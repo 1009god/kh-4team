@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-23T06:51:25.379Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="ZqZdIqPAPAM2OriIj1r0" version="20.3.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-23T06:51:51.200Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="_9E3CyNh6yjg8Z7M-ZMW" version="20.3.6" type="github">
   <diagram id="umM1ArvoGKvKTqcnsH8R" name="페이지-1">
     <mxGraphModel dx="2036" dy="773" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -94,7 +94,7 @@
           <mxGeometry x="320" y="660" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-24" value="공지사항" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="190" y="750" width="120" height="60" as="geometry" />
+          <mxGeometry x="170" y="790" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-25" value="프로젝트 올리기" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
           <mxGeometry x="440" y="340" width="120" height="60" as="geometry" />
@@ -112,7 +112,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-32" value="광고(상품랜덤)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-100" y="580" width="120" height="60" as="geometry" />
+          <mxGeometry x="-140" y="553" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-39" value="인기" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
           <mxGeometry x="-70" y="250" width="120" height="70" as="geometry" />
