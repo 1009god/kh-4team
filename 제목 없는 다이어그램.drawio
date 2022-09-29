@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T13:17:05.282Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="CGCxFUfj8gokG0w6-3Me" version="20.3.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-29T13:20:38.215Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="2yOy7--HM-DNKrfRV_sg" version="20.3.7" type="github">
   <diagram id="umM1ArvoGKvKTqcnsH8R" name="페이지-1">
-    <mxGraphModel dx="3541" dy="2164" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2997" dy="2028" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -216,7 +216,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="oMtmFpeShLSbiUQwDoEX-45" value="검색&lt;br&gt;(최근 검색어)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+        <mxCell id="oMtmFpeShLSbiUQwDoEX-45" value="검색&lt;br&gt;(최근 검색어&lt;br&gt;인기 검색어&lt;br&gt;추천 검색어)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="500" y="660" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="oMtmFpeShLSbiUQwDoEX-49" target="oMtmFpeShLSbiUQwDoEX-18" edge="1">
