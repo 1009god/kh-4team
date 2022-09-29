@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T11:22:48.336Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="VlvOsN5WadzwCepjtfkm" version="20.3.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-29T11:42:20.601Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="OaWHXqmMgAsXeNWHnL0B" version="20.3.6" type="github">
   <diagram id="umM1ArvoGKvKTqcnsH8R" name="페이지-1">
-    <mxGraphModel dx="2992" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2992" dy="1946" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -354,9 +354,6 @@
         <mxCell id="DBSJqJ6nftdNI6tlennw-4" value="올린 프로젝트&lt;br&gt;(카테고리: 전체,&lt;br&gt;작성중, 심사중, 승인됨, 반려됨, 공개예정, 진행중, 종료)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1170" y="315" width="170" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="DBSJqJ6nftdNI6tlennw-6" value="(프로필 &#39;올린 프로젝트&#39; 랑 동일페이지입니다&lt;br&gt;어떻게 끼워넣을 자리가 없어서 한칸더만들었습니다 죄송힙니다)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="980" y="440" width="370" height="40" as="geometry" />
-        </mxCell>
         <mxCell id="DBSJqJ6nftdNI6tlennw-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-7">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1340" y="350" as="targetPoint" />
@@ -380,17 +377,29 @@
         <mxCell id="DBSJqJ6nftdNI6tlennw-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-8" target="DBSJqJ6nftdNI6tlennw-14">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-8" target="DBSJqJ6nftdNI6tlennw-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="DBSJqJ6nftdNI6tlennw-8" value="프로젝트 관리" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1440" y="210" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DBSJqJ6nftdNI6tlennw-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-14" target="DBSJqJ6nftdNI6tlennw-16">
+        <mxCell id="DBSJqJ6nftdNI6tlennw-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-14" target="DBSJqJ6nftdNI6tlennw-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-14" target="DBSJqJ6nftdNI6tlennw-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-14" target="DBSJqJ6nftdNI6tlennw-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-14" target="DBSJqJ6nftdNI6tlennw-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-14" target="DBSJqJ6nftdNI6tlennw-23">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="DBSJqJ6nftdNI6tlennw-14" value="프로젝트 수정(edit)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1640" y="210" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="DBSJqJ6nftdNI6tlennw-16" value="심사 기준&lt;br&gt;(토글 페이지)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1850" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DBSJqJ6nftdNI6tlennw-18" value="기본 정보&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1850" y="90" width="120" height="60" as="geometry" />
@@ -398,11 +407,54 @@
         <mxCell id="DBSJqJ6nftdNI6tlennw-20" value="펀딩 계획" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1850" y="190" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DBSJqJ6nftdNI6tlennw-21" value="펀딩 옵션" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1850" y="290" width="120" height="60" as="geometry" />
+        <mxCell id="DBSJqJ6nftdNI6tlennw-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-21" target="DBSJqJ6nftdNI6tlennw-37">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="DBSJqJ6nftdNI6tlennw-22" value="펀딩 옵션" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1850" y="390" width="120" height="60" as="geometry" />
+        <mxCell id="DBSJqJ6nftdNI6tlennw-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-21" target="DBSJqJ6nftdNI6tlennw-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-21" value="펀딩 옵션" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-22" value="프로젝트 소개&lt;br&gt;(일정, 예산, 요약)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="450" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-23" target="DBSJqJ6nftdNI6tlennw-43">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2068" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-23" value="창작자 정보" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="580" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-31" value="내부에 토글형태로&lt;br&gt;심사기준 페이지" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-34" value="프로젝트 카테고리&lt;br&gt;프로젝트 제목&lt;br&gt;프로젝트 요약&lt;br&gt;프로젝트 대표 이미지&lt;br&gt;페이지 주소" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1980" y="50" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-35" value="목표 금액&lt;br&gt;펀딩 일정" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1980" y="190" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-36" value="옵션 구성품 생성" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2068" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-37" value="옵션 조합" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2068" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-40" value="ex) 여기서&lt;br&gt;-연필 1자루&lt;br&gt;-지우개 3개&lt;br&gt;-막걸리&lt;br&gt;-창작자와 저녁 한 끼&lt;br&gt;라는 세부옵션을생성" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="2210" y="360" width="130" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-41" value="생성페이지에서 만든 구성품들로&lt;br&gt;조합페이지에서&lt;br&gt;천원짜리 옵션: 연필1자루&lt;br&gt;만원짜리상품: 지우개3개, 막걸리1병&lt;br&gt;4만원짜리 상품: 막걸리1병, 창작자랑 밥한끼 먹기&lt;br&gt;이런느낌으로 옵션을 조합함" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="2200" y="220" width="290" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-42" value="창작자(개인 혹은 팀)의&lt;br&gt;-이름&lt;br&gt;-프로필 이미지&lt;br&gt;-소개(2~3문장)&lt;br&gt;-주 활동지역" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1835" y="650" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-43" value="본인 인증" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="2068" y="585" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
