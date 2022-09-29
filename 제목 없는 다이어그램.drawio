@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T22:11:20.901Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="oO3VJql3nlNZcaqkzqVG" version="20.3.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-29T22:26:52.206Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="xxmk7UztsM88ov4uXo8h" version="20.3.6" type="github">
   <diagram id="umM1ArvoGKvKTqcnsH8R" name="페이지-1">
     <mxGraphModel dx="2992" dy="1946" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -188,6 +188,9 @@
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-26" value="로그인" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="440" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="oMtmFpeShLSbiUQwDoEX-27" target="DBSJqJ6nftdNI6tlennw-45">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-27" value="회원가입" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="630" y="440" width="120" height="60" as="geometry" />
@@ -592,6 +595,15 @@
         </mxCell>
         <mxCell id="xhdLgySUpjyIVhQg6mVY-1" value="오븐에서 좀 더 자세히 구현했어요" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="560" y="629" width="110" height="21" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-45" target="DBSJqJ6nftdNI6tlennw-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-45" value="회원 정보 입력" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="535" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-47" value="약관" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="629" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
