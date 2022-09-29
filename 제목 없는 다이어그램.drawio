@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T08:37:53.707Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="BEjGxzwPhzF5VaftlKCa" version="20.3.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-29T11:08:46.493Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="HIQN2kHnixZK6t8bsDNP" version="20.3.6" type="github">
   <diagram id="umM1ArvoGKvKTqcnsH8R" name="페이지-1">
-    <mxGraphModel dx="3289" dy="2071" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2992" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -162,6 +162,9 @@
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-24" value="공지사항" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="170" y="740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="oMtmFpeShLSbiUQwDoEX-25" target="DBSJqJ6nftdNI6tlennw-1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-25" value="프로젝트 올리기" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
           <mxGeometry x="440" y="340" width="120" height="60" as="geometry" />
@@ -335,6 +338,9 @@
         </mxCell>
         <mxCell id="PPN7n7XD5OHCREN7FDQY-16" value="추천 프로젝트(랜덤)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="1100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-1" value="프로젝트 개설" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="810" y="340" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
