@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-09-28T16:35:24.216Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="PSiIvdDIG1q71zBg9mJ5" version="20.3.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-29T08:37:53.707Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="BEjGxzwPhzF5VaftlKCa" version="20.3.6" type="github">
   <diagram id="umM1ArvoGKvKTqcnsH8R" name="페이지-1">
-    <mxGraphModel dx="3381" dy="2273" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3289" dy="2071" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -93,7 +93,7 @@
         <mxCell id="9BAEh77c-vEVXdw_-Wml-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="oMtmFpeShLSbiUQwDoEX-11" target="9BAEh77c-vEVXdw_-Wml-19" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="oMtmFpeShLSbiUQwDoEX-11" value="후원한 프로젝트" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="oMtmFpeShLSbiUQwDoEX-11" value="후원한 프로젝트&lt;br&gt;(후원현황 &lt;br&gt;성공,실패,취소,진행중)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="630" y="210" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-14" value="문의내역" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -220,19 +220,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="oHjlom7W9EIAhRzlkXhr-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="oMtmFpeShLSbiUQwDoEX-49" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-780" y="310" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="oMtmFpeShLSbiUQwDoEX-49" value="상품목록" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-550" y="210" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oHjlom7W9EIAhRzlkXhr-1" value="달성률" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-980" y="190" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="oHjlom7W9EIAhRzlkXhr-4" value="전체 보기&lt;br&gt;근데 탭을 눌렀을 때랑 달라보이는 점이 없는데 주소는 다름&lt;br&gt;굳이 안 넣어도 될 듯함" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-1140" y="40" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="oHjlom7W9EIAhRzlkXhr-5" value="75%이하" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1140" y="120" width="120" height="60" as="geometry" />
@@ -245,9 +237,6 @@
         </mxCell>
         <mxCell id="oHjlom7W9EIAhRzlkXhr-8" value="최소,최댓값 &lt;br&gt;직접 입력" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-1140" y="360" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="oHjlom7W9EIAhRzlkXhr-11" value="에디터 추천&lt;br&gt;(꼭 필요할까?)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-840" y="320" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="9BAEh77c-vEVXdw_-Wml-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="9BAEh77c-vEVXdw_-Wml-1" target="9BAEh77c-vEVXdw_-Wml-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
