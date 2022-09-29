@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-29T11:12:43.880Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="QWkqnIl6QyIviPnhfhtU" version="20.3.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-29T11:17:59.821Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="ueQpsLx1mCEJUbS68YHE" version="20.3.6" type="github">
   <diagram id="umM1ArvoGKvKTqcnsH8R" name="페이지-1">
     <mxGraphModel dx="2992" dy="2003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -345,11 +345,40 @@
         <mxCell id="DBSJqJ6nftdNI6tlennw-1" value="프로젝트 개설" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="860" y="340" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="DBSJqJ6nftdNI6tlennw-4" value="올린 프로젝트" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1170" y="340" width="120" height="60" as="geometry" />
+        <mxCell id="DBSJqJ6nftdNI6tlennw-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-4" target="DBSJqJ6nftdNI6tlennw-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-4" target="DBSJqJ6nftdNI6tlennw-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-4" value="올린 프로젝트&lt;br&gt;(카테고리: 전체,&lt;br&gt;작성중, 심사중, 승인됨, 반려됨, 공개예정, 진행중, 종료)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="315" width="170" height="110" as="geometry" />
         </mxCell>
         <mxCell id="DBSJqJ6nftdNI6tlennw-6" value="(프로필 &#39;올린 프로젝트&#39; 랑 동일페이지입니다&lt;br&gt;어떻게 끼워넣을 자리가 없어서 한칸더만들었습니다 죄송힙니다)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1015" y="410" width="370" height="40" as="geometry" />
+          <mxGeometry x="980" y="440" width="370" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1340" y="350" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1410" y="465" />
+              <mxPoint x="1410" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-7" value="프로젝트 삭제" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="450" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.318;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="DBSJqJ6nftdNI6tlennw-8" target="DBSJqJ6nftdNI6tlennw-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1410" y="255" />
+              <mxPoint x="1410" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DBSJqJ6nftdNI6tlennw-8" value="프로젝트 관리" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="210" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
