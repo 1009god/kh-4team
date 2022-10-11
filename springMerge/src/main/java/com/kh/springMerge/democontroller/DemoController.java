@@ -11,5 +11,11 @@ public class DemoController {
 	public String kimseunghee() {
 		return "kimseunghee";
 	}
+	
+	@GetMapping("/jeongminjeong")
+	@ResponseBody
+	public String jeongminjeong() {
+		return "jeongminjeong";
+	}
 
 }
