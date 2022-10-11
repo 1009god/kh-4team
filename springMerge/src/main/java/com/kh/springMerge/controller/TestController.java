@@ -10,6 +10,15 @@ public class TestController {
 	int a=10;
 	int b=20;
 	
+	@Controller
+	@RequestMapping("/test")
+	public class TestController {
+		
+		int a=10;
+		int b=20;
+		
+		
+	
 		
 
 }
