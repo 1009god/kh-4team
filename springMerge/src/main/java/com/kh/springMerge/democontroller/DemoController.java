@@ -17,5 +17,12 @@ public class DemoController {
 	public String jeongminjeong() {
 		return "jeongminjeong";
 	}
+	
+	@GetMapping("/jeongminjeong")
+	@ResponseBody
+	public String jeongminjeong2() {
+		return "jeongminjeong";
+	}
 
+	
 }
