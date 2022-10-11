@@ -30,10 +30,5 @@ public class DemoController {
 		return "jiahn";
 	}
 
-	@GetMapping("/choijiahn")
-	@ResponseBody
-	public String choijiahn44() {
-		return "jiahn";
-	}
 	
 }
