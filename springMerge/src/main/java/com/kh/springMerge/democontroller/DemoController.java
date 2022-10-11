@@ -23,6 +23,12 @@ public class DemoController {
 	public String jeongminjeong2() {
 		return "jeongminjeong";
 	}
+	
+	@GetMapping("/choijiahn")
+	@ResponseBody
+	public String choijiahn3() {
+		return "jiahn";
+	}
 
 	
 }
