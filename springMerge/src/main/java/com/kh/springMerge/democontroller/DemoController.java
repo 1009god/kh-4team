@@ -29,6 +29,12 @@ public class DemoController {
 	public String choijiahn3() {
 		return "jiahn";
 	}
+	
+	@GetMapping("/minjeong")
+	@ResponseBody
+	public String minjeong() {
+		return "minjeong";
+	}
 
 	
 }
