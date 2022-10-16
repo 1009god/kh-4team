@@ -35,6 +35,12 @@ public class DemoController {
 	public String minjeong() {
 		return "minjeong";
 	}
+	
+	@GetMapping("/minjeong2")
+	@ResponseBody
+	public String minjoeng2() {
+		return "minjeong2";
+	}
 
 	
 }
