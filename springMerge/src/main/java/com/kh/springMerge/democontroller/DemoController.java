@@ -80,5 +80,11 @@ public class DemoController {
 		return "kimseunghee";
 	}
 	
+	@GetMapping("/taerim2")
+	@ResponseBody
+	public String taerim2() {
+		return "kimseunghee";
+	}
+	
 	
 }
