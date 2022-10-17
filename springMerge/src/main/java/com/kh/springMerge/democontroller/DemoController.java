@@ -72,4 +72,11 @@ public class DemoController {
 		return "kimseunghee";
 	}
 	
+	@RequestMapping("/seunghee")
+	@ResponseBody
+	public String seunghee() {
+		return "seunghee";
+	}
+	
+	
 }
