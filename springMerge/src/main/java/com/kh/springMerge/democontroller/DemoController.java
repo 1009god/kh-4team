@@ -72,7 +72,36 @@ public class DemoController {
 		return "kimseunghee";
 	}
 	
+	//태림 충돌 테스트
+	//안녕
+
+
+
+	@GetMapping("/minjeong5")
+	@ResponseBody
+	public String minjeong5() {
+		return "minjeong5";
+	}
+
 	//태림 충돌 테스트1
 	//충돌 테스트 우웩
+
+	@GetMapping("/taerim1")
+	@ResponseBody
+	public String taerim1() {
+		return "kimseunghee";
+	}
+	
+	//Local main은 지워도 됨
+	//테스트 해보자
+
+	@GetMapping("/what")
+	@ResponseBody
+	public String kyk() {
+		return "kyk";
+	}
+
+	//충돌 내볼게요
+	//해보자
 	
 }
