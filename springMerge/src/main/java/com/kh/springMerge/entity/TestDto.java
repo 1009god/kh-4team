@@ -11,5 +11,5 @@ public class TestDto {
 	//lombok 테스트
 	private int test;
 	private String test2;
-
+	private String name;
 }
