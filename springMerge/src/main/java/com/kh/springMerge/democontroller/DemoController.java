@@ -84,7 +84,8 @@ public class DemoController {
 	}
 
 	//태림 충돌 테스트1
-	
+	//충돌 테스트 우웩
+
 	@GetMapping("/taerim1")
 	@ResponseBody
 	public String taerim1() {
@@ -102,7 +103,5 @@ public class DemoController {
 
 	//충돌 내볼게요
 	//해보자
-	
-
 	
 }
