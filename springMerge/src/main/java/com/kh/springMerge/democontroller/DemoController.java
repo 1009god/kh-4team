@@ -86,10 +86,10 @@ public class DemoController {
 	//태림 충돌 테스트1
 	//충돌 테스트 우웩
 
-	@GetMapping("/taerim1")
+	@GetMapping("/taerim10")
 	@ResponseBody
-	public String taerim1() {
-		return "kimseunghee";
+	public String taerim10() {
+		return "kimseunghee10";
 	}
 	
 	//Local main은 지워도 됨
@@ -99,8 +99,9 @@ public class DemoController {
 	@ResponseBody
 	public String kyk() {
 		return "kyk";
+		
 	}
-
+	
 	//충돌 내볼게요
 	//해보자
 	
