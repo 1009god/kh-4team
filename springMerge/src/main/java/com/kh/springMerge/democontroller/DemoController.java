@@ -72,10 +72,14 @@ public class DemoController {
 		return "kimseunghee";
 	}
 	
+
 	@GetMapping("/minjeong5")
 	@ResponseBody
 	public String minjeong5() {
 		return "minjeong5";
 	}
+
+	//태림 충돌 테스트1
+	
 	
 }
