@@ -48,4 +48,10 @@ public class DemoController {
 		return "minjeong3";
 	}
 	
+	@GetMapping("/taerim")
+	@ResponseBody
+	public String taerim1() {
+		return "minjeong3";
+	}
+	
 }
