@@ -75,9 +75,7 @@ public class DemoController {
 	public String kimjongyeon() {
 		return "add";
 	}
-<<<<<<< HEAD
-	//태림 충돌테스트
-=======
+
 	
 	@RequestMapping("/taerim")
 	@ResponseBody
@@ -85,5 +83,5 @@ public class DemoController {
 		return "jiahn31";
 	}
 	//추가 주석 테스트 2
->>>>>>> branch 'taerim' of https://github.com/1009god/kh-4team.git
+
 }
