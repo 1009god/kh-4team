@@ -74,5 +74,11 @@ public class DemoController {
 	
 	//태림 충돌 테스트1
 	
+	@GetMapping("/taerim1")
+	@ResponseBody
+	public String taerim1() {
+		return "kimseunghee";
+	}
+	
 	
 }
