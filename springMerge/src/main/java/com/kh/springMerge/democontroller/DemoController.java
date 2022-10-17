@@ -55,4 +55,10 @@ public class DemoController {
 		return "jiahn31";
 	}
 	
+	@RequestMapping("/taerim")
+	@ResponseBody
+	public String taerim1() {
+		return "jiahn31";
+	}
+	
 }
