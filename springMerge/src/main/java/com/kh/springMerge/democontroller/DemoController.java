@@ -11,7 +11,6 @@ public class DemoController {
 	@ResponseBody
 	public String kimseunghee() {
 		return "kimseunghee";
-		//승희 충돌 테스트
 	}
 	
 	@GetMapping("/jeongminjeong")
@@ -65,6 +64,12 @@ public class DemoController {
 	@GetMapping("/kimjongyeon")
 	public String kimjongyeon() {
 		return "add";
+	}
+	
+	@GetMapping("/seunghee")
+	@ResponseBody
+	public String seunghee() {
+		return "kimseunghee";
 	}
 	
 }
