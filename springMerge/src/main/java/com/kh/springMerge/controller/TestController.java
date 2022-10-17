@@ -16,7 +16,10 @@ public class TestController {
 		return "hwangtaehyeon";
 	}
 
-	
+	@GetMapping("/kimjongyeon")
+	public String kimjongyeon() {
+		return "add";
+	}
 		
 		
 	

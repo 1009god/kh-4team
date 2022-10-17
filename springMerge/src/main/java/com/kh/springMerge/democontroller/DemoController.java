@@ -62,5 +62,9 @@ public class DemoController {
 		return "jiahn31";
 
 	}
+	@GetMapping("/kimjongyeon")
+	public String kimjongyeon() {
+		return "add";
+	}
 	
 }
