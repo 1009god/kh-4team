@@ -91,5 +91,7 @@ public class DemoController {
 		return "kimseunghee";
 	}
 	
+	//Local main은 지워도 됨
+	
 	
 }
