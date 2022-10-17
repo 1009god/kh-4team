@@ -11,6 +11,6 @@ public class TestController {
 	//src 폴더에 .keep파일 추가
 	int a=10;
 	int b=20;
-	int c=30;
+	
 
 }
