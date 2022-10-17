@@ -50,11 +50,19 @@ public class DemoController {
 	}
 	
 
+
 	@GetMapping("/taerim")
 	@ResponseBody
 	public String taerim1() {
 		return "minjeong3";
 		}
+
+	@GetMapping("/minjeong4")
+	@ResponseBody
+	public String minjeong4() {
+		return "minjeong4";
+	}
+
 
 	@RequestMapping("/jiahn31")
 	@ResponseBody
