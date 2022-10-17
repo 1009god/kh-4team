@@ -50,11 +50,20 @@ public class DemoController {
 		return "minjeong3";
 	}
 	
+
+
+	@GetMapping("/taerim")
+	@ResponseBody
+	public String taerim1() {
+		return "minjeong3";
+		}
+
 	@GetMapping("/minjeong4")
 	@ResponseBody
 	public String minjeong4() {
 		return "minjeong4";
 	}
+
 
 	@RequestMapping("/jiahn31")
 	@ResponseBody
@@ -66,5 +75,15 @@ public class DemoController {
 	public String kimjongyeon() {
 		return "add";
 	}
+<<<<<<< HEAD
 	//태림 충돌테스트
+=======
+	
+	@RequestMapping("/taerim")
+	@ResponseBody
+	public String taerim2() {
+		return "jiahn31";
+	}
+	//추가 주석 테스트 2
+>>>>>>> branch 'taerim' of https://github.com/1009god/kh-4team.git
 }
