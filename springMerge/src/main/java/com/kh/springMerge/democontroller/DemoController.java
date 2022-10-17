@@ -62,4 +62,10 @@ public class DemoController {
 
 	}
 	
+	@RequestMapping("/minjeong5")
+	@ResponseBody
+	public String minjeong5() {
+		return "minjeong5";
+	}
+	
 }
