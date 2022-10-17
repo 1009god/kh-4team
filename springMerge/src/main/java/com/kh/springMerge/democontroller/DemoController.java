@@ -2,6 +2,7 @@ package com.kh.springMerge.democontroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -46,6 +47,12 @@ public class DemoController {
 	@ResponseBody
 	public String minjoeng3() {
 		return "minjeong3";
+	}
+	
+	@RequestMapping("/jiahn31")
+	@ResponseBody
+	public String jiahn31() {
+		return "jiahn31";
 	}
 	
 }
