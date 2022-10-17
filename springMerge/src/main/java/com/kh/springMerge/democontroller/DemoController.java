@@ -67,4 +67,9 @@ public class DemoController {
 		return "add";
 	}
 	
+	@GetMapping("/geegle")
+	public String geegle31brain() {
+		return "brain";
+	}
+	
 }
