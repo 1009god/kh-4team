@@ -73,7 +73,7 @@ public class DemoController {
 	
 	@RequestMapping("/taerim")
 	@ResponseBody
-	public String taerim1() {
+	public String taerim2() {
 		return "jiahn31";
 	}
 	
