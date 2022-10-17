@@ -96,5 +96,11 @@ public class DemoController {
 	//충돌 내볼게요
 	//해보자
 	
+	@GetMapping("/kjn12")
+	@ResponseBody
+	public String kjn12() {
+		return "kjn12";
+	}
+	
 	
 }
