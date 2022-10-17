@@ -11,6 +11,7 @@ public class DemoController {
 	@ResponseBody
 	public String kimseunghee() {
 		return "kimseunghee";
+		//승희 충돌 테스트
 	}
 	
 	@GetMapping("/jeongminjeong")
