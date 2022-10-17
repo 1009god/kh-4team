@@ -75,7 +75,7 @@ public class DemoController {
 	@GetMapping("/minjeong5")
 	@ResponseBody
 	public String minjeong5() {
-		return "kimseunghee";
+		return "minjeong5";
 	}
 	
 }
