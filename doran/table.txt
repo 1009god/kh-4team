@@ -1,3 +1,5 @@
+MEM 테이블
+
 create table mem(
 mem_no number primary key,
 mem_email varchar2(50) not null unique,
@@ -7,3 +9,14 @@ mem_tel char(11) check(regexp_like(mem_tel, '^010[0-9]{8}$')),
 mem_join_date date default sysdate not null,
 mem_route varchar2(100)
 );
+
+회원번호 시퀀스
+create sequence mem_seq;
+
+SELLER 테이블
+create table seller(
+seller_mem_no references mem(mem_no) on delete cascade,
+seller_registry_date date default sysdate not null,
+seller_bank varchar2(60),
+seller_account varchar2(60));
+
