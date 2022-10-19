@@ -514,7 +514,7 @@ ul.pagination.pagination-small {
         - 해당 영역(.float-container) 종료 시 자동으로 clear 되도록 처리
         - 가상 선택자(virtual selector)가 필요하다
 */
-
+.float-container {}
 .float-container::after {
     content:"";
     display: block;
