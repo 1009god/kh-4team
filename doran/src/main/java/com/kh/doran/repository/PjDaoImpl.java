@@ -20,8 +20,8 @@ public class PjDaoImpl implements PjDao {
 	@Autowired//주입
 	private JdbcTemplate jdbcTemplate;
 	
-	@Autowired
-	private PjDto pjDto;
+//	@Autowired
+//	private PjDto pjDto; 하면...안됩니다...아예 지우면 나중에 또 까먹고 걸칠까봐 주석처리함
 	
 	
 	private RowMapper<PjDto> mapper=new RowMapper<PjDto>(){
@@ -68,6 +68,14 @@ public class PjDaoImpl implements PjDao {
 
 	
 	};
+
+
+	@Override
+	public PjDto selectOne(int pjNo) {
+		String sql="SELECT*FROM PJ WHERE PJ_NO=?";
+		Object[] param= {pjNo};
+		return jdbcTemplate.query(sql,extractor,param);
+	}
 
 	
 
