@@ -1,10 +1,15 @@
 package com.kh.doran.repository;
 
-import javax.swing.tree.RowMapper;
-import javax.swing.tree.TreePath;
+
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
@@ -17,6 +22,52 @@ public class PjDaoImpl implements PjDao {
 	
 	@Autowired
 	private PjDto pjDto;
+	
+	
+	private RowMapper<PjDto> mapper=new RowMapper<PjDto>(){
+
+		@Override
+		public PjDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return PjDto.builder()
+					.pjNo(rs.getInt("PJ_NO"))
+					.pjSellerMemNo(rs.getInt("PJ_SELLER_MEM_NO"))
+					.pjCategory(rs.getString("PJ_CATEGORY"))
+					.pjName(rs.getString("PJ_NAME"))
+					.pjSummary(rs.getString("PJ_SUMMARY"))
+					.pjTargetMoney(rs.getInt("PJ_TARGET_MONEY"))
+					.pjFundingStartDate(rs.getDate("PJ_FUNDING_START_DATE"))
+					.pjFundingEndDate(rs.getDate("PJ_FUNDING_END_DATE"))
+					.pjEndDate(rs.getDate("PJ_END_DATE"))
+					.build();
+		}
+	
+	};
+	
+	
+	private ResultSetExtractor<PjDto> extractor=new ResultSetExtractor<PjDto>() {
+
+		@Override
+		public PjDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return PjDto.builder()
+						.pjNo(rs.getInt("PJ_NO"))
+						.pjSellerMemNo(rs.getInt("PJ_SELLER_MEM_NO"))
+						.pjCategory(rs.getString("PJ_CATEGORY"))
+						.pjName(rs.getString("PJ_NAME"))
+						.pjSummary(rs.getString("PJ_SUMMARY"))
+						.pjTargetMoney(rs.getInt("PJ_TARGET_MONEY"))
+						.pjFundingStartDate(rs.getDate("PJ_FUNDING_START_DATE"))
+						.pjFundingEndDate(rs.getDate("PJ_FUNDING_END_DATE"))
+						.pjEndDate(rs.getDate("PJ_END_DATE"))
+						.build();
+			}
+			else {
+				return null;
+			}
+		}
+
+	
+	};
 
 	
 
