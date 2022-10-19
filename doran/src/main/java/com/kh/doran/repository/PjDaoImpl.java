@@ -5,8 +5,11 @@ import javax.swing.tree.TreePath;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
 import com.kh.doran.entity.PjDto;
 
+@Repository
 public class PjDaoImpl implements PjDao {
 	
 	@Autowired//주입
@@ -16,5 +19,5 @@ public class PjDaoImpl implements PjDao {
 	private PjDto pjDto;
 
 	
-	private RowMapper<PjDto> mapper=new RowMapper<>
+
 }
