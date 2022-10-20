@@ -39,6 +39,7 @@ public class PjDaoImpl implements PjDao {
 					.pjFundingStartDate(rs.getDate("PJ_FUNDING_START_DATE"))
 					.pjFundingEndDate(rs.getDate("PJ_FUNDING_END_DATE"))
 					.pjEndDate(rs.getDate("PJ_END_DATE"))
+					.pjLikesNumber(rs.getInt("PJ_LIKES_NUMBER"))
 					.build();
 		}
 	
@@ -60,6 +61,7 @@ public class PjDaoImpl implements PjDao {
 						.pjFundingStartDate(rs.getDate("PJ_FUNDING_START_DATE"))
 						.pjFundingEndDate(rs.getDate("PJ_FUNDING_END_DATE"))
 						.pjEndDate(rs.getDate("PJ_END_DATE"))
+						.pjLikesNumber(rs.getInt("PJ_LIKES_NUMBER"))
 						.build();
 			}
 			else {
