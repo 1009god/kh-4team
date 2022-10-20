@@ -10,9 +10,19 @@
 <title>Insert title here</title>
 </head>
 
-<body>
+<body>		
+
 
 <h1>my page</h1>
+
+		
+<div class="container-800">
+	<div class="row">
+			<h1 style="padding-left:20px">${memDto.memEmail} 회원 정보</h1>
+	</div>
+
+</div>
+
 
 </body>
 </html>
