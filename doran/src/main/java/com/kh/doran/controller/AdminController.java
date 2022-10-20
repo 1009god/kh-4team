@@ -4,10 +4,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.doran.constant.SessionConstant;
 import com.kh.doran.entity.AdminDto;
@@ -34,6 +36,11 @@ public class AdminController {
 	public String insertSuccess() {
 		return "admin/insertResult";
 	}
+	
+	@GetMapping("/login")//로그인 정보가 맞지않다고 뜨는 오류 해결해야함ㅠㅠ
+	public String login() {
+		return "admin/login";
+	}
 		
 	@PostMapping("/login")
 	public String login(@ModelAttribute AdminDto inputDto,
@@ -54,4 +61,24 @@ public class AdminController {
 			return "redirect:login?error";
 		}
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute(SessionConstant.EMAIL);
+		
+		return "redirect:/";
+	}
+	
+//	@RequestMapping("/list")
+//	public String list(Model model,
+//			@RequestParam(required = false) String type, 
+//			@RequestParam(required = false) String keyword) {
+//		boolean isSearch =type !=null&&keyword !=null;
+//		if(isSearch) {
+//			model.addAttribute("list",musicDao.selectList(type,keyword));
+//		}
+//		else {
+//			model.addAttribute(keyword)
+//		}
+//	}
 }
