@@ -26,12 +26,12 @@ public class AdminDaoImpl implements AdminDao {
 		return null;
 	}
 
-//	@Override
-//	public boolean updateLoginTime(String memberId) {
-//		String sql = "UPDATE ADMIN "
-//						+ "SET ADMIN_LOGIN=SYSDATE "
-//						+ "WHERE ADMIN_EMAIL=?";
-//		Object[] param = {adminEmail};
-//		return jdbcTemplate.update(sql, param) > 0;
-//	}
+	@Override
+	public boolean updateLoginTime(String adminEmail) {
+		String sql = "UPDATE ADMIN "
+						+ "SET ADMIN_LOGIN=SYSDATE "
+						+ "WHERE ADMIN_EMAIL=?";
+		Object[] param = {adminEmail};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 }
