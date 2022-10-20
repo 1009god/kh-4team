@@ -69,16 +69,5 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
-//	@RequestMapping("/list")
-//	public String list(Model model,
-//			@RequestParam(required = false) String type, 
-//			@RequestParam(required = false) String keyword) {
-//		boolean isSearch =type !=null&&keyword !=null;
-//		if(isSearch) {
-//			model.addAttribute("list",musicDao.selectList(type,keyword));
-//		}
-//		else {
-//			model.addAttribute(keyword)
-//		}
-//	}
+	
 }
