@@ -22,6 +22,8 @@ public class AdminController {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	
 	@GetMapping("/insert")
 	public String insert() {
 		return "/admin/insert";
@@ -50,7 +52,7 @@ public class AdminController {
 			return "redirect:login?error";	
 		}//inputDto는 사용자가 입력한 정보, findDto는 데이터베이스 조회 결과
 		boolean passwordMatch=
-				inputDto.getAdminEmail().equals(findDto.getAdminPw());
+				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
 			session.setAttribute(SessionConstant.EMAIL,inputDto.getAdminEmail());
 		
@@ -69,16 +71,5 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
-//	@RequestMapping("/list")
-//	public String list(Model model,
-//			@RequestParam(required = false) String type, 
-//			@RequestParam(required = false) String keyword) {
-//		boolean isSearch =type !=null&&keyword !=null;
-//		if(isSearch) {
-//			model.addAttribute("list",musicDao.selectList(type,keyword));
-//		}
-//		else {
-//			model.addAttribute(keyword)
-//		}
-//	}
+	
 }
