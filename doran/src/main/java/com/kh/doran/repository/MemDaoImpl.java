@@ -18,16 +18,6 @@ public class MemDaoImpl implements MemDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-//	private RowMapper<MemDto> mapper = new RowMapper<MemDto>() {
-//		@Override
-//		public MemDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			MemDto dto = new MemDto();
-//			dto.setMemNo(rs.getInt("memNo"));
-//			dto.setMemEmail(rs.getString("memEmail"));
-//			dto.setMemPw(rs.getString("memPw"));
-//			dto.setMemNick(rs.getString("memNick"));
-//		}
-//	} 미완
 	
 	private ResultSetExtractor<MemDto> extractor = new ResultSetExtractor<MemDto>() {
 		
@@ -40,7 +30,7 @@ public class MemDaoImpl implements MemDao {
 				dto.setMemPw(rs.getString("mem_pw"));
 				dto.setMemNick(rs.getString("mem_nick"));
 				dto.setMemTel(rs.getString("mem_tel"));
-				dto.setMemJoin(rs.getDate("mem_join"));
+				dto.setMemJoinDate(rs.getDate("mem_join_date"));
 				dto.setMemRoute(rs.getString("mem_route"));	
 				return dto;
 			}

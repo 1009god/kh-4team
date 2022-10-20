@@ -12,6 +12,5 @@ public class MemDto {
 	
 	private int memNo;
 	private String memEmail, memPw, memNick, memTel, memRoute;
-	private Date memJoin;
-	
+	private Date memJoinDate;
 }
