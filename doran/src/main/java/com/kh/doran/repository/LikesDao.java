@@ -7,6 +7,4 @@ public interface LikesDao {
 	void delete(LikesDto dto);//좋아요 취소
 	boolean check(LikesDto dto);//이 프로젝트에 좋아요 했는지 여부 확인
 	int count(int pjNo);//특정 프로젝트에 좋아요가 몇 개인지 세기
-	
-	void refresh(int pjNo);
 }

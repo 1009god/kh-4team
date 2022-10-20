@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +21,6 @@
                     <th>프로젝트 이름</th>
                     <td>${PjDto.pjName}</td>
                 </tr>
-               <tr>
-               		<th>좋아요</th>
-               		<td>${PjDto.pjLikesNumber}</td>
-               </tr>
             </tbody>
         </table>
 

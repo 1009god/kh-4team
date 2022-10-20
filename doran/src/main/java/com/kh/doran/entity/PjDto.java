@@ -24,7 +24,6 @@ public class PjDto {
 	private Date pjFundingStartDate;
 	private Date pjFundingEndDate;
 	private Date pjEndDate;
-	private int pjLikesNumber;
 	
 	
 }
