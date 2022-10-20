@@ -6,7 +6,7 @@
 </jsp:include>
 
 <form action="insert" method="post">
-<div class="container-600 mt-40">
+<div class="container-300 mt-40">
 	<div class="row center">
 		<h1>관리자 가입 정보 입력</h1>
 	</div>
@@ -23,7 +23,7 @@
 	
 	<div class="row left">
 		<label>Nickname</label>
-		<input class="input w-100" name="adminNick" placeholder="사용하실 닉네임 입력해주세요!" type="text" required autocomplete="off">
+		<input class="input w-100" name="adminNick" placeholder="사용하실 관리자명을 입력해주세요!" type="text" required autocomplete="off">
 	</div>
 	
 </div>

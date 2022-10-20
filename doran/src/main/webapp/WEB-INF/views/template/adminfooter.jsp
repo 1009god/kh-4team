@@ -1,12 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
+			</section>
+		</div>
+	
+		<hr>
+		<footer>
+			<div class="float-container">
+				<div class="float-left w-33">
+					<div class="row">
+						<h2>회사소개</h2>	
+					</div>
+					<div class="row">
+						이용약관
+					</div>
+					<div class="row">
+						공지사항
+					</div>
+					<div class="row">
+						서비스소개
+					</div>
+					<div class="row">
+						채용
+					</div>
+					<div class="row">
+						헬프 센터
+					</div>
+				</div>
+			
+				<div class="float-left w-33">
+					<div class="row">
+						<h2>지점 연락처</h2>	
+					</div>
+					<div class="row">
+						당산 지원 : 000-0000-0000
+					</div>
+					
+				</div>
+				<div class="float-left w-33">
+					<div class="row">
+						<h2>상태창</h2>	
+					</div>
+					<div class="row">
+						loginId : ${sessionScope.loginId}
+					</div>
+					<div class="row">
+						로그인 : ${sessionScope.loginId != null}
+					</div>
+					<div class="row">
+						mg : ${sessionScope.mg}
+					</div>
+					<div class="row">
+						관리자 : ${sessionScope.mg == '관리자'}
+					</div>
+				</div>
+			</div>
+		</footer>
+	
+	</main>
+    
+    </body>
 </html>
