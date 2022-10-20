@@ -28,7 +28,12 @@ public class MemController {
 	
 	@GetMapping("/join_finish")
 	public String joinFinish() {
-		return "mem/joinFinish"; //완료 페이지는 홈으로? 아님 축하드린다는 창?
+		return "mem/joinFinish"; //축하드린다는 창
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "mem/login";
 	}
 
 }
