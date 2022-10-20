@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.MemDao;
@@ -19,7 +23,8 @@ public class MemMypageController {
 	
 	@Autowired
 	private MemDao memDao;
-
+	
+	//프로필 홈
   @GetMapping("/profile")
   public String mypage(HttpSession session, Model model) {
      //1. 세션에 들어있는 아이디를 꺼낸다 (down casting다운캐스팅) 형변환?
@@ -38,4 +43,29 @@ public class MemMypageController {
      return "mypage/profile";
   }
 
+  	//수정
+	@GetMapping("/edit")
+	public String edit(Model model, @RequestParam String memNo) {
+		MemDto dto = memDao.selectOne(memNo);
+		model.addAttribute("memDto", dto);
+		return "mypage/edit";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute MemDto memDto,
+									RedirectAttributes attr) {
+		boolean result = memDao.update(memDto);
+		if(result) {
+			attr.addAttribute("memNo", memDto.getMemNo());
+			return "redirect:mypage/edit";
+		}
+		else {
+			return "redirect:edit_fail";
+		}
+	}
+	
+	@GetMapping("/edit_fail")
+	public String editFail() {
+		return "mypage/editFail";
+	}
 }
