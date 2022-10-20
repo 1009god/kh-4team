@@ -22,6 +22,8 @@ public class AdminController {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	
 	@GetMapping("/insert")
 	public String insert() {
 		return "/admin/insert";
@@ -50,7 +52,7 @@ public class AdminController {
 			return "redirect:login?error";	
 		}//inputDto는 사용자가 입력한 정보, findDto는 데이터베이스 조회 결과
 		boolean passwordMatch=
-				inputDto.getAdminEmail().equals(findDto.getAdminPw());
+				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
 			session.setAttribute(SessionConstant.EMAIL,inputDto.getAdminEmail());
 		

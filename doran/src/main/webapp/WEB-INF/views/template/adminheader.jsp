@@ -46,7 +46,7 @@
 				<ul class="dropdown-menu">
 					<c:choose>
 						<c:when test="${login}">
-							<li><a href="/">홈</a></li>
+							<li><a href="/admin">홈</a></li>
 							<li>
 								<a href="#">데이터셋</a>
 								<ul>
@@ -87,7 +87,6 @@
 				</ul>
 			</nav>
 	
-	        <!-- 사이드바 + 컨텐츠 -->
             <div class="float-container">
             	<!-- 관리자 메뉴 추가 -->
             	<aside>

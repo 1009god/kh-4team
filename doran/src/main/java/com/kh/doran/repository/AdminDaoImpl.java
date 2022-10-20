@@ -1,16 +1,22 @@
 package com.kh.doran.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AdminDto;
+import com.kh.doran.entity.MemDto;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	
 	
 	@Override
 	public void insert(AdminDto adminDto) {
@@ -34,5 +40,7 @@ public class AdminDaoImpl implements AdminDao {
 		Object[] param = {adminEmail};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+
+	
 }
 
