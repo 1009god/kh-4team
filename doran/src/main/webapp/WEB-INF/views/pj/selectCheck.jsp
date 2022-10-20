@@ -14,6 +14,6 @@
 <span>${OptionsDto.optionsStock}</span>
 <span>${OptionsDto.optionsDeliveryPrice}</span>
 
-<button>다음</button>
+<a href="order?optionsNo=${OptionsDto.optionsNo}"><button>다음</button></a>
 </body>
 </html>
