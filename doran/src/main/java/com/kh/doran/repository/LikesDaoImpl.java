@@ -44,4 +44,12 @@ public class LikesDaoImpl implements LikesDao {
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
 
+	@Override
+	public void refresh(int pjNo) {
+		String sql="UPDATE PJ SET PJ_LIKES_NUMBER=(SELECT COUNT(*) FROM LIKES "
+				+ "WHERE LIKES_PJ_NO=?) WHERE PJ_NO=?";
+		Object[] param= {pjNo, pjNo};
+		jdbcTemplate.update(sql,param);
+	}
+	
 }
