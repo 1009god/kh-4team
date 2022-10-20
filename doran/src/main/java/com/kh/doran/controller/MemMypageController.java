@@ -29,7 +29,7 @@ public class MemMypageController {
   public String mypage(HttpSession session, Model model) {
      //1. 세션에 들어있는 아이디를 꺼낸다 (down casting다운캐스팅) 형변환?
      //- 세션에 저장된 형태가 Object이기 때문에 string으로 다운캐스팅
-     String memEmail = (String) session.getAttribute("memEmail");
+     String memEmail = (String) session.getAttribute("loginId");
      
      
      //2. 아이드를 이용하여 회원정보를 불러온다
