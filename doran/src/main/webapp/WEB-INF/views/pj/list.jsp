@@ -9,6 +9,7 @@
 </head>
 <body>
 <h1>상품 목록</h1>
+<%-- <h3>${pjListSearchVo}</h3> --%>
 <div class=row>
 	<!-- 검색창 -->
 	<form action = "list" method = "get">
@@ -22,14 +23,21 @@
 	</form>
 	<div>
 		<c:forEach var="pjDto" items="${list}">
-			<div>${pjDto.pjCategory}</div>
+			<div>[${pjDto.pjCategory}]</div>
 			<div><a href="detail?pjNo=${pjDto.pjNo}">
 			${pjDto.pjName}</a></div>
 		</c:forEach>
 	</div>
 	
-	<!--임시 페이지 네비게이터  -->
-	<h3>&laquo; &lt; 1 2 3 4 5 6 7 8 9 10 &gt; &raquo;</h3>
+	<!--페이지 네비게이터  -->
+	<h3>
+	<a href="list?p=${pjListSearchVo.firstBlock()}">&laquo;</a> 
+	<a href="list?p=${pjListSearchVo.prevBlock()}">&lt;</a>
+	<c:forEach var="i" begin="${pjListSearchVo.startBlock()}" end="${pjListSearchVo.endBlock()}">
+		<a href="list?p=${i}">${i}</a></c:forEach>	
+	<a href="list?p=${pjListSearchVo.nextBlock()}">&gt;</a>
+	<a href="list?p=${pjListSearchVo.lastBlock()}">&raquo;</a>
+	</h3>
 
 </div>
 </body>

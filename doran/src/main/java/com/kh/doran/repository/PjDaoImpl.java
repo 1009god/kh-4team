@@ -81,19 +81,78 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,extractor,param);
 	}
 	
-	@Override
-	public List<PjDto> selectList() {
-		String sql = "select*from pj order by pj_no desc";
-		return jdbcTemplate.query(sql, mapper);
-	}
+//	@Override
+//	public List<PjDto> selectList() {
+//		String sql = "select*from pj order by pj_no desc";
+//		return jdbcTemplate.query(sql, mapper);
+//	}
 	
 	@Override
 	public List<PjDto> selectList(PjListSearchVO vo) {
-		String sql = "select*from pj where instr(#1, ?) > 0 order by #1 asc";
+		if(vo.isSearch()) {//검색
+			return search(vo);
+		}
+		else {// 목록
+			return list(vo);
+		}
+//		String sql = "select*from pj where instr(#1, ?) > 0 order by #1 asc";
+//		sql = sql.replace("#1", vo.getType());
+//		Object[] param = {vo.getKeyword()};
+// 		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	@Override
+	public List<PjDto> search(PjListSearchVO vo) {
+		String sql = "select * from ( "
+				+ "select rownum rn, TMP.* from( "
+					+ "select*from pj "
+					+ "where instr(#1,?)>0 "
+					+ "order by pj_no desc "
+				+ ")TMP "
+			+ ") where rn between ? and ?";
+	sql=sql.replace("#1", vo.getType());
+	Object[]param = {
+			vo.getKeyword(), vo.startRow(),vo.endRow()
+		};
+	return jdbcTemplate.query(sql,mapper,param);
+	}
+	
+	@Override
+	public List<PjDto> list(PjListSearchVO vo) {
+		String sql = "select * from ( "
+					+ "select rownum rn, TMP.* from( "
+						+ "select*from pj order by pj_no desc "
+					+ ")TMP "
+				+ ") where rn between ? and ?";
+
+		Object[]param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql,mapper,param);
+	}
+	
+	@Override
+	public int count(PjListSearchVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	
+	@Override
+	public int listCount(PjListSearchVO vo) {
+		String sql = "select count(*) from pj";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int searchCount(PjListSearchVO vo) {
+		String sql = "select count(*) from pj where instr(#1,?)>0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
- 		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
+	
 
 	
 

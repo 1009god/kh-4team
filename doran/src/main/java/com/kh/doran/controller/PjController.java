@@ -62,12 +62,19 @@ public class PjController {
 	public String list(Model model, 
 			@ModelAttribute(name="pjListSearchVo") PjListSearchVO vo) {
 		
-		if(vo.isSearch()) {
-			model.addAttribute("list",pjDao.selectList(vo));
-		}
-		else {
-			model.addAttribute("list", pjDao.selectList());
-		}
+		//페이지 네비게이터를 위한 게시글 수를 구한 것
+		int count = pjDao.count(vo);
+		vo.setCount(count);
+	
+		model.addAttribute("list",pjDao.selectList(vo));
+		
+		//페이지네이션하며 주석 처리 - 완료되면 지울 것
+//		if(vo.isSearch()) {
+//			model.addAttribute("list",pjDao.selectList(vo));
+//		}
+//		else {
+//			model.addAttribute("list", pjDao.selectList());
+//		}
 		return "pj/list";
 	};
 	
