@@ -44,20 +44,20 @@ public class MemMypageController {
   }
 
   	//수정
-	@GetMapping("/edit")
+	@GetMapping("/edit_profile")
 	public String edit(Model model, @RequestParam String memNo) {
 		MemDto dto = memDao.selectOne(memNo);
 		model.addAttribute("memDto", dto);
-		return "mypage/edit";
+		return "mypage/editProfile";
 	}
 	
-	@PostMapping("/edit")
+	@PostMapping("/edit_profile")
 	public String edit(@ModelAttribute MemDto memDto,
 									RedirectAttributes attr) {
-		boolean result = memDao.update(memDto);
+		boolean result = memDao.profileUpdate(memDto);
 		if(result) {
 			attr.addAttribute("memNo", memDto.getMemNo());
-			return "redirect:mypage/edit";
+			return "redirect:mypage/editProfile";
 		}
 		else {
 			return "redirect:edit_fail";

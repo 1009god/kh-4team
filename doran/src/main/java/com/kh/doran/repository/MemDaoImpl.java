@@ -69,7 +69,7 @@ public class MemDaoImpl implements MemDao {
 	}
 
 	@Override
-	public boolean update(MemDto memDto) {
+	public boolean profileUpdate(MemDto memDto) {
 		String sql = "update mem set mem_nick=?, mem_tel=? where mem_no = ?";
 		Object[] param = {
 				memDto.getMemNick(), memDto.getMemTel(), memDto.getMemNo()
