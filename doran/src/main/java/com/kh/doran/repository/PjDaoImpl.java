@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
+import com.kh.doran.vo.PjListSearchVO;
 
 @Repository
 public class PjDaoImpl implements PjDao {
@@ -85,10 +86,10 @@ public class PjDaoImpl implements PjDao {
 	}
 	
 	@Override
-	public List<PjDto> selectList(String type, String keyword) {
+	public List<PjDto> selectList(PjListSearchVO vo) {
 		String sql = "select*from pj where instr(#1, ?) > 0 order by #1 asc";
-		sql = sql.replace("#1", type);
-		Object[] param = {keyword};
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
  		return jdbcTemplate.query(sql, mapper, param);
 	}
 
