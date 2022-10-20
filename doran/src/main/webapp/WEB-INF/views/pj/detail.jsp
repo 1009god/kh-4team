@@ -30,7 +30,7 @@
         </table>
 
         <c:forEach var="optionsDto" items="${OptionsDto}">
-            <span>${optionsDto.optionsName}</span>
+            <span><a href="selectCheck?optionsNo=${optionsDto.optionsNo}">${optionsDto.optionsName}</a></span>
             <span>${optionsDto.optionsPrice}</span>
             <span>${optionsDto.optionsStock}</span>
         </c:forEach>

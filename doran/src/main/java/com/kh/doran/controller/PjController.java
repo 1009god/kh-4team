@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.doran.constant.SessionConstant;
 import com.kh.doran.entity.LikesDto;
+import com.kh.doran.entity.PjDto;
 import com.kh.doran.repository.LikesDao;
-import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.PjDao;
 
@@ -48,6 +49,20 @@ public class PjController {
 	};
 	
 	
+	@GetMapping("/selectCheck")
+	public String selectCheck(@RequestParam int optionsNo, Model model) {//, HttpSession session
+//		String loginId=(String) session.getAttribute(SessionConstant.EMAIL);
+//		if(loginId==null) {
+//			return "redirect:/mem/login";
+//		}
+		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));//선택중인 옵션
+		return "pj/selectCheck";
+	};
+	
+	@GetMapping("/order")
+	public String order() {
+		return "pj/order";
+	};
 	
 
 }
