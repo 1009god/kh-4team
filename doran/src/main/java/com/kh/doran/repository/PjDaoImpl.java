@@ -4,6 +4,7 @@ package com.kh.doran.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -75,6 +76,20 @@ public class PjDaoImpl implements PjDao {
 		String sql="SELECT*FROM PJ WHERE PJ_NO=?";
 		Object[] param= {pjNo};
 		return jdbcTemplate.query(sql,extractor,param);
+	}
+	
+	@Override
+	public List<PjDto> selectList() {
+		String sql = "select*from pj order by pj_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	@Override
+	public List<PjDto> selectList(String type, String keyword) {
+		String sql = "select*from pj where instr(#1, ?) > 0 order by #1 asc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+ 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	
