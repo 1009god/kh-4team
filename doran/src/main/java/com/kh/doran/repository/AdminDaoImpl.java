@@ -35,3 +35,4 @@ public class AdminDaoImpl implements AdminDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 }
+
