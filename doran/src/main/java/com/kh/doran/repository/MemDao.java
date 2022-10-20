@@ -7,6 +7,4 @@ public interface MemDao {
 	MemDto selectOne(String memEmail);
 	MemDto selectOne2(String memNo);
 	boolean update(MemDto dto);
-
-	
 }

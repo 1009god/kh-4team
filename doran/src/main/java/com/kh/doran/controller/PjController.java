@@ -15,7 +15,10 @@ import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.MemDao;
 
 
-
+import com.kh.doran.constant.SessionConstant;
+import com.kh.doran.entity.LikesDto;
+import com.kh.doran.repository.LikesDao;
+import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.PjDao;
 import com.kh.doran.vo.PjListSearchVO;
@@ -24,11 +27,17 @@ import com.kh.doran.vo.PjListSearchVO;
 @RequestMapping("/pj")
 public class PjController {
 	
+	
+	
 	@Autowired
 	private PjDao pjDao;
 	
 	@Autowired
 	private OptionsDao optionsDao;
+	
+	@Autowired
+	private LikesDao likesDao;
+
 	
 	@GetMapping("/detail")
 
@@ -44,7 +53,6 @@ public class PjController {
 		likesDto.setLikesMemEmail(loginId);
 		model.addAttribute("isLike", likesDao.check(likesDto));
 		}
-
 		return "pj/detail";
 	};
 	

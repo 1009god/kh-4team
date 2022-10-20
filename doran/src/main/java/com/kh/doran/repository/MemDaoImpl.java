@@ -63,18 +63,21 @@ public class MemDaoImpl implements MemDao {
 
 	@Override
 	public MemDto selectOne2(String memNo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from mem where mem_no = ?";
+		Object[] param = {memNo};
+		return jdbcTemplate.query(sql, extractor, param);
 	}
 
 	@Override
-	public boolean update(MemDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(MemDto memDto) {
+		String sql = "update mem set mem_nick=?, mem_tel=? where mem_no = ?";
+		Object[] param = {
+				memDto.getMemNick(), memDto.getMemTel(), memDto.getMemNo()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
-	
-	
+
 	
 	
 }
