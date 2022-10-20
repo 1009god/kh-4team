@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.PjDao;
 
 @Controller
@@ -20,6 +20,18 @@ public class PjController {
 //	public String detail(@RequestParam int pjNo, Model model) {
 //		
 //	};
+
+	@Autowired
+	private OptionsDao optionsDao;
+	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int pjNo, Model model) {
+		model.addAttribute("PjDto", pjDao.selectOne(pjNo));
+		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));
+		return "pj/detail";
+	};
+	
+	
 	
 	@GetMapping("/list")
 	public String list(Model model, 
