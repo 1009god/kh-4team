@@ -7,12 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class MemDto {
+	
 	private int memNo;
 	private String memEmail, memPw, memNick, memTel, memRoute;
 	private Date memJoin;
+	
 }
