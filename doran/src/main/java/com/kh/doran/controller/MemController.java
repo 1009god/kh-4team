@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +39,33 @@ public class MemController {
 	}
 	
 	@PostMapping("/login")
+	public String login(
+			@ModelAttribute MemDto inputDto,
+			HttpSession session) {
+		MemDto findDto = memDao.selectOne(inputDto.getMemEmail());
+		if(findDto == null) { //아이디 틀리면 로그인창
+			return "redirect:login?error"; 
+		}
+		
+		boolean passwordMatch = 
+				inputDto.getMemPw().equals(findDto.getMemPw());
+		if(passwordMatch) {
+			session.setAttribute("loginId", inputDto.getMemEmail());
+			
+			return "redirect:/"; //홈페이지로 보내주자 맞으면
+		}
+		else {
+			return "redirect:login?error"; //리다이렉트 = 겟, 비번 틀리면 로그인창
+		}
+		
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginId");
+		return "redirect:/";
+	}
+		
 	public String login(@ModelAttribute MemDto inputDto) {
 		MemDto findDto = memDao.selectOne(inputDto.getMemEmail());
 		if(findDto == null) { //아이디 틀리면 로그인창
