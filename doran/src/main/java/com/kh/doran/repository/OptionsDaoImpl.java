@@ -63,4 +63,11 @@ public class OptionsDaoImpl implements OptionsDao {
 		Object[] param= {optionsPjNo};
 		return jdbcTemplate.query(sql,mapper,param);
 	}
+	
+	@Override
+	public OptionsDto selectOne(int optionsNo) {
+		String sql="select*from options where options_no=?";
+		Object[] param= {optionsNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
 }
