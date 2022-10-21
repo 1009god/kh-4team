@@ -3,13 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 상세</title>
 </head>
 <body>
+
 
     <div>
         <table>
@@ -29,10 +31,10 @@
             </tbody>
         </table>
 
-        <c:forEach var="optionsDto" items="${OptionsDto}">
-            <span><a href="selectCheck?optionsNo=${optionsDto.optionsNo}">${optionsDto.optionsName}</a></span>
-            <span>${optionsDto.optionsPrice}</span>
-            <span>${optionsDto.optionsStock}</span>
+        <c:forEach var="OptionsDto" items="${OptionsDto}">
+            <span><a href="selectCheck?optionsNo=${OptionsDto.optionsNo}">${OptionsDto.optionsName}</a></span>
+            <span>${OptionsDto.optionsPrice}</span>
+            <span>${OptionsDto.optionsStock}</span>
         </c:forEach>
     </div>
 
