@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.constant.SessionConstant;
 import com.kh.doran.entity.AdminDto;
+import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.AdminDao;
+import com.kh.doran.repository.MemDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,6 +25,10 @@ public class AdminController {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Autowired
+	private MemDao memDao;
+	
+
 	@GetMapping("/insert")
 	public String insert() {
 		return "/admin/insert";
@@ -50,7 +57,7 @@ public class AdminController {
 			return "redirect:login?error";	
 		}//inputDto는 사용자가 입력한 정보, findDto는 데이터베이스 조회 결과
 		boolean passwordMatch=
-				inputDto.getAdminEmail().equals(findDto.getAdminPw());
+				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
 			session.setAttribute(SessionConstant.NO,inputDto.getAdminEmail());
 		
@@ -68,6 +75,41 @@ public class AdminController {
 		
 		return "redirect:/";
 	}
+	
+	@GetMapping("/list")
+	public String list(Model model,
+				@RequestParam(required=false)String type,
+				@RequestParam(required=false)String keyword) {
+		boolean isSearch=type!=null&&keyword!=null;
+		if(isSearch) {
+			model.addAttribute("list",adminDao.selectList(type, keyword));			
+		}
+		else {
+			model.addAttribute("list",adminDao.selectList());
+		}
+		return "mem/list";
+	}
+	
+	@GetMapping("/detail")
+	public String detail(Model model,
+						@RequestParam String memEmail) {
+		MemDto memDto=memDao.selectOne(memEmail);
+		return "mem/detail";
+	}
+	
+	@GetMapping("/change")
+	public String change(Model model,@RequestParam String memEmail) {
+		model.addAttribute("memDto",memDao.selectOne(memEmail));
+		return "mem/change";
+	}
+//	@PostMapping("/change")
+//	public String change(@ModelAttribute MemDto memDto,		
+//						RedirectAttributes attr){
+//		boolean result = adminDao.update(memDto);
+//						}
+	
+	
+	
 	
 	
 }

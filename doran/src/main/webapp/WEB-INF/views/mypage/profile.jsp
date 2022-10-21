@@ -18,7 +18,9 @@
 		
 <div class="container-800">
 	<div class="row">
-			<h1 style="padding-left:20px">${memDto.memEmail} 회원 정보</h1>
+		<img src="https://w7.pngwing.com/pngs/987/118/png-transparent-computer-icons-login-user-profile-others-computer-logo-desktop-wallpaper-thumbnail.png" width="100" height="100">
+		<h1 style="padding-left:20px">${memDto.memEmail} 회원 정보</h1>
+		<button>수정</button>
 	</div>
 	<div class="row">
 	${memDto.memNo} 회원 번호
@@ -27,11 +29,12 @@
 	${memDto.memNick} 회원 닉네임	
 	</div>
 	<div class="row">
-	${memDto.mem} 회원 닉네임	
-	</div>
+	${memDto.memTel} 회원 번호
+	</div>	
 	<div class="row">
 	${memDto.memJoinDate} 회원 가입일
-	</div>
+	</div>	
+	
 
 </div>
 
