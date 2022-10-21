@@ -32,6 +32,7 @@
 					<a href ="#">마감임박</a>
 					<a href ="#">커뮤니티</a>
 					<a href ="#">고객센터</a>
+					<a href ="/seller/sellerjoin">판매자 가입</a>
 					<a href ="/mem/logout">로그아웃</a>
 				</c:when>
 				<c:otherwise>
