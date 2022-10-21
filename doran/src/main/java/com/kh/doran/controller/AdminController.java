@@ -59,7 +59,7 @@ public class AdminController {
 		boolean passwordMatch=
 				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
-			session.setAttribute(SessionConstant.EMAIL,inputDto.getAdminEmail());
+			session.setAttribute(SessionConstant.NO,inputDto.getAdminEmail());
 		
 			adminDao.updateLoginTime(inputDto.getAdminEmail());
 			return "redirect:/";
@@ -71,7 +71,7 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute(SessionConstant.EMAIL);
+		session.removeAttribute(SessionConstant.NO);
 		
 		return "redirect:/";
 	}
