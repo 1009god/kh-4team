@@ -92,14 +92,14 @@ public class AdminController {
 	
 	@GetMapping("/detail")
 	public String detail(Model model,
-						@RequestParam String memEmail) {
-		MemDto memDto=memDao.selectOne(memEmail);
+						@RequestParam int memNo) {
+		MemDto memDto=memDao.selectOne(memNo);
 		return "mem/detail";
 	}
 	
 	@GetMapping("/change")
-	public String change(Model model,@RequestParam String memEmail) {
-		model.addAttribute("memDto",memDao.selectOne(memEmail));
+	public String change(Model model,@RequestParam int memNo) {
+		model.addAttribute("memDto",memDao.selectOne(memNo));
 		return "mem/change";
 	}
 //	@PostMapping("/change")

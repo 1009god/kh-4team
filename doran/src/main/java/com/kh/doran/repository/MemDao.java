@@ -4,8 +4,8 @@ import com.kh.doran.entity.MemDto;
 
 public interface MemDao {
 	void insert(MemDto memDto);
-	MemDto selectOne(String memEmail);
-	MemDto selectOne2(int memNo);
+	MemDto selectOne(int memNo);
+	
 
 	
 	boolean profileUpdate(MemDto dto);  //구버전
