@@ -62,7 +62,7 @@ public class MemDaoImpl implements MemDao {
 	}
 
 	@Override
-	public MemDto selectOne2(String memNo) {
+	public MemDto selectOne2(int memNo) {
 		String sql = "select * from mem where mem_no = ?";
 		Object[] param = {memNo};
 		return jdbcTemplate.query(sql, extractor, param);

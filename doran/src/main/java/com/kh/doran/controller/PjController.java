@@ -51,19 +51,22 @@ public class PjController {
 	public String detail(@RequestParam int pjNo, Model model, HttpSession session) {
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트넘버로 검색해서 나온 값 model에 저장해서 넘김
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
-//		String loginId=(String) session.getAttribute("loginId");
-//		MemDto findDto=new MemDto();
-//		findDto=memDao.selectOne(loginId);
-//		int qwerty=findDto.getMemNo();
-		
+
+		int loginNo=(int) session.getAttribute(SessionConstant.NO);
+		if(loginNo!=0) {
+			LikesDto likesDto=new LikesDto();
+			likesDto.setLikesMemNo(loginNo);
+			likesDto.setLikesPjNo(pjNo);
+			model.addAttribute("check",likesDao.check(likesDto));
+		}
 		return "pj/detail";
 	};
 	
 	
 	@GetMapping("/selectCheck")//구매할 옵션 선택(확인)
 	public String selectCheck(@RequestParam int optionsNo, Model model, HttpSession session) {
-		String loginId=(String) session.getAttribute(SessionConstant.EMAIL);
-		if(loginId==null) {
+		int loginNo=(int) session.getAttribute(SessionConstant.NO);
+		if(loginNo==0) {
 			return "redirect:/mem/login";
 		}
 		
@@ -79,16 +82,40 @@ public class PjController {
 	@PostMapping("/order")
 	public String order(@ModelAttribute OrdersDto ordersDto, 
 			@RequestParam int optionsNo, Model model, HttpSession session, RedirectAttributes attr) {
-		String loginId=(String) session.getAttribute(SessionConstant.EMAIL);
-		MemDto memDto=memDao.selectOne(loginId);
-		int memNo=memDto.getMemNo();
-		attr.addAttribute("memNo",memNo);
+		int loginNo=(int) session.getAttribute(SessionConstant.NO);
+		attr.addAttribute("memNo", loginNo);
 		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
 		int optionsPjNo=optionsDto.getOptionsPjNo();
 		attr.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
 		attr.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
-		return null;
+		return "redirect:/pj/orderComplete";
 	};
+	
+	@GetMapping("/orderComplete")
+	public String orderComplete() {
+		return "pj/orderComplete";
+	}
+	
+	@GetMapping("/like")
+	public String like(@RequestParam int pjNo, HttpSession session, RedirectAttributes attr) {
+		int loginNo=(int) session.getAttribute(SessionConstant.NO);
+		LikesDto likesDto=new LikesDto();
+		likesDto.setLikesMemNo(loginNo);
+		likesDto.setLikesPjNo(pjNo);
+		
+		if(likesDao.check(likesDto)) {//이미 좋아요를 했을 경우
+			likesDao.delete(likesDto);
+		}
+		else {//아직 좋아요를 하지 않았다면
+			likesDao.insert(likesDto);
+		}
+		
+		likesDao.refresh(pjNo);//좋아요 수를 갱신함
+		attr.addAttribute("pjNo",pjNo);
+		return "redirect:/pj/detail";
+		
+	};
+	
 	
 	@GetMapping("/list")
 	public String list(Model model, 
@@ -102,6 +129,7 @@ public class PjController {
 		}
 		return "pj/list";
 	};
+	
 	
 
 }
