@@ -20,7 +20,7 @@
 	<div class="row">
 		<img src="https://w7.pngwing.com/pngs/987/118/png-transparent-computer-icons-login-user-profile-others-computer-logo-desktop-wallpaper-thumbnail.png" width="100" height="100">
 		<h1 style="padding-left:20px">${memDto.memEmail} 회원 정보</h1>
-		<button>수정</button>
+		<a href="/mypage/edit/profile"><button>수정</button></a>
 	</div>
 	<div class="row">
 	${memDto.memNo} 회원 번호
