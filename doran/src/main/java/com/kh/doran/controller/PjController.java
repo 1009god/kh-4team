@@ -36,7 +36,7 @@ public class PjController {
 	public String detail(@RequestParam int pjNo, Model model, HttpSession session) {
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트넘버로 검색해서 나온 값 model에 저장해서 넘김
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
-		String loginId=(String) session.getAttribute(SessionConstant.EMAIL);
+		String loginId=(String) session.getAttribute(SessionConstant.NO);
 		//회원일 경우 좋아요 했는지 기록을 첨부
 		if(loginId!=null) {
 		LikesDto likesDto=new LikesDto();
