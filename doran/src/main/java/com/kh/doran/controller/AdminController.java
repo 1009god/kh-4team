@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.doran.constant.SessionConstant;
 import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.AdminDao;
@@ -67,7 +66,7 @@ public class AdminController {
 		boolean passwordMatch=
 				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
-			session.setAttribute(SessionConstant.NO,inputDto.getAdminEmail());
+			session.setAttribute("loginNo",inputDto.getAdminEmail());
 		
 			adminDao.updateLoginTime(inputDto.getAdminEmail());
 			return "redirect:/";
@@ -79,7 +78,7 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute(SessionConstant.NO);
+		session.removeAttribute("loginNo");
 		
 		return "redirect:/";
 	}
@@ -107,13 +106,26 @@ public class AdminController {
 		return "admin/memlist";
 	}
 	
+	@GetMapping("/detail")
+	public String detail(Model model,
+						@RequestParam int memNo) {
+		MemDto memDto=memDao.selectOne(memNo);
+		return "mem/detail";
+	}
+
 //	@GetMapping("list")
 //	public String list(Model model,
 //						@ModelAttribute(name="vo")MemListVO vo) {
 //		
 //		int count = adminDao.count(vo);
 //	}
-	
+
+	@GetMapping("/change")
+	public String change(Model model,@RequestParam int memNo) {
+		model.addAttribute("memDto",memDao.selectOne(memNo));
+		return "mem/change";
+	}
+
 	
 //	@GetMapping("/detail")
 //	public String detail(Model model,
@@ -130,6 +142,7 @@ public class AdminController {
 //
 //	}
 //	
+
 //	@PostMapping("/change")
 //	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
 //		boolean result = adminDao.update(memDto);
