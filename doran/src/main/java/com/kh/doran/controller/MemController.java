@@ -42,7 +42,7 @@ public class MemController {
 	public String login(
 			@ModelAttribute MemDto inputDto,
 			HttpSession session) {
-		MemDto findDto = memDao.selectOne(inputDto.getMemEmail());
+		MemDto findDto = memDao.selectOne(inputDto.getMemNo());
 		if(findDto == null) { //아이디 틀리면 로그인창
 			return "redirect:login?error"; 
 		}

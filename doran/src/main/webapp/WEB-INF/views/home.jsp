@@ -9,6 +9,12 @@
 <title>도란도란 - 펀딩 사이트</title>
 </head>
 <body>
+<%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="메인페이지" name="title"/>
+</jsp:include>
+
+
 	<h1>어서오세요!</h1>
 	<!-- 로그인 상태 확인 -->
 	<h2>loginId = ${sessionScope.loginId }</h2>
@@ -26,10 +32,6 @@
 	</c:choose>
 
 
-<%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="메인페이지" name="title"/>
-</jsp:include>
 
 
 
