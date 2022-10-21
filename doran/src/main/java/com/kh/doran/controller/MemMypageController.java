@@ -40,32 +40,59 @@ public class MemMypageController {
      
      //4.화면(view)으로 전달(forward)한다
      
-     return "mypage/profile";
+     return "mypage/edit/profile";
   }
 
-  	//수정
-	@GetMapping("/edit_profile")
-	public String edit(Model model, @RequestParam String memNo) {
-		MemDto dto = memDao.selectOne(memNo);
-		model.addAttribute("memDto", dto);
-		return "mypage/editProfile";
+//개인정보 수정
+	// 1. 자신의 현재 정보를 조회하여 화면에 출력
+	// 2. 바꾸고 싶은 정보를 입력하여 전송하면 해당 정보를 변경
+
+	@GetMapping("/edit/profile")
+	public String editProfile(HttpSession session, Model model) {
+		
+		//(1)아이디 획득(HttpSession)
+		String memEmail = (String)session.getAttribute("loginId");
+		
+		//(2) 아이디로 정보를 조회
+		MemDto memDto = memDao.selectOne(memEmail);
+		
+		//(3) 조회한 정보를 화면으로 전달
+		model.addAttribute("memDto",memDto);
+		
+		//(4) 연결될 화면 주소를 반환
+		return "mypage/edit/profile";
 	}
 	
-	@PostMapping("/edit_profile")
-	public String edit(@ModelAttribute MemDto memDto,
-									RedirectAttributes attr) {
-		boolean result = memDao.profileUpdate(memDto);
-		if(result) {
-			attr.addAttribute("memNo", memDto.getMemNo());
-			return "redirect:mypage/editProfile";
-		}
+	@PostMapping("/edit/profile")
+	public String editProfile(HttpSession session, 
+											@ModelAttribute MemDto inputDto, //client가 입력한 값
+											RedirectAttributes attr) {
+		// memberId는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
+		String memEmail = (String)session.getAttribute("loginId");
+		inputDto.setMemEmail(memEmail); //memberDto에 세션에서 가져온 ID를 넣어줌
+		
+		//(1) 비밀번호를 검사
+		MemDto findDto = memDao.selectOne(memEmail);  //findDto는 DB에서 가져온 값
+		boolean passwordMatch = inputDto.getMemPw().equals(findDto.getMemPw());
+		
+		if(passwordMatch) {
+			//(2) 비밀번호 검사를 통과했다면 정보를 변경하도록 처리
+			memDao.editProfile(inputDto);
+			return "redirect: mypage/profile";			
+		}		
 		else {
-			return "redirect:edit_fail";
-		}
+			return "redirect:error";
+		}	
+	}
+
+	@GetMapping("/edit/profile_result")
+	public String infromaitonResult() {
+		return "mypage/profile";
 	}
 	
-	@GetMapping("/edit_fail")
-	public String editFail() {
-		return "mypage/editFail";
-	}
+	
+	
+	
+	
+	
 }

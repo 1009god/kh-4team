@@ -25,13 +25,13 @@
 		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">
 	</div>
 	<div class="row center">
-		<button type="submit">수정</button>
+	<a href = "/mypage/edit/profile">
+		<button type="button" onclick="/mypage/edit/profile">수정</button>
+	</a>	
 	</div>
 	
 </form>
 
-전화번호-> account로  
-edit/profile, edit/account(비밀번호, 전화번호),edit/address- table 따로 존재
 
 </body>
 </html>
