@@ -76,7 +76,7 @@ public class PjDaoImpl implements PjDao {
 
 	@Override
 	public PjDto selectOne(int pjNo) {
-		String sql="SELECT*FROM PJ WHERE PJ_NO=?";
+		String sql="select*from pj where pj_no=?";
 		Object[] param= {pjNo};
 		return jdbcTemplate.query(sql,extractor,param);
 	}
