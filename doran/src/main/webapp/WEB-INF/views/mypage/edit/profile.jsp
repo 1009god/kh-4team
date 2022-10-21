@@ -18,10 +18,16 @@
 		<input class="input w-100" type="text" name="profileImg" value="${memDto.이미지}" >
 	</div>
  --%>
+ 
+ <a href="/mypage/edit/profile">프로필</a>
+ <a href="/mypage/edit/account">계정</a>
+ <a href="/mypage/edit/address">배송지</a>
+ 
+ 
  <form action="mypage/edit" method="post">
  
 	<div class="row">
-		<label>Nickname</label>
+		<label>닉네임</label>
 		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">
 	</div>
 	<div class="row center">
