@@ -29,11 +29,11 @@ public class MemMypageController {
   public String mypage(HttpSession session, Model model) {
      //1. 세션에 들어있는 아이디를 꺼낸다 (down casting다운캐스팅) 형변환?
      //- 세션에 저장된 형태가 Object이기 때문에 string으로 다운캐스팅
-     String memEmail = (String) session.getAttribute("loginId");
+     int memNo = (int)session.getAttribute("loginNo");
      
      
      //2. 아이드를 이용하여 회원정보를 불러온다
-     MemDto memDto = memDao.selectOne(memEmail);
+     MemDto memDto = memDao.selectOne(memNo);
      
      //3.불러온 정보를 모델에 첨부한다
      model.addAttribute("memDto", memDto);
@@ -51,10 +51,10 @@ public class MemMypageController {
 	public String editProfile(HttpSession session, Model model) {
 		
 		//(1)아이디 획득(HttpSession)
-		String memEmail = (String)session.getAttribute("loginId");
+		int memNo = (int)session.getAttribute("loginNo");
 		
 		//(2) 아이디로 정보를 조회
-		MemDto memDto = memDao.selectOne(memEmail);
+		MemDto memDto = memDao.selectOne(memNo);
 		
 		//(3) 조회한 정보를 화면으로 전달
 		model.addAttribute("memDto",memDto);
@@ -68,8 +68,8 @@ public class MemMypageController {
 											@ModelAttribute MemDto inputDto, //client가 입력한 값
 											RedirectAttributes attr) {
 		// memberId는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
-		String memEmail = (String)session.getAttribute("loginId");
-		inputDto.setMemEmail(memEmail); //memberDto에 세션에서 가져온 ID를 넣어줌
+		int memNo = (int)session.getAttribute("loginNo");
+		inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 ID를 넣어줌
 		
 //		//(1) 비밀번호를 검사
 //		MemDto findDto = memDao.selectOne(memEmail);  //findDto는 DB에서 가져온 값
