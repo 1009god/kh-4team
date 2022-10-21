@@ -55,11 +55,12 @@ public class PjController {
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
 		
 		String loginId=(String) session.getAttribute(SessionConstant.EMAIL);
+		MemDto memDto=memDao.selectOne(loginId);
 		//회원일 경우 좋아요 했는지 기록을 첨부
 		if(loginId!=null) {
 		LikesDto likesDto=new LikesDto();
 		likesDto.setLikesPjNo(pjNo);
-		likesDto.setLikesMemEmail(loginId);
+		likesDto.setLikesMemNo(memDto.getMemNo());
 		model.addAttribute("isLike", likesDao.check(likesDto));
 		}
 		return "pj/detail";
