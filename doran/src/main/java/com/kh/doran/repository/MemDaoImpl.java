@@ -54,8 +54,6 @@ public class MemDaoImpl implements MemDao {
 		jdbcTemplate.update(sql, param);
 	}
 
-
-
 	@Override
 	public MemDto selectOne(int memNo) {
 		String sql = "select * from mem where mem_no = ?";
@@ -63,8 +61,10 @@ public class MemDaoImpl implements MemDao {
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 
+	
+
 	@Override
-	public boolean profileUpdate(MemDto memDto) {
+	public boolean profileUpdate(MemDto memDto) { //구버전
 		String sql = "update mem set mem_nick=?, mem_tel=? where mem_no = ?";
 		Object[] param = {
 				memDto.getMemNick(), memDto.getMemTel(), memDto.getMemNo()
