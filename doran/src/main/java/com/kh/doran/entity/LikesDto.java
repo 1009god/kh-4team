@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LikesDto {
 	private int likesPjNo;
-	private String likesMemEmail;
+	private int likesMemNo;
 }

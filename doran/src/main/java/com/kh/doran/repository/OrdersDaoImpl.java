@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.doran.entity.OrdersDto;
 
 @Repository
-public class OrdersDaoImpl {
+public class OrdersDaoImpl implements OrdersDao{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -60,4 +60,11 @@ public class OrdersDaoImpl {
 		}
 	};
 
+//	@Override
+//	public void insert(OrdersDto ordersDto) {
+//		String sql=""
+//		
+//	}
+
+	
 }
