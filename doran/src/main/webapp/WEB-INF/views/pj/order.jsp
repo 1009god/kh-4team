@@ -9,5 +9,13 @@
 <body>
 <h1>결제</h1>
 
+<form action="order?optionsNo=${OptionsDto.optionsNo}" method="post">
+<input>
+<input>
+<input>
+<button type="submit">주문하기</button>
+
+</form>
+
 </body>
 </html>

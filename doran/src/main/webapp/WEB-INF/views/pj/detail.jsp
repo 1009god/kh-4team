@@ -26,7 +26,15 @@
                 </tr>
                <tr>
                		<th>좋아요</th>
-               		<td>${PjDto.pjLikesNumber}</td>
+               		<td>
+               		${PjDto.pjLikesNumber}
+               		<c:if test="${check==true}">
+               		<button><a href="like?pjNo=${PjDto.pjNo}">좋아요 취소하기</a></button>
+               		</c:if>
+               		<c:if test="${check==false}">
+               		<button><a href="like?pjNo=${PjDto.pjNo}">좋아요 하기</a></button>
+               		</c:if>
+               		</td>
                </tr>
             </tbody>
         </table>

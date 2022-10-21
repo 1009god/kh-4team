@@ -80,7 +80,7 @@ public class PjController {
 	};
 	
 	@PostMapping("/order")
-	public String order(@ModelAttribute OrdersDto ordersDto, 
+	public String order(@ModelAttribute OrdersDto ordersDto,
 			@RequestParam int optionsNo, Model model, HttpSession session, RedirectAttributes attr) {
 		int loginNo=(int) session.getAttribute(SessionConstant.NO);
 		attr.addAttribute("memNo", loginNo);
