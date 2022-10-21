@@ -6,7 +6,8 @@
 
 <html>
 <head>
-<title><c:choose>
+<title>
+<c:choose>
 		<c:when test="${param.title != null}">
 					${param.title}
 				</c:when>
@@ -25,25 +26,22 @@
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
+<script src="/js/checkbox.js"></script>
 
 </head>
 <body>
-
-
 	<main>
-
 		<header>
-			<div class="container-800">
+			<div class="container-700">
 				<div class="row center">
 					<h1>도란도란 관리자 전용 페이지</h1>
 				</div>
 			</div>
 		</header>
+    	<!-- 메뉴 -->
 		<nav>
-
 			<ul class="dropdown-menu">
 				<c:choose>
 					<c:when test="${login}">
@@ -73,7 +71,7 @@
 		<div class="float-container">
 			<!-- 관리자 메뉴 추가 -->
 			<aside>
-				<div class="container-150">
+				<div class="container-200">
 					<div class="row">
 						<h2>관리자메뉴</h2>
 					</div>
@@ -81,7 +79,7 @@
 						<a href="#">프로젝트 관리</a>
 					</div>
 					<div class="row">
-						<a href="#">전체 회원 관리</a>
+						<a href="/admin/memlist">전체 회원 관리</a>
 					</div>
 					<div class="row">
 						<a href="#">판매자 관리</a>
@@ -97,6 +95,6 @@
 					</div>
 
 				</div>
-		</div>
+		
 		</aside>
 		<section>

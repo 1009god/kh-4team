@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class MemListSearchVO {
+public class MemListVO {
 
-	private int MemNo;
-	private String memEmail,memNick,sellerMemNo;
+	private int memNo;
+	private String memEmail,memNick,sellerCheck;
 }

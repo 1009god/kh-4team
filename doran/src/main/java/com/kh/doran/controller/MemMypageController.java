@@ -29,18 +29,16 @@ public class MemMypageController {
   public String mypage(HttpSession session, Model model) {
      //1. 세션에 들어있는 아이디를 꺼낸다 (down casting다운캐스팅) 형변환?
      //- 세션에 저장된 형태가 Object이기 때문에 string으로 다운캐스팅
-     int memNo = (int)session.getAttribute("loginNo");
-     
-     
-     //2. 아이드를 이용하여 회원정보를 불러온다
-     MemDto memDto = memDao.selectOne(memNo);
-     
-     //3.불러온 정보를 모델에 첨부한다
-     model.addAttribute("memDto", memDto);
-     
-     //4.화면(view)으로 전달(forward)한다
-     
-     return "mypage/profile";
+	  int memNo = (int)session.getAttribute("loginNo");     
+	     
+	     //2. 아이드를 이용하여 회원정보를 불러온다
+	     MemDto memDto = memDao.selectOne(memNo);
+	     
+	     //3.불러온 정보를 모델에 첨부한다
+	     model.addAttribute("memDto", memDto);
+	     
+	     //4.화면(view)으로 전달(forward)한다	     
+	     return "mypage/profile";
   }
 
 //프로필 정보 수정
