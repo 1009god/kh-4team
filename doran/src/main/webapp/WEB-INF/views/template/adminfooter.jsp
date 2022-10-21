@@ -47,12 +47,6 @@
 					<div class="row">
 						로그인 : ${sessionScope.loginId != null}
 					</div>
-					<div class="row">
-						mg : ${sessionScope.mg}
-					</div>
-					<div class="row">
-						관리자 : ${sessionScope.mg == '관리자'}
-					</div>
 				</div>
 			</div>
 		</footer>
@@ -61,3 +55,24 @@
     
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

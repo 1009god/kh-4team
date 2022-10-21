@@ -17,6 +17,7 @@ import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.AdminDao;
 import com.kh.doran.repository.MemDao;
+import com.kh.doran.repository.PjDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,6 +28,13 @@ public class AdminController {
 	
 	@Autowired
 	private MemDao memDao;
+	
+	@Autowired
+	private PjDao pjDao;
+	
+//	@Autowired
+//	private SellerDao sellerDao;
+	
 	
 
 	@GetMapping("/insert")
@@ -76,7 +84,16 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/list")
+////	조회 기능
+//	@GetMapping("/list")
+//	public String list(Model model) {
+//		List<MemDto> list = AdminDao.selecList;
+//		model.addAttribute("list", list);
+//		return "admin/memlist";
+//	}
+	
+	
+	@GetMapping("/memlist")
 	public String list(Model model,
 				@RequestParam(required=false)String type,
 				@RequestParam(required=false)String keyword) {
@@ -87,27 +104,46 @@ public class AdminController {
 		else {
 			model.addAttribute("list",adminDao.selectList());
 		}
-		return "mem/list";
+		return "admin/memlist";
 	}
+	
+//	@GetMapping("list")
+//	public String list(Model model,
+//						@ModelAttribute(name="vo")MemListVO vo) {
+//		
+//		int count = adminDao.count(vo);
+//	}
+	
 	
 	@GetMapping("/detail")
 	public String detail(Model model,
 						@RequestParam String memEmail) {
 		MemDto memDto=memDao.selectOne(memEmail);
-		return "mem/detail";
+		return "admin/detail";
 	}
 	
 	@GetMapping("/change")
 	public String change(Model model,@RequestParam String memEmail) {
 		model.addAttribute("memDto",memDao.selectOne(memEmail));
-		return "mem/change";
+		return "admin/change";
 	}
-//	@PostMapping("/change")
-//	public String change(@ModelAttribute MemDto memDto,		
-//						RedirectAttributes attr){
-//		boolean result = adminDao.update(memDto);
-//						}
 	
+	@PostMapping("/change")
+	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
+		boolean result = adminDao.update(memDto);
+		if(result) {
+			attr.addAttribute("memEmail",memDto.getMemEmail());	
+			return "redirect:detail";
+			}
+		else {
+			return "redirect:change_fail";
+		}
+	}
+	@GetMapping("/change_fail")
+	public String changeFail() {
+
+		return "admin/changeFail";
+	}
 	
 	
 	
