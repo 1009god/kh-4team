@@ -65,23 +65,25 @@ public class MemMypageController {
 	public String editProfile(HttpSession session, 
 											@ModelAttribute MemDto inputDto, //client가 입력한 값
 											RedirectAttributes attr) {
-		// memberId는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
+		// memberNo는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
 		int memNo = (int)session.getAttribute("loginNo");
-		inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 ID를 넣어줌
+		inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 memNo를 넣어줌  // 지금 사용자의 no
 		
-//		//(1) 비밀번호를 검사
-//		MemDto findDto = memDao.selectOne(memEmail);  //findDto는 DB에서 가져온 값
-//		boolean passwordMatch = inputDto.getMemPw().equals(findDto.getMemPw());
-//		
-//		if(passwordMatch) {
-//			//(2) 비밀번호 검사를 통과했다면 정보를 변경하도록 처리
-			memDao.editProfile(inputDto);
-			return "redirect: mypage/profile";			
-//		}		
-//		else {
-//			return "redirect:error";
-//		}	
+		boolean result = memDao.editProfile(inputDto);
+		
+		if(result) {			
+			attr.addAttribute("memNo",inputDto.getMemNo());	
+			return "redirect:/mypage/profile";	
+		}
+	
+		else {
+			return "redirect:/mypage/edit/editFail";
+		}	
 	}
+	
+	
+	
+
 
 	@GetMapping("/edit/profile_result")
 	public String infromaitonResult() {

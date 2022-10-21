@@ -82,8 +82,9 @@ public class MemDaoImpl implements MemDao {
 	@Override
 	public boolean editProfile(MemDto dto) {
 		// 세션을 이용한 프로필 수정
-		String sql = "update mem set mem_nick = ? where mem_no= ?";
+		String sql = "update mem set mem_nick = ? where mem_no= ?";		
 		Object[] param = {dto.getMemNick(), dto.getMemNo()};
+		//세션에서 no를 가져와야함
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
