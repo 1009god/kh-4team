@@ -19,6 +19,8 @@
 	<body>
 	<h2>loginId = ${sessionScope.loginId}</h2>
 	<h2>로그인 상태 = ${loginId != null}</h2>
+	<h2>세션넘버 = ${sessionScope.loginNo}</h2>
+	
 	<!-- 메뉴 절대경로 -->
 		<div align="center">
 			<c:choose>
