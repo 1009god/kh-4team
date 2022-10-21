@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.PjListSearchVO;
+import com.kh.doran.vo.PjSortVO;
 
 @Repository
 public class PjDaoImpl implements PjDao {
@@ -92,6 +93,9 @@ public class PjDaoImpl implements PjDao {
 		if(vo.isSearch()) {//검색
 			return search(vo);
 		}
+//		else if(vo.isCategory()) {
+//			return category(vo);
+//		}
 		else {// 목록
 			return list(vo);
 		}
@@ -129,6 +133,8 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,mapper,param);
 	}
 	
+	
+	
 	@Override
 	public int count(PjListSearchVO vo) {
 		if(vo.isSearch()) {
@@ -139,12 +145,14 @@ public class PjDaoImpl implements PjDao {
 		}
 	}
 	
+	// 전체 데이터 갯수
 	@Override
 	public int listCount(PjListSearchVO vo) {
 		String sql = "select count(*) from pj";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
+	// 검색 데이터 갯수
 	@Override
 	public int searchCount(PjListSearchVO vo) {
 		String sql = "select count(*) from pj where instr(#1,?)>0";
@@ -153,7 +161,14 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
 	
-
+	
+	// 인기순 정렬
+	@Override
+	public List<PjDto> popular(PjSortVO vo) {
+		
+		String sql = "select*from pj order by pj_likes_number desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
 	
 
 }

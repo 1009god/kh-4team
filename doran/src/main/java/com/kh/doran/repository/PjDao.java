@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.PjListSearchVO;
+import com.kh.doran.vo.PjSortVO;
 
 
 public interface PjDao {
@@ -21,6 +22,13 @@ public interface PjDao {
 	int count(PjListSearchVO vo);
 	int searchCount(PjListSearchVO vo);
 	int listCount(PjListSearchVO vo);
+	
+	//카테고리별 정렬
+//	List<PjDto> category(PjListSearchVO vo);
+	
+	// 인기순
+	List<PjDto> popular(PjSortVO vo);
+	
 	
 	//U
 	//D

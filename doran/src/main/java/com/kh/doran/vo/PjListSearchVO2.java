@@ -4,13 +4,17 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class PjListSearchVO {
+public class PjListSearchVO2 {
 	//검색 분류와 검색어
 	private String type, keyword;
 	
 	@ToString.Include
 	public boolean isSearch() {
 		return type!=null && keyword!=null;
+	}
+	
+	public boolean isCategory() {
+		return type!=null && keyword==null;
 	}
 	
 	//현재 페이지 번호(없을 경우 p=1로 설정)
@@ -85,6 +89,9 @@ public class PjListSearchVO {
 	public String parameter() {
 		if(isSearch()) {
 			return "size="+size+"&type="+type+"&keyword="+keyword;
+		}
+		else if(isCategory()) {
+			return "size="+size+"&type="+type;
 		}
 		else {
 			return "size="+size;
