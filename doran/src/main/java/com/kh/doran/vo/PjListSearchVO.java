@@ -31,7 +31,7 @@ public class PjListSearchVO {
 	private int count;
 	
 	//화면에 표시할 블럭 개수
-	private int blockSize = 10;
+	private int blockSize = 5;
 	
 	@ToString.Include
 	public int pageCount() {
@@ -40,12 +40,13 @@ public class PjListSearchVO {
 	
 	@ToString.Include
 	public int startBlock() {
-		return endBlock()-(blockSize-1);
+		return (p-1) / blockSize * blockSize + 1;
 	}
 	
 	@ToString.Include
 	public int endBlock() {
-		return(p+blockSize-1) / blockSize*blockSize;
+		int value = startBlock() + blockSize-1;
+		return Math.min(value, lastBlock());
 	}
 	
 	public int prevBlock() {
@@ -62,6 +63,32 @@ public class PjListSearchVO {
 	
 	public int lastBlock() {
 		return pageCount();
+	}
+	
+	public boolean isFirst() {
+		return p == 1;
+	}
+	
+	public boolean isLast() {
+		return endBlock()==lastBlock();
+	}
+	
+	public boolean hasPrev() {
+		return startBlock() > 1;
+	}
+	
+	public boolean hasNext() {
+		return endBlock() < lastBlock();
+	}
+	
+	//검색이나 크기 유지
+	public String parameter() {
+		if(isSearch()) {
+			return "size="+size+"&type="+type+"&keyword="+keyword;
+		}
+		else {
+			return "size="+size;
+		}
 	}
 
 }
