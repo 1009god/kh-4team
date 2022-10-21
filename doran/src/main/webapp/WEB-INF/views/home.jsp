@@ -17,6 +17,7 @@
 	<c:choose>
 		<c:when test="${login}">
 			<h2><a href="mem/logout">회원 로그아웃</a></h2>
+			<h2><a href="mypage/profile">마이 페이지</a></h2>
 		</c:when>
 		<c:otherwise>
 			<h2><a href="mem/login">회원 로그인</a></h2>

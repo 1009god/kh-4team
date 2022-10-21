@@ -40,10 +40,10 @@ public class MemMypageController {
      
      //4.화면(view)으로 전달(forward)한다
      
-     return "mypage/edit/profile";
+     return "mypage/profile";
   }
 
-//개인정보 수정
+//프로필 정보 수정
 	// 1. 자신의 현재 정보를 조회하여 화면에 출력
 	// 2. 바꾸고 싶은 정보를 입력하여 전송하면 해당 정보를 변경
 
@@ -71,18 +71,18 @@ public class MemMypageController {
 		String memEmail = (String)session.getAttribute("loginId");
 		inputDto.setMemEmail(memEmail); //memberDto에 세션에서 가져온 ID를 넣어줌
 		
-		//(1) 비밀번호를 검사
-		MemDto findDto = memDao.selectOne(memEmail);  //findDto는 DB에서 가져온 값
-		boolean passwordMatch = inputDto.getMemPw().equals(findDto.getMemPw());
-		
-		if(passwordMatch) {
-			//(2) 비밀번호 검사를 통과했다면 정보를 변경하도록 처리
+//		//(1) 비밀번호를 검사
+//		MemDto findDto = memDao.selectOne(memEmail);  //findDto는 DB에서 가져온 값
+//		boolean passwordMatch = inputDto.getMemPw().equals(findDto.getMemPw());
+//		
+//		if(passwordMatch) {
+//			//(2) 비밀번호 검사를 통과했다면 정보를 변경하도록 처리
 			memDao.editProfile(inputDto);
 			return "redirect: mypage/profile";			
-		}		
-		else {
-			return "redirect:error";
-		}	
+//		}		
+//		else {
+//			return "redirect:error";
+//		}	
 	}
 
 	@GetMapping("/edit/profile_result")
