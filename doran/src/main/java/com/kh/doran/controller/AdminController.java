@@ -67,7 +67,7 @@ public class AdminController {
 		boolean passwordMatch=
 				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
-			session.setAttribute(SessionConstant.EMAIL,inputDto.getAdminEmail());
+			session.setAttribute(SessionConstant.NO,inputDto.getAdminEmail());
 		
 			adminDao.updateLoginTime(inputDto.getAdminEmail());
 			return "redirect:/";
@@ -79,7 +79,7 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute(SessionConstant.EMAIL);
+		session.removeAttribute(SessionConstant.NO);
 		
 		return "redirect:/";
 	}
@@ -115,35 +115,37 @@ public class AdminController {
 //	}
 	
 	
-	@GetMapping("/detail")
-	public String detail(Model model,
-						@RequestParam String memEmail) {
-		MemDto memDto=memDao.selectOne(memEmail);
-		return "admin/detail";
-	}
+//	@GetMapping("/detail")
+//	public String detail(Model model,
+//						@RequestParam String memEmail) {
+//		MemDto memDto=memDao.selectOne(memEmail);
+//		return "admin/detail";
+//
+//	}
 	
-	@GetMapping("/change")
-	public String change(Model model,@RequestParam String memEmail) {
-		model.addAttribute("memDto",memDao.selectOne(memEmail));
-		return "admin/change";
-	}
-	
-	@PostMapping("/change")
-	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
-		boolean result = adminDao.update(memDto);
-		if(result) {
-			attr.addAttribute("memEmail",memDto.getMemEmail());	
-			return "redirect:detail";
-			}
-		else {
-			return "redirect:change_fail";
-		}
-	}
-	@GetMapping("/change_fail")
-	public String changeFail() {
-
-		return "admin/changeFail";
-	}
+//	@GetMapping("/change")
+//	public String change(Model model,@RequestParam String memEmail) {
+//		model.addAttribute("memDto",memDao.selectOne(memEmail));
+//		return "admin/change";
+//
+//	}
+//	
+//	@PostMapping("/change")
+//	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
+//		boolean result = adminDao.update(memDto);
+//		if(result) {
+//			attr.addAttribute("memEmail",memDto.getMemEmail());	
+//			return "redirect:detail";
+//			}
+//		else {
+//			return "redirect:change_fail";
+//		}
+//	}
+//	@GetMapping("/change_fail")
+//	public String changeFail() {
+//
+//		return "admin/changeFail";
+//	}
 	
 	
 	
