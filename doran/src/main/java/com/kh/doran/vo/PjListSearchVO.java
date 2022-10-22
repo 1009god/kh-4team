@@ -13,6 +13,13 @@ public class PjListSearchVO {
 		return type!=null && keyword!=null;
 	}
 	
+	private String sort;
+	
+	@ToString.Include
+	public boolean isSort() {
+		return sort!=null;
+	}
+	
 	//현재 페이지 번호(없을 경우 p=1로 설정)
 	private int p = 1;
 	private int size = 12;
@@ -91,5 +98,16 @@ public class PjListSearchVO {
 		}
 	}
 	
+	//정렬 기준
+	public String sortBy() {
+		if(isSort()) {
+			return "size="+size+"&sort="+sort;
+		}
+		else {
+			return "size="+size;
+		}
+	}
+
+
 
 }

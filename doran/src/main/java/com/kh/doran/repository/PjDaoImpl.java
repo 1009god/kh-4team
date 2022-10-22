@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.PjListSearchVO;
-import com.kh.doran.vo.PjSortVO;
 
 @Repository
 public class PjDaoImpl implements PjDao {
@@ -82,27 +81,20 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,extractor,param);
 	}
 	
-//	@Override
-//	public List<PjDto> selectList() {
-//		String sql = "select*from pj order by pj_no desc";
-//		return jdbcTemplate.query(sql, mapper);
-//	}
 	
 	@Override
 	public List<PjDto> selectList(PjListSearchVO vo) {
 		if(vo.isSearch()) {//검색
 			return search(vo);
 		}
-//		else if(vo.isCategory()) {
-//			return category(vo);
-//		}
-		else {// 목록
+		
+		else if(vo.isSort()) {//정렬순
+			return sort(vo);
+		}
+
+		else {//목록
 			return list(vo);
 		}
-//		String sql = "select*from pj where instr(#1, ?) > 0 order by #1 asc";
-//		sql = sql.replace("#1", vo.getType());
-//		Object[] param = {vo.getKeyword()};
-// 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
 	@Override
@@ -134,11 +126,25 @@ public class PjDaoImpl implements PjDao {
 	}
 	
 	
+	// 선택정렬순
+	@Override
+	public List<PjDto> sort(PjListSearchVO vo) {
+		String sql = "select * from ( "
+				+ "select rownum rn, TMP.* from( "
+					+ "select*from pj order by ? desc "
+				+ ")TMP "
+			+ ") where rn between ? and ?";
+		Object[] param = {vo.getSort(), vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper ,param);
+	}
 	
 	@Override
 	public int count(PjListSearchVO vo) {
 		if(vo.isSearch()) {
 			return searchCount(vo);
+		}
+		else if(vo.isSort()) {
+			return listCount(vo);
 		}
 		else {
 			return listCount(vo);
@@ -160,15 +166,10 @@ public class PjDaoImpl implements PjDao {
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
+
 	
+
 	
-	// 인기순 정렬
-	@Override
-	public List<PjDto> popular(PjSortVO vo) {
-		
-		String sql = "select*from pj order by pj_likes_number desc";
-		return jdbcTemplate.query(sql, mapper);
-	}
 	
 
 }

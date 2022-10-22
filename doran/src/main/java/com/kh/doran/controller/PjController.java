@@ -9,16 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.kh.doran.constant.SessionConstant;
-import com.kh.doran.entity.LikesDto;
-import com.kh.doran.repository.LikesDao;
-import com.kh.doran.repository.MemDao;
-
 
 import com.kh.doran.constant.SessionConstant;
 import com.kh.doran.entity.LikesDto;
 import com.kh.doran.repository.LikesDao;
-import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.PjDao;
 import com.kh.doran.vo.PjListSearchVO;
@@ -69,6 +63,7 @@ public class PjController {
 		model.addAttribute("list",pjDao.selectList(vo));
 		return "pj/list";
 	};
+	
 	
 	//카테고리별.. 클릭했을 때 카테고리 명을 어떻게 받아오지..?
 	

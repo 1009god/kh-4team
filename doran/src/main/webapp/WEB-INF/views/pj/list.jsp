@@ -9,18 +9,34 @@
 </head>
 <body>
 <h1>상품 목록</h1>
-<%-- <h3>${pjListSearchVo}</h3> --%>
+<h3>${pjListSearchVo}</h3>
 <div class=row>
+	
+	<form action ="list" method = "get">
+		<div>
+		<button type="submit" name="sort" value ="pj_likes_number" >
+<%-- 		<c:if test="${pjListSearchVo.sort=='pj_likes_number'}"></c:if> --%>
+		인기</button>
+		</div>
+		
+<!-- 		<select type="input" name="sort"> -->
+<%-- 			<option value="pj_likes_number" <c:if test="${pjListSearchVo.sort=='pj_likes_number'}">selected</c:if>>인기순</option> --%>
+<%-- 			<option value="pj_no" <c:if test="${pjListSearchVo.sort=='pj_no'}">selected</c:if>>최신순</option> --%>
+<!-- 		</select> -->
+	</form>
+	
 	<!-- 검색창 -->
 	<form action = "list" method = "get">
 		<select name="type">
 			<option value="pj_name" <c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>
-			<option value="pj_category" <c:if test="${pjListSearchVo.type== 'pj_category'}">selected</c:if>>프로젝트 카테고리</option>
+			<option value="pj_category" <c:if test="${pjListSearchVo.type=='pj_category'}">selected</c:if>>프로젝트 카테고리</option>
 		</select>
 		
 		<input type="search" name="keyword" placeholder="검색어" required value="${pjListSearchVo.keyword}">
 		<button type="submit">검색</button>
 	</form>
+	
+	
 	
 	<div>
 		<a href="list"><span>전체 프로젝트</span></a>
@@ -34,7 +50,7 @@
 	
 	<div>
 		<c:forEach var="pjDto" items="${list}">
-			<div>[${pjDto.pjCategory}]</div>
+			<div>[${pjDto.pjCategory}]<span>♥${pjDto.pjLikesNumber}</span></div>
 			<div><a href="detail?pjNo=${pjDto.pjNo}">
 			${pjDto.pjName}</a></div>
 		</c:forEach>
@@ -46,7 +62,7 @@
 	
 	<c:choose>
 		<c:when test="${not pjListSearchVo.isFirst()}">
-			<a href="list?p=${pjListSearchVo.firstBlock()}&${pjListSearchVo.parameter()}">&laquo;</a> 
+			<a href="list?p=${pjListSearchVo.firstBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}">&laquo;</a> 
 		</c:when>
 		<c:otherwise>
 			<a href="#">&laquo;</a> 
@@ -56,7 +72,7 @@
 	<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
 	<c:choose>
 		<c:when test="${pjListSearchVo.hasPrev()}">
-			<a href="list?p=${pjListSearchVo.prevBlock()}&${pjListSearchVo.parameter()}">&lt;</a>
+			<a href="list?p=${pjListSearchVo.prevBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}">&lt;</a>
 		</c:when>
 		<c:otherwise>
 			<a href="#">&lt;</a> 
@@ -64,13 +80,13 @@
 	</c:choose>
 	
 	<c:forEach var="i" begin="${pjListSearchVo.startBlock()}" end="${pjListSearchVo.endBlock()}" step="1">
-		<a href="list?p=${i}&${pjListSearchVo.parameter()}">${i}</a>
+		<a href="list?p=${i}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}">${i}</a>
 	</c:forEach>
 		
 	<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 	<c:choose>
 		<c:when test="${pjListSearchVo.hasNext()}">
-			<a href="list?p=${pjListSearchVo.nextBlock()}&${pjListSearchVo.parameter()}">&gt;</a>
+			<a href="list?p=${pjListSearchVo.nextBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}">&gt;</a>
 		</c:when>
 		<c:otherwise>
 			<a href="#">&gt;</a> 
@@ -79,7 +95,7 @@
 	
 	<c:choose>
 		<c:when test="${not pjListSearchVo.isLast()}">
-			<a href="list?p=${pjListSearchVo.lastBlock()}&${pjListSearchVo.parameter()}">&raquo;</a>
+			<a href="list?p=${pjListSearchVo.lastBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}">&raquo;</a>
 		</c:when>
 		<c:otherwise>
 			<a href="#">&raquo;</a> 
