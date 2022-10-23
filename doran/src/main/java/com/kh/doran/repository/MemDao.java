@@ -11,6 +11,10 @@ public interface MemDao {
 	boolean profileUpdate(MemDto dto);  //구버전
 	boolean editProfile(MemDto dto); //신버전
 	
+	boolean delete(String memEmail);
+	
+//	boolean updateLoginTime(int memNo); 로그인 시간 구헌
+	
 	//boolean accountUPdate
 	
 

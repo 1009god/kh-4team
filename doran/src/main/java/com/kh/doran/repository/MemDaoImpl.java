@@ -88,6 +88,22 @@ public class MemDaoImpl implements MemDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	
+//	@Override 로그인 시간 구현 필요하게 되면
+//	public boolean updateLoginTime(int memNo) { //로그인 시간 업데이트
+//		String sql = "update mem "
+//							+ "set mem_login=sysdate "
+//							+ "where mem_no=?";
+//		Object[] param = {memNo};
+//		return jdbcTemplate.update(sql, param) > 0;
+//	}
+	
+	@Override
+	public boolean delete(String memEmail) {
+		String sql = "delete mem where mem_email = ?";
+		Object[] param = {memEmail};
+		return jdbcTemplate.update(sql,param) > 0;
+	}
 
 	
 	
