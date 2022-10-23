@@ -24,19 +24,20 @@
  <a href="/mypage/edit/address">배송지</a>
  
  
- <form action="mypage/edit" method="post">
  
+ <form method="post">
 	<div class="row">
 		<label>닉네임</label>
 		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">
+		<input type="hidden" name="memNo" value="${memDto.memNo}" > 
 	</div>
 	<div class="row center">
-	<a href = "/mypage/edit/profile">
-		<button type="button" onclick="/mypage/edit/profile">수정</button>
-	</a>	
-	</div>
 	
+		<button type="submit" >수정</button>
+	
+	</div>
 </form>
+
 
 
 </body>
