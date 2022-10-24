@@ -4,11 +4,17 @@ import com.kh.doran.entity.MemDto;
 
 public interface MemDao {
 	void insert(MemDto memDto);
+	MemDto selectOne(int memNo);
 	MemDto selectOne(String memEmail);
-	MemDto selectOne2(String memNo);
 
 	
-	boolean profileUpdate(MemDto dto);
+	boolean profileUpdate(MemDto dto);  //구버전
+	boolean editProfile(MemDto dto); //신버전
+	
+	boolean delete(String memEmail);
+	
+//	boolean updateLoginTime(int memNo); 로그인 시간 구헌
+	
 	//boolean accountUPdate
 	
 

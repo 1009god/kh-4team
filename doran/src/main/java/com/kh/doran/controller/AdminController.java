@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.doran.constant.SessionConstant;
 import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.AdminDao;
 import com.kh.doran.repository.MemDao;
+import com.kh.doran.repository.PjDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,6 +27,13 @@ public class AdminController {
 	
 	@Autowired
 	private MemDao memDao;
+	
+	@Autowired
+	private PjDao pjDao;
+	
+//	@Autowired
+//	private SellerDao sellerDao;
+	
 	
 
 	@GetMapping("/insert")
@@ -59,7 +66,7 @@ public class AdminController {
 		boolean passwordMatch=
 				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
-			session.setAttribute(SessionConstant.EMAIL,inputDto.getAdminEmail());
+			session.setAttribute("loginNo",inputDto.getAdminEmail());
 		
 			adminDao.updateLoginTime(inputDto.getAdminEmail());
 			return "redirect:/";
@@ -71,12 +78,21 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute(SessionConstant.EMAIL);
+		session.removeAttribute("loginNo");
 		
 		return "redirect:/";
 	}
 	
-	@GetMapping("/list")
+////	조회 기능
+//	@GetMapping("/list")
+//	public String list(Model model) {
+//		List<MemDto> list = AdminDao.selecList;
+//		model.addAttribute("list", list);
+//		return "admin/memlist";
+//	}
+	
+	//회원 리스트
+	@GetMapping("/memlist")
 	public String list(Model model,
 				@RequestParam(required=false)String type,
 				@RequestParam(required=false)String keyword) {
@@ -87,28 +103,42 @@ public class AdminController {
 		else {
 			model.addAttribute("list",adminDao.selectList());
 		}
-		return "mem/list";
+		return "admin/memlist";
 	}
 	
 	@GetMapping("/detail")
 	public String detail(Model model,
-						@RequestParam String memEmail) {
-		MemDto memDto=memDao.selectOne(memEmail);
-		return "mem/detail";
+						@RequestParam int memNo) {
+		AdminDto memDto=adminDao.selectOne(memNo);
+		model.addAttribute("dto",memDto);
+		return "admin/detail";
 	}
-	
+
 	@GetMapping("/change")
-	public String change(Model model,@RequestParam String memEmail) {
-		model.addAttribute("memDto",memDao.selectOne(memEmail));
-		return "mem/change";
+	public String change(Model model,@RequestParam int memNo) {
+		model.addAttribute("memDto",memDao.selectOne(memNo));
+		return "admin/change";
+
 	}
-//	@PostMapping("/change")
-//	public String change(@ModelAttribute MemDto memDto,		
-//						RedirectAttributes attr){
-//		boolean result = adminDao.update(memDto);
-//						}
 	
-	
+
+	@PostMapping("/change")
+	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
+		boolean result = adminDao.update(memDto);
+		if(result) {
+			attr.addAttribute("memEmail",memDto.getMemEmail());	
+			return "redirect:detail?memno="+memDto.getMemNo();
+			}
+		else {
+			return "redirect:change_fail";
+		}
+	}
+	@GetMapping("/change_fail")
+	public String changeFail() {
+
+		return "admin/changeFail";
+	}
+
 	
 	
 	

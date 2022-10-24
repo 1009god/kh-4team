@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.vo.MemListVO;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -45,18 +46,18 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 			}
 		}
 	};
-	@Override
-	public AdminDto selectOne(String adminEmail) {
-		String sql="select*from mem";
-		Object[]param= {adminEmail};
-		return jdbcTemplate.query(sql, extractor,param);
-	}
 	
 	@Override
 	public void insert(AdminDto adminDto) {
 		String sql = "INSERT INTO ADMIN(ADMIN_NO,ADMIN_EMAIL,ADMIN_PW,ADMIN_NICK)" + "VALUES(ADMIN_SEQ.NEXTVAL,?,?,?)";
 		Object[] param = { adminDto.getAdminEmail(), adminDto.getAdminPw(), adminDto.getAdminNick() };
 		jdbcTemplate.update(sql, param);
+	}
+	@Override
+	public AdminDto selectOne(String adminEmail) {
+		String sql="select*from admin where admin_email=?";
+		Object[]param= {adminEmail};
+		return jdbcTemplate.query(sql, extractor,param);
 	}
 	
 	@Override
@@ -71,21 +72,33 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	private RowMapper<MemDto> mapper = new RowMapper<MemDto>() {
 		@Override
 		public MemDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MemDto dto = new MemDto();
-			dto.setMemNo(rs.getInt("mem_no"));
-			dto.setMemEmail(rs.getString("mem_email"));
-			dto.setMemPw(rs.getString("mem_pw"));
-			dto.setMemNick(rs.getString("mem_nick"));
-			dto.setMemTel(rs.getString("mem_tel"));
-			dto.setMemJoinDate(rs.getDate("mem_join_date"));
-			dto.setMemRoute(rs.getString("mem_route"));	
-			return dto;
+			return MemDto.builder()
+			.memNo(rs.getInt("mem_no"))
+			.memEmail(rs.getString("mem_email"))
+			.memPw(rs.getString("mem_pw"))
+			.memNick(rs.getString("mem_nick"))
+			.memTel(rs.getString("mem_tel"))
+			.memJoinDate(rs.getDate("mem_join_date"))
+			.memRoute(rs.getString("mem_route"))
+			.build();
+		}
+	};
+	
+	private RowMapper<MemListVO> listmapper = new RowMapper<MemListVO>() {
+		@Override
+		public MemListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return MemListVO.builder()
+					.memNo(rs.getInt("mem_no"))
+					.memEmail(rs.getString("mem_email"))					
+					.memNick(rs.getString("mem_nick"))	
+					.sellerCheck(rs.getString("seller_check"))
+					.build();
 		}
 	};
 	
 	@Override
 	public List<MemDto>selectList(){
-		String sql = "select * from mem";
+		String sql = "select * from mem order by mem_no desc";
 		return jdbcTemplate.query(sql,mapper);
 	}
 	
@@ -95,15 +108,36 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		Object[]param= {keyword};
 		return jdbcTemplate.query(sql, mapper,param);
 	}
-
+	
+//	@Override
+//	public List<MemListVO> selectList(MemListVO vo) {
+//		
+//		return null;
+//	}
+//	@Override
+//	public int count(MemListVO vo) {
+//		
+//		return 0;
+//	}
+	//회원 정보 수정
 	@Override
 	public boolean update(MemDto memDto) {
 		String sql="update mem"
 				+ "set"
-				+ "mem_nick=?"
+				+ "mem_nick=?,"
 				+ "where mem_no=?";
 		Object[]param= {memDto.getMemNick(),memDto.getMemNo()};
 		return jdbcTemplate.update(sql,param)>0;
 	}
 	
+	@Override
+	public AdminDto selectOne(int memNo) {
+		String sql = "select * from mem where mem_no=?";
+		Object[]param= {memNo};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
+
+	
+
+
 }

@@ -55,28 +55,55 @@ public class MemDaoImpl implements MemDao {
 	}
 
 	@Override
+	public MemDto selectOne(int memNo) {
+		String sql = "select * from mem where mem_no = ?";
+		Object[] param = {memNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
+	@Override
 	public MemDto selectOne(String memEmail) {
 		String sql = "select * from mem where mem_email = ?";
 		Object[] param = {memEmail};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 
-	@Override
-	public MemDto selectOne2(String memNo) {
-		String sql = "select * from mem where mem_no = ?";
-		Object[] param = {memNo};
-		return jdbcTemplate.query(sql, extractor, param);
-	}
+	
 
 	@Override
-	public boolean profileUpdate(MemDto memDto) {
+	public boolean profileUpdate(MemDto memDto) { //구버전
 		String sql = "update mem set mem_nick=?, mem_tel=? where mem_no = ?";
 		Object[] param = {
 				memDto.getMemNick(), memDto.getMemTel(), memDto.getMemNo()
 		};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+
+	@Override
+	public boolean editProfile(MemDto dto) {
+		// 세션을 이용한 프로필 수정
+		String sql = "update mem set mem_nick = ? where mem_no= ?";		
+		Object[] param = {dto.getMemNick(), dto.getMemNo()};
+		//세션에서 no를 가져와야함
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 	
+	
+//	@Override 로그인 시간 구현 필요하게 되면
+//	public boolean updateLoginTime(int memNo) { //로그인 시간 업데이트
+//		String sql = "update mem "
+//							+ "set mem_login=sysdate "
+//							+ "where mem_no=?";
+//		Object[] param = {memNo};
+//		return jdbcTemplate.update(sql, param) > 0;
+//	}
+	
+	@Override
+	public boolean delete(String memEmail) {
+		String sql = "delete mem where mem_email = ?";
+		Object[] param = {memEmail};
+		return jdbcTemplate.update(sql,param) > 0;
+	}
 
 	
 	

@@ -18,20 +18,27 @@
 		<input class="input w-100" type="text" name="profileImg" value="${memDto.이미지}" >
 	</div>
  --%>
- <form action="mypage/edit" method="post">
  
+ <a href="/mypage/edit/profile">프로필</a>
+ <a href="/mypage/edit/account">계정</a>
+ <a href="/mypage/edit/address">배송지</a>
+ 
+ 
+ 
+ <form method="post">
 	<div class="row">
-		<label>Nickname</label>
+		<label>닉네임</label>
 		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">
+		<input type="hidden" name="memNo" value="${memDto.memNo}" > 
 	</div>
 	<div class="row center">
-		<button type="submit">수정</button>
-	</div>
 	
+		<button type="submit" >수정</button>
+	
+	</div>
 </form>
 
-전화번호-> account로  
-edit/profile, edit/account(비밀번호, 전화번호),edit/address- table 따로 존재
+
 
 </body>
 </html>
