@@ -51,7 +51,7 @@ public class PjListSearchVO {
 	
 	//현재 페이지 번호(없을 경우 p=1로 설정)
 	private int p = 1;
-	private int size = 12;
+	private int size = 6;
 	
 	@ToString.Include
 	public int startRow() {
