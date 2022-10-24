@@ -139,5 +139,15 @@ public class BoardDaoImpl implements BoardDao{
 		Object[] param = {boardPostNo};
 		return jdbcTemplate.update(sql,param) > 0;
 	}
+	
+	@Override
+	public boolean update(BoardDto boardDto) {
+		String sql = "update board set board_title=?, board_content=? where board_post_no=?";
+		Object[] param = {
+			boardDto.getBoardTitle(), boardDto.getBoardContent(), boardDto.getBoardPostNo()
+		};
+		
+	return jdbcTemplate.update(sql, param) > 0;
+	}
 }
 

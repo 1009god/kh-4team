@@ -84,6 +84,30 @@ public class BoardController {
 	      }
 		
 	}
+	
+	@GetMapping("/edit")
+	public String edit(@RequestParam int boardPostNo, Model model) {
+		BoardDto boardDto = boardDao.selectOne(boardPostNo);
+		if(boardDto == null) { //없는 경우 내가 만든 예외 발생
+			throw new TargetNotFoundException();
+		}
+		model.addAttribute("boardDto", boardDto);
+		return "board/edit";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute BoardDto boardDto,
+			RedirectAttributes attr) {
+		boolean result = boardDao.update(boardDto);
+		if(result) {//성공했으면 상세페이지
+			attr.addAttribute("boardPostNo", boardDto.getBoardPostNo());
+			return "redirect:detail";
+		}
+		
+		else { //실패했으면 오류 발생
+			throw new TargetNotFoundException();
+		}
+	}
 }
 		
 
