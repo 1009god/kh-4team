@@ -40,6 +40,45 @@ public class MemMypageController {
 	     //4.화면(view)으로 전달(forward)한다	     
 	     return "mypage/profile";
   }
+  
+//회원 탈퇴!!
+	
+	@GetMapping("/goodbye_content") //회원 탈퇴 전 중요 내용
+	public String goodbyeContent() {
+		return "mypage/goodbyeContent";
+	}
+	
+	@GetMapping("/goodbye") //회원
+	public String goodbye() {
+		return "mypage/goodbye";
+	}
+	
+	@PostMapping("/goodbye") //회원
+	public String goodbye(HttpSession session,
+			@RequestParam String memPw) {
+		String memEmail = (String)session.getAttribute("loginId");
+		MemDto memDto = memDao.selectOne(memEmail);
+		boolean passwordMatch =
+				memPw.equals(memDto.getMemPw());
+		if(passwordMatch) {
+			//회원 탈퇴
+			memDao.delete(memEmail);
+			//로그아웃
+			session.removeAttribute("loginId");
+			session.removeAttribute("loginNo");
+			
+			return "redirect:goodbye_result";
+		}
+		else {
+			return "redirect:goodbye?error";
+		}
+	}
+	
+	@GetMapping("/goodbye_result") //비회원 나중에 인터셉터로
+	public String goodbyeResult() {
+		return "mypage/goodbyeResult";
+	}
+	
 
 
 	
