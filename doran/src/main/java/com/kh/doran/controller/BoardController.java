@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.BoardDto;
+import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.BoardDao;
 import com.kh.doran.vo.BoardListSearchVO;
 
@@ -70,6 +71,18 @@ public class BoardController {
 		int boardPostNo = boardDao.insert2(boardDto);
 		attr.addAttribute("boardPostNo", boardPostNo);
 		return "redirect:detail";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam int boardPostNo) {
+		boolean result = boardDao.delete(boardPostNo);
+	      if(result) {//삭제 성공
+	         return "redirect:list";
+	      }
+	      else {//구문은 실행되었지만 바뀐 게 없는 경우 (강제 예외 처리)
+	         throw new TargetNotFoundException();
+	      }
+		
 	}
 }
 		

@@ -13,7 +13,7 @@ public interface BoardDao {
 	BoardDto selectOne(int boardPostNo);
 	BoardDto read(int boardPostNo); //조회수 증가까지
 //	boolean update(DTO);
-//	boolean delete(PK);
+	boolean delete(int boardPostNo);
 	
 	void clear();
 	boolean updateReadcount(int boardPostNo);
