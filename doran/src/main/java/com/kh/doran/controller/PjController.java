@@ -16,7 +16,6 @@ import com.kh.doran.entity.OrdersDto;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.MemDao;
 
-
 import com.kh.doran.entity.LikesDto;
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.entity.MemDto;
@@ -119,15 +118,13 @@ public class PjController {
 	public String list(Model model, 
 			@ModelAttribute(name="pjListSearchVo") PjListSearchVO vo) {
 		
-		if(vo.isSearch()) {
-			model.addAttribute("list",pjDao.selectList(vo));
-		}
-		else {
-			model.addAttribute("list", pjDao.selectList());
-		}
+		//페이지 네비게이터를 위한 게시글 수를 구한 것
+		int count = pjDao.count(vo);
+		vo.setCount(count);
+	
+		model.addAttribute("list",pjDao.selectList(vo));
 		return "pj/list";
 	};
-	
 	
 
 }
