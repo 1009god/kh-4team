@@ -9,7 +9,7 @@ public interface BoardDao {
 	void insert(BoardDto boardDto);
 	List<BoardDto> selectList();
 	List<BoardDto> selectList(BoardListSearchVO vo);
-	//MemDto selectOne(int memNo);
+	BoardDto selectOne(int boardPostNo);
 	//	DTO selectOne(PK);
 //	boolean update(DTO);
 //	boolean delete(PK);

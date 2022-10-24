@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -69,6 +71,33 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 		
+	private ResultSetExtractor<BoardDto> extractor = new ResultSetExtractor<BoardDto>() {
+		
+		@Override
+		public BoardDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return BoardDto.builder()
+						.boardPostNo(rs.getInt("board_post_no"))
+						.boardMemNo(rs.getInt("board_mem_no"))
+						.boardTitle(rs.getString("board_title"))
+						.boardContent(rs.getString("board_content"))
+						.boardWriteTime(rs.getDate("board_writetime"))
+						.boardViewCnt(rs.getInt("board_view_cnt"))
+						.boardReplyCnt(rs.getInt("board_reply_cnt"))
+					.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
+
+	@Override
+	public BoardDto selectOne(int boardPostNo) {
+		String sql = "select * from board where board_post_no = ?";
+		Object[] param = {boardPostNo};
+		return jdbcTemplate.query(sql,  extractor, param);
+	}
 	
 }
 

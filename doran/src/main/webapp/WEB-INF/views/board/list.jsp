@@ -25,8 +25,13 @@
 	<c:forEach var="boardDto" items="${list}">
 		<tr>
 			<td>${boardDto.boardPostNo}</td>
-			<td>${boardDto.boardTitle}</td>
-			<td>?</td>
+			<td align="left">
+				<a href="detail?boardPostNo=${boardDto.boardPostNo}">
+					${boardDto.boardTitle}
+				</a>
+					[${boardDto.boardReplyCnt}]
+			</td>
+			<td>${boardDto.boardMemNo }</td>
 			<td>${boardDto.boardWriteTime}</td>
 			<td>${boardDto.boardReplyCnt}</td>
 			<td>${boardDto.boardViewCnt}</td>
@@ -48,11 +53,11 @@
 <!-- 검색창 -->
 <form action="list" method="get">
 	<select name="type" required>
-		<option value="board_title">제목</option>
-		<option value="board_writer">작성자</option>
+		<option value="board_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
+		<option value="board_writer" <c:if test="${vo.type == 'board_mem_no' }" >selected</c:if>>작성자</option>
 	</select>
 	
-	<input type="search" name="keyword" placeholder="검색어" required>
+	<input type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
 	
 	<button type="submit">검색</button>
 </form>
