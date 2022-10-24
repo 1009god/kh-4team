@@ -65,18 +65,6 @@ public class PjController {
 	};
 	
 	
-	//카테고리별.. 클릭했을 때 카테고리 명을 어떻게 받아오지..?
-	
-//	@GetMapping("/category")
-//	public String list(Model model,
-//			@ModelAttribute(name="pjListSearchVo") PjListSearchVO vo) {
-//		
-//		int count = pjDao.count(vo);
-//		vo.setCount(count);
-//		
-//		model.addAttribute(vo);
-//	}
-	
 	
 
 }

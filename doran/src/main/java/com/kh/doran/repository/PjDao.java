@@ -17,16 +17,26 @@ public interface PjDao {
 	List<PjDto> list(PjListSearchVO vo); 
 	List<PjDto> search(PjListSearchVO vo);
 	
-	//정렬선택순
-	List<PjDto> sort(PjListSearchVO vo);
+	//인기순
+	List<PjDto> popular(PjListSearchVO vo);
 	
-	//검색과 목록의 총 데이터 개수를 구하는 메소드(마지막 페이지 번호를 구하기 위해서 사용하는 메소드)
+	//마감임박순
+	List<PjDto> imminent(PjListSearchVO vo);
+	
+	//최신순
+	List<PjDto> latest(PjListSearchVO vo);
+	
+	//카테고리별 정렬
+	List<PjDto> category(PjListSearchVO vo);
+	
+	//검색과 목록의 총 데이터 갯수를 구하는 메소드(마지막 페이지 번호를 구하기 위해서 사용하는 메소드)
 	int count(PjListSearchVO vo);
 	int searchCount(PjListSearchVO vo);
 	int listCount(PjListSearchVO vo);
 	
-	//카테고리별 정렬
-//	List<PjDto> category(PjListSearchVO vo);
+	//카테고리별 데이터 갯수
+	int categoryCount(PjListSearchVO vo);
+
 	
 	// 인기순
 //	List<PjDto> popular(PjSortVO vo);

@@ -16,8 +16,37 @@ public class PjListSearchVO {
 	private String sort;
 	
 	@ToString.Include
-	public boolean isSort() {
-		return sort!=null;
+	public boolean isPopular() {
+		if(sort!=null) {
+			return sort.equals("pj_likes_number");			
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean isImminent() {
+		if(sort!=null) {
+			return sort.equals("pj_funding_end_date-sysdate");
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean isLatest() {
+		if(sort!=null) {
+			return sort.equals("pj_no");
+		}
+		else{
+			return false;
+		}
+	}
+	
+	private String category;
+	
+	public boolean isCategory() {
+		return category!=null;
 	}
 	
 	//현재 페이지 번호(없을 경우 p=1로 설정)
@@ -100,8 +129,24 @@ public class PjListSearchVO {
 	
 	//정렬 기준
 	public String sortBy() {
-		if(isSort()) {
+		if(isPopular()) {
 			return "size="+size+"&sort="+sort;
+		}
+		if(isImminent()) {
+			return "size="+size+"&sort="+sort;
+		}
+		if(isLatest()) {
+			return "size="+size+"&sort="+sort;
+		}
+		else {
+			return "size="+size;
+		}
+	}
+	
+	//카테고리별 크기 유지
+	public String categoryBy() {
+		if(isCategory()) {
+			return "size="+size+"&category="+category;
 		}
 		else {
 			return "size="+size;
