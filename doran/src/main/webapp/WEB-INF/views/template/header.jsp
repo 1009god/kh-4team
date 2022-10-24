@@ -28,7 +28,7 @@
     <div class="b-example-divider"></div>
 
   <header class="p-3 mb-3 border-bottom">
-    <div class="container">
+    <div class="container mt-5">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
@@ -40,7 +40,7 @@
           <li><a href="#" class="nav-link px-2 link-dark">인기</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">신규</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">마감임박</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">커뮤니티</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark ">커뮤니티</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">고객센터</a></li>
         </ul>
 
@@ -60,20 +60,20 @@
           <ul class="dropdown-menu text-small">
           	<c:choose>
          		<c:when test = "${login}">
-	            <li><a class="dropdown-item" href="/mypage/profile">프로필</a></li>
+	            <li><a class="dropdown-item" href="#">프로필</a></li>
 	            <li><a class="dropdown-item" href="#">좋아요</a></li>
 	            <li><a class="dropdown-item" href="#">1:1 문의</a></li>
 	            <li><a class="dropdown-item" href="#">관심 프로젝트</a></li>
 	            <li><a class="dropdown-item" href="#">후원한 프로젝트</a></li>
 	            <li><a class="dropdown-item" href="#">설정</a></li>
 	            <li><hr class="dropdown-divider"></li>
-	            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+	            <li><a class="dropdown-item" href="/mem/logout">로그아웃</a></li>
 	          </c:when>
 	          <c:otherwise>
 	          	 <li><a class="dropdown-item" href="/mem/join">회원가입</a></li>
                   <li><a class="dropdown-item" href="/mem/login">로그인</a></li>
 	          </c:otherwise>
-      </c:choose>
+      		</c:choose>
 	          	
           	
           </ul>
