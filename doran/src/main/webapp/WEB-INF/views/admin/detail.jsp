@@ -10,14 +10,14 @@
 }
 </style>
 		<jsp:include page="/WEB-INF/views/template/adminheader.jsp">
-			<jsp:param value="${memberDto.memEmail} 회원 정보" name="title" />
+			<jsp:param value="${memDto.memEmail} 회원 정보" name="title" />
 		</jsp:include>
 
 		
 
 <div class="container-600 mt-40 mb-40">
 	<div class="row left">
-		<h1 style="padding-left: 20px">${memberDto.memberEmail}회원 정보</h1>
+		<h1 style="padding-left: 20px">${memDto.memEmail}회원 정보</h1>
 	</div>
 
 	<div class="row center">
@@ -40,11 +40,11 @@
 										</tr>
 										<tr>
 											<td><a class="btn btn-neutral btn-small"
-												href="change?memberId=${memDto.memId}">정보 변경</a></td>
+												href="change?memberId=${memDto.memEmail}">정보 변경</a></td>
 										</tr>
 										<tr>
 											<td><a class="btn btn-neutral btn-small"
-												href="exit?memberId=${memDto.memId}">회원 탈퇴</a></td>
+												href="exit?memberId=${memDto.memEmail}">회원 탈퇴</a></td>
 										</tr>
 									
 							</tbody>

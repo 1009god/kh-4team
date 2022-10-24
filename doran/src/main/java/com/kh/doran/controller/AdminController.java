@@ -91,7 +91,7 @@ public class AdminController {
 //		return "admin/memlist";
 //	}
 	
-	
+	//회원 리스트
 	@GetMapping("/memlist")
 	public String list(Model model,
 				@RequestParam(required=false)String type,
@@ -109,57 +109,36 @@ public class AdminController {
 	@GetMapping("/detail")
 	public String detail(Model model,
 						@RequestParam int memNo) {
-		MemDto memDto=memDao.selectOne(memNo);
-		return "mem/detail";
+		AdminDto memDto=adminDao.selectOne(memNo);
+		model.addAttribute("dto",memDto);
+		return "admin/detail";
 	}
-
-//	@GetMapping("list")
-//	public String list(Model model,
-//						@ModelAttribute(name="vo")MemListVO vo) {
-//		
-//		int count = adminDao.count(vo);
-//	}
 
 	@GetMapping("/change")
 	public String change(Model model,@RequestParam int memNo) {
 		model.addAttribute("memDto",memDao.selectOne(memNo));
-		return "mem/change";
+		return "admin/change";
+
+	}
+	
+
+	@PostMapping("/change")
+	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
+		boolean result = adminDao.update(memDto);
+		if(result) {
+			attr.addAttribute("memEmail",memDto.getMemEmail());	
+			return "redirect:detail?memno="+memDto.getMemNo();
+			}
+		else {
+			return "redirect:change_fail";
+		}
+	}
+	@GetMapping("/change_fail")
+	public String changeFail() {
+
+		return "admin/changeFail";
 	}
 
-	
-//	@GetMapping("/detail")
-//	public String detail(Model model,
-//						@RequestParam String memEmail) {
-//		MemDto memDto=memDao.selectOne(memEmail);
-//		return "admin/detail";
-//
-//	}
-	
-//	@GetMapping("/change")
-//	public String change(Model model,@RequestParam String memEmail) {
-//		model.addAttribute("memDto",memDao.selectOne(memEmail));
-//		return "admin/change";
-//
-//	}
-//	
-
-//	@PostMapping("/change")
-//	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
-//		boolean result = adminDao.update(memDto);
-//		if(result) {
-//			attr.addAttribute("memEmail",memDto.getMemEmail());	
-//			return "redirect:detail";
-//			}
-//		else {
-//			return "redirect:change_fail";
-//		}
-//	}
-//	@GetMapping("/change_fail")
-//	public String changeFail() {
-//
-//		return "admin/changeFail";
-//	}
-	
 	
 	
 	

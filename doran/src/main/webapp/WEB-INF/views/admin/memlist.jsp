@@ -3,13 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <jsp:include page="/WEB-INF/views/template/adminheader.jsp">
-	<jsp:param value="음원 목록" name="title"/>
+	<jsp:param value="회원 목록" name="title"/>
 </jsp:include>
 
-<div class="container-800 mt-40 mb-40">
+<div class="container-700 mt-40 mb-50">
 	<!-- 제목 -->
 	<div class="row center">
-		<h1>회원 목록</h1>
+		<h1>회원 리스트</h1>
 	</div>
 	
 	<!-- 검색창 -->
@@ -17,10 +17,7 @@
 	<div class="row center">
 		<!-- 항목 -->
 		<select class="input" name="type" required>
-			<!-- 
-				보여지는 글자와 전송할 글자를 분리하여 작성
-				value - 전송되는 값 
-			-->
+		
 			<option value="mem_email">이메일</option>
 			<option value="mem_nick">닉네임</option>
 			
@@ -50,12 +47,13 @@
 				<c:forEach var="dto" items="${list}">
 				<tr>
 					<td>${dto.memNo}</td>
+					
 					<td>
-						<a href="detail?memNo=${dto.memNo}">
+						<a href="/admin/detail?memNo=${dto.memNo}">
 							${dto.memNick}
 						</a>
-						
 					</td>
+					
 					<td>${dto.memEmail}</td>	
 					
 					<td>회원/판매자</td>
@@ -63,16 +61,7 @@
 				</c:forEach>
 			</tbody>
 			
-			<%-- 관리자만 등록 버튼 출력 --%>
-			<c:if test="${mg == '관리자'}">
-			<tfoot align="right">
-				<tr>
-					<td colspan="6">
-						<a href="insert">등록</a>
-					</td>
-				</tr>
-			</tfoot>
-			</c:if>
+		
 			
 		</table>
 	</div>

@@ -17,10 +17,9 @@ public interface AdminDao {
 		List<MemDto> selectList();
 		List<MemDto> selectList(String type, String keyword);
 		
-//		List<MemListVO>selectList(MemListVO vo);
-//		int count(MemListVO vo);
-		
+		//수정,상세
 		boolean update(MemDto memDto);
+		AdminDto selectOne(int memNo);
 		
 		
 		//프로젝트 테이블

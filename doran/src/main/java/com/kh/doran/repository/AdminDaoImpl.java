@@ -111,15 +111,15 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	
 //	@Override
 //	public List<MemListVO> selectList(MemListVO vo) {
-//		// TODO Auto-generated method stub
+//		
 //		return null;
 //	}
 //	@Override
 //	public int count(MemListVO vo) {
-//		// TODO Auto-generated method stub
+//		
 //		return 0;
 //	}
-	
+	//회원 정보 수정
 	@Override
 	public boolean update(MemDto memDto) {
 		String sql="update mem"
@@ -129,7 +129,15 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		Object[]param= {memDto.getMemNick(),memDto.getMemNo()};
 		return jdbcTemplate.update(sql,param)>0;
 	}
+	
+	@Override
+	public AdminDto selectOne(int memNo) {
+		String sql = "select * from mem where mem_no=?";
+		Object[]param= {memNo};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
 
+	
 
 
 }
