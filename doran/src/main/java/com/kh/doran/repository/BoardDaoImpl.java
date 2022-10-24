@@ -2,62 +2,73 @@ package com.kh.doran.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.BoardDto;
+import com.kh.doran.entity.MemDto;
 
-
+@Repository
 public class BoardDaoImpl implements BoardDao{
-	private static RowMapper<BoardDto> mapper = new RowMapper<BoardDto>() {
+		
+		@Autowired
+		private JdbcTemplate jdbcTemplate;
 		
 		@Override
-		public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			BoardDto dto = new BoardDto();
-			dto.setBoardPostNo(rs.getInt("board_post_no"));
-			dto.setBoardMemNo(rs.getInt("board_mem_no"));
-			dto.setBoardTitle(rs.getString("board_title"));
-			dto.setBoardContent(rs.getString("board_content"));
-			dto.setBoardWriteTime(rs.getDate("board_writetime"));
-			dto.setBoardViewCnt(rs.getInt("board_view_cnt"));
-			dto.setBoardReplyCnt(rs.getInt("board_reply_cnt"));
-			return dto;
+		public void insert(BoardDto boardDto) {
+			String sql = "insert into board(board_post_no, board_mem_no, "
+							+ "board_title, "
+							+ "board_content) "
+							+ "values(board_seq.nextval, ?, ?, ?)";
+			Object[] param = {boardDto.getBoardMemNo(),
+										boardDto.getBoardTitle(),
+										boardDto.getBoardContent()};
+			jdbcTemplate.update(sql, param);
 		}
-	};
-	
-	private static ResultSetExtractor<BoardDto> extractor = new ResultSetExtractor<BoardDto>() {
 		
 		@Override
-		public BoardDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-			if(rs.next()) {
-				BoardDto dto = new BoardDto();
-				dto.setBoardPostNo(rs.getInt("board_post_no"));
-				dto.setBoardMemNo(rs.getInt("board_mem_no"));
-				dto.setBoardTitle(rs.getString("board_title"));
-				dto.setBoardContent(rs.getString("board_content"));
-				dto.setBoardWriteTime(rs.getDate("board_writetime"));
-				dto.setBoardViewCnt(rs.getInt("board_view_cnt"));
-				dto.setBoardReplyCnt(rs.getInt("board_reply_cnt"));
-				return dto;
-			}
-			else {
-				return null;
-			}
-			
+		public void clear() {
+			String sql = "delete board";
+			jdbcTemplate.update(sql);
 		}
-	};
-	
-	public static RowMapper<BoardDto> getMapper() {
-		return mapper;
+		
+		
+		private RowMapper<BoardDto> mapper = new RowMapper<BoardDto>() {
+			@Override
+			public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return BoardDto.builder()
+										.boardPostNo(rs.getInt("board_post_no"))
+										.boardMemNo(rs.getInt("board_mem_no"))
+										.boardTitle(rs.getString("board_title"))
+										.boardContent(rs.getString("board_content"))
+										.boardWriteTime(rs.getDate("board_writetime"))
+										.boardViewCnt(rs.getInt("board_view_cnt"))
+										.boardReplyCnt(rs.getInt("board_reply_cnt"))
+									.build();
+			}
+		};
+		
+		@Override
+		public List<BoardDto> selectList() {
+			String sql = "select * from board order by board_post_no desc";
+			return jdbcTemplate.query(sql, mapper);
+		}
+		
+		@Override
+		public List<BoardDto> selectList(String type, String keyword) {
+			String sql = "select * from board "
+					+ "where instr(#1, ?) > 0 "
+					+ "order by board_post_no desc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
+
+		
 	
-	public static ResultSetExtractor<BoardDto> getExtractor() {
-		return extractor;
-	}
-
-	
-
-
 }
+
