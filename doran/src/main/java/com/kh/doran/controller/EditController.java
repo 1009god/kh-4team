@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.doran.entity.AddressDto;
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.MemDao;
 
 @Controller
@@ -20,6 +22,9 @@ public class EditController {
 
 	@Autowired
 	private MemDao memDao;
+	
+	@Autowired
+	private AddressDao addressDao;
 	
 	
 	//프로필 정보 수정
@@ -64,14 +69,14 @@ public class EditController {
 
 
 		@GetMapping("/profile_result")
-		public String infromaitonResult() {
+		public String profileResult() {
 			return "profile";
 		}		
 		
 		
-	//account 정보 수정
+//account 정보 수정
 	// 비밀번호 수정
-	// 전화번호 수정	
+	// 전화번호 수정		
 		@GetMapping("/account")
 		public String editAccount(HttpSession session, Model model) {
 			
@@ -112,7 +117,25 @@ public class EditController {
 		public String accountResult() {
 			return "edit/account";
 		}
+
 		
+		//배송지 수정 맵핑
+		@GetMapping("/address")
+		public String address() {
+			return "edit/address";
+		}
 		
+		@PostMapping("/address")
+		public String address(
+				HttpSession session,
+				@ModelAttribute AddressDto inputDto) {		
+			addressDao.insert(inputDto);
+			return "redirect:address_finish";
+		}
+		
+		@GetMapping("/address_finish")
+		public String addressFinish() {
+			return "edit/address";
+		}
 		
 }
