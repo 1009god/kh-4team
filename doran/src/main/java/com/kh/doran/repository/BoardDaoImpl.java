@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.BoardDto;
-import com.kh.doran.entity.MemDto;
+import com.kh.doran.vo.BoardListSearchVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -59,12 +59,12 @@ public class BoardDaoImpl implements BoardDao{
 		}
 		
 		@Override
-		public List<BoardDto> selectList(String type, String keyword) {
+		public List<BoardDto> selectList(BoardListSearchVO vo) {
 			String sql = "select * from board "
 					+ "where instr(#1, ?) > 0 "
 					+ "order by board_post_no desc";
-		sql = sql.replace("#1", type);
-		Object[] param = {keyword};
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 

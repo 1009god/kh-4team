@@ -45,4 +45,14 @@
 <!-- 페이지 네비게이터 -->
 <h3> &laquo; &lt; 1 2 3 4 5 6 7 8 9 10 &gt; &raquo; </h3>
 
-
+<!-- 검색창 -->
+<form action="list" method="get">
+	<select name="type" required>
+		<option value="board_title">제목</option>
+		<option value="board_writer">작성자</option>
+	</select>
+	
+	<input type="search" name="keyword" placeholder="검색어" required>
+	
+	<button type="submit">검색</button>
+</form>

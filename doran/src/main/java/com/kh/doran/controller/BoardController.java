@@ -1,20 +1,13 @@
 package com.kh.doran.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.doran.entity.BoardDto;
-import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.BoardDao;
+import com.kh.doran.vo.BoardListSearchVO;
 
 @Controller
 @RequestMapping("/board")
@@ -24,13 +17,17 @@ public class BoardController {
 	private BoardDao boardDao;
 	
 	@RequestMapping("/list")
-	public String list(HttpSession session,
-			Model model) {
-		model.addAttribute("list", boardDao.selectList());
+	public String list(Model model,
+			@ModelAttribute BoardListSearchVO vo) {
+		if(vo.isSearch()) {
+			model.addAttribute("list", boardDao.selectList(vo.getType(), vo.getKeyword()));
+		}
+		else {
+			model.addAttribute("list", boardDao.selectList());
+		}
 //		int boardMemNo = (int)session.getAttribute("loginNo");
 //		BoardDto boardDto = memDao.selectOne(memNo);
 //		model.addAttribute("boardDto", boardDto);
-//		
 		return "board/list";
 	}
 }
