@@ -1,13 +1,18 @@
 package com.kh.doran.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.doran.entity.BoardDto;
+import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.BoardDao;
 import com.kh.doran.vo.BoardListSearchVO;
 
@@ -42,6 +47,23 @@ public class BoardController {
 		//2. 데이터를 읽도록 처리한다
 		model.addAttribute("boardDto", boardDao.read(boardPostNo)); 
 		return "board/detail";
+	}
+	
+	@GetMapping("/write")
+	public String write() {
+		return "board/write";
+	}
+	
+	@PostMapping("/write") 
+	public String write(
+			@ModelAttribute BoardDto boardDto,
+			HttpSession session) {
+		//session 에 있는 회원 번호를 작성자로 추가한 뒤 등록해야 함
+		int memNo = (int)session.getAttribute("loginNo");
+		boardDto.setBoardMemNo(memNo);
+		
+		boardDao.insert(boardDto);
+		return "redirect:list";
 	}
 }
 		
