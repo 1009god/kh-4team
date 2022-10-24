@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -25,27 +26,8 @@ public class AddressDaoImpl implements AddressDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Override
-	public void insert(AddressDto addressDto) {
-		String sql = "insert into address values (address_seq.nextval, ?, ?, ?, ?, ?, ?)";
-		Object[] param = {
-				addressDto.getAddressMemNo(), 
-				addressDto.getAddressName(),
-				addressDto.getAddressTel(),
-				addressDto.getAddressPost(),
-				addressDto.getAddressBasic(),
-				addressDto.getAddressDetail()
-				//sql 회원번호 부러와서 입력 어케??
-		};
-		jdbcTemplate.update(sql, param);
-	}
 	
-	
-//	@Override
-//	public void insert(MemDto memDto) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+
 
 	
 	private RowMapper<AddressDto> mapper=new RowMapper<>() {
@@ -85,6 +67,32 @@ public class AddressDaoImpl implements AddressDao {
 			}
 		}	
 	};
+
+	@Override
+	public void insert(AddressDto addressDto) {
+		String sql = "insert into address values (address_seq.nextval, ?, ?, ?, ?, ?, ?)";
+		Object[] param = {
+				addressDto.getAddressMemNo(), 
+				addressDto.getAddressName(),
+				addressDto.getAddressTel(),
+				addressDto.getAddressPost(),
+				addressDto.getAddressBasic(),
+				addressDto.getAddressDetail()				
+		};		
+		jdbcTemplate.update(sql, param);
+	}
+	
+	@Override
+	public List<AddressDto> selectList() {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from address order by address_no desc"
+				+ ")TMP"
+			+ ") where rn between 1 and 5";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	
 
 
 }
