@@ -41,57 +41,7 @@ public class MemMypageController {
 	     return "mypage/profile";
   }
 
-//프로필 정보 수정
-	// 1. 자신의 현재 정보를 조회하여 화면에 출력
-	// 2. 바꾸고 싶은 정보를 입력하여 전송하면 해당 정보를 변경
 
-	@GetMapping("/edit/profile")
-	public String editProfile(HttpSession session, Model model) {
-		
-		//(1)아이디 획득(HttpSession)
-		int memNo = (int)session.getAttribute("loginNo");
-		
-		//(2) 아이디로 정보를 조회
-		MemDto memDto = memDao.selectOne(memNo);
-		
-		//(3) 조회한 정보를 화면으로 전달
-		model.addAttribute("memDto",memDto);
-		
-		//(4) 연결될 화면 주소를 반환
-		return "mypage/edit/profile";
-	}
-	
-	@PostMapping("/edit/profile")
-	public String editProfile(HttpSession session, 
-											@ModelAttribute MemDto inputDto, //client가 입력한 값
-											RedirectAttributes attr) {
-		// memberNo는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
-		int memNo = (int)session.getAttribute("loginNo");
-		inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 memNo를 넣어줌  // 지금 사용자의 no
-		
-		boolean result = memDao.editProfile(inputDto);
-		
-		if(result) {			
-			attr.addAttribute("memNo",inputDto.getMemNo());	
-			return "redirect:/mypage/profile";	
-		}
-	
-		else {
-			return "redirect:/mypage/edit/editFail";
-		}	
-	}
-	
-	
-	
-
-
-	@GetMapping("/edit/profile_result")
-	public String infromaitonResult() {
-		return "mypage/profile";
-	}
-	
-	
-	
 	
 	
 	
