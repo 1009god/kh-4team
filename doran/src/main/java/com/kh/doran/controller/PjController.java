@@ -78,6 +78,7 @@ public class PjController {
 	
 	@GetMapping("/order")
 	public String order() {
+		
 		return "pj/order";
 	};
 	

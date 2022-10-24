@@ -11,12 +11,12 @@
 <body>
 <h1>결제</h1>
 
-<span>${OptionsDto.optionsName}</span>
-<span></span>
-<span></span>
 
 
-<form action="order?optionsNo=${OptionsDto.optionsNo}" method="post">
+
+<form action="order" method="post">
+<input type="hidden" name="optionsNo" value="${OptionsDto.optionsNo}">
+<input type="hidden" name="optionsPrice" value="${OptionsDto.optionsPrice}">
 <input>
 <input>
 <input>
