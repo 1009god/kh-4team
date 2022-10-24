@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.BoardDto;
-import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.BoardDao;
 import com.kh.doran.vo.BoardListSearchVO;
 
@@ -57,13 +57,19 @@ public class BoardController {
 	@PostMapping("/write") 
 	public String write(
 			@ModelAttribute BoardDto boardDto,
-			HttpSession session) {
+			HttpSession session, RedirectAttributes attr) {
 		//session 에 있는 회원 번호를 작성자로 추가한 뒤 등록해야 함
 		int memNo = (int)session.getAttribute("loginNo");
 		boardDto.setBoardMemNo(memNo);
 		
 		boardDao.insert(boardDto);
-		return "redirect:list";
+		//return "redirect:list";
+		
+		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
+		//해결책 : 번호를 미리 생성하고 등록하도록 메소드 변경
+		int boardPostNo = boardDao.insert2(boardDto);
+		attr.addAttribute("boardPostNo", boardPostNo);
+		return "redirect:detail";
 	}
 }
 		
