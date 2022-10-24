@@ -19,7 +19,7 @@ public interface AdminDao {
 		
 		//수정,상세
 		boolean update(MemDto memDto);
-		AdminDto selectOne(int memNo);
+		MemDto selectOne(int memNo);
 		
 		
 		//프로젝트 테이블

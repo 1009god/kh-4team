@@ -6,7 +6,7 @@
 </jsp:include>
 
 <form action="insert" method="post">
-<div class="container-600 mt-40">
+<div class="container-300 mt-40">
 	<div class="row center">
 		<h1>관리자 가입 정보 입력</h1>
 	</div>
