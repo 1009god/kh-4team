@@ -31,7 +31,10 @@
 		</tr>
 		<tr height="200" valign="top"">
 			<th>내용</th>
-			<td>${boardDto.boardContent}</td>
+			<td>
+				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
+				<pre></pre>
+			</td>
 		</tr>
 	</tbody>
 	<tfoot>
