@@ -98,11 +98,23 @@ public class MemDaoImpl implements MemDao {
 //		return jdbcTemplate.update(sql, param) > 0;
 //	}
 	
+	
+	//수정-계정 delete 
 	@Override
 	public boolean delete(String memEmail) {
 		String sql = "delete mem where mem_email = ?";
 		Object[] param = {memEmail};
 		return jdbcTemplate.update(sql,param) > 0;
+	}
+
+	//수정-계정account수정(비밀번호, 전화번호)
+	@Override
+	public boolean editAccount(MemDto dto) {
+		// 세션을 이용한 프로필 수정
+				String sql = "update mem set mem_pw = ?, mem_tel = ? where mem_no= ?";		
+				Object[] param = {dto.getMemPw(), dto.getMemTel(),dto.getMemNo()};
+				//세션에서 no를 가져와야함
+				return jdbcTemplate.update(sql, param) > 0;		
 	}
 
 	

@@ -19,9 +19,9 @@
 	</div>
  --%>
  
- <a href="/mypage/edit/profile">프로필</a>
- <a href="/mypage/edit/account">계정</a>
- <a href="/mypage/edit/address">배송지</a>
+ <a href="//edit/profile">프로필</a>
+ <a href="/edit/account">계정</a>
+ <a href="/edit/address">배송지</a>
  
  
  
