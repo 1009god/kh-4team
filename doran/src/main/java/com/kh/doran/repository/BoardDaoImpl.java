@@ -99,5 +99,20 @@ public class BoardDaoImpl implements BoardDao{
 		return jdbcTemplate.query(sql,  extractor, param);
 	}
 	
+	@Override
+	public boolean updateReadcount(int boardPostNo) {
+		String sql = "update board set board_view_cnt = "
+				+ "board_view_cnt + 1 "
+				+ "where board_post_no = ?";
+		Object[] param = {boardPostNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	@Override
+	public BoardDto read(int boardPostNo) {
+		this.updateReadcount(boardPostNo);
+		return this.selectOne(boardPostNo);
+	}
+	
 }
 

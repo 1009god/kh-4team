@@ -10,7 +10,7 @@
 	<thead>
 	<tr>
 		<td align = "right" colspan="6">
-			<a href="#">글쓰기</a>
+			<a href="write">글쓰기</a>
 		</td>
 		<tr>
 			<th>번호</th>
@@ -41,7 +41,7 @@
 	<tfoot>
 		<tr>
 			<td align = "right" colspan="6">
-				<a href="#">글쓰기</a>
+				<a href="write">글쓰기</a>
 			</td>
 		</tr>
 	</tfoot>

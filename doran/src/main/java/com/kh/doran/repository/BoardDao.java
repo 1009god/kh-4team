@@ -10,9 +10,12 @@ public interface BoardDao {
 	List<BoardDto> selectList();
 	List<BoardDto> selectList(BoardListSearchVO vo);
 	BoardDto selectOne(int boardPostNo);
-	//	DTO selectOne(PK);
+	BoardDto read(int boardPostNo); //조회수 증가까지
+
 //	boolean update(DTO);
 //	boolean delete(PK);
+	
 	void clear();
+	boolean updateReadcount(int boardPostNo);
 
 }

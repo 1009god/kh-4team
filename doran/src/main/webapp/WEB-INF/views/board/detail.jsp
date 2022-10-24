@@ -21,7 +21,9 @@
 		</tr>
 		<tr>
 			<th>작성일</th>
-			<td>${boardDto.boardWriteTime}</td>
+			<td>
+				<fmt:formatDate value="${boardDto.boardWriteTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+			</td>
 		</tr>
 		<tr>
 			<th>조회수</th>
@@ -34,7 +36,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="2">
+			<td colspan="2" align="right">
 				<a href="write">글쓰기</a>
 				<a href="#">수정하기</a>
 				<a href="#">삭제하기</a>

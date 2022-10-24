@@ -35,8 +35,13 @@ public class BoardController {
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int boardPostNo, Model model) {
-		model.addAttribute("boardDto", boardDao.selectOne(boardPostNo));
-		return "/board/detail";
+//		1. 조회수를 증가시켜서 데이터를 불러온다
+//		boardDao.updateReadcount(boardPostNo); //조회수 증가
+//		model.addAttribute("boardDto", boardDao.selectOne(boardPostNo)); //불러와
+		
+		//2. 데이터를 읽도록 처리한다
+		model.addAttribute("boardDto", boardDao.read(boardPostNo)); 
+		return "board/detail";
 	}
 }
 		
