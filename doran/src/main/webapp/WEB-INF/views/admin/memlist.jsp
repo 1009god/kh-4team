@@ -8,14 +8,14 @@
 
 <div class="container-700 mt-40 mb-50">
 	<!-- 제목 -->
-	<div class="row center">
-		<h3>회원 리스트</h3>
+	<div class="row">
+		<h2>회원 리스트</h2>
 	</div>
 	
 	<!-- 검색창 -->
-	<form action="list" method="get">
-	<div class="row center">
-		<!-- 항목 -->
+<!-- 	<form action="list" method="get">
+	<div class="row1">
+		항목
 		<select class="input" name="type" required>
 		
 			<option value="mem_email">이메일</option>
@@ -23,15 +23,15 @@
 			
 		</select>
 		
-		<!-- 키워드 -->
+		키워드
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>
 		
 		<button class="btn btn-positive">검색</button>
 	</div>
-	</form>
+	</form> -->
 	
 	<!-- 목록 출력 -->
-	<div class="row">
+	<div class="row1">
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr>

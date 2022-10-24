@@ -6,14 +6,15 @@
 	<jsp:param value="프로젝트 목록" name="title"/>
 </jsp:include>
 
+
 <div class="container-700 mt-40 mb-50">
 	<!-- 제목 -->
-	<div class="row left">
+	<div class="row center">
 		<h3>프로젝트 리스트</h3>
 	</div>
 	
 	<!-- 목록 출력 -->
-	<div class="row">
+	<div class="row center">
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr>
