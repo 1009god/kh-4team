@@ -76,13 +76,13 @@
 						<h2>관리자메뉴</h2>
 					</div>
 					<div class="row">
-						<a href="#">프로젝트 관리</a>
+						<a href="/admin/pjlist">프로젝트 관리</a>
 					</div>
 					<div class="row">
 						<a href="/admin/memlist">전체 회원 관리</a>
 					</div>
 					<div class="row">
-						<a href="#">판매자 관리</a>
+						<a href="/admin/sellerlist">판매자 관리</a>
 					</div>
 					<div class="row">
 						<a href="#">공지사항 관리</a>

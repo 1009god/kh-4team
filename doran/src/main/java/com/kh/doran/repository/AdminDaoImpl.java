@@ -28,8 +28,7 @@ public class AdminDaoImpl implements AdminDao {
 	private PjDao pjDao;
 
 	
-private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto>() {
-		
+private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto>() {	
 		@Override
 		public AdminDto extractData(ResultSet rs) throws SQLException, DataAccessException {
 			if(rs.next()) {
@@ -68,7 +67,7 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	}
 
 
-
+//회원
 	private RowMapper<MemDto> mapper = new RowMapper<MemDto>() {
 		@Override
 		public MemDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -83,7 +82,7 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 			.build();
 		}
 	};
-	
+
 	private RowMapper<MemListVO> listmapper = new RowMapper<MemListVO>() {
 		@Override
 		public MemListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -109,17 +108,35 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		return jdbcTemplate.query(sql, mapper,param);
 	}
 	
-//	@Override
-//	public List<MemListVO> selectList(MemListVO vo) {
-//		
-//		return null;
-//	}
-//	@Override
-//	public int count(MemListVO vo) {
-//		
-//		return 0;
-//	}
-	//회원 정보 수정
+	
+//회원 
+	private ResultSetExtractor<MemDto> extractor1 = new ResultSetExtractor<MemDto>() {
+		
+		@Override
+		public MemDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				MemDto dto = new MemDto();
+				dto.setMemNo(rs.getInt("mem_no"));
+				dto.setMemEmail(rs.getString("mem_email"));
+				dto.setMemPw(rs.getString("mem_pw"));
+				dto.setMemNick(rs.getString("mem_nick"));
+				dto.setMemTel(rs.getString("mem_tel"));
+				dto.setMemJoinDate(rs.getDate("mem_join_date"));
+				dto.setMemRoute(rs.getString("mem_route"));	
+				return dto;
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	@Override
+	public MemDto selectOne(int memNo) {
+		String sql = "select * from mem where mem_no=?";
+		Object[]param= {memNo};
+		return jdbcTemplate.query(sql, extractor1,param);
+	}
+
 	@Override
 	public boolean update(MemDto memDto) {
 		String sql="update mem"
@@ -129,14 +146,6 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		Object[]param= {memDto.getMemNick(),memDto.getMemNo()};
 		return jdbcTemplate.update(sql,param)>0;
 	}
-	
-	@Override
-	public AdminDto selectOne(int memNo) {
-		String sql = "select * from mem where mem_no=?";
-		Object[]param= {memNo};
-		return jdbcTemplate.query(sql, extractor,param);
-	}
-
 	
 
 

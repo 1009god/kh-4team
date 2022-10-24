@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <jsp:include page="/WEB-INF/views/template/adminheader.jsp">
-	<jsp:param value="음원 목록" name="title"/>
+	<jsp:param value="프로젝트 목록" name="title"/>
 </jsp:include>
 
 <div class="container-700 mt-40 mb-50">
@@ -17,7 +17,7 @@
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr>
-					<th>판매자</th>
+					<th>판매자 번호 </th>
 					<th>카테고리</th>
 					<th>프로젝트명</th>
 					<th>목표금액</th>
@@ -30,11 +30,11 @@
 			<tbody align="center">
 				<c:forEach var="dto" items="${list}">
 				<tr>
-					<td>${dto.memNick}</td>
+			    	<td>${dto.pjNo}</td> 
 					
 					<td>${dto.pjCategory}</td>
 					
-					<td><a href="detail?pjNo=${dto.pjNo}">
+					<td><a href="pjdetail?pjNo=${dto.pjNo}">
 							${dto.pjName}
 						</a></td>	
 					
@@ -42,7 +42,7 @@
 
 					<td>${dto.pjFundingStartDate}</td>
 					
-					<td>${dto.JudgePjState}</td>
+					<td><%-- ${dto.JudgePjState} --%>심사중/승인/거절(사유)</td> 
 					
 					
 			     	</tr>
