@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,15 +119,15 @@ public class EditController {
 		public String accountResult() {
 			return "edit/account";
 		}
-
 		
-		//배송지 수정 맵핑
-		@GetMapping("/address")
+		
+		//배송지 수정-배송지 추가
+		@GetMapping("/address_plus")
 		public String address() {
-			return "edit/address";
+			return "edit/addressPlus";
 		}
 		
-		@PostMapping("/address")
+		@PostMapping("/address_plus")
 		public String address(
 				HttpSession session,
 				@ModelAttribute AddressDto inputDto) {		
@@ -135,7 +137,16 @@ public class EditController {
 		
 		@GetMapping("/address_finish")
 		public String addressFinish() {
-			return "edit/address";
+			return "redirect:/edit/address_list";
 		}
+		
+		//배송지 리스트
+		@GetMapping("/address_list")
+		public String addressList(Model model) {
+			List<AddressDto> list = addressDao.selectList();
+			model.addAttribute("list",list);
+			return "edit/addressList";
+		}
+
 		
 }
