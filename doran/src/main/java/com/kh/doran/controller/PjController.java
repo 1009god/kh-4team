@@ -49,8 +49,12 @@ public class PjController {
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트넘버로 검색해서 나온 값 model에 저장해서 넘김
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
 
-		int loginNo=(int) session.getAttribute("loginNo");
-		if(loginNo!=0) {
+		
+		Integer loginNo=(Integer) session.getAttribute("loginNo");
+		if(loginNo==null) {
+			return "pj/detail";
+		}
+		else {
 			LikesDto likesDto=new LikesDto();
 			likesDto.setLikesMemNo(loginNo);
 			likesDto.setLikesPjNo(pjNo);
@@ -62,8 +66,8 @@ public class PjController {
 	
 	@GetMapping("/selectCheck")//구매할 옵션 선택(확인)
 	public String selectCheck(@RequestParam int optionsNo, Model model, HttpSession session) {
-		int loginNo=(int) session.getAttribute("loginNo");
-		if(loginNo==0) {
+		Integer loginNo=(Integer) session.getAttribute("loginNo");
+		if(loginNo==null) {
 			return "redirect:/mem/login";
 		}
 		
@@ -73,6 +77,7 @@ public class PjController {
 	
 	@GetMapping("/order")
 	public String order() {
+		
 		return "pj/order";
 	};
 	

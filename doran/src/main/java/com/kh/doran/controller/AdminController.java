@@ -109,7 +109,7 @@ public class AdminController {
 	@GetMapping("/detail")
 	public String detail(Model model,
 						@RequestParam int memNo) {
-		AdminDto memDto=adminDao.selectOne(memNo);
+		MemDto memDto=adminDao.selectOne(memNo);
 		model.addAttribute("dto",memDto);
 		return "admin/detail";
 	}
