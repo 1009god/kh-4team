@@ -47,16 +47,20 @@
         <img src="/img/logo.png" width="10%">
         <img src="/img/burger.png" width="2%">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+         
           <li><a href="#" class="nav-link px-2 link-secondary">전체 프로젝트</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">인기</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">신규</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">마감임박</a></li>
           <li><a href="#" class="nav-link px-2 link-dark ">커뮤니티</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">고객센터</a></li>
+          
         </ul>
-
-        <button type="submit" class="btn btn-outline-secondary" onclick="location.href='#'">프로젝트 올리기</button>
-
+		<c:choose>
+        <c:when test = "${login}">
+        <button type="submit" class="btn btn-outline-secondary" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+		</c:when>
+		</c:choose>
         &nbsp;
         &nbsp;
 
