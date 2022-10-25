@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.doran.entity.OrdersDto;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.MemDao;
-
+import com.kh.doran.entity.AddressDto;
 import com.kh.doran.entity.LikesDto;
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.entity.MemDto;
@@ -76,20 +76,24 @@ public class PjController {
 	};
 	
 	@GetMapping("/order")
-	public String order() {
-		
+	public String order(@RequestParam int optionsNo, HttpSession session, Model model) {
+		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
+		int pjNo=optionsDto.getOptionsPjNo();
+		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+		model.addAttribute("PjDto", pjDao.selectOne(pjNo));
 		return "pj/order";
 	};
 	
-	@PostMapping("/order")
-	public String order(@ModelAttribute OrdersDto ordersDto,
-			@RequestParam int optionsNo, Model model, HttpSession session, RedirectAttributes attr) {
+	
+	@RequestMapping("/order")
+	public String order(@ModelAttribute OrdersDto ordersDto, @ModelAttribute AddressDto addressDto,
+			@RequestParam int optionsNo, Model model, HttpSession session) {
 		int loginNo=(int) session.getAttribute("loginNo");
-		attr.addAttribute("memNo", loginNo);
+		model.addAttribute("memNo", loginNo);
 		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
 		int optionsPjNo=optionsDto.getOptionsPjNo();
-		attr.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
-		attr.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
+		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
 		return "redirect:/pj/orderComplete";
 	};
 	
