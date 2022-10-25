@@ -33,7 +33,7 @@
 			<th>내용</th>
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
-				<pre></pre>
+				<pre>${boardDto.boardContent}</pre>
 			</td>
 		</tr>
 	</tbody>
@@ -41,8 +41,8 @@
 		<tr>
 			<td colspan="2" align="right">
 				<a href="write">글쓰기</a>
-				<a href="edit?boardPostNo =${boardDto.boardPostNo}">수정하기</a>
-				<a href="delete?boardPostNo =${boardDto.boardPostNo}">삭제하기</a>
+				<a href="edit?boardPostNo=${boardDto.boardPostNo}">수정하기</a>
+				<a href="delete?boardPostNo=${boardDto.boardPostNo}">삭제하기</a>
 				<a href="list">목록으로</a>
 			</td>
 		</tr>

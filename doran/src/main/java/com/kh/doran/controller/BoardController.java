@@ -1,5 +1,8 @@
 package com.kh.doran.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +33,47 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String list(Model model,
 			@ModelAttribute(name="vo") BoardListSearchVO vo) {
-		if(vo.isSearch()) {
-			model.addAttribute("list", boardDao.selectList(vo));
-		}
-		else {
-			model.addAttribute("list", boardDao.selectList());
-		}
+		//페이지 네비게이터를 위한 게시글 수를 구한다
+		int count = boardDao.count(vo);
+		vo.setCount(count);
+		
+		model.addAttribute("list", boardDao.selectList(vo));
 		return "board/list";
 	}
 	
 	@GetMapping("/detail")
-	public String detail(@RequestParam int boardPostNo, Model model) {
+	public String detail(@RequestParam int boardPostNo, Model model,
+			HttpSession session) {
 //		1. 조회수를 증가시켜서 데이터를 불러온다
 //		boardDao.updateReadcount(boardPostNo); //조회수 증가
-//		model.addAttribute("boardDto", boardDao.selectOne(boardPostNo)); //불러와
 		
 		//2. 데이터를 읽도록 처리한다
-		model.addAttribute("boardDto", boardDao.read(boardPostNo)); 
+		
+//		(+ 추가) 조회수 중복 방지 처리
+//		(1) 세션에 내가 읽은 게시글의 번호를 저장할 수 있는 저장소를 구현
+//		-> 후보 : int[], List<Integer>, Set<Integer>
+//		리스트를 선택 = 내가 읽은 게시글의 순서, 셋 순서 상관 없이 게시글을 읽은 적이 있나? (중복확인)
+//		-> 세션에 저장할 이름 history로 지정
+//		(2) 현재 history 가 있을지 없을지 모르므로  꺼내서 없으면 생성
+		
+		Set<Integer> history = (Set<Integer>)session.getAttribute("history");
+		if(history == null) {//history 가 없다면 신규 생성
+			history = new HashSet<>();
+		}
+		
+//		(3) 현재 글 번호를 읽은 적이 있는지 검사
+		if(history.add(boardPostNo)) { //추가된 경우
+			model.addAttribute("boardDto", boardDao.read(boardPostNo)); 
+		}
+		
+		else {//추가가 안 된 경우 - 읽은 적이 있는 번호면
+			model.addAttribute("boardDto", boardDao.selectOne(boardPostNo)); //불러와
+		}
+		
+		System.out.println("history" + history);
+		
+//		(4) 갱신된 저장소를 세션에 다시 저장
+		session.setAttribute("history", history);
 		return "board/detail";
 	}
 	
