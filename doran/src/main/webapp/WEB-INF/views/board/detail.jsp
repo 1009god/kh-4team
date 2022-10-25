@@ -54,34 +54,60 @@
 	<c:forEach var="replyDto" items="${replyList}">
 		<tr>
 			<td width="90%">
-				${replyDto.replyMemNo} <br>
+			<!-- 작성자 -->
+			${replyDto.replyMemNo}
+			<c:if test="${boardDto.boardMemNo == replyDto.replyMemNo}">
+			(작성자)
+			</c:if>
+			
 				<pre>${replyDto.replyContent}</pre>
 				<br><br>
 				<fmt:formatDate value="${replyDto.replyWriteTime}" pattern="yyyy-MM-dd HH:mm"/>
-				${replyDto.replyWriteTime} 
 			</td>
 			<th>
-				수정
-				<br>
-				삭제
+				<!-- 수정과 삭제는 현재 사용자가 남긴 댓글에만 표시 -->
+				<c:if test="${loginNo == replyDto.replyMemNo}">
+					수정
+					<br>
+					<a href="reply/delete?replyNo=${replyDto.replyNo}&replyBoardPostNo=${replyDto.replyBoardPostNo}">삭제</a>
+				</c:if>
 			</th>
 		</tr>
 		</c:forEach>
 	</tbody>
 </table>
 <br>
-<form action="reply/write" method="post">
-<input type="hidden" name="replyBoardPostNo" value="${boardDto.boardPostNo}">
-<table border="1" width="500">
-	<tbody>
-		<tr>
-			<th>
-				<textarea name="replyContent" rows="5" cols="60" required placeholder="댓글 작성..."></textarea>
-			</th>
-			<th>
-				<button type="submit">등록</button>
-			</th>
-		</tr>
-	</tbody>
-</table>
-</form>
+<c:choose>
+	<c:when test="${loginNo != null}">
+		<form action="reply/write" method="post">
+	<input type="hidden" name="replyBoardPostNo" value="${boardDto.boardPostNo}">
+	<table border="1" width="500">
+		<tbody>
+			<tr>
+				<th>
+					<textarea name="replyContent" rows="5" cols="55" required placeholder="댓글 작성..."></textarea>
+				</th>
+				<th>
+					<button type="submit">등록</button>
+				</th>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+		
+	</c:when>
+	<c:otherwise>
+		<table border="1" width="500">
+			<tbody>
+				<tr>
+					<th>
+						<textarea name="replyContent" rows="5" cols="55" placeholder="로그인 후 댓글 작성이 가능합니다" disabled></textarea>
+					</th>
+					<th>
+						<button type="submit" disabled>등록</button>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+	</c:otherwise>
+</c:choose>

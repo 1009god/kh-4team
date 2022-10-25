@@ -155,6 +155,16 @@ public class BoardController {
 		attr.addAttribute("boardPostNo", replyDto.getReplyBoardPostNo());
 		return "redirect:/board/detail"; //절대
 	}
+	
+	@GetMapping("/reply/delete")
+	public String replyDelete(
+			@RequestParam int replyNo,
+			@RequestParam int replyBoardPostNo,
+			RedirectAttributes attr) {
+		replyDao.delete(replyNo);
+		attr.addAttribute("boardPostNo", replyBoardPostNo);
+		return "redirect:/board/detail";
+	}
 }
 		
 
