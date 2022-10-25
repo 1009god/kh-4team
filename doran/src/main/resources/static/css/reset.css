@@ -50,6 +50,7 @@ q:before, q:after {
     box-sizing: border-box;
 }
 
-html {
-    font-family: 'Noto Sans KR', sans-serif;
+html{
+    font-family: 'Nanum Gothic', sans-serif;
+    /* 폰트 2개인 이유 : 플랜A, 플랜B */
 }
