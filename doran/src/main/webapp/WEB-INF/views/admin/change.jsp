@@ -5,7 +5,7 @@
 </jsp:include>
 
 <form action="change" method="post">
-<input name="" value="${dto.no}" type="hidden">
+<input name="" value="${memdto.memNo}" type="hidden">
 
 <div class="container-300 mt-40">
 	<div class="row center">

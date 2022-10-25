@@ -30,21 +30,21 @@
 							<tbody class="center">
 								<tr>
 									<td><img class="image image-circle image-shadow"
-										src="download?membEmail=${memDto.memEmail}" width="100"
+										src="download?membEmail=${memDto.memNo}" width="100"
 										height="100"></td>
 								</tr>
 							
 										<tr>
-											<td><a class="btn btn-neutral btn-small" href="list">목록
+											<td><a class="btn btn-neutral btn-small" href="/admin/memlist">목록
 													보기</a></td>
 										</tr>
 										<tr>
 											<td><a class="btn btn-neutral btn-small"
-												href="change?memberId=${memDto.memEmail}">정보 변경</a></td>
+												href="change?memNo=${memDto.memNo}">정보 변경</a></td>
 										</tr>
 										<tr>
 											<td><a class="btn btn-neutral btn-small"
-												href="exit?memberId=${memDto.memEmail}">회원 탈퇴</a></td>
+												href="delete?memNo=${memDto.memNo}">회원 탈퇴</a></td>
 										</tr>
 									
 							</tbody>
@@ -53,25 +53,25 @@
 					<td>
 						<table class="table table-border">
 							<tr>
-								<th width="25%">아이디</th>
-								<td>${memDto.memEmail}</td>
+								<th width="20%">아이디</th>
+								<td>${dto.memEmail}</td>
 							</tr>
 							<tr>
 								<th>번호</th>
-								<td>${memDto.memNo}</td>
+								<td>${dto.memNo}</td>
 							</tr>
 							<tr>
 								<th>닉네임</th>
-								<td>${memDto.memNick}</td>
+								<td>${dto.memNick}</td>
 							</tr>
 							<tr>
 								<th>전화번호</th>
-								<td>${memDto.memTel}</td>
+								<td>${dto.memTel}</td>
 							</tr>
 							
 							<tr>
 								<th>가입일시</th>
-								<td><fmt:formatDate value="${memDto.memJoinDate}"
+								<td><fmt:formatDate value="${dto.memJoinDate}"
 										pattern="y년 M월 d일 E a h시 m분 s초" /></td>
 							</tr>
 							

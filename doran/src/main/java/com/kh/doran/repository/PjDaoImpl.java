@@ -94,7 +94,7 @@ public class PjDaoImpl implements PjDao {
 		else if(vo.isImminent()) {//마감임박순
 			return imminent(vo);
 		}
-		else if(vo.isLast()) {//마감임박순
+		else if(vo.isLatest()) {//최신순
 			return latest(vo);
 		}
 		else if(vo.isCategory()) {//카테고리별
@@ -160,6 +160,7 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,mapper,param);
 	}
 	
+	//최신순
 	@Override
 	public List<PjDto> latest(PjListSearchVO vo) {
 		String sql = "select * from ( "
@@ -173,17 +174,18 @@ public class PjDaoImpl implements PjDao {
 	}
 	
 	// 카테고리별 정렬순
+	
 	@Override
 	public List<PjDto> category(PjListSearchVO vo) {
-		String sql = "select * from ( " 
-			    + "select rownum rn, TMP.* from( " 
-					+ "select*from pj where pj_category in ? order by pj_no desc " 
-								+ ")TMP " 
-							+ ") where rn between ? and ?";
+		String sql = "select * from ( "
+				+  "select rownum rn, TMP.* from( "
+					+ "	select*from pj where pj_category in ? order by pj_no desc "
+				 				+")TMP "
+						+	") where rn between ? and ?";
 		Object[] param = {vo.getCategory(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql,mapper,param);
 	}
-	
+
 	@Override
 	public int count(PjListSearchVO vo) {
 		if(vo.isSearch()) {

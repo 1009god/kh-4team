@@ -8,14 +8,14 @@
 
 <div class="container-700 mt-40 mb-50">
 	<!-- 제목 -->
-	<div class="row center">
-		<h1>회원 리스트</h1>
+	<div class="row">
+		<h2>회원 리스트</h2>
 	</div>
 	
 	<!-- 검색창 -->
-	<form action="list" method="get">
-	<div class="row center">
-		<!-- 항목 -->
+<!-- 	<form action="list" method="get">
+	<div class="row1">
+		항목
 		<select class="input" name="type" required>
 		
 			<option value="mem_email">이메일</option>
@@ -23,15 +23,15 @@
 			
 		</select>
 		
-		<!-- 키워드 -->
+		키워드
 		<input class="input" type="search" name="keyword" placeholder="검색어" required>
 		
 		<button class="btn btn-positive">검색</button>
 	</div>
-	</form>
+	</form> -->
 	
 	<!-- 목록 출력 -->
-	<div class="row">
+	<div class="row1">
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr>
@@ -43,7 +43,7 @@
 					
 				</tr>
 			</thead>
-			<tbody align="center">
+			<tbody>
 				<c:forEach var="dto" items="${list}">
 				<tr>
 					<td>${dto.memNo}</td>
@@ -66,24 +66,24 @@
 		</table>
 	</div>
 
-	<div class="row">
-		<ul class="pagination pagination-small">
-			<li><a href="#">&laquo;</a></li>
-			<li><a href="#">&lt;</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">6</a></li>
-			<li><a href="#">7</a></li>
-			<li><a href="#">8</a></li>
-			<li><a href="#">9</a></li>
-			<li><a href="#">10</a></li>
-			<li><a href="#">&gt;</a></li>
-			<li><a href="#">&raquo;</a></li>
-		</ul>
-	</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
 	
 </div>
     

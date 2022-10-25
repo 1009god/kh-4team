@@ -1,13 +1,19 @@
 package com.kh.doran.repository;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AddressDto;
@@ -17,14 +23,12 @@ import com.kh.doran.entity.AddressDto;
 public class AddressDaoImpl implements AddressDao {
 
 
-//	@Override
-//	public void insert(MemDto memDto) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	
+
+
 	
 	private RowMapper<AddressDto> mapper=new RowMapper<>() {
 
@@ -63,6 +67,33 @@ public class AddressDaoImpl implements AddressDao {
 			}
 		}	
 	};
+
+	@Override
+	public void insert(AddressDto addressDto) {
+		String sql = "insert into address values (address_seq.nextval, ?, ?, ?, ?, ?, ?)";
+		Object[] param = {
+				addressDto.getAddressMemNo(), 
+				addressDto.getAddressName(),
+				addressDto.getAddressTel(),
+				addressDto.getAddressPost(),
+				addressDto.getAddressBasic(),
+				addressDto.getAddressDetail()				
+		};		
+		jdbcTemplate.update(sql, param);
+	}
+	
+	@Override
+	public List<AddressDto> selectList() {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from address order by address_no desc"
+				+ ")TMP"
+			+ ") where rn between 1 and 5";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	
+
 
 }
 
