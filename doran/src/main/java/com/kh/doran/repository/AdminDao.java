@@ -9,9 +9,10 @@ import com.kh.doran.vo.MemListVO;
 public interface AdminDao {
 		
 		//관리자 테이블
+		AdminDto selectOne(int adminNo);
 		AdminDto selectOne(String adminEmail);
 		void insert(AdminDto adminDto);
-		boolean updateLoginTime(String adminEmail);
+		boolean updateLoginTime(int adminNo);
 		
 		//회원 테이블 
 		List<MemDto> selectList();
@@ -19,7 +20,8 @@ public interface AdminDao {
 		
 		//수정,상세
 		boolean update(MemDto memDto);
-		MemDto selectOne(int memNo);
+		MemDto selectOne1(int memNo);
+		boolean delete(int memNo);
 		
 		
 		//프로젝트 테이블

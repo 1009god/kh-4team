@@ -34,7 +34,7 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 			if(rs.next()) {
 				AdminDto dto = new AdminDto();
 				dto.setAdminNo(rs.getInt("admin_no"));
-				dto.setAdminEmail(rs.getString("admin_eamil"));
+				dto.setAdminEmail(rs.getString("admin_email"));
 				dto.setAdminPw(rs.getString("admin_pw"));
 				dto.setAdminNick(rs.getString("admin_nick"));
 				
@@ -53,6 +53,12 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		jdbcTemplate.update(sql, param);
 	}
 	@Override
+	public AdminDto selectOne(int adminNo) {
+		String sql = "select * from admin where admin_no = ?";
+		Object[]param= {adminNo};
+		return jdbcTemplate.query(sql, extractor,param);
+	}
+	@Override
 	public AdminDto selectOne(String adminEmail) {
 		String sql="select*from admin where admin_email=?";
 		Object[]param= {adminEmail};
@@ -60,9 +66,9 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	}
 	
 	@Override
-	public boolean updateLoginTime(String adminEmail) {
-		String sql = "UPDATE ADMIN " + "SET ADMIN_LOGIN=SYSDATE " + "WHERE ADMIN_EMAIL=?";
-		Object[] param = { adminEmail };
+	public boolean updateLoginTime(int adminNo) {
+		String sql = "UPDATE ADMIN " + "SET ADMIN_LOGIN=SYSDATE " + "WHERE ADMIN_No=?";
+		Object[] param = { adminNo };
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 
@@ -131,7 +137,7 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		}
 	};
 	@Override
-	public MemDto selectOne(int memNo) {
+	public MemDto selectOne1(int memNo) {
 		String sql = "select * from mem where mem_no=?";
 		Object[]param= {memNo};
 		return jdbcTemplate.query(sql, extractor1,param);
@@ -139,13 +145,17 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 
 	@Override
 	public boolean update(MemDto memDto) {
-		String sql="update mem"
-				+ "set"
-				+ "mem_nick=?,"
-				+ "where mem_no=?";
+		String sql="update mem set mem_nick=? where mem_no=?";
 		Object[]param= {memDto.getMemNick(),memDto.getMemNo()};
 		return jdbcTemplate.update(sql,param)>0;
 	}
+	@Override
+	public boolean delete(int memNo) {
+		String sql = "delete mem where mem_no=?";
+		Object[]param= {memNo};
+		return jdbcTemplate.update(sql,param)>0;
+	}
+
 	
 
 
