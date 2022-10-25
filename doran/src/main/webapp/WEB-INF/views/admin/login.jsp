@@ -13,7 +13,7 @@
 	
 	<div class="row left">
 		<label>아이디</label>
-		<input class="input w-100" name="adminEmail" placeholder="이메일" type="text" required autocomplete="off">
+		<input class="input w-100" name="adminEmail" placeholder="이메일" type="text" required>
 	</div>	
 	
 	<div class="row left mt-20">
