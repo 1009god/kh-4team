@@ -33,7 +33,7 @@
 			<th>내용</th>
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
-				<pre></pre>
+				<pre>${boardDto.boardContent}</pre>
 			</td>
 		</tr>
 	</tbody>
