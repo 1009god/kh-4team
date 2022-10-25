@@ -48,3 +48,24 @@
 		</tr>
 	</tfoot>
 </table>
+<table border="1" width="500">
+	<!-- 댓글 목록 -->
+	<tbody>
+	<c:forEach var="replyDto" items="${replyList}">
+		<tr>
+			<td width="90%">
+				${replyDto.replyMemNo} <br>
+				<pre>${replyDto.replyContent}</pre>
+				<br><br>
+				<fmt:formatDate value="${replyDto.replyWriteTime}" pattern="yyyy-MM-dd HH:mm"/>
+				${replyDto.replyWriteTime} 
+			</td>
+			<th>
+				수정
+				<br>
+				삭제
+			</th>
+		</tr>
+		</c:forEach>
+	</tbody>
+</table>
