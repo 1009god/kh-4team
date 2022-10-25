@@ -77,6 +77,10 @@ public class PjController {
 	
 	@GetMapping("/order")
 	public String order(@RequestParam int optionsNo, HttpSession session, Model model) {
+		Integer loginNo=(Integer) session.getAttribute("loginNo");
+		if(loginNo==null) {
+			return "redirect:/mem/login";
+		}
 		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
 		int pjNo=optionsDto.getOptionsPjNo();
 		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
@@ -85,11 +89,15 @@ public class PjController {
 	};
 	
 	
-	@RequestMapping("/order")
+	@PostMapping("/order")
 	public String order(@ModelAttribute OrdersDto ordersDto, @ModelAttribute AddressDto addressDto,
 			@RequestParam int optionsNo, Model model, HttpSession session) {
-		int loginNo=(int) session.getAttribute("loginNo");
-		model.addAttribute("memNo", loginNo);
+		Integer loginNo=(Integer) session.getAttribute("loginNo");
+		if(loginNo==null) {
+			return "redirect:/mem/login";
+		}
+		int loginNo2=(int) session.getAttribute("loginNo");
+		model.addAttribute("memNo", loginNo2);
 		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
 		int optionsPjNo=optionsDto.getOptionsPjNo();
 		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));

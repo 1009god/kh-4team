@@ -21,12 +21,18 @@
 
 
 
+    <div>
+        <h2>배송지 선택</h2>
+        <select>
+            <option></option>
+        </select>
+        
+    </div>
 
 
 
 
-<form action="order" method="post">
-    <h2>배송지 추가</h2>
+
     <form method ="post">
         <div>
         <label>해당 회원 번호
@@ -67,9 +73,10 @@
         </div>
         
     </form>
-<button type="submit">주문하기</button>
 
-</form>
+<button>주문하기</button>
+
+
 
 </body>
 </html>
