@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class DoranQDto {
 
-	private int DoranQNo, DorqnQmemNo, DoranQAdminNo;
-	private String DoranQTitle, DoranQContent;
-	private Date DoranQWriteTime;
-	private String DoranQType,DoranQProcessing;
+	private int doranQNo, dorqnQmemNo, doranQadminNo;
+	private String doranQTitle, doranQContent;
+	private Date doranQWritetime;
+	private String doranQType,doranQProcessing;
 }
