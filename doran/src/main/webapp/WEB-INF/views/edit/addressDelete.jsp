@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-배송지 수정
+주소 삭제 완료
+
+
 </body>
 </html>

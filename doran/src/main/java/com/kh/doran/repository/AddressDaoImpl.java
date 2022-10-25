@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AddressDto;
+import com.kh.doran.entity.MemDto;
 
 
 @Repository
@@ -68,6 +69,7 @@ public class AddressDaoImpl implements AddressDao {
 		}	
 	};
 
+	//배송지 등록
 	@Override
 	public void insert(AddressDto addressDto) {
 		String sql = "insert into address values (address_seq.nextval, ?, ?, ?, ?, ?, ?)";
@@ -82,6 +84,7 @@ public class AddressDaoImpl implements AddressDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
+	//배송지 목록
 	@Override
 	public List<AddressDto> selectList() {
 		String sql = "select * from ("
@@ -92,7 +95,47 @@ public class AddressDaoImpl implements AddressDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
+	//배송지 삭제
+	@Override
+	public boolean delete(int addressNo) {
+		String sql = "delete address where address_no = ?";
+		Object[] param = {addressNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+
 	
+	//배송지 selectOne
+	@Override
+	public AddressDto selectOne(int addressNo) {
+		String sql = "select * from address where address_no = ?";
+		Object[] param = {addressNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+
+	
+	//배송지 수정
+	@Override
+	public boolean update(AddressDto addressDto) {
+		String sql = "update address set "
+					+ "address_name = ?, "
+					+ "address_post = ?, "
+					+ "address_basic = ?, "
+					+ "address_detail = ?, "
+					+ "address_tel = ? "
+				+ "where "
+					+ "address_no = ?";
+		Object[] param = {			
+				addressDto.getAddressName(),
+				addressDto.getAddressPost(),
+				addressDto.getAddressBasic(),
+				addressDto.getAddressDetail(),				
+				addressDto.getAddressTel(),
+				addressDto.getAddressNo()
+			};		
+		return jdbcTemplate.update(sql, param) > 0 ;
+	}
+	
+
 
 
 }

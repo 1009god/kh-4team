@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+배송지 수정 페이지
 
-<h2>배송지 추가</h2>
 <form method ="post">
 	<div>
 	<label>해당 회원 번호
@@ -16,13 +16,13 @@
 	</label>
 	
 	<label>받는 사람
-		<input name = "addressName" type="text" required>
+		<input name = "addressName" type="text" required value=${addressDto.addressName}>
 	</label>
 	</div>
 	
 	<div>	
 	<label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
+		<input name = "addressPost"  id="sample6_postcode" type="text" required value=${addressDto.addressPost} >
 	</label>
 	</div>
 	
@@ -30,19 +30,19 @@
 	
 	<div>
 	<label>주소
-		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
+		<input name = "addressBasic" id="sample6_address" type="text" required value=${addressDto.addressBasic}>
 	</label>
 	</div>
 	
 	<div>
 	<label>상세주소
-		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
+		<input name = "addressDetail" id="sample6_detailAddress"  type="text" required value=${addressDto.addressDetail}>
 	</label>
 	</div>
 	
 	<div>
 	<label>받는 사람 휴대폰 번호
-		<input name = "addressTel" type="text" required>
+		<input name = "addressTel" type="text" required value=${addressDto.addressTel}>
 	</label>
 	</div>
 	
@@ -84,4 +84,3 @@
 
 </body>
 </html>
-
