@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.BoardDto;
+import com.kh.doran.entity.ReplyDto;
 import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.BoardDao;
 import com.kh.doran.repository.ReplyDao;
@@ -141,6 +142,18 @@ public class BoardController {
 		else { //실패했으면 오류 발생
 			throw new TargetNotFoundException();
 		}
+	}
+	
+	@PostMapping("/reply/write")
+	public String replyWrite(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr, HttpSession session) {
+		int memNo = (int)session.getAttribute("loginNo");
+		replyDto.setReplyMemNo(memNo);
+		replyDao.insert(replyDto);
+		
+		attr.addAttribute("boardPostNo", replyDto.getReplyBoardPostNo());
+		return "redirect:/board/detail"; //절대
 	}
 }
 		

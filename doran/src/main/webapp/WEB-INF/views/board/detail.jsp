@@ -69,3 +69,19 @@
 		</c:forEach>
 	</tbody>
 </table>
+<br>
+<form action="reply/write" method="post">
+<input type="hidden" name="replyBoardPostNo" value="${boardDto.boardPostNo}">
+<table border="1" width="500">
+	<tbody>
+		<tr>
+			<th>
+				<textarea name="replyContent" rows="5" cols="60" required placeholder="댓글 작성..."></textarea>
+			</th>
+			<th>
+				<button type="submit">등록</button>
+			</th>
+		</tr>
+	</tbody>
+</table>
+</form>
