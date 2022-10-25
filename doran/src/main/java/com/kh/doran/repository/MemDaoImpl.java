@@ -109,12 +109,20 @@ public class MemDaoImpl implements MemDao {
 
 	//수정-계정account수정(비밀번호, 전화번호)
 	@Override
-	public boolean editAccount(MemDto dto) {
+	public boolean editAccountPw(MemDto dto) {
 		// 세션을 이용한 프로필 수정
-				String sql = "update mem set mem_pw = ?, mem_tel = ? where mem_no= ?";		
-				Object[] param = {dto.getMemPw(), dto.getMemTel(),dto.getMemNo()};
+				String sql = "update mem set mem_pw = ? where mem_no= ?";		
+				Object[] param = {dto.getMemPw(), dto.getMemNo()};
 				//세션에서 no를 가져와야함
 				return jdbcTemplate.update(sql, param) > 0;		
+	}
+
+	@Override
+	public boolean editAccountTel(MemDto dto) {
+		// 세션을 이용한 프로필 수정
+		String sql = "update mem set mem_tel = ? where mem_no = ?";
+		Object[] param = {dto.getMemTel(), dto.getMemNo()};
+		return jdbcTemplate.update(sql, param) > 0;	
 	}
 
 	
