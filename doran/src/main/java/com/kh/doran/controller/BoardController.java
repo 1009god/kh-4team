@@ -33,12 +33,7 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String list(Model model,
 			@ModelAttribute(name="vo") BoardListSearchVO vo) {
-		if(vo.isSearch()) {
-			model.addAttribute("list", boardDao.selectList(vo));
-		}
-		else {
-			model.addAttribute("list", boardDao.selectList());
-		}
+		model.addAttribute("list", boardDao.selectList(vo));
 		return "board/list";
 	}
 	
