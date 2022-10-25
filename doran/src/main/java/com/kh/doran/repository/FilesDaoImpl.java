@@ -58,6 +58,7 @@ public class FilesDaoImpl implements FilesDao{
 	public int sequence() {
 		String sql = "select FILES_SEQ.NEXTVAL FROM DUAL";
 		return jdbcTemplate.queryForObject(sql, int.class);
+		//번호를 프로그램에서 불러와서 쓸 때 필요하다
 	}
 	//등록
 	@Override

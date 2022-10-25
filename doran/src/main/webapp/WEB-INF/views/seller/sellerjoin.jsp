@@ -14,6 +14,7 @@
  <input type="text" name="sellerBank" placeholder="등록하실 은행" required> <br>
  <input type="text" name="sellerAccount" placeholder="계좌번호" required> <br>
  첨부파일(사업자등록)<input type="file" name="files" multiple accept=".jpg,.png">
+ 
  <button type="submit">판매자 가입 신청</button>
  </form>
 약관, 버튼 잠금 추가 예정
