@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.OrdersDto;
+import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.MemDao;
 import com.kh.doran.entity.AddressDto;
@@ -42,6 +43,9 @@ public class PjController {
 	
 	@Autowired
 	private MemDao memDao;
+	
+	@Autowired
+	private AddressDao addressDao;
 
 	
 	@GetMapping("/detail")
@@ -85,6 +89,12 @@ public class PjController {
 		int pjNo=optionsDto.getOptionsPjNo();
 		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));
+
+		//현재 접속중인 계정이 등록해둔 배송지 목록을 저장해서 넘김
+		int loginNo2=(int) session.getAttribute("loginNo");
+		model.addAttribute("AddressDto",addressDao.selectList(loginNo2));
+		
+		
 		return "pj/order";
 	};
 	
@@ -102,6 +112,7 @@ public class PjController {
 		int optionsPjNo=optionsDto.getOptionsPjNo();
 		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
 		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+
 		return "redirect:/pj/orderComplete";
 	};
 	

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -86,6 +87,18 @@ public class AddressDaoImpl implements AddressDao {
 		}	
 	};
 
-
+	@Override
+	public List<AddressDto> selectList(int addressMemNo) {
+		String sql="select*from address where address_mem_no=? order by address_no";
+		Object[] param= {addressMemNo};
+		return jdbcTemplate.query(sql,mapper,param);
+	}
+	
+	@Override
+	public int count(int addressMemNo) {
+		String sql="select count(*) from address where address_mem_no=?";
+		Object[] param= {addressMemNo};
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
 }
 

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<c:set var="OptionsDto" items="${OptionsDto}"></c:set>
-<c:set var="PjDto" items="${PjDto}"></c:set>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
+
 
 <!DOCTYPE html>
 <html>
@@ -22,18 +23,28 @@
 
 
     <div>
-        <h2>배송지 선택</h2>
-        <select>
-            <option></option>
-        </select>
         
+        <h2>배송지 선택</h2>
+        
+        ${AddressDto}
+        <select>
+            <c:forEach var="AddressDto" items="${AddressDto}">
+           <option>${AddressDto}</option>
+        </c:forEach>
+        </select>
+
     </div>
 
 
+    
 
 
 
+    <!--체크박스선택시에만보이게해야함-->
     <form method ="post">
+        <div>
+            <h2>배송지 입력</h2>
+        </div>
         <div>
         <label>해당 회원 번호
             <input name="addressMemNo" value="${sessionScope.loginNo}" > 
