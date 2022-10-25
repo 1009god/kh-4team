@@ -33,6 +33,10 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String list(Model model,
 			@ModelAttribute(name="vo") BoardListSearchVO vo) {
+		//페이지 네비게이터를 위한 게시글 수를 구한다
+		int count = boardDao.count(vo);
+		vo.setCount(count);
+		
 		model.addAttribute("list", boardDao.selectList(vo));
 		return "board/list";
 	}
