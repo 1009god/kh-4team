@@ -21,6 +21,19 @@ public class DoranQTest {
 	
 //	@BeforeEach
 	
+
+	@Test
+	public void before() {
+		for(int i=1;i<=10;i++) {
+		dao.insert(DoranQDto.builder()
+							.doranQTitle("테스트"+i)
+							.doranQContent("테스트"+i)
+							.doranQType("취소문의")
+							.doranQProcessing("답변완료")
+							.build());
+		}
+	}
+
 //	@Test
 //	public void before() {
 //		for(int i=1;i<=10;i++) {
@@ -32,6 +45,7 @@ public class DoranQTest {
 //							.build());
 //		}
 //	}
+
 //	@Test
 //	public void test() {
 //		List<DoranQDto> list = dao.selectList();

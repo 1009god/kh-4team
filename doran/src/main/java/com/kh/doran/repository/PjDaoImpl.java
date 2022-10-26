@@ -227,6 +227,18 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
 
+
+
+	@Override
+	public void insert(PjDto pjDto) {//	1      2				3			4			5			6				7						8					9							   1 2 3 4 5 6 7 8
+		String sql ="insert into Pj(PJ_NO, PJ_SELLER_MEM_NO, PJ_CATEGORY, PJ_NAME, PJ_SUMMARY, PJ_TARGET_MONEY, PJ_FUNDING_START_DATE, PJ_FUNDING_END_DATE, PJ_END_DATE) values(PJ_SEQ.nextval,?,?,?,?,?,?,?,?)";
+		Object[] param = {pjDto.getPjSellerMemNo(),pjDto.getPjCategory(),pjDto.getPjName(),pjDto.getPjSummary(),pjDto.getPjTargetMoney(),pjDto.getPjFundingStartDate(),pjDto.getPjFundingEndDate(),pjDto.getPjEndDate()};
+		//							1					2						3				4 					5							6							7							8
+		jdbcTemplate.update(sql, param);
+		
+	}
+
+
 	//달성률 계산 위한 매퍼	
 			private RowMapper<OrdersCalVO> calMapper = new RowMapper<>() {
 				@Override
@@ -240,6 +252,7 @@ public class PjDaoImpl implements PjDao {
 							.build();
 		}
 	};
+
 	
 	@Override
 	public List<OrdersCalVO> achievementRate() {
