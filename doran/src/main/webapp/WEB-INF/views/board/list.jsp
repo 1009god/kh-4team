@@ -36,7 +36,11 @@
 				<a href="detail?boardPostNo=${boardDto.boardPostNo}">
 					${boardDto.boardTitle}
 				</a>
-					[${boardDto.boardReplyCnt}]
+				
+				<!-- 댓글 갯수 출력 -->
+				<c:if test="${boardDto.replyCount > 0}">
+					[${boardDto.replyCount}]
+				</c:if>
 			</td>
 			<td>${boardDto.boardMemNo }</td>
 			<td>
