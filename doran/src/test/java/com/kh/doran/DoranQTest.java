@@ -25,10 +25,10 @@ public class DoranQTest {
 	public void before() {
 		for(int i=1;i<=10;i++) {
 		dao.insert(DoranQDto.builder()
-							.DoranQTitle("테스트"+i)
-							.DoranQContent("테스트"+i)
-							.DoranQType("취소문의")
-							.DoranQProcessing("답변완료")
+							.doranQTitle("테스트"+i)
+							.doranQContent("테스트"+i)
+							.doranQType("취소문의")
+							.doranQProcessing("답변완료")
 							.build());
 		}
 	}

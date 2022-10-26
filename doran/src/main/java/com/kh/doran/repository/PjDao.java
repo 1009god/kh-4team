@@ -8,7 +8,7 @@ import com.kh.doran.vo.PjListSearchVO;
 
 public interface PjDao {
 	//C
-	
+	void insert(PjDto pjDto);
 	//R
 	PjDto selectOne(int pjNo); //프로젝트 1개의 정보 보기
 
