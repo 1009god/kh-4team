@@ -8,12 +8,26 @@
 <c:set var="today">
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
+<style>
+	 .table.table-slit {
+            border: 3px solid gray;
+            border-left: none;
+            border-right: none;
+        }
+        .table.table-slit > thead {
+            border-bottom: 2px solid gray;
+        }
+        .table.table-slit > tfoot {
+            border-top: 2px solid gray;
+        }
+</style>
 
 <!-- 테스트용 데이터 출력 -->
-<h3>${vo}</h3>
+<!-- <h3>${vo}</h3> -->
 
 
-<table border="1" width="800"">
+
+<table class="table table-slit">
 	<thead>
 	<tr>
 		<td align = "right" colspan="6">
