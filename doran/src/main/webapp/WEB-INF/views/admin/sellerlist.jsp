@@ -49,7 +49,7 @@
 				<c:forEach var="dto" items="${list}">
 				<tr>
 					<td>
-						 <a href="/admin/sellerdetail?memNo=${memdto.memNo}">
+						 <a href="/admin/sellerdetail?sellerMemNo=${dto.sellerMemNo}">
 							${dto.sellerMemNo}
 							</a>
 					</td>

@@ -10,7 +10,7 @@
 }
 </style>
 		<jsp:include page="/WEB-INF/views/template/adminheader.jsp">
-			<jsp:param value="${memdto.memNo} 판매자 정보" name="title" />
+			<jsp:param value="${sellerdto.memNo} 판매자 정보" name="title" />
 		</jsp:include>
 
 		
@@ -30,7 +30,7 @@
 							<tbody class="center">
 								<tr>
 									<td><img class="image image-circle image-shadow"
-										src="download?memNo=${memDto.memNo}" width="100"
+										src="download?memNo=${sellerDto.sellerMemNo}" width="100"
 										height="100"></td>
 								</tr>
 							
@@ -79,8 +79,8 @@
 						
 						<table class="table table-border">
 							<tr>
-								<th width="20%">닉네임</th>
-								<td>${memDto.memEmail}</td>
+								<th width="20%">판매자 번호</th>
+								<td>${dto.sellerMemNo}</td>
 							</tr>
 							<tr>
 								<th>은행</th>
