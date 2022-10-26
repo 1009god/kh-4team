@@ -66,6 +66,7 @@ public class BoardDaoImpl implements BoardDao{
 										.boardViewCnt(rs.getInt("board_view_cnt"))
 										.boardReplyCnt(rs.getInt("board_reply_cnt"))
 										.replyCount(rs.getInt("reply_count"))
+										.memNick(rs.getString("mem_nick"))
 									.build();
 			}
 		};
@@ -169,14 +170,13 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<BoardListVO> search(BoardListSearchVO vo) {
 		String sql = "select * from ("
-								+ "select rownum rn, TMP.* from ("
-									+ "select distinct B.*, "
-						    			+ "count(R.reply_no) over (partition by B.board_post_no) reply_count "
-						    		+ "from board B left outer join reply R on B.board_post_no = R.reply_board_post_no "
-						    		+ "where instr(#1, ?) > 0 "
-						    		+ "order by board_post_no desc "
-						    		+ ")TMP"
-						    		+ ") where rn between ? and ?";
+				+ "select rownum rn, TMP.* from (select board_post_no, mem_nick, reply_count "
+				+ "from board B "
+				+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
+				+ "(select distinct reply_board_post_no, count(R.reply_no) "
+				+ "over(partition by reply_board_post_no) reply_count "
+				+ "from reply R) on board_post_no = reply_board_post_no) "
+				+ "where instr(#1, ?) > 0 order by board_post_no desc) TMP where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
@@ -188,9 +188,12 @@ public class BoardDaoImpl implements BoardDao{
 	public List<BoardListVO> list(BoardListSearchVO vo) {
 		String sql = "select * from ( "
 							+ "select rownum rn, TMP.* from ( "
-							+ "select distinct B.*, "
-			    			+ "count(R.reply_no) over (partition by B.board_post_no) reply_count "
-			    			+ "from board B left outer join reply R on B.board_post_no = R.reply_board_post_no "
+							+ "select B.*, mem_nick, reply_count "
+									+ "from board B "
+									+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
+									+ "(select distinct reply_board_post_no, count(R.reply_no) "
+									+ "over(partition by reply_board_post_no) reply_count "
+									+ "from reply R) on board_post_no = reply_board_post_no "
 								+ "order by board_post_no desc "
 							+ ")TMP "
 						+ ") where rn between ? and ?";

@@ -14,5 +14,6 @@ public class BoardListVO {
 	private String boardTitle;
 	private Date boardWriteTime;
 	private int replyCount;
+	private String memNick;
 
 }

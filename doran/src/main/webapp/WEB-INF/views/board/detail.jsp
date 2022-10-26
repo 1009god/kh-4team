@@ -76,7 +76,7 @@
 		<tr class="view">
 			<td width="90%">
 			<!-- 작성자 -->
-			${replyDto.replyMemNo}
+			${replyDto.memNick}
 			<c:if test="${boardDto.boardMemNo == replyDto.replyMemNo}">
 			(작성자)
 			</c:if>

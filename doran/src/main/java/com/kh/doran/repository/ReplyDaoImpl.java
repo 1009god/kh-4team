@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.ReplyDto;
+import com.kh.doran.vo.ReplyListVO;
 
 @Repository
 public class ReplyDaoImpl implements ReplyDao {
@@ -20,7 +21,6 @@ public class ReplyDaoImpl implements ReplyDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	private RowMapper<ReplyDto> mapper = new RowMapper<ReplyDto>() {
-		
 		@Override
 		public ReplyDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return ReplyDto.builder()
@@ -29,6 +29,20 @@ public class ReplyDaoImpl implements ReplyDao {
 										.replyMemNo(rs.getInt("reply_mem_no"))
 										.replyContent(rs.getString("reply_content"))
 										.replyWriteTime(rs.getDate("reply_writetime"))
+									.build();
+		}
+	};
+	
+	private RowMapper<ReplyListVO> listMapper = new RowMapper<ReplyListVO>() {
+		@Override
+		public ReplyListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return ReplyListVO.builder()
+										.replyNo(rs.getInt("reply_no"))
+										.replyBoardPostNo(rs.getInt("reply_board_post_no"))
+										.replyMemNo(rs.getInt("reply_mem_no"))
+										.replyContent(rs.getString("reply_content"))
+										.replyWriteTime(rs.getDate("reply_writetime"))
+										.memNick(rs.getString("mem_nick"))			
 									.build();
 		}
 	};
@@ -46,10 +60,14 @@ public class ReplyDaoImpl implements ReplyDao {
 	}
 	
 	@Override
-	public List<ReplyDto> selectList(int replyBoardPostNo) {
-		String sql = "select * from reply where reply_board_post_no = ? order by reply_board_post_no asc";
+	public List<ReplyListVO> selectList(int replyBoardPostNo) {
+		String sql = "select R.*, M.mem_nick "
+				+ "from reply R left outer join "
+				+ "mem M on R.reply_mem_no = M.mem_no "
+						+ "where reply_board_post_no = ? "
+						+ "order by reply_board_post_no asc";
 		Object[] param = {replyBoardPostNo};
-		return jdbcTemplate.query(sql,  mapper, param);
+		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	
 	@Override

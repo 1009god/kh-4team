@@ -2,18 +2,15 @@ package com.kh.doran.vo;
 
 import java.sql.Date;
 
-import com.kh.doran.entity.BoardDto;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
 public class ReplyListVO {
-	private int boardPostNo, boardMemNo, boardViewCnt, boardReplyCnt;
-	private String boardTitle, boardContent;
-	private Date boardWriteTime;
+	private int replyNo, replyBoardPostNo, replyMemNo;
+	private String replyContent;
+	private Date replyWriteTime;
+	private String memNick;
 }

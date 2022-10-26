@@ -42,7 +42,7 @@
 					[${boardDto.replyCount}]
 				</c:if>
 			</td>
-			<td>${boardDto.boardMemNo }</td>
+			<td>${boardDto.memNick}</td>
 			<td>
 				<c:set var="current">
 					<fmt:formatDate value="${boardDto.boardWriteTime}" pattern="yyyy-MM-dd"/>
