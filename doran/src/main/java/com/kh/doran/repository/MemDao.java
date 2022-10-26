@@ -15,7 +15,8 @@ public interface MemDao {
 	
 //	boolean updateLoginTime(int memNo); 로그인 시간 구헌
 	
-	boolean editAccount(MemDto dto); // 수정-계정수정
+	boolean editAccountPw(MemDto dto); // 수정-계정수정
+	boolean editAccountTel(MemDto dto); // 수정-계정수정
 	
 
 

@@ -18,6 +18,12 @@
         ${OptionsDto.optionsNo}
         ${OptionsDto.optionsName}
         ${OptionsDto.optionsPrice}
+        
+        <input type="hidden" name="ordersOptionsNo" value="${OptionsDto.optionsNo}">
+        <input type="hidden" name="ordersPayDate" value="${PjDto.pjFundingEndDate}">
+        <input type="text" name="ordersMessage" placeholder="배달시 요청사항(예: 경비실에 맡겨주세요)">
+        <input type="hidden" name="ordersDeliveryPay" value="${OptionsDto.optionsDeliveryPrice}">
+        
     </div>
 
 
@@ -27,9 +33,9 @@
         <h2>배송지 선택</h2>
         
         ${AddressDto}
-        <select>
+        <select name="ordersAddressNo">
             <c:forEach var="AddressDto" items="${AddressDto}">
-           <option>${AddressDto}</option>
+           <option value="${AddressDto.addressNo}">${AddressDto}</option>
         </c:forEach>
         </select>
 

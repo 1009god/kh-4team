@@ -23,6 +23,7 @@ import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.OptionsDto;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
+import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
 import com.kh.doran.vo.PjListSearchVO;
 
@@ -46,6 +47,9 @@ public class PjController {
 	
 	@Autowired
 	private AddressDao addressDao;
+	
+	@Autowired
+	private OrdersDao ordersDao;
 
 	
 	@GetMapping("/detail")
@@ -112,7 +116,7 @@ public class PjController {
 		int optionsPjNo=optionsDto.getOptionsPjNo();
 		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
 		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
-
+		ordersDao.insert(ordersDto);//주문 작성
 		return "redirect:/pj/orderComplete";
 	};
 	

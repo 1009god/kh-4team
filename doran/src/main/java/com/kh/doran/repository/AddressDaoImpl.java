@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AddressDto;
+import com.kh.doran.entity.MemDto;
 
 
 @Repository
@@ -26,27 +27,8 @@ public class AddressDaoImpl implements AddressDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Override
-	public void insert(AddressDto addressDto) {
-		String sql = "insert into address values (address_seq.nextval, ?, ?, ?, ?, ?, ?)";
-		Object[] param = {
-				addressDto.getAddressMemNo(), 
-				addressDto.getAddressName(),
-				addressDto.getAddressTel(),
-				addressDto.getAddressPost(),
-				addressDto.getAddressBasic(),
-				addressDto.getAddressDetail()
-				//sql 회원번호 부러와서 입력 어케??
-		};
-		jdbcTemplate.update(sql, param);
-	}
 	
-	
-//	@Override
-//	public void insert(MemDto memDto) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+
 
 	
 	private RowMapper<AddressDto> mapper=new RowMapper<>() {
@@ -87,6 +69,7 @@ public class AddressDaoImpl implements AddressDao {
 		}	
 	};
 
+
 	@Override
 	public List<AddressDto> selectList(int addressMemNo) {
 		String sql="select*from address where address_mem_no=? order by address_no";
@@ -100,5 +83,76 @@ public class AddressDaoImpl implements AddressDao {
 		Object[] param= {addressMemNo};
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
+
+	//배송지 등록
+	@Override
+	public void insert(AddressDto addressDto) {
+		String sql = "insert into address values (address_seq.nextval, ?, ?, ?, ?, ?, ?)";
+		Object[] param = {
+				addressDto.getAddressMemNo(), 
+				addressDto.getAddressName(),
+				addressDto.getAddressTel(),
+				addressDto.getAddressPost(),
+				addressDto.getAddressBasic(),
+				addressDto.getAddressDetail()				
+		};		
+		jdbcTemplate.update(sql, param);
+	}
+	
+	//배송지 목록
+	@Override
+	public List<AddressDto> selectList() {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+					+ "select * from address order by address_no desc"
+				+ ")TMP"
+			+ ") where rn between 1 and 5";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	//배송지 삭제
+	@Override
+	public boolean delete(int addressNo) {
+		String sql = "delete address where address_no = ?";
+		Object[] param = {addressNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+
+	
+	//배송지 selectOne
+	@Override
+	public AddressDto selectOne(int addressNo) {
+		String sql = "select * from address where address_no = ?";
+		Object[] param = {addressNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+
+	
+	//배송지 수정
+	@Override
+	public boolean update(AddressDto addressDto) {
+		String sql = "update address set "
+					+ "address_name = ?, "
+					+ "address_post = ?, "
+					+ "address_basic = ?, "
+					+ "address_detail = ?, "
+					+ "address_tel = ? "
+				+ "where "
+					+ "address_no = ?";
+		Object[] param = {			
+				addressDto.getAddressName(),
+				addressDto.getAddressPost(),
+				addressDto.getAddressBasic(),
+				addressDto.getAddressDetail(),				
+				addressDto.getAddressTel(),
+				addressDto.getAddressNo()
+			};		
+		return jdbcTemplate.update(sql, param) > 0 ;
+	}
+	
+
+
+
+
 }
 

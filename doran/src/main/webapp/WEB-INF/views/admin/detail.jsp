@@ -10,14 +10,14 @@
 }
 </style>
 		<jsp:include page="/WEB-INF/views/template/adminheader.jsp">
-			<jsp:param value="${memDto.memEmail} 회원 정보" name="title" />
+			<jsp:param value="${memDto.memNo} 회원 정보" name="title" />
 		</jsp:include>
 
 		
 
 <div class="container-600 mt-40 mb-40">
 	<div class="row left">
-		<h1 style="padding-left: 20px">${memDto.memEmail}회원 정보</h1>
+		<h1 style="padding-left: 20px">${memDto.memNo}회원 정보</h1>
 	</div>
 
 	<div class="row center">
@@ -30,7 +30,7 @@
 							<tbody class="center">
 								<tr>
 									<td><img class="image image-circle image-shadow"
-										src="download?membEmail=${memDto.memNo}" width="100"
+										src="download?memNo=${memDto.memNo}" width="100"
 										height="100"></td>
 								</tr>
 							
@@ -54,24 +54,24 @@
 						<table class="table table-border">
 							<tr>
 								<th width="20%">아이디</th>
-								<td>${dto.memEmail}</td>
+								<td>${memDto.memEmail}</td>
 							</tr>
 							<tr>
 								<th>번호</th>
-								<td>${dto.memNo}</td>
+								<td>${memDto.memNo}</td>
 							</tr>
 							<tr>
 								<th>닉네임</th>
-								<td>${dto.memNick}</td>
+								<td>${memDto.memNick}</td>
 							</tr>
 							<tr>
 								<th>전화번호</th>
-								<td>${dto.memTel}</td>
+								<td>${memDto.memTel}</td>
 							</tr>
 							
 							<tr>
 								<th>가입일시</th>
-								<td><fmt:formatDate value="${dto.memJoinDate}"
+								<td><fmt:formatDate value="${memDto.memJoinDate}"
 										pattern="y년 M월 d일 E a h시 m분 s초" /></td>
 							</tr>
 							

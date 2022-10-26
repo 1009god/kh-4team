@@ -60,11 +60,19 @@ public class OrdersDaoImpl implements OrdersDao{
 		}
 	};
 
-//	@Override
-//	public void insert(OrdersDto ordersDto) {
-//		String sql=""
-//		
-//	}
+	@Override
+	public void insert(OrdersDto ordersDto) {
+		String sql="insert into orders(orders_no, orders_mem_no, orders_options_no, orders_date, orders_cancel_date, orders_message, "
+				+ "orders_pay_date, orders_delivery_pay, orders_address_no) "
+				+ "values(orders_seq.nextval, ?, ?, sysdate, null, ?, ?, ?, ?)";
+		Object[] param= {ordersDto.getOrdersMemNo(),
+									ordersDto.getOrdersOptionsNo(),
+									ordersDto.getOrdersMessage(),
+									ordersDto.getOrdersPayDate(),
+									ordersDto.getOrdersDeliveryPay(),
+									ordersDto.getOrdersAddressNo()};
+		jdbcTemplate.update(sql, param);
+	}
 
 	
 }

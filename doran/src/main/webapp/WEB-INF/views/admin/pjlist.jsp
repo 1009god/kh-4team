@@ -6,14 +6,15 @@
 	<jsp:param value="프로젝트 목록" name="title"/>
 </jsp:include>
 
+
 <div class="container-700 mt-40 mb-50">
 	<!-- 제목 -->
-	<div class="row left">
-		<h1>프로젝트 리스트</h1>
+	<div class="row center">
+		<h3>프로젝트 리스트</h3>
 	</div>
 	
 	<!-- 목록 출력 -->
-	<div class="row">
+	<div class="row center">
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr>
@@ -27,7 +28,7 @@
 					
 				</tr>
 			</thead>
-			<tbody align="center">
+			<tbody>
 				<c:forEach var="dto" items="${list}">
 				<tr>
 			    	<td>${dto.pjNo}</td> 
@@ -54,25 +55,22 @@
 		</table>
 	</div>
 
-	<div class="row">
-		<ul class="pagination pagination-small">
-			<li><a href="#">&laquo;</a></li>
-			<li><a href="#">&lt;</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">6</a></li>
-			<li><a href="#">7</a></li>
-			<li><a href="#">8</a></li>
-			<li><a href="#">9</a></li>
-			<li><a href="#">10</a></li>
-			<li><a href="#">&gt;</a></li>
-			<li><a href="#">&raquo;</a></li>
-		</ul>
-	</div>
-	
-</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
     
 <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>

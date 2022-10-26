@@ -9,10 +9,12 @@
 <body>
  셀러가입 페이지
  
- <form action="sellerjoin" method="post">
+ <form action="sellerjoin" method="post" enctype="multipart/form-data">
  <input type="hidden" name="sellerMemNo" value="${sessionScope.loginNo}"> <br>  <!--  여기에 로그인한 회원의 회원 번호를-->
  <input type="text" name="sellerBank" placeholder="등록하실 은행" required> <br>
  <input type="text" name="sellerAccount" placeholder="계좌번호" required> <br>
+ 첨부파일(사업자등록)<input type="file" name="files" multiple accept=".jpg,.png">
+ 
  <button type="submit">판매자 가입 신청</button>
  </form>
 약관, 버튼 잠금 추가 예정

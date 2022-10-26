@@ -29,7 +29,7 @@
 .container-1100 { width:1100px; margin:0 auto; }
 .container-1150 { width:1150px; margin:0 auto; }
 .container-1200 { width:1200px; margin:0 auto; }
-.container-1400 {width:1400px; margin:0 auto;} /*전체 홈페이지 컨테이너*/
+.container-1400 { width:1400px; margin:0 auto; }
 
 /*
     row는 container 내부에 배치될 도구들이 위치할 자리에 해당한다
@@ -38,6 +38,15 @@
 .row {
     margin: 10px 0px;
 }
+.row1 {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
 
 /*
     row 내부에 위치하는 도구들의 폭을 설정
@@ -187,9 +196,9 @@ textarea.input.fix-size {
     - 테이블은 기본디자인이 너무 많아서 디자인하기 까다로운 태그 중 하나
 */
 .table {
-    border-collapse: collapse;/*테두리 병합*/
-    width:100%;
-    font-size: 16px;
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
 }
 /* 
     방법 1 : .table 안에 있는 모든 th와 모든 td를 선택(후손선택자) 
@@ -438,10 +447,13 @@ ul.pagination.pagination-small {
 
 /* (7) */
 .dropdown-menu {
-    font-size: 20px;
+    font-size: 15px;
+    background-color: #D8BFD8;
 }
+
 .dropdown-menu li {
     padding: 0.5em;
+    background-color: #D8BFD8;
 }
 .dropdown-menu a {
     display: block;
@@ -452,24 +464,25 @@ ul.pagination.pagination-small {
 }
 .dropdown-menu ul {
     width:100%;
-    background-color: #636e72;
+    background-color: #D8BFD8;
 }
 
 /* (8) */
 .dropdown-menu li:hover {
-    background-color: #2d3436;
+    background-color: #FFE4E1;
 }
 .dropdown-menu li:hover > a {
-    color:#dfe6e9;
+    color:#D3D3D3;
 }
 
 .dropdown-menu {
-    background-color: #636e72;
+    background-color: #D8BFD8;
 }
 
 /* (9) */
 .dropdown-menu {
     position: relative;
+    background-color: #D8BFD8;
 }
 .dropdown-menu > .right-menu {
     position: absolute;
@@ -481,7 +494,8 @@ ul.pagination.pagination-small {
 .dropdown-menu li {
     position: relative;
 }
-.dropdown-menu > li > ul ul {
+.dropdown-menu > li > ul ul
+ {
     position: absolute;
     top:0;
     left:100%;
@@ -527,4 +541,96 @@ ul.pagination.pagination-small {
 }
 .float-right {
     float: right;
+}
+
+/* 황태현이 추가한 것 필요하면 사용할 것 */
+.pagination {
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: #0056b3;
+  text-decoration: none;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
+
+.page-link:focus {
+  z-index: 3;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.page-item:first-child .page-link {
+  margin-left: 0;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:last-child .page-link {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+.pagination-lg .page-link {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.pagination-lg .page-item:first-child .page-link {
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+}
+
+.pagination-lg .page-item:last-child .page-link {
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.pagination-sm .page-link {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.pagination-sm .page-item:first-child .page-link {
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+
+.pagination-sm .page-item:last-child .page-link {
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
 }

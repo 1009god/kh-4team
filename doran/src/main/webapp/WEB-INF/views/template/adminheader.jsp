@@ -25,6 +25,7 @@
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/commons.css">
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
+<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"> -->
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
@@ -71,7 +72,7 @@
 		<div class="float-container">
 			<!-- 관리자 메뉴 추가 -->
 			<aside>
-				<div class="container-200">
+				<div class="container-400">
 					<div class="row">
 						<h2>관리자메뉴</h2>
 					</div>

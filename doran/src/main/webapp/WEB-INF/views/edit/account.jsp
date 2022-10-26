@@ -10,7 +10,7 @@
 <h1>계정관련 수정페이지</h1>
 
 
- <form method="post">
+ 
 	<div class="row">
 		
 		<input type="hidden" name="memNo" value="${memDto.memNo}" > 
@@ -19,22 +19,25 @@
 			<label>비밀번호</label>
 			<input type="text" name="memPw" value="${memDto.memPw}" required autocomplete="off">
 		</div>
+		<div class="row center">	
+			<button type="button" ><a href="/edit/account_change_pw">수정</a></button>	
+		</div>
 		<div>
 			<label>전화번호</label>
 			<input type="text" name="memTel" value="${memDto.memTel}" required autocomplete="off">
 		</div>
+		<div class="row center">	
+			<button type="button" ><a href="/edit/account_change_tel">수정</a></button>	
+		</div>
 		
 	</div>
 	
-	<div class="row center">	
-		<button type="submit" >수정</button>	
-	</div>
 	
-</form>
+
 
 <div>
  회원 탈퇴
-<button type="button" onclick="/mypage/goodbye">탈퇴</button>
+<button type="button" ><a href="/mypage/goodbye_content">탈퇴</a></button>
  
 </div>
 
