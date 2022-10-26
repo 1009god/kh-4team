@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class SupportPjVo {
+public class SupportPjVO {
 
-	private int memNo;
-	private String pjCategory,pjName, pjSummary;
+	private int memNo, optionsPjNo;
+	private String pjCategory,pjName;
 }

@@ -1,6 +1,10 @@
 package com.kh.doran.repository;
 
+import java.util.List;
+
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.entity.PjDto;
+import com.kh.doran.vo.SupportPjVO;
 
 public interface MemDao {
 	void insert(MemDto memDto);
@@ -17,6 +21,7 @@ public interface MemDao {
 	
 	boolean editAccountPw(MemDto dto); // 수정-계정수정
 	boolean editAccountTel(MemDto dto); // 수정-계정수정
+	
 	
 
 

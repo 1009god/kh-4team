@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
+import com.kh.doran.vo.SupportPjVO;
 
 @Repository
 public class PjDaoImpl implements PjDao {
@@ -253,6 +254,27 @@ public class PjDaoImpl implements PjDao {
 			    + "group by op.options_pj_no, pj_target_money,pj_no";
 		return jdbcTemplate.query(sql,calMapper);
 	}
+
+	
+//	//support맵퍼
+//	private RowMapper<SupportPjVO> supportMapper = new RowMapper<SupportPjVO>() {
+//		
+//		@Override
+//		public SupportPjVO mapRow(ResultSet rs, int rowNum) throws SQLException {			
+//			return SupportPjVO.builder().memNo(rs.getInt("mem_no"))
+//					.optionsPjNo(rs.getInt("options_pj_no"))
+//					.pjCategory(rs.getString(""));
+//		}
+//	};
+	
+
+//	@Override
+//	public List<SupportPjVO> supportList() {
+//		String sql ="select options_pj_no, mem.mem_no from options inner join orders on options_no=orders_options_no "
+//				+ "inner join mem on mem.mem_no = orders.orders_mem_no";
+//				
+//		return jdbcTemplate.query(sql,supportMapper);
+//	}
 
 	
 	
