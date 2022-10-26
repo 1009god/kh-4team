@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.doran.entity.LikesDto;
+import com.kh.doran.entity.OptionsDto;
 import com.kh.doran.entity.OrdersDto;
 import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.LikesDao;
@@ -25,6 +27,7 @@ import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
+import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
 
 @Controller
@@ -155,8 +158,10 @@ public class PjController {
 		vo.setCount(count);
 	
 		model.addAttribute("list",pjDao.selectList(vo));
+		model.addAttribute("amountCalList", pjDao.achievementRate());
 		return "pj/list";
 	};
+	
 	
 
 }
