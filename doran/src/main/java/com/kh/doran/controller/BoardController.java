@@ -165,6 +165,16 @@ public class BoardController {
 		attr.addAttribute("boardPostNo", replyBoardPostNo);
 		return "redirect:/board/detail";
 	}
+	
+	@PostMapping("/reply/edit")
+	public String replyEdit(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr) {
+		replyDao.update(replyDto);
+		attr.addAttribute("boardPostNo", replyDto.getReplyBoardPostNo());
+		return "redirect:/board/detail";
+		
+	}
 }
 		
 
