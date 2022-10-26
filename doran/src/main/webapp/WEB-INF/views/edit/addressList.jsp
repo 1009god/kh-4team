@@ -27,6 +27,8 @@ border:solid;
 <c:forEach var= "dto" items = "${list}"> <!-- 컨트롤러에서 넘어온 list -->
 
 <div class="border">
+<button><a href="address_delete?addressNo=${dto.addressNo}">삭제</a></button>
+<button><a href="address_change?addressNo=${dto.addressNo}">수정</a></button>
 ${dto.addressNo}
 	<div>
 		${dto.addressName}

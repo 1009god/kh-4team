@@ -15,7 +15,4 @@ public class BoardDto {
 	private int boardPostNo, boardMemNo, boardViewCnt, boardReplyCnt;
 	private String boardTitle, boardContent;
 	private Date boardWriteTime;
-
-	
-
 }

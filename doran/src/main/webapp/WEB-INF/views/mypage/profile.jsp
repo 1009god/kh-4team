@@ -8,36 +8,65 @@
 
 
 <%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
+<style>
+
+.mypage_menu > li {
+	float: left;
+	line-height: 3em;             
+	padding-left: 20px;
+	 list-style: none;	 
+}
+
+.mypage_menu > li >a {
+	color: black;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+.mypage_menu > li > a:hover {
+	 color: #0072b2;
+}
 
 
 
-<h1>my page</h1>
+
+</style>
+
+
+
 
 		
-<div class="container-800">
-	<div class="row">
-		<img src="https://w7.pngwing.com/pngs/987/118/png-transparent-computer-icons-login-user-profile-others-computer-logo-desktop-wallpaper-thumbnail.png" width="100" height="100">
-		<h1 style="padding-left:20px">${memDto.memNo} 회원 정보</h1>
-		<a href="/edit/profile"><button>수정</button></a>
-	</div>
-	<div class="row">
-	${memDto.memNo} 회원 번호
-	</div>
-	<div class="row">
-	${memDto.memNick} 회원 닉네임	
-	</div>
-	<div class="row">
-	${memDto.memTel} 회원 번호
-	</div>	
-	<div class="row">
-	${memDto.memJoinDate} 회원 가입일
-	</div>	
+<div class="container-1400">
 
+	<div>
+		<img src="https://w7.pngwing.com/pngs/987/118/png-transparent-computer-icons-login-user-profile-others-computer-logo-desktop-wallpaper-thumbnail.png" width="100px" height="100px">
+		<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span>
+		<a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		
+		<span>${memDto.memJoinDate} 회원 가입일</span>
+		
+	</div>
+	
+	<ul class="mypage_menu">                             
+     	 <li><a href="/mypage/created">올린 프로젝트</a></li>
+         <li><a href="/mypage/backed">후원한 프로젝트</a></li>
+    </ul> 
+    
 </div>
+
+     <hr style="border:1px color= silver;" width="100%">          
+                       
+<div>
+</div>	
+	
+	
+
+
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

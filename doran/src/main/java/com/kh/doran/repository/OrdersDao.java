@@ -1,14 +1,11 @@
 package com.kh.doran.repository;
 
-import java.util.List;
-
-import com.kh.doran.vo.OrdersCalVO;
+import com.kh.doran.entity.OrdersDto;
 
 public interface OrdersDao {
 	
-//	void insert(OrdersDto ordersDto);
-	
 
-	
+	void insert(OrdersDto ordersDto);
+
 
 }

@@ -15,8 +15,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.doran.entity.LikesDto;
 import com.kh.doran.entity.OptionsDto;
 import com.kh.doran.entity.OrdersDto;
+import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.MemDao;
+import com.kh.doran.entity.AddressDto;
+import com.kh.doran.entity.LikesDto;
+import com.kh.doran.entity.PjDto;
+import com.kh.doran.entity.MemDto;
+import com.kh.doran.entity.OptionsDto;
+import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
@@ -42,11 +49,15 @@ public class PjController {
 	private MemDao memDao;
 	
 	@Autowired
-	private OrdersDao ordersDao;
 	
 	
 	private OrdersCalVO ordersCalVo;
 
+
+	private AddressDao addressDao;
+	
+	@Autowired
+	private OrdersDao ordersDao;
 
 	
 	@GetMapping("/detail")
@@ -81,20 +92,39 @@ public class PjController {
 	};
 	
 	@GetMapping("/order")
-	public String order() {
+	public String order(@RequestParam int optionsNo, HttpSession session, Model model) {
+		Integer loginNo=(Integer) session.getAttribute("loginNo");
+		if(loginNo==null) {
+			return "redirect:/mem/login";
+		}
+		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
+		int pjNo=optionsDto.getOptionsPjNo();
+		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+		model.addAttribute("PjDto", pjDao.selectOne(pjNo));
+
+		//현재 접속중인 계정이 등록해둔 배송지 목록을 저장해서 넘김
+		int loginNo2=(int) session.getAttribute("loginNo");
+		model.addAttribute("AddressDto",addressDao.selectList(loginNo2));
+		
 		
 		return "pj/order";
 	};
 	
+	
 	@PostMapping("/order")
-	public String order(@ModelAttribute OrdersDto ordersDto,
-			@RequestParam int optionsNo, Model model, HttpSession session, RedirectAttributes attr) {
-		int loginNo=(int) session.getAttribute("loginNo");
-		attr.addAttribute("memNo", loginNo);
+	public String order(@ModelAttribute OrdersDto ordersDto, @ModelAttribute AddressDto addressDto,
+			@RequestParam int optionsNo, Model model, HttpSession session) {
+		Integer loginNo=(Integer) session.getAttribute("loginNo");
+		if(loginNo==null) {
+			return "redirect:/mem/login";
+		}
+		int loginNo2=(int) session.getAttribute("loginNo");
+		model.addAttribute("memNo", loginNo2);
 		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
 		int optionsPjNo=optionsDto.getOptionsPjNo();
-		attr.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
-		attr.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
+		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+		ordersDao.insert(ordersDto);//주문 작성
 		return "redirect:/pj/orderComplete";
 	};
 	

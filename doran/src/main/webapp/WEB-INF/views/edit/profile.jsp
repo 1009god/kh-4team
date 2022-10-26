@@ -24,7 +24,7 @@
  <a href="/edit/address_list">배송지</a>
  
  
- 
+ <div>프로필 이미지 수정</div>
  <form method="post">
 	<div class="row">
 		<label>닉네임</label>

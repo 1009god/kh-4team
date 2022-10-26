@@ -72,7 +72,7 @@
 		<div class="float-container">
 			<!-- 관리자 메뉴 추가 -->
 			<aside>
-				<div class="container-200">
+				<div class="container-400">
 					<div class="row">
 						<h2>관리자메뉴</h2>
 					</div>

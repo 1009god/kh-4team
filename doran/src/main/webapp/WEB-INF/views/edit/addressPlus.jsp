@@ -7,13 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>배송지 수정페이지</h1>
-
-<h2>등록된 배송지</h2>
-
-(배송지목록 출력)
-
-<hr>
 
 <h2>배송지 추가</h2>
 <form method ="post">

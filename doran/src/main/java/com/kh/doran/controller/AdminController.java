@@ -66,10 +66,10 @@ public class AdminController {
 		boolean passwordMatch=
 				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
-			session.setAttribute("loginNo",inputDto.getAdminEmail());
-		
-			adminDao.updateLoginTime(inputDto.getAdminEmail());
-			return "redirect:/";
+			session.setAttribute("loginId",inputDto.getAdminEmail());
+			session.setAttribute("loginNo", findDto.getAdminNo()); 
+//			adminDao.updateLoginTime(inputDto.getAdminEmail());
+			return "redirect:/admin";
 		}
 		else {
 			return "redirect:login?error";
@@ -78,9 +78,10 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
+		session.removeAttribute("loginId");
 		session.removeAttribute("loginNo");
 		
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
 ////	조회 기능
@@ -109,14 +110,14 @@ public class AdminController {
 	@GetMapping("/detail")
 	public String detail(Model model,
 						@RequestParam int memNo) {
-		MemDto memDto=adminDao.selectOne(memNo);
-		model.addAttribute("dto",memDto);
+		MemDto memDto=adminDao.selectOne1(memNo);
+		model.addAttribute("memDto",memDto);
 		return "admin/detail";
 	}
 
 	@GetMapping("/change")
 	public String change(Model model,@RequestParam int memNo) {
-		model.addAttribute("memDto",memDao.selectOne(memNo));
+		model.addAttribute("memDto",adminDao.selectOne1(memNo));
 		return "admin/change";
 
 	}
@@ -126,17 +127,28 @@ public class AdminController {
 	public String change(@ModelAttribute MemDto memDto,RedirectAttributes attr){
 		boolean result = adminDao.update(memDto);
 		if(result) {
-			attr.addAttribute("memEmail",memDto.getMemEmail());	
-			return "redirect:detail?memno="+memDto.getMemNo();
+			attr.addAttribute("memNo",memDto.getMemNo());	
+			return "redirect:admin/detail";
 			}
 		else {
-			return "redirect:change_fail";
+			return "redirect:admin/change_fail";
 		}
 	}
-	@GetMapping("/change_fail")
+	@GetMapping("/change-fail")
 	public String changeFail() {
 
 		return "admin/changeFail";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam int memNo) {
+		boolean result = adminDao.delete(memNo);
+		if(result) {
+			return "redirect:memlist";
+		}
+		else {
+			return "admin/editFail";
+		}
 	}
 
 	

@@ -57,7 +57,13 @@
 </html>
 
 
-
+    		
+    		
+    		<%--  
+    		사용자 세션과 관련된 정보 출력 (지울 예정)
+    			세션 ID : ${pageContext.session.getId() }<br>
+    			신규세션 : ${pageContext.session.isNew()}<br>
+    		--%>
 
 
 
