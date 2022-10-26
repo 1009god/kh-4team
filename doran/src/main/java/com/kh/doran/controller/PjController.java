@@ -49,11 +49,6 @@ public class PjController {
 	private MemDao memDao;
 	
 	@Autowired
-	
-	
-	private OrdersCalVO ordersCalVo;
-
-
 	private AddressDao addressDao;
 	
 	@Autowired
