@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
+import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
 
 @Repository
@@ -226,7 +227,43 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
 
+	//달성률 계산 위한 매퍼	
+			private RowMapper<OrdersCalVO> calMapper = new RowMapper<>() {
+				@Override
+				public OrdersCalVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+					return OrdersCalVO.builder()
+								.optionsPjNo(rs.getInt("options_pj_no"))
+								.pjNo(rs.getInt("pj_no"))
+								.priceTotal(rs.getInt("price_total"))
+								.pjTargetMoney(rs.getInt("pj_target_money"))
+								.achievementRate(rs.getInt("achievement_rate"))
+							.build();
+		}
+	};
 	
+//	@Override
+//	public List<OrdersCalVO> amountCal(){
+//		String sql = "select " 
+//			    + "op.options_pj_no, "
+//			   + "sum(options_price) price_total, pj_no,pj_target_money "
+//			+ " from options op inner join orders ord on op.options_no=ord.orders_options_no "
+//			    + " inner join pj on options_pj_no = pj_no group by op.options_pj_no, pj_no, pj_target_money";
+//		return jdbcTemplate.query(sql,calMapper);
+//	};
+	
+
+	@Override
+	public List<OrdersCalVO> achievementRate() {
+		String sql = "select " 
+					+ " op.options_pj_no, "
+					+" sum(options_price) price_total, "
+					+ "sum(options_price)/pj_target_money*100 achievement_rate, "
+					+ "pj_target_money, pj_no "
+			+ " from options op inner join orders ord on op.options_no=ord.orders_options_no" 
+			    	+ " inner join pj on options_pj_no = pj_no "
+			    + "group by op.options_pj_no, pj_target_money,pj_no";
+		return jdbcTemplate.query(sql,calMapper);
+	}
 
 	
 	
