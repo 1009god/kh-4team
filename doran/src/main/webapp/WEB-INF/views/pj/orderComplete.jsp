@@ -12,6 +12,7 @@
 </head>
 <body>
 
+    <h2>주문완료! 와 정말대단해~</h2>
     <a href="http://localhost:8888/mypage/profile">마이페이지로</a>
     <a href="http://localhost:8888/">메인페이지로</a>
 

@@ -105,18 +105,19 @@ public class PjController {
 	
 	@PostMapping("/order")
 	public String order(@ModelAttribute OrdersDto ordersDto, @ModelAttribute AddressDto addressDto,
-			@RequestParam int optionsNo, Model model, HttpSession session) {
+			@RequestParam int ordersOptionsNo, Model model, HttpSession session) {
 		Integer loginNo=(Integer) session.getAttribute("loginNo");
 		if(loginNo==null) {
 			return "redirect:/mem/login";
 		}
 		int loginNo2=(int) session.getAttribute("loginNo");
 		model.addAttribute("memNo", loginNo2);
-		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
+		OptionsDto optionsDto=optionsDao.selectOne(ordersOptionsNo);
 		int optionsPjNo=optionsDto.getOptionsPjNo();
 		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
-		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+		model.addAttribute("OptionsDto", optionsDao.selectOne(ordersOptionsNo));
 		ordersDao.insert(ordersDto);//주문 작성
+		
 		return "redirect:/pj/orderComplete";
 	};
 	
