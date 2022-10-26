@@ -117,7 +117,7 @@ public class PjController {
 		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
 		model.addAttribute("OptionsDto", optionsDao.selectOne(ordersOptionsNo));
 		ordersDao.insert(ordersDto);//주문 작성
-		
+		optionsDao.stockUpdate(ordersOptionsNo);//주문한 옵션의 재고를 1 깎음
 		return "redirect:/pj/orderComplete";
 	};
 	

@@ -9,6 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세</title>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+    
+    var stock=$("span.stock").text();
+    console.log(stock);
+
+
+</script>
 </head>
 <body>
 
@@ -41,11 +49,14 @@
             </tbody>
         </table>
 
+        <div class="selectOption">
         <c:forEach var="OptionsDto" items="${OptionsDto}">
-            <span><a href="selectCheck?optionsNo=${OptionsDto.optionsNo}">${OptionsDto.optionsName}</a></span>
+            <span><a class="choose" href="selectCheck?optionsNo=${OptionsDto.optionsNo}">${OptionsDto.optionsName}</a></span>
             <span>${OptionsDto.optionsPrice}</span>
-            <span>${OptionsDto.optionsStock}</span>
+            <span class="stock">${OptionsDto.optionsStock}</span>
         </c:forEach>
+         </div>
+
     </div>
 
 </body>
