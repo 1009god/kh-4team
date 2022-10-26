@@ -37,11 +37,8 @@ public interface PjDao {
 	
 	//카테고리별 데이터 갯수
 	int categoryCount(PjListSearchVO vo);
-
-	//주문 금액 계산
-//	List<OrdersCalVO> amountCal();
 	
-	//달성률 계산
+	//주문금액, 달성률 계산
 	List<OrdersCalVO> achievementRate();
 
 	

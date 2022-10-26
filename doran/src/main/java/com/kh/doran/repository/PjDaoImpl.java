@@ -241,17 +241,6 @@ public class PjDaoImpl implements PjDao {
 		}
 	};
 	
-//	@Override
-//	public List<OrdersCalVO> amountCal(){
-//		String sql = "select " 
-//			    + "op.options_pj_no, "
-//			   + "sum(options_price) price_total, pj_no,pj_target_money "
-//			+ " from options op inner join orders ord on op.options_no=ord.orders_options_no "
-//			    + " inner join pj on options_pj_no = pj_no group by op.options_pj_no, pj_no, pj_target_money";
-//		return jdbcTemplate.query(sql,calMapper);
-//	};
-	
-
 	@Override
 	public List<OrdersCalVO> achievementRate() {
 		String sql = "select " 
