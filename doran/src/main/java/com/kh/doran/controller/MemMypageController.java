@@ -41,8 +41,8 @@ public class MemMypageController {
 	     return "mypage/profile";
   }
   
-//회원 탈퇴!!
-	
+//회원 탈퇴!!	
+
 	@GetMapping("/goodbye_content") //회원 탈퇴 전 중요 내용
 	public String goodbyeContent() {
 		return "mypage/goodbyeContent";
@@ -78,6 +78,8 @@ public class MemMypageController {
 	public String goodbyeResult() {
 		return "mypage/goodbyeResult";
 	}
+	
+	
 	
 
 
