@@ -12,8 +12,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AdminDto;
+import com.kh.doran.entity.BoardDto;
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.vo.BoardListSearchVO;
+import com.kh.doran.vo.MemListSearchVO;
 import com.kh.doran.vo.MemListVO;
+import com.kh.doran.vo.PjListSearchVO;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -108,12 +112,41 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	}
 	
 	@Override
-	public List<MemDto>selectList(String type,String keyword){
-		String sql = "select * from mem where instr(#1,?)>0 order by #1 asc";
-		Object[]param= {keyword};
-		return jdbcTemplate.query(sql, mapper,param);
+	public List<MemDto> selectList(MemListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {//목록이라면
+			return list(vo);
+		}
 	}
 	
+	@Override
+	public List<MemDto> search(MemListSearchVO vo) {
+		String sql = "select * from ( "
+							+ "select rownum rn, TMP.* from ( "
+								+ "select * from mem "
+								+ "where instr(#1, ?) > 0 "
+								+ "order by mem_no desc "
+								+ ")TMP "
+								+ ") where rn between ? and ? ";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+			vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	@Override
+	public List<MemDto> list(MemListSearchVO vo) {
+		String sql = "select * from ( "
+							+ "select rownum rn, TMP.* from ( "
+								+ "select * from mem order by mem_no desc "
+							+ ")TMP "
+						+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 //회원 
 	private ResultSetExtractor<MemDto> extractor1 = new ResultSetExtractor<MemDto>() {
@@ -154,6 +187,27 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		String sql = "delete mem where mem_no=?";
 		Object[]param= {memNo};
 		return jdbcTemplate.update(sql,param)>0;
+	}
+	@Override
+	public int count(MemListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return searchCount(vo); //검색 카운트 구하는 메소드
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	@Override
+	public int listCount(MemListSearchVO vo) {
+		String sql = "select count(*) from mem";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	@Override
+	public int searchCount(MemListSearchVO vo) {
+		String sql = "select count(*) from mem where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
 	

@@ -11,8 +11,10 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.kh.doran.entity.PjDto;
+import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.SellerDto;
+import com.kh.doran.vo.MemListSearchVO;
+import com.kh.doran.vo.SellerListSearchVO;
 
 @Repository
 public class AdminSellerDaoImpl implements AdminSellerDao {
@@ -37,17 +39,45 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 		
 	@Override
 	public List<SellerDto> selectList() {
-		String sql = "select * from seller order by seller_no asc";
+		String sql = "select * from seller order by seller_mem_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 
 	@Override
-	public List<SellerDto> selectList(String type, String keyword) {
-		String sql = "select * from seller"
-					+ "where instr("+type+",?)>0"
-					+ "order by "+type+" asc";
-		Object[]param = {keyword};
-		return jdbcTemplate.query(sql, mapper,param);
+	public List<SellerDto> selectList(SellerListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {//목록이라면
+			return list(vo);
+		}
+	}
+	
+	@Override
+	public List<SellerDto> search(SellerListSearchVO vo) {
+		String sql = "select * from ( "
+							+ "select rownum rn, TMP.* from ( "
+								+ "select * from seller "
+								+ "where instr(#1, ?) > 0 "
+								+ "order by seller_mem_no desc "
+								+ ")TMP "
+								+ ") where rn between ? and ? ";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+			vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	@Override
+	public List<SellerDto> list(SellerListSearchVO vo) {
+		String sql = "select * from ( "
+							+ "select rownum rn, TMP.* from ( "
+								+ "select * from seller order by seller_mem_no desc "
+							+ ")TMP "
+						+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 
 	private ResultSetExtractor<SellerDto> extractor = new ResultSetExtractor<SellerDto>() {
@@ -70,16 +100,40 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 	
 	@Override
 	public SellerDto selectOne(int sellerNo) {
-		String sql = "select * from seller where seller_no=?";
+		String sql = "select * from seller where seller_mem_no=?";
 		Object[]param = {sellerNo};
 		return jdbcTemplate.query(sql, extractor,param);
 	}
 
 	@Override
 	public boolean delete(int sellerNo) {
-		String sql = "delete seller where seller_no=?";
+		String sql = "delete seller where seller_mem_no=?";
 		Object[]param= {sellerNo};
 		return jdbcTemplate.update(sql,param)>0;
+	}
+	
+	@Override
+	public int count(SellerListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return searchCount(vo); //검색 카운트 구하는 메소드
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	
+	@Override
+	public int listCount(SellerListSearchVO vo) {
+		String sql = "select count(*) from seller";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int searchCount(SellerListSearchVO vo) {
+		String sql = "select count(*) from seller where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 
 }
