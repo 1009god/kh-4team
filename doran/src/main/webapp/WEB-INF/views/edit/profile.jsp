@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>프로필 수정페이지</title>
-</head>
-<body>
 
+ <%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="메인페이지" name="title"/>
+</jsp:include>
 
 <h1>설정</h1>
 <%--	이미지 디비랑 연결 어케 하지 ???

@@ -79,7 +79,18 @@ public class MemMypageController {
 		return "mypage/goodbyeResult";
 	}
 	
+//올린 프로젝트 created
+	@GetMapping("/created")
+	public String created() {
+		return "mypage/created";
+	}
 	
+	
+//후원한 프로젝트 finished
+	@GetMapping("/supported")
+	public String supported() {
+		return "mypage/supported";
+	}
 	
 
 

@@ -37,9 +37,6 @@
 
 </style>
 
-
-
-
 		
 <div class="container-1400">
 
@@ -54,7 +51,7 @@
 	
 	<ul class="mypage_menu">                             
      	 <li><a href="/mypage/created">올린 프로젝트</a></li>
-         <li><a href="/mypage/backed">후원한 프로젝트</a></li>
+         <li><a href="/mypage/supported">후원한 프로젝트</a></li>
     </ul> 
     
 </div>

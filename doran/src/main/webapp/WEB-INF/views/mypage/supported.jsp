@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-마이페이지의 후원한 프로젝트
+마이페이지의 후원한 프로젝트 supported
 </body>
 </html>
