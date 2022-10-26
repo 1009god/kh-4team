@@ -19,19 +19,19 @@ public class DoranQTest {
 	@Autowired
 	private DoranQDao dao;
 	
-	@BeforeEach
+//	@BeforeEach
 	
-	@Test
-	public void before() {
-		for(int i=1;i<=10;i++) {
-		dao.insert(DoranQDto.builder()
-							.DoranQTitle("테스트"+i)
-							.DoranQContent("테스트"+i)
-							.DoranQType("취소문의")
-							.DoranQProcessing("답변완료")
-							.build());
-		}
-	}
+//	@Test
+//	public void before() {
+//		for(int i=1;i<=10;i++) {
+//		dao.insert(DoranQDto.builder()
+//							.DoranQTitle("테스트"+i)
+//							.DoranQContent("테스트"+i)
+//							.DoranQType("취소문의")
+//							.DoranQProcessing("답변완료")
+//							.build());
+//		}
+//	}
 //	@Test
 //	public void test() {
 //		List<DoranQDto> list = dao.selectList();
