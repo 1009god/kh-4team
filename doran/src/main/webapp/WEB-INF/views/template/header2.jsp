@@ -89,6 +89,10 @@
                     text-align: center;
                     text-decoration: none;
                 }
+                
+                #login_menu {
+                	border: 1px;
+                }
             </style>
         </head>
         <body>
@@ -102,12 +106,30 @@
                             <img src="/img/DoranMini.png" id="logo_img" width="170px" height="70px">
                         </div>
             
-                        <div id="top_menu">                            
-                            <a href="/mem/login">로그인</a> |
-                            <a href="/mem/join">가입</a>
-                        </div>
-                    </div>
-                </header>
+                        <div id="top_menu">
+                        
+                        	<c:choose>
+						        <c:when test = "${login}">
+						        	<button type="submit" class="btn btn-neutral" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+								</c:when>
+							</c:choose>               
+                        
+                      
+					          	<c:choose>
+					         		<c:when test = "${login}">
+							           <a class="dropdown-item" href="/mem/logout">로그아웃</a>							     
+						          </c:when>
+						          <c:otherwise>
+						          <button class="btn btn-neutral">
+			                            <a href="/mem/login">로그인</a> |
+			                            <a href="/mem/join">가입</a>		
+		                           </button>				          	  
+						          </c:otherwise>
+					      		</c:choose>
+                      
+					</div>					
+                 </div>                 
+              </header>
                         
                     <div class="container-1400">
                         <nav>

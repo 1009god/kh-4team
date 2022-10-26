@@ -16,7 +16,7 @@
             
             </ul>
                 <div style= "float: left;">
-                    <p class="text-center text-muted">도란도란(주) | 대표이사 김도란</p>
+                    <p class="text-center text-muted">도란도란(주) | 대표이사 야도란</p>
                     <p class="text-center text-muted">사업자 등록번호 555-55-55555</p>
                     <p class="text-center text-muted">서울특별시 영등포구 선유동 2로 57 이레빌딩 (구관) 19F, 20F</p>
                     <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
