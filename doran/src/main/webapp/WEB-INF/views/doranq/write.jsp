@@ -10,24 +10,23 @@
 		<tr>
 			<th>제목</th>
 			<td>
-				<input type="text" name="boardTitle" required>
+				<input type="text" name="doranQTitle" required>
 			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea name="doranQContent" rows="10" cols="60" required></textarea>
+				<textarea name="boardContent" rows="10" cols="60" required></textarea>
 			</td>
 		</tr>
 	</tbody>
 	<tfoot>
 		<tr>
 			<td align="right" colspan="2">
-				<a href = "/doran/list">목록으로</a>
+				<a href = "list">목록으로</a>
 				<button type="submit">등록하기</button>
 			</td>
 		</tr>
 	</tfoot>
 </table>
 </form>
-    

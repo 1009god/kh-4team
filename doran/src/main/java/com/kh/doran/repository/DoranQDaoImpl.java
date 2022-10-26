@@ -38,7 +38,7 @@ public class DoranQDaoImpl implements DoranQDao {
 		public DoranQDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return DoranQDto.builder()
 			.doranQNo(rs.getInt("doran_q_no"))
-			.dorqnQmemNo(rs.getInt("doran_q_mem_no"))
+			.doranQmemNo(rs.getInt("doran_q_mem_no"))
 			.doranQadminNo(rs.getInt("doran_q_admin_no"))
 			.doranQTitle(rs.getString("doran_q_title"))
 			.doranQContent(rs.getString("doran_q_content"))
@@ -73,7 +73,7 @@ private ResultSetExtractor<DoranQDto> extractor = new ResultSetExtractor<DoranQD
 			if(rs.next()) {
 				return DoranQDto.builder()
 						.doranQNo(rs.getInt("doran_q_no"))
-						.dorqnQmemNo(rs.getInt("doran_q_mem_no"))
+						.doranQmemNo(rs.getInt("doran_q_mem_no"))
 						.doranQadminNo(rs.getInt("doran_q_admin_no"))
 						.doranQTitle(rs.getString("doran_q_title"))
 						.doranQContent(rs.getString("doran_q_content"))
@@ -96,17 +96,23 @@ private ResultSetExtractor<DoranQDto> extractor = new ResultSetExtractor<DoranQD
 	}
 	@Override
 	public int insert2(DoranQDto doranQDto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	@Override
-	public boolean delete(int doranQNo) {
-		String sql = "delete doran_q where doran_q_no = ?";
-		Object[] param = {doranQNo};
-		return jdbcTemplate.update(sql,param) > 0;
-	}
+		//번호를 미리 생성한 뒤 등록하는 기능
+				String sql = "select doran_q_seq.nextval from dual";
+				int doranQNo = jdbcTemplate.queryForObject(sql, int.class);
+				
+				//등록 시퀀스 생성 xx
+				sql = "insert into doran_q("
+						+ "doran_q_no, doran_q_title, doran_q_content,"
+						+ "doran_q_type, doran_q_processing"
+						+ ") values(?, ?, ?, ?, ?)";
+			Object[] param= {doranQDto.getDoranQTitle(),
+					doranQDto.getDoranQContent(),doranQDto.getDoranQType(),
+					doranQDto.getDoranQProcessing()
+					};
+				jdbcTemplate.update(sql, param);
+				
+				return doranQNo;
+			}
 	
 	@Override
 	public boolean update(DoranQDto doranQDto) {
@@ -115,8 +121,16 @@ private ResultSetExtractor<DoranQDto> extractor = new ResultSetExtractor<DoranQD
 				doranQDto.getDoranQTitle(), doranQDto.getDoranQContent(), doranQDto.getDoranQType(),doranQDto.getDoranQNo()
 		};
 		
-	return jdbcTemplate.update(sql, param) > 0;
+		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
+	@Override
+	public boolean delete(int doranQNo) {
+		String sql = "delete doran_q where doran_q_no = ?";
+		Object[] param = {doranQNo};
+		return jdbcTemplate.update(sql,param) > 0;
+	}
+	
 
 	
 	@Override
@@ -163,10 +177,11 @@ private ResultSetExtractor<DoranQDto> extractor = new ResultSetExtractor<DoranQD
 	
 	@Override
 	public int searchCount(DoranQListSearchVO vo) {
-		String sql = "select count(*) from board where instr(#1, ?) > 0";
+		String sql = "select count(*) from doran_q where instr(#1, ?) > 0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
+
 
 }
