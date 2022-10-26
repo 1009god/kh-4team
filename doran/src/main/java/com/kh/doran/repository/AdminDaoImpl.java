@@ -12,12 +12,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AdminDto;
-import com.kh.doran.entity.BoardDto;
 import com.kh.doran.entity.MemDto;
-import com.kh.doran.vo.BoardListSearchVO;
+import com.kh.doran.vo.AdminMemListVO;
 import com.kh.doran.vo.MemListSearchVO;
-import com.kh.doran.vo.MemListVO;
-import com.kh.doran.vo.PjListSearchVO;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -93,26 +90,30 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		}
 	};
 
-	private RowMapper<MemListVO> listmapper = new RowMapper<MemListVO>() {
+	private RowMapper<AdminMemListVO> listmapper = new RowMapper<AdminMemListVO>() {
 		@Override
-		public MemListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return MemListVO.builder()
+		public AdminMemListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return AdminMemListVO.builder()
 					.memNo(rs.getInt("mem_no"))
-					.memEmail(rs.getString("mem_email"))					
-					.memNick(rs.getString("mem_nick"))	
-					.sellerCheck(rs.getString("seller_check"))
+					.memEmail(rs.getString("mem_email"))
+					.memPw(rs.getString("mem_pw"))
+					.memNick(rs.getString("mem_nick"))
+					.memTel(rs.getString("mem_tel"))
+					.memJoinDate(rs.getDate("mem_join_date"))
+					.memRoute(rs.getString("mem_route"))
+					.sellerCheck(rs.getString("seller_Check"))
 					.build();
 		}
 	};
 	
 	@Override
-	public List<MemDto>selectList(){
+	public List<MemDto> selectList(){
 		String sql = "select * from mem order by mem_no desc";
 		return jdbcTemplate.query(sql,mapper);
 	}
 	
 	@Override
-	public List<MemDto> selectList(MemListSearchVO vo) {
+	public List<AdminMemListVO> selectList(MemListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
 			return search(vo);
 		}
@@ -122,7 +123,7 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	}
 	
 	@Override
-	public List<MemDto> search(MemListSearchVO vo) {
+	public List<AdminMemListVO> search(MemListSearchVO vo) {
 		String sql = "select * from ( "
 							+ "select rownum rn, TMP.* from ( "
 								+ "select * from mem "
@@ -134,18 +135,18 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
 		};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listmapper, param);
 	}
 	
 	@Override
-	public List<MemDto> list(MemListSearchVO vo) {
+	public List<AdminMemListVO> list(MemListSearchVO vo) {
 		String sql = "select * from ( "
 							+ "select rownum rn, TMP.* from ( "
 								+ "select * from mem order by mem_no desc "
 							+ ")TMP "
 						+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listmapper, param);
 	}
 	
 //회원 

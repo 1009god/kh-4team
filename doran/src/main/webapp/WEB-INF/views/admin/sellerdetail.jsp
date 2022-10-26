@@ -51,7 +51,7 @@
 						</table>
 					</th>
 					<td>
-						<%-- <table class="table table-border">
+					<table class="table table-border">
 							<tr>
 								<th width="20%">아이디</th>
 								<td>${memDto.memEmail}</td>
@@ -75,7 +75,7 @@
 										pattern="y년 M월 d일 E a h시 m분 s초" /></td>
 							</tr>
 							
-						</table> --%>
+						</table>
 						
 						<table class="table table-border">
 							<tr>

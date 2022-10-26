@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.vo.AdminMemListVO;
 import com.kh.doran.vo.BoardListSearchVO;
 import com.kh.doran.vo.MemListSearchVO;
 import com.kh.doran.vo.PjListSearchVO;
@@ -19,9 +20,9 @@ public interface AdminDao {
 		//회원 테이블 
 		List<MemDto> selectList();
 		
-		List<MemDto> selectList(MemListSearchVO vo);
-		List<MemDto> list(MemListSearchVO vo);
-		List<MemDto> search(MemListSearchVO vo);
+		List<AdminMemListVO> selectList(MemListSearchVO vo);
+		List<AdminMemListVO> list(MemListSearchVO vo);
+		List<AdminMemListVO> search(MemListSearchVO vo);
 		
 		//수정,상세
 		boolean update(MemDto memDto);

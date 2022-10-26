@@ -11,9 +11,10 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.SellerDto;
-import com.kh.doran.vo.MemListSearchVO;
+import com.kh.doran.vo.AdminsellerDetailVO;
+import com.kh.doran.vo.AdminsellerListVO;
+import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.SellerListSearchVO;
 
 @Repository
@@ -36,15 +37,61 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 		}
 	
 	};
-		
+	
+	private RowMapper<AdminsellerListVO> listmapper = new RowMapper<AdminsellerListVO>() {
+		@Override
+		public AdminsellerListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return AdminsellerListVO.builder()
+					.memNick(rs.getString("mem_nick"))
+					.sellerMemNo(rs.getInt("sellerMemNo"))
+					.sellerRegistryDate(rs.getDate("seller_registry_date"))
+					.sellerBank(rs.getString("seller_bank"))
+					.sellerAccount(rs.getString("seller_account"))
+					.sellerCheck(rs.getString("seller_check"))	
+				.build();
+}
+};
+
 	@Override
 	public List<SellerDto> selectList() {
 		String sql = "select * from seller order by seller_mem_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
+	
+	
+	private ResultSetExtractor<AdminsellerDetailVO> detailExtractor = new ResultSetExtractor<AdminsellerDetailVO>() {	
+	@Override
+	public AdminsellerDetailVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+		if(rs.next()) {
+			return AdminsellerDetailVO.builder()
+					.sellerMemNo(rs.getInt("seller_mem_no"))
+					.memEmail(rs.getString("mem_email"))
+					.memPw(rs.getString("mem_pw"))
+					.memNick(rs.getString("mem_nick"))
+					.memTel(rs.getString("mem_tel"))
+					.memJoinDate(rs.getDate("mem_join_date"))
+					.memRoute(rs.getString("mem_route"))
+					.sellerRegistryDate(rs.getDate("seller_registry_date"))
+					.sellerBank(rs.getString("seller_back"))
+					.sellerAccount(rs.getString("seller_bank"))
+					.sellerCheck(rs.getString("seller_check"))
+					.build();
+		}
+		else {
+			return null;
+		}
+	}
+};
+//	아우터 sql구문 추가 select * from mem m join seller s on mem.mem_no = seller.seller_mem_no;
+	@Override
+	public AdminsellerDetailVO selectOne1(int boardPostNo) {
+		String sql = "";
+		Object[] param = {boardPostNo};
+		return jdbcTemplate.query(sql,  detailExtractor, param);
+}
 
 	@Override
-	public List<SellerDto> selectList(SellerListSearchVO vo) {
+	public List<AdminsellerListVO> selectList(SellerListSearchVO vo) {
 		if(vo.isSearch()) {//검색이라면
 			return search(vo);
 		}
@@ -54,7 +101,7 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 	}
 	
 	@Override
-	public List<SellerDto> search(SellerListSearchVO vo) {
+	public List<AdminsellerListVO> search(SellerListSearchVO vo) {
 		String sql = "select * from ( "
 							+ "select rownum rn, TMP.* from ( "
 								+ "select * from seller "
@@ -66,18 +113,18 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
 		};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listmapper, param);
 	}
 	
 	@Override
-	public List<SellerDto> list(SellerListSearchVO vo) {
+	public List<AdminsellerListVO> list(SellerListSearchVO vo) {
 		String sql = "select * from ( "
 							+ "select rownum rn, TMP.* from ( "
 								+ "select * from seller order by seller_mem_no desc "
 							+ ")TMP "
 						+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listmapper, param);
 	}
 
 	private ResultSetExtractor<SellerDto> extractor = new ResultSetExtractor<SellerDto>() {
@@ -135,5 +182,6 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
+
 
 }
