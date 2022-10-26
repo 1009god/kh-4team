@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.BoardDto;
+import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.BoardListSearchVO;
 import com.kh.doran.vo.BoardListVO;
 
@@ -71,6 +72,9 @@ public class BoardDaoImpl implements BoardDao{
 			}
 		};
 		
+
+		
+		
 		@Override
 		public List<BoardDto> selectList() {
 			String sql = "select * from board order by board_post_no desc";
@@ -108,12 +112,36 @@ public class BoardDaoImpl implements BoardDao{
 			}
 		}
 	};
+	
+	private ResultSetExtractor<BoardDetailVO> detailExtractor = new ResultSetExtractor<BoardDetailVO>() {
+		
+		@Override
+		public BoardDetailVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return BoardDetailVO.builder()
+						.boardPostNo(rs.getInt("board_post_no"))
+						.boardMemNo(rs.getInt("board_mem_no"))
+						.boardTitle(rs.getString("board_title"))
+						.boardContent(rs.getString("board_content"))
+						.boardWriteTime(rs.getDate("board_writetime"))
+						.boardViewCnt(rs.getInt("board_view_cnt"))
+						.boardReplyCnt(rs.getInt("board_reply_cnt"))
+						.memNick(rs.getString("mem_nick"))
+						.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
 
 	@Override
-	public BoardDto selectOne(int boardPostNo) {
-		String sql = "select * from board where board_post_no = ?";
+	public BoardDetailVO selectOne(int boardPostNo) {
+		String sql = "select "
+						+ "board.*, mem_nick "
+							+ "from board left outer join mem on board_mem_no = mem_no where board_post_no = ?";
 		Object[] param = {boardPostNo};
-		return jdbcTemplate.query(sql,  extractor, param);
+		return jdbcTemplate.query(sql,  detailExtractor, param);
 	}
 	
 	@Override
@@ -126,7 +154,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	
 	@Override
-	public BoardDto read(int boardPostNo) {
+	public BoardDetailVO read(int boardPostNo) {
 		this.updateReadcount(boardPostNo);
 		return this.selectOne(boardPostNo);
 	}

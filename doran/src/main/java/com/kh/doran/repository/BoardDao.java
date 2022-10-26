@@ -3,6 +3,7 @@ package com.kh.doran.repository;
 import java.util.List;
 
 import com.kh.doran.entity.BoardDto;
+import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.BoardListSearchVO;
 import com.kh.doran.vo.BoardListVO;
 
@@ -22,8 +23,8 @@ public interface BoardDao {
 	int searchCount(BoardListSearchVO vo);
 	int listCount(BoardListSearchVO vo);
 	
-	BoardDto selectOne(int boardPostNo);
-	BoardDto read(int boardPostNo); //조회수 증가까지
+	BoardDetailVO selectOne(int boardPostNo);
+	BoardDetailVO read(int boardPostNo); //조회수 증가까지
 	
 	boolean update(BoardDto boardDto);
 	boolean delete(int boardPostNo);
