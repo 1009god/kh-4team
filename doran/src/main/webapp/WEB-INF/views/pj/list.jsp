@@ -16,17 +16,35 @@
 
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/commons.css">
+    <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
+    
+    
 
     <!--jquery를 사용하기 위하여 라이브러리 js파일을 불러온다-->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+    
+    <!-- 프로그레스바 라이브러리 -->
+	<script type="text/javascript" src="loading-bar.js"></script>
+   
     <script type="text/javascript">
+    
+    /* construct manually */
+    var bar1 = new ldBar("#myItem1");
+    /* ldBar stored in the element */
+    var bar2 = document.getElementById('myItem1').ldBar;
+    bar1.set(60);
         
 
     </script>
     <style>
+    
+    .pjImg{
+    	max-width: 100%;
+    }
 
     .a{
    		transition : all 0.2s linear;
+  		width : 372px;  
     	margin : 0px auto;
      	overflow : hidden; 
     	
@@ -34,6 +52,7 @@
     .a:hover{
     	transform : scale(1.05);
     }
+    
     .list{
      	display : flex; 
      	justify-content: space-between; 
@@ -42,6 +61,18 @@
     .item{
      	width : "33%"; 
     }
+    .progressbar{
+    	height : 3px;
+        position: relative;
+        background : lightgray;
+            }
+    .progressbar> .inner{
+        position: absolute;
+        top:0;
+        left:0;
+        bottom:0;
+		background: #0072b2;
+            }
     
     </style>
 
@@ -92,9 +123,12 @@
 
         
         <div class="row center list">
+	            <c:forEach var="amountCalList" items="${amountCalList}">
 	            <c:forEach var="pjDto" items="${list}">
 	            	<div class="row item">
-		           		 	<img class="img a" src="/img/test.jpg" width="372px">
+	            			<div class="a">
+		           		 		<img class="pjImg" src="/img/test.jpg" >
+	            			</div>
 		                <div class="row">
 			                <a href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
 			                <span> ♥ ${pjDto.pjLikesNumber}</span>
@@ -103,8 +137,26 @@
 			                <a href="detail?pjNo=${pjDto.pjNo}">
 			                ${pjDto.pjName}</a>
 		                </div>
+                                <div class="left">
+	                                <c:choose>
+		                                <c:when test="${amountCalList.pjNo==pjDto.pjNo}">
+		                               		 ${amountCalList.achievementRate}%	${amountCalList.priceTotal}원
+		                                </c:when>
+		                                <c:otherwise>
+		                                	0% 	0원
+		                                </c:otherwise>
+	                                </c:choose>
+	                            </div>
+		                <div class="row">
+                            <div class="progressbar">
+                            	<div class="inner" id="myItem1"></div>
+<!--                                  <input type="number" name="percent" class="percent input w-100"  -->
+<%--                                  min="0" max="100" value="${amountCalList.achievementRate}"> --%>
+                            </div>
+                        </div>
 	       			</div>
-	            </c:forEach>
+	       			</c:forEach>
+	       		</c:forEach>
         </div>
 
         
@@ -161,4 +213,5 @@
 </div>
 </body>
 </html>
+
 

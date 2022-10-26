@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.BoardDto;
+import com.kh.doran.entity.ReplyDto;
 import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.BoardDao;
+import com.kh.doran.repository.ReplyDao;
 import com.kh.doran.vo.BoardListSearchVO;
 
 @Controller
@@ -26,6 +28,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Autowired
+	private ReplyDao replyDao;
 	
 	
 	//modelAttribute 로 수신한 데이터는 자동으로 model 에 첨부됨
@@ -74,6 +79,9 @@ public class BoardController {
 		
 //		(4) 갱신된 저장소를 세션에 다시 저장
 		session.setAttribute("history", history);
+		
+//		(+ 추가) 댓글 목록을 조회하여 첨부
+		model.addAttribute("replyList",replyDao.selectList(boardPostNo));
 		return "board/detail";
 	}
 	
@@ -134,6 +142,38 @@ public class BoardController {
 		else { //실패했으면 오류 발생
 			throw new TargetNotFoundException();
 		}
+	}
+	
+	@PostMapping("/reply/write")
+	public String replyWrite(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr, HttpSession session) {
+		int memNo = (int)session.getAttribute("loginNo");
+		replyDto.setReplyMemNo(memNo);
+		replyDao.insert(replyDto);
+		
+		attr.addAttribute("boardPostNo", replyDto.getReplyBoardPostNo());
+		return "redirect:/board/detail"; //절대
+	}
+	
+	@GetMapping("/reply/delete")
+	public String replyDelete(
+			@RequestParam int replyNo,
+			@RequestParam int replyBoardPostNo,
+			RedirectAttributes attr) {
+		replyDao.delete(replyNo);
+		attr.addAttribute("boardPostNo", replyBoardPostNo);
+		return "redirect:/board/detail";
+	}
+	
+	@PostMapping("/reply/edit")
+	public String replyEdit(
+			@ModelAttribute ReplyDto replyDto,
+			RedirectAttributes attr) {
+		replyDao.update(replyDto);
+		attr.addAttribute("boardPostNo", replyDto.getReplyBoardPostNo());
+		return "redirect:/board/detail";
+		
 	}
 }
 		

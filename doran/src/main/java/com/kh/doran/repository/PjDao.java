@@ -3,6 +3,7 @@ package com.kh.doran.repository;
 import java.util.List;
 
 import com.kh.doran.entity.PjDto;
+import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
 
 
@@ -36,12 +37,12 @@ public interface PjDao {
 	
 	//카테고리별 데이터 갯수
 	int categoryCount(PjListSearchVO vo);
+	
+	//주문금액, 달성률 계산
+	List<OrdersCalVO> achievementRate();
 
 	
-	// 인기순
-//	List<PjDto> popular(PjSortVO vo);
-//	
-//	int count(PjSortVO vo);
+
 	
 	
 	//U

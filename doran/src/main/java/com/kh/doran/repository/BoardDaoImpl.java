@@ -54,19 +54,34 @@ public class BoardDaoImpl implements BoardDao{
 			}
 		};
 		
+//		private RowMapper<BoardListVO> listMapper = new RowMapper<BoardListVO>() {
+//			@Override
+//			public BoardListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				return BoardListVO.builder()
+//										.boardPostNo(rs.getInt("board_post_no"))
+//										.boardMemNo(rs.getInt("board_mem_no"))
+//										.boardTitle(rs.getString("board_title"))
+//										.boardContent(rs.getString("board_content"))
+//										.boardWriteTime(rs.getDate("board_writetime"))
+//										.boardViewCnt(rs.getInt("board_view_cnt"))
+//										.boardReplyCnt(rs.getInt("board_reply_cnt"))
+//										.memNick(rs.getString("mem_nick"))
+//									.build();
+//			}
+//		};
+		
 		@Override
 		public List<BoardDto> selectList() {
 			String sql = "select * from board order by board_post_no desc";
 			return jdbcTemplate.query(sql, mapper);
 		}
-		
+
 		@Override
 		public List<BoardDto> selectList(BoardListSearchVO vo) {
-			if(vo.isSearch()) {
+			if(vo.isSearch()) {//검색이라면
 				return search(vo);
 			}
-			
-			else { //목록이라면
+			else {//목록이라면
 				return list(vo);
 			}
 		}
