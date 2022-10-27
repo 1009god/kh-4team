@@ -42,6 +42,11 @@
 
 	<div>
 		<img src="https://w7.pngwing.com/pngs/987/118/png-transparent-computer-icons-login-user-profile-others-computer-logo-desktop-wallpaper-thumbnail.png" width="100px" height="100px">
+		
+		
+			<span>프로필 이미지 파일</span>
+			
+		
 		<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span>
 		<a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
 		

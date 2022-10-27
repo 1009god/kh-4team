@@ -23,6 +23,8 @@ public interface MemDao {
 	boolean editAccountPw(MemDto dto); // 수정-계정수정
 	boolean editAccountTel(MemDto dto); // 수정-계정수정
 	
+
+	
 	
 
 

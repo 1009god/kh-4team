@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.MemDto;
-
+import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
 
 
@@ -25,6 +25,9 @@ public class MemMypageController {
 	
 	@Autowired
 	private MemDao memDao;
+	
+	@Autowired
+	private FilesDao filesDao;
 	
 	//프로필 홈
   @GetMapping("/profile")
@@ -38,6 +41,9 @@ public class MemMypageController {
 	     
 	     //3.불러온 정보를 모델에 첨부한다
 	     model.addAttribute("memDto", memDto);
+	     
+	     //(+추가) 프로필 이미지
+	     //model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
 	     //4.화면(view)으로 전달(forward)한다	     
 	     return "mypage/profile";
