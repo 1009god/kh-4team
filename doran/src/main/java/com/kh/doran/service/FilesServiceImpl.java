@@ -18,6 +18,7 @@ import com.kh.doran.repository.FilesDao;
 
 @Service
 public class FilesServiceImpl implements FilesService{
+	
 	@Autowired
 	private FilesDao filesDao;
 	
@@ -25,6 +26,7 @@ public class FilesServiceImpl implements FilesService{
 	
 	@Override
 	public ResponseEntity<ByteArrayResource> load(int filesNo) throws IOException {
+		//파일탐색(db)
 		FilesDto dto = filesDao.selectOne(filesNo);
 		if(dto==null) {//파일이 없다면
 			throw new TargetNotFoundException("존재하지 않는 파일");

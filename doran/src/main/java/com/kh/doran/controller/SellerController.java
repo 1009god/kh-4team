@@ -85,13 +85,6 @@ public class SellerController {
 		return "redircet:/";
 	}
 	
-	@GetMapping("/pjinsert")
-	public String pjinsert( 
-			@ModelAttribute PjDto pjDto,
-			@RequestParam List<MultipartFile> files
-			) throws IllegalStateException, IOException {
-		
-		return "";
-	}
+	
 	
 }
