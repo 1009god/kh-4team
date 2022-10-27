@@ -38,7 +38,7 @@ public class EditController {
 	@Autowired
 	private FilesDao filesDao;
 	
-	private final File directory = new File("E:/doranupload/profileimg");
+	private final File directory = new File(System.getProperty("user.home"), "doranupload");
 	
 	@PostConstruct //최소 실행시 딱 한 번만 실행되는 메소드
 	public void prepare() {
