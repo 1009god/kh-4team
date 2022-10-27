@@ -2,6 +2,8 @@ package com.kh.doran.repository;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.vo.AdminMemListVO;
@@ -9,6 +11,7 @@ import com.kh.doran.vo.BoardListSearchVO;
 import com.kh.doran.vo.MemListSearchVO;
 import com.kh.doran.vo.PjListSearchVO;
 
+@Repository
 public interface AdminDao {
 		
 		//관리자 테이블

@@ -36,8 +36,8 @@ public class AdminSellerController {
 	}
 	
 	@GetMapping("/sellerdetail")
-	public String detail(Model model, @RequestParam int sellerNo) {
-		SellerDto sellerDto = adminSellerDao.selectOne(sellerNo);
+	public String detail(Model model, @RequestParam int sellerMemNo) {
+		SellerDto sellerDto = adminSellerDao.selectOne(sellerMemNo);
 		model.addAttribute("sellerDto",sellerDto);
 		
 		return "admin/sellerdetail";

@@ -23,12 +23,12 @@ public class DoranQDaoImpl implements DoranQDao {
 	@Override
 	public void insert(DoranQDto doranQDto) {
 		String sql = "insert into doran_q("
-					+ "doran_q_no, doran_q_title, doran_q_content,"
+					+ "doran_q_no,doran_q_mem_no,doran_q_admin_no, doran_q_title, doran_q_content,"
 					+ "doran_q_type, doran_q_processing"
-					+ ") values(doran_q_seq.nextval, ?, ?, ?, ?)";
-		Object[] param= {doranQDto.getDoranQTitle(),
+					+ ") values(doran_q_seq.nextval,?,?,?,?,?,?)";
+		Object[] param= {doranQDto.getDoranQTitle(),doranQDto.getDoranQmemNo(),doranQDto.getDoranQadminNo(),
 				doranQDto.getDoranQContent(),doranQDto.getDoranQType(),
-				doranQDto.getDoranQProcessing()
+				doranQDto.getDoranQProcessing(),doranQDto.getDoranQNo()
 				};
 		jdbcTemplate.update(sql,param);
 	}
@@ -55,16 +55,16 @@ public class DoranQDaoImpl implements DoranQDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 
-	@Override
-	public List<DoranQDto> selectList(DoranQListSearchVO vo) {
-		if(vo.isSearch()) {
-			return search(vo);
-		}
-		
-		else { //목록이라면
-			return list(vo);
-		}
-	}
+//	@Override
+//	public List<DoranQDto> selectList(DoranQListSearchVO vo) {
+//		if(vo.isSearch()) {
+//			return search(vo);
+//		}
+//		
+//		else { //목록이라면
+//			return list(vo);
+//		}
+//	}
 
 private ResultSetExtractor<DoranQDto> extractor = new ResultSetExtractor<DoranQDto>() {
 		
@@ -94,25 +94,25 @@ private ResultSetExtractor<DoranQDto> extractor = new ResultSetExtractor<DoranQD
 		Object[] param = {doranQNo};
 		return jdbcTemplate.query(sql,  extractor, param);
 	}
-	@Override
-	public int insert2(DoranQDto doranQDto) {
-		//번호를 미리 생성한 뒤 등록하는 기능
-				String sql = "select doran_q_seq.nextval from dual";
-				int doranQNo = jdbcTemplate.queryForObject(sql, int.class);
-				
-				//등록 시퀀스 생성 xx
-				sql = "insert into doran_q("
-						+ "doran_q_no, doran_q_title, doran_q_content,"
-						+ "doran_q_type, doran_q_processing"
-						+ ") values(?, ?, ?, ?, ?)";
-			Object[] param= {doranQDto.getDoranQTitle(),
-					doranQDto.getDoranQContent(),doranQDto.getDoranQType(),
-					doranQDto.getDoranQProcessing()
-					};
-				jdbcTemplate.update(sql, param);
-				
-				return doranQNo;
-			}
+//	@Override
+//	public int insert2(DoranQDto doranQDto) {
+//		//번호를 미리 생성한 뒤 등록하는 기능
+//				String sql = "select doran_q_seq.nextval from dual";
+//				int doranQNo = jdbcTemplate.queryForObject(sql, int.class);
+//				
+//				//등록 시퀀스 생성 xx
+//				sql = "insert into doran_q("
+//						+ "doran_q_no, doran_q_title, doran_q_content,"
+//						+ "doran_q_type, doran_q_processing"
+//						+ ") values(?, ?, ?, ?, ?)";
+//			Object[] param= {doranQDto.getDoranQTitle(),
+//					doranQDto.getDoranQContent(),doranQDto.getDoranQType(),
+//					doranQDto.getDoranQProcessing()
+//					};
+//				jdbcTemplate.update(sql, param);
+//				
+//				return doranQNo;
+//			}
 	
 	@Override
 	public boolean update(DoranQDto doranQDto) {
@@ -133,55 +133,55 @@ private ResultSetExtractor<DoranQDto> extractor = new ResultSetExtractor<DoranQD
 	
 
 	
-	@Override
-	public List<DoranQDto> search(DoranQListSearchVO vo) {
-		String sql = "select * from ( "
-				+ "select rownum rn, TMP.* from ( "
-					+ "select * from doran_q "
-					+ "where instr(#1, ?) > 0 "
-					+ "order by doran_q_no desc "
-					+ ")TMP "
-					+ ") where rn between ? and ? ";
-			sql = sql.replace("#1", vo.getType());
-			Object[] param = {
-				vo.getKeyword(), vo.startRow(), vo.endRow()
-				};
-		return jdbcTemplate.query(sql, mapper, param);
-	}
-	@Override
-	public List<DoranQDto> list(DoranQListSearchVO vo) {
-		String sql = "select * from ( "
-				+ "select rownum rn, TMP.* from ( "
-					+ "select * from doran_q order by doran_q_no desc "
-				+ ")TMP "
-			+ ") where rn between ? and ?";
-			Object[] param = {vo.startRow(), vo.endRow()};
-			return jdbcTemplate.query(sql, mapper, param);
-}
-
-	@Override
-	public int count(DoranQListSearchVO vo) {
-		if(vo.isSearch()) {//검색이라면
-			return searchCount(vo); //검색 카운트 구하는 메소드
-		}
-		else {
-			return listCount(vo);
-		}
-	}
-
-	@Override
-	public int listCount(DoranQListSearchVO vo) {
-		String sql = "select count(*) from doran_q";
-		return jdbcTemplate.queryForObject(sql, int.class);
-	}
-	
-	@Override
-	public int searchCount(DoranQListSearchVO vo) {
-		String sql = "select count(*) from doran_q where instr(#1, ?) > 0";
-		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword()};
-		return jdbcTemplate.queryForObject(sql, int.class, param);
-	}
+//	@Override
+//	public List<DoranQDto> search(DoranQListSearchVO vo) {
+//		String sql = "select * from ( "
+//				+ "select rownum rn, TMP.* from ( "
+//					+ "select * from doran_q "
+//					+ "where instr(#1, ?) > 0 "
+//					+ "order by doran_q_no desc "
+//					+ ")TMP "
+//					+ ") where rn between ? and ? ";
+//			sql = sql.replace("#1", vo.getType());
+//			Object[] param = {
+//				vo.getKeyword(), vo.startRow(), vo.endRow()
+//				};
+//		return jdbcTemplate.query(sql, mapper, param);
+//	}
+//	@Override
+//	public List<DoranQDto> list(DoranQListSearchVO vo) {
+//		String sql = "select * from ( "
+//				+ "select rownum rn, TMP.* from ( "
+//					+ "select * from doran_q order by doran_q_no desc "
+//				+ ")TMP "
+//			+ ") where rn between ? and ?";
+//			Object[] param = {vo.startRow(), vo.endRow()};
+//			return jdbcTemplate.query(sql, mapper, param);
+//}
+//
+//	@Override
+//	public int count(DoranQListSearchVO vo) {
+//		if(vo.isSearch()) {//검색이라면
+//			return searchCount(vo); //검색 카운트 구하는 메소드
+//		}
+//		else {
+//			return listCount(vo);
+//		}
+//	}
+//
+//	@Override
+//	public int listCount(DoranQListSearchVO vo) {
+//		String sql = "select count(*) from doran_q";
+//		return jdbcTemplate.queryForObject(sql, int.class);
+//	}
+//	
+//	@Override
+//	public int searchCount(DoranQListSearchVO vo) {
+//		String sql = "select count(*) from doran_q where instr(#1, ?) > 0";
+//		sql = sql.replace("#1", vo.getType());
+//		Object[] param = {vo.getKeyword()};
+//		return jdbcTemplate.queryForObject(sql, int.class, param);
+//	}
 
 
 }
