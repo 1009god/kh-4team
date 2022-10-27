@@ -17,6 +17,7 @@ import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.AdminDao;
 import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.PjDao;
+import com.kh.doran.vo.MemListSearchVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -94,18 +95,16 @@ public class AdminController {
 	
 	//회원 리스트
 	@GetMapping("/memlist")
-	public String list(Model model,
-				@RequestParam(required=false)String type,
-				@RequestParam(required=false)String keyword) {
-		boolean isSearch=type!=null&&keyword!=null;
-		if(isSearch) {
-			model.addAttribute("list",adminDao.selectList(type, keyword));			
-		}
-		else {
-			model.addAttribute("list",adminDao.selectList());
-		}
+	public String list(Model model, 
+			@ModelAttribute(name="vo") MemListSearchVO vo) {
+		
+		//페이지 네비게이터를 위한 게시글 수를 구한 것
+		int count = adminDao.count(vo);
+		vo.setCount(count);
+	
+		model.addAttribute("list",adminDao.selectList(vo));
 		return "admin/memlist";
-	}
+	};
 	
 	@GetMapping("/detail")
 	public String detail(Model model,

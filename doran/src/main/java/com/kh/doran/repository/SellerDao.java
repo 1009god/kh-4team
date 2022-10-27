@@ -4,6 +4,7 @@ import com.kh.doran.entity.SellerDto;
 
 public interface SellerDao {
 	void insert(SellerDto sellerDto);
+	SellerDto selectOne(int sellerMemNo);
 	
 	
 }

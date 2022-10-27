@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.SellerDto;
 import com.kh.doran.repository.AdminSellerDao;
+import com.kh.doran.vo.MemListSearchVO;
+import com.kh.doran.vo.SellerListSearchVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -16,16 +20,18 @@ public class AdminSellerController {
 
 	@Autowired
 	private AdminSellerDao adminSellerDao;
+	
+	
 
 	@RequestMapping("/sellerlist")
-	public String list(Model model, @RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if (isSearch) {
-			model.addAttribute("list", adminSellerDao.selectList(type, keyword));
-		} else {
-			model.addAttribute("list", adminSellerDao.selectList());
-		}
+	public String list(Model model, 
+			@ModelAttribute(name="vo") SellerListSearchVO vo) {
+		
+		//페이지 네비게이터를 위한 게시글 수를 구한 것
+		int count = adminSellerDao.count(vo);
+		vo.setCount(count);
+	
+		model.addAttribute("list",adminSellerDao.selectList(vo));
 		return "admin/sellerlist";
 	}
 	

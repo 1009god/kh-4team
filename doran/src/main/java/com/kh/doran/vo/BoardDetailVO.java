@@ -8,12 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class BoardListVO {//목록에서 닉네임 보이게
+public class BoardDetailVO {//세부에서 닉네임 보이게
 	
 	private int boardPostNo, boardMemNo, boardViewCnt, boardReplyCnt;
-	private String boardTitle;
+	private String boardTitle, boardContent;
 	private Date boardWriteTime;
-	private int replyCount;
 	private String memNick;
 
 }

@@ -20,6 +20,7 @@ import com.kh.doran.entity.ReplyDto;
 import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.BoardDao;
 import com.kh.doran.repository.ReplyDao;
+import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.BoardListSearchVO;
 
 @Controller
@@ -61,6 +62,7 @@ public class BoardController {
 //		-> 세션에 저장할 이름 history로 지정
 //		(2) 현재 history 가 있을지 없을지 모르므로  꺼내서 없으면 생성
 		
+		@SuppressWarnings("unchecked")
 		Set<Integer> history = (Set<Integer>)session.getAttribute("history");
 		if(history == null) {//history 가 없다면 신규 생성
 			history = new HashSet<>();
@@ -122,7 +124,7 @@ public class BoardController {
 	
 	@GetMapping("/edit")
 	public String edit(@RequestParam int boardPostNo, Model model) {
-		BoardDto boardDto = boardDao.selectOne(boardPostNo);
+		BoardDetailVO boardDto = boardDao.selectOne(boardPostNo);
 		if(boardDto == null) { //없는 경우 내가 만든 예외 발생
 			throw new TargetNotFoundException();
 		}

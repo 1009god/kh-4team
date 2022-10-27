@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.kh.doran.entity.BoardDto;
 import com.kh.doran.repository.BoardDao;
+import com.kh.doran.vo.BoardListVO;
 
 @SpringBootTest
 public class BoardTest {

@@ -12,6 +12,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
+import com.kh.doran.vo.AdminpjListVO;
+import com.kh.doran.vo.BoardListSearchVO;
+import com.kh.doran.vo.PjListSearchVO;
 
 @Repository
 public class AdminPjDaoImpl implements AdminPjDao {
@@ -37,6 +40,20 @@ public class AdminPjDaoImpl implements AdminPjDao {
 		}
 	
 	};
+	
+	private RowMapper<AdminpjListVO> listmapper = new RowMapper<AdminpjListVO>() {
+		@Override
+		public AdminpjListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return AdminpjListVO.builder()
+					.pjNo(rs.getInt("pj_no"))
+					.pjSellerMemNo(rs.getInt("pj_seller_no"))
+					.pjCategory(rs.getString("pj_category"))
+					.pjName(rs.getString("pj_name"))
+					.pjTargetMoney(rs.getInt("pj_target_money"))
+					.memNick(rs.getString("mem_nick"))	
+				.build();
+}
+};
 	@Override
 	public List<PjDto> selectList() {
 		String sql = "select * from pj order by pj_no asc";
@@ -44,12 +61,13 @@ public class AdminPjDaoImpl implements AdminPjDao {
 	}
 
 	@Override
-	public List<PjDto> selectList(String type, String keyword) {
-		String sql = "select * from pj"
-				+ "where instr("+type+", ?) > 0 "
-				+ "order by "+type+" asc";
-		Object[]param = {keyword};
-		return jdbcTemplate .query(sql, mapper,param);
+	public List<AdminpjListVO> selectList(PjListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {//목록이라면
+			return list(vo);
+		}
 	}
 
 	private ResultSetExtractor<PjDto> extractor = new ResultSetExtractor<PjDto>() {
@@ -87,6 +105,66 @@ public class AdminPjDaoImpl implements AdminPjDao {
 		Object[]param= {pjNo};
 		return jdbcTemplate.update(sql,param)>0;
 	}
+	
+	@Override
+	public List<AdminpjListVO> search(PjListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from (select board_post_no, mem_nick, reply_count "
+				+ "from board B "
+				+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
+				+ "(select distinct reply_board_post_no, count(R.reply_no) "
+				+ "over(partition by reply_board_post_no) reply_count "
+				+ "from reply R) on board_post_no = reply_board_post_no) "
+				+ "where instr(#1, ?) > 0 order by board_post_no desc) TMP where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {
+			vo.getKeyword(), vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, listmapper, param);
+	}
+	
+	@Override
+	public List<AdminpjListVO> list(PjListSearchVO vo) {
+		String sql = "select * from ( "
+							+ "select rownum rn, TMP.* from ( "
+							+ "select B.*, mem_nick, reply_count "
+									+ "from board B "
+									+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
+									+ "(select distinct reply_board_post_no, count(R.reply_no) "
+									+ "over(partition by reply_board_post_no) reply_count "
+									+ "from reply R) on board_post_no = reply_board_post_no "
+								+ "order by board_post_no desc "
+							+ ")TMP "
+						+ ") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, listmapper, param);
+	}
+
+	@Override
+	public int count(PjListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return searchCount(vo); //검색 카운트 구하는 메소드
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	
+	@Override
+	public int listCount(PjListSearchVO vo) {
+		String sql = "select count(*) from pj";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int searchCount(PjListSearchVO vo) {
+		String sql = "select count(*) from pj where instr(#1, ?) > 0";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	
 
 }
 

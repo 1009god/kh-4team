@@ -55,22 +55,54 @@
 		</table>
 	</div>
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+ <!--페이지 네비게이터  -->
+    <div class="row center">
+        <ul class="pagination on">
+	        <c:choose>
+	            <c:when test="${not pjListSearchVo.isFirst()}">
+	                <li><a href="pjlist?p=${pjListSearchVo.firstBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&laquo;</a></li> 
+	            </c:when>
+	            <c:otherwise>
+	                <li><a href="#">&laquo;</a></li> 
+	            </c:otherwise>
+	        </c:choose>
+	     
+        
+        <!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
+        <c:choose>
+            <c:when test="${pjListSearchVo.hasPrev()}">
+                <li><a href="pjlist?p=${pjListSearchVo.prevBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&lt;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li><a href="#">&lt;</a></li> 
+            </c:otherwise>
+        </c:choose>
+        
+        <c:forEach var="i" begin="${pjListSearchVo.startBlock()}" end="${pjListSearchVo.endBlock()}" step="1">
+            <li><a href="pjlist?p=${i}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">${i}</a></li>
+        </c:forEach>
+            
+        <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+        <c:choose>
+            <c:when test="${pjListSearchVo.hasNext()}">
+                <li><a href="pjlist?p=${pjListSearchVo.nextBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&gt;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li><a href="#">&gt;</a></li> 
+            </c:otherwise>
+        </c:choose>
+        
+        <c:choose>
+            <c:when test="${not pjListSearchVo.isLast()}">
+                <li><a href="pjlist?p=${pjListSearchVo.lastBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&raquo;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li><a href="#">&raquo;</a></li> 
+            </c:otherwise>
+        </c:choose>
+            
+       </ul>
+
+    </div>
     
 <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>
