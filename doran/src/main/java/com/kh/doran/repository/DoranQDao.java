@@ -2,6 +2,7 @@ package com.kh.doran.repository;
 
 import java.util.List;
 
+
 import com.kh.doran.entity.DoranQDto;
 import com.kh.doran.vo.DoranQListSearchVO;
 
@@ -21,10 +22,13 @@ public interface DoranQDao {
 	int searchCount(DoranQListSearchVO vo);
 	int listCount(DoranQListSearchVO vo);
 	
+	
 	DoranQDto selectOne(int doranQNo);
 
 	boolean update(DoranQDto doranQDto);
 	boolean delete(int doranQNo);
+	
+
 	
 
 }

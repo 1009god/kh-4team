@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
+import com.kh.doran.vo.SupportPjVO;
 
 @Repository
 public class PjDaoImpl implements PjDao {
@@ -227,6 +228,18 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
 
+
+
+	@Override
+	public void insert(PjDto pjDto) {//	1      2				3			4			5			6				7						8					9							   1 2 3 4 5 6 7 8
+		String sql ="insert into Pj(PJ_NO, PJ_SELLER_MEM_NO, PJ_CATEGORY, PJ_NAME, PJ_SUMMARY, PJ_TARGET_MONEY, PJ_FUNDING_START_DATE, PJ_FUNDING_END_DATE, PJ_END_DATE) values(PJ_SEQ.nextval,?,?,?,?,?,?,?,?)";
+		Object[] param = {pjDto.getPjSellerMemNo(),pjDto.getPjCategory(),pjDto.getPjName(),pjDto.getPjSummary(),pjDto.getPjTargetMoney(),pjDto.getPjFundingStartDate(),pjDto.getPjFundingEndDate(),pjDto.getPjEndDate()};
+		//							1					2						3				4 					5							6							7							8
+		jdbcTemplate.update(sql, param);
+		
+	}
+
+
 	//달성률 계산 위한 매퍼	
 			private RowMapper<OrdersCalVO> calMapper = new RowMapper<>() {
 				@Override
@@ -240,6 +253,7 @@ public class PjDaoImpl implements PjDao {
 							.build();
 		}
 	};
+
 	
 	@Override
 	public List<OrdersCalVO> achievementRate() {
@@ -253,6 +267,27 @@ public class PjDaoImpl implements PjDao {
 			    + "group by op.options_pj_no, pj_target_money,pj_no";
 		return jdbcTemplate.query(sql,calMapper);
 	}
+
+	
+//	//support맵퍼
+//	private RowMapper<SupportPjVO> supportMapper = new RowMapper<SupportPjVO>() {
+//		
+//		@Override
+//		public SupportPjVO mapRow(ResultSet rs, int rowNum) throws SQLException {			
+//			return SupportPjVO.builder().memNo(rs.getInt("mem_no"))
+//					.optionsPjNo(rs.getInt("options_pj_no"))
+//					.pjCategory(rs.getString(""));
+//		}
+//	};
+	
+
+//	@Override
+//	public List<SupportPjVO> supportList() {
+//		String sql ="select options_pj_no, mem.mem_no from options inner join orders on options_no=orders_options_no "
+//				+ "inner join mem on mem.mem_no = orders.orders_mem_no";
+//				
+//		return jdbcTemplate.query(sql,supportMapper);
+//	}
 
 	
 	

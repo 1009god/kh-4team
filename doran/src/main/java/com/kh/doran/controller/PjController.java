@@ -1,5 +1,9 @@
 package com.kh.doran.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +14,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.LikesDto;
 import com.kh.doran.entity.OptionsDto;
 import com.kh.doran.entity.OrdersDto;
+
+import com.kh.doran.repository.FilesDao;
+
 import com.kh.doran.repository.AddressDao;
+
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.MemDao;
+
+import com.kh.doran.entity.FilesDto;
+
 import com.kh.doran.entity.AddressDto;
-import com.kh.doran.entity.LikesDto;
+
+
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.entity.MemDto;
-import com.kh.doran.entity.OptionsDto;
+
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
@@ -53,6 +66,41 @@ public class PjController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+	
+	private FilesDao filesDao;
+	
+	@GetMapping("/insert")
+	public String insert() {
+		return "pj/insert";
+	}
+	@PostMapping("/insert")
+	public String insert(@ModelAttribute PjDto pjDto,
+			@RequestParam List<MultipartFile> files
+			)throws IllegalStateException, IOException  {
+		pjDao.insert(pjDto);
+		for(MultipartFile file : files) {
+			if(!file.isEmpty()) {
+				System.out.println("첨부파일 발견");
+				
+			//db등록
+			int filesNo = filesDao.sequence();
+			filesDao.insert(FilesDto.builder()
+					.filesNo(filesNo)
+					.filesUploadname(file.getOriginalFilename())
+					.filesType(file.getContentType())
+					.filesSize(file.getSize())
+					.build());
+			//파일저장
+			File dir = new File("D:/doranuplaod/pjinsertimg");
+			dir.mkdirs();
+			File target = new File(dir,String.valueOf(filesNo));
+			file.transferTo(target);
+			}
+	}
+		return "redirect:/";
+	}
+
+
 
 	
 	@GetMapping("/detail")

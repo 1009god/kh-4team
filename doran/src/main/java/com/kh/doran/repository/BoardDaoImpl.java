@@ -12,7 +12,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.BoardDto;
+import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.BoardListSearchVO;
+import com.kh.doran.vo.BoardListVO;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -54,21 +56,24 @@ public class BoardDaoImpl implements BoardDao{
 			}
 		};
 		
-//		private RowMapper<BoardListVO> listMapper = new RowMapper<BoardListVO>() {
-//			@Override
-//			public BoardListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-//				return BoardListVO.builder()
-//										.boardPostNo(rs.getInt("board_post_no"))
-//										.boardMemNo(rs.getInt("board_mem_no"))
-//										.boardTitle(rs.getString("board_title"))
-//										.boardContent(rs.getString("board_content"))
-//										.boardWriteTime(rs.getDate("board_writetime"))
-//										.boardViewCnt(rs.getInt("board_view_cnt"))
-//										.boardReplyCnt(rs.getInt("board_reply_cnt"))
-//										.memNick(rs.getString("mem_nick"))
-//									.build();
-//			}
-//		};
+		private RowMapper<BoardListVO> listMapper = new RowMapper<BoardListVO>() {
+			@Override
+			public BoardListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return BoardListVO.builder()
+										.boardPostNo(rs.getInt("board_post_no"))
+										.boardMemNo(rs.getInt("board_mem_no"))
+										.boardTitle(rs.getString("board_title"))
+										.boardWriteTime(rs.getDate("board_writetime"))
+										.boardViewCnt(rs.getInt("board_view_cnt"))
+										.boardReplyCnt(rs.getInt("board_reply_cnt"))
+										.replyCount(rs.getInt("reply_count"))
+										.memNick(rs.getString("mem_nick"))
+									.build();
+			}
+		};
+		
+
+		
 		
 		@Override
 		public List<BoardDto> selectList() {
@@ -77,7 +82,7 @@ public class BoardDaoImpl implements BoardDao{
 		}
 
 		@Override
-		public List<BoardDto> selectList(BoardListSearchVO vo) {
+		public List<BoardListVO> selectList(BoardListSearchVO vo) {
 			if(vo.isSearch()) {//검색이라면
 				return search(vo);
 			}
@@ -107,12 +112,36 @@ public class BoardDaoImpl implements BoardDao{
 			}
 		}
 	};
+	
+	private ResultSetExtractor<BoardDetailVO> detailExtractor = new ResultSetExtractor<BoardDetailVO>() {
+		
+		@Override
+		public BoardDetailVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return BoardDetailVO.builder()
+						.boardPostNo(rs.getInt("board_post_no"))
+						.boardMemNo(rs.getInt("board_mem_no"))
+						.boardTitle(rs.getString("board_title"))
+						.boardContent(rs.getString("board_content"))
+						.boardWriteTime(rs.getDate("board_writetime"))
+						.boardViewCnt(rs.getInt("board_view_cnt"))
+						.boardReplyCnt(rs.getInt("board_reply_cnt"))
+						.memNick(rs.getString("mem_nick"))
+						.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
 
 	@Override
-	public BoardDto selectOne(int boardPostNo) {
-		String sql = "select * from board where board_post_no = ?";
+	public BoardDetailVO selectOne(int boardPostNo) {
+		String sql = "select "
+						+ "board.*, mem_nick "
+							+ "from board left outer join mem on board_mem_no = mem_no where board_post_no = ?";
 		Object[] param = {boardPostNo};
-		return jdbcTemplate.query(sql,  extractor, param);
+		return jdbcTemplate.query(sql,  detailExtractor, param);
 	}
 	
 	@Override
@@ -125,7 +154,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	
 	@Override
-	public BoardDto read(int boardPostNo) {
+	public BoardDetailVO read(int boardPostNo) {
 		this.updateReadcount(boardPostNo);
 		return this.selectOne(boardPostNo);
 	}
@@ -167,30 +196,37 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	
 	@Override
-	public List<BoardDto> search(BoardListSearchVO vo) {
-		String sql = "select * from ( "
-							+ "select rownum rn, TMP.* from ( "
-								+ "select * from board "
-								+ "where instr(#1, ?) > 0 "
-								+ "order by board_post_no desc "
-								+ ")TMP "
-								+ ") where rn between ? and ? ";
+	public List<BoardListVO> search(BoardListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from (select board_post_no, mem_nick, reply_count "
+				+ "from board B "
+				+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
+				+ "(select distinct reply_board_post_no, count(R.reply_no) "
+				+ "over(partition by reply_board_post_no) reply_count "
+				+ "from reply R) on board_post_no = reply_board_post_no) "
+				+ "where instr(#1, ?) > 0 order by board_post_no desc) TMP where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
 		};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	
 	@Override
-	public List<BoardDto> list(BoardListSearchVO vo) {
+	public List<BoardListVO> list(BoardListSearchVO vo) {
 		String sql = "select * from ( "
 							+ "select rownum rn, TMP.* from ( "
-								+ "select * from board order by board_post_no desc "
+							+ "select B.*, mem_nick, reply_count "
+									+ "from board B "
+									+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
+									+ "(select distinct reply_board_post_no, count(R.reply_no) "
+									+ "over(partition by reply_board_post_no) reply_count "
+									+ "from reply R) on board_post_no = reply_board_post_no "
+								+ "order by board_post_no desc "
 							+ ")TMP "
 						+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listMapper, param);
 	}
 	
 	@Override

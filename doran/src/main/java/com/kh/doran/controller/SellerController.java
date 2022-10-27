@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.doran.entity.FilesDto;
+import com.kh.doran.entity.PjDto;
 import com.kh.doran.entity.SellerDto;
 import com.kh.doran.repository.FilesDao;
+import com.kh.doran.repository.PjDao;
 import com.kh.doran.repository.SellerDao;
 import com.kh.doran.service.SellerService;
 
@@ -35,6 +37,9 @@ public class SellerController {
 	private FilesDao filesDao;
 	@Autowired
 	private SellerService sellerService;
+	@Autowired
+	private PjDao pjDao;
+	
 	private final File directory =new File("D:/doranupload");
 	@PostConstruct
 	public void prepare() {
@@ -54,6 +59,7 @@ public class SellerController {
 			@RequestParam List<MultipartFile> files
 			//리퀘스트파람 멀티파트파일 멤버프로필
 			) throws IllegalStateException, IOException {
+		//SellerDto findDto = sellerDao.
 		sellerDao.insert(sellerDto);
 		for(MultipartFile file : files) {
 			if(!file.isEmpty()) {
@@ -76,6 +82,16 @@ public class SellerController {
 		}
 		
 		
-		return "seller/sellerfinish";
+		return "redircet:/";
 	}
+	
+	@GetMapping("/pjinsert")
+	public String pjinsert( 
+			@ModelAttribute PjDto pjDto,
+			@RequestParam List<MultipartFile> files
+			) throws IllegalStateException, IOException {
+		
+		return "";
+	}
+	
 }

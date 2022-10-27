@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.MemDto;
+
 import com.kh.doran.repository.MemDao;
+
 
 
 
@@ -79,7 +81,21 @@ public class MemMypageController {
 		return "mypage/goodbyeResult";
 	}
 	
+//올린 프로젝트 created
+	@GetMapping("/created")
+	public String created() {
+		return "mypage/created";
+	}
 	
+	
+//후원한 프로젝트 finished
+	@GetMapping("/supported")
+	public String supported(HttpSession session, Model model) {
+		int memNo = (int)session.getAttribute("loginNo");
+		
+		
+		return "mypage/supported";
+	}
 	
 
 

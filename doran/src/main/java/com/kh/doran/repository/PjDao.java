@@ -7,9 +7,10 @@ import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
 
 
+
 public interface PjDao {
 	//C
-	
+	void insert(PjDto pjDto);
 	//R
 	PjDto selectOne(int pjNo); //프로젝트 1개의 정보 보기
 
@@ -41,7 +42,8 @@ public interface PjDao {
 	//주문금액, 달성률 계산
 	List<OrdersCalVO> achievementRate();
 
-	
+	//마이페이지- 후원한 프로젝트에 쓰임	
+	//	List<SupportPjVO> supportList(); 
 
 	
 	

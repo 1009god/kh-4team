@@ -37,7 +37,7 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${boardDto.boardMemNo}</td>
+			<td>${boardDto.memNick}</td>
 		</tr>
 		<tr>
 			<th>작성일</th>
@@ -76,7 +76,7 @@
 		<tr class="view">
 			<td width="90%">
 			<!-- 작성자 -->
-			${replyDto.replyMemNo}
+			${replyDto.memNick}
 			<c:if test="${boardDto.boardMemNo == replyDto.replyMemNo}">
 			(작성자)
 			</c:if>
