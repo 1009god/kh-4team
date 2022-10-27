@@ -22,7 +22,7 @@ public class FilesServiceImpl implements FilesService{
 	@Autowired
 	private FilesDao filesDao;
 	
-	private final File dir = new File("D:/doranupload");
+	private final File dir = new File(System.getProperty("user.home"), "doranupload"); //운영체제에 맞게 
 	
 	@Override
 	public ResponseEntity<ByteArrayResource> load(int filesNo) throws IOException {

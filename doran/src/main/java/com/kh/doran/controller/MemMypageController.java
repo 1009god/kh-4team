@@ -43,7 +43,7 @@ public class MemMypageController {
 	     model.addAttribute("memDto", memDto);
 	     
 	     //(+추가) 프로필 이미지
-	     //model.addAttribute("profileImg", filesDao.profileImgList(memNo));
+	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
 	     //4.화면(view)으로 전달(forward)한다	     
 	     return "mypage/profile";

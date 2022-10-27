@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
 <jsp:param value="판매자 등록" name="title"/>
 </jsp:include>
 <link rel="stylesheet" type="text/css" href="reset.css">

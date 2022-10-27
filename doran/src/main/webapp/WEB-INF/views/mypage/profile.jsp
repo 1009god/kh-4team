@@ -37,20 +37,31 @@
 
 </style>
 
+
+
+
+
+
 		
 <div class="container-1400">
 
 	<div>
-		<img src="https://w7.pngwing.com/pngs/987/118/png-transparent-computer-icons-login-user-profile-others-computer-logo-desktop-wallpaper-thumbnail.png" width="100px" height="100px">
+	<c:if test=""></c:if>
 		
 		
-			<span>프로필 이미지 파일</span>
-			
-		
+		<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+			<c:if test="${status.last}">			
+				<img width="100px" height="100px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}">
+			</c:if>
+		</c:forEach>
+				
 		<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span>
 		<a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
 		
 		<span>${memDto.memJoinDate} 회원 가입일</span>
+		
+		
+		
 		
 	</div>
 	
