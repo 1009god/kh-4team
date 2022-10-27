@@ -30,9 +30,19 @@ public class MemRestController { //아이디 검사
 		else {
 			return "NNNNN";//사용 불가능 아이디 (이미 존재함)
 		}
-		//return "NNNNN"; 사용할 수 없는 아이디인 경우 (아이디 이미 존재)
-		//return "NNNNY"; 사용할 수 있는 아이디인 경우 (아이디 없음)
-		
 	}
+	
+	@GetMapping("/nick")
+	public String nick(@RequestParam String memNick) {
+		MemDto memDto = memDao.selectNick(memNick);
+		if(memDto == null) {
+			return "NNNNY"; //사용 가능 닉네임 (당신이 첫 사람)
+		}
+		else {
+			return "NNNNN";//사용 불가능 닉네임 (이미 존재함)
+		}
+	}
+	
+	
 	
 }
