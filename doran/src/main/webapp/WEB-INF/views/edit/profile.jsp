@@ -20,8 +20,14 @@
  <a href="/edit/address_list">배송지</a>
  
  
+ <form method="post" enctype="multipart/form-data">
+ <!-- 이미지 첨부파일 -->
  <div>프로필 이미지 수정</div>
- <form method="post">
+ <input type="file" name= files>
+ 
+ 
+ 
+ 
 	<div class="row">
 		<label>닉네임</label>
 		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">

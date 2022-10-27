@@ -23,7 +23,7 @@
 	<tfoot>
 		<tr>
 			<td align="right" colspan="2">
-				<a href = "/doran/list">목록으로</a>
+				<a href = "/board/list">목록으로</a>
 				<button type="submit">등록하기</button>
 			</td>
 		</tr>

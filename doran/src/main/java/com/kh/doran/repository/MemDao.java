@@ -10,6 +10,7 @@ public interface MemDao {
 	void insert(MemDto memDto);
 	MemDto selectOne(int memNo);
 	MemDto selectOne(String memEmail);
+	MemDto selectNick(String memNick);
 
 	
 	boolean profileUpdate(MemDto dto);  //구버전
@@ -21,6 +22,8 @@ public interface MemDao {
 	
 	boolean editAccountPw(MemDto dto); // 수정-계정수정
 	boolean editAccountTel(MemDto dto); // 수정-계정수정
+	
+
 	
 	
 
