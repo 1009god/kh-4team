@@ -12,16 +12,22 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
     
-    var stock=$("span.stock").text();
-    console.log(stock);
+    
+
 
 
 </script>
+<style>
+    .selectOption {
+        border: 1px dotted gray;
+    }
+</style>
 </head>
 <body>
 
 
     <div>
+        <div>
         <table>
             <tbody>
                 <tr>
@@ -48,14 +54,46 @@
                </tr>
             </tbody>
         </table>
+    </div>
 
-        <div class="selectOption">
-        <c:forEach var="OptionsDto" items="${OptionsDto}">
-            <span><a class="choose" href="selectCheck?optionsNo=${OptionsDto.optionsNo}">${OptionsDto.optionsName}</a></span>
-            <span>${OptionsDto.optionsPrice}</span>
-            <span class="stock">${OptionsDto.optionsStock}</span>
-        </c:forEach>
-         </div>
+    <c:forEach var="OptionsDto" items="${OptionsDto}">
+        
+
+    <c:set var="currentStock" value="${OptionsDto.optionsStock}" />
+    <c:set var="orderCount" value="${OrderCount}" />
+    
+
+    <c:choose>
+        <c:when test="${OrderCount==1}">
+            <div class="selectOption"  onclick="alert('이미 후원한 프로젝트입니다. 추가로 후원할 수 없습니다');">
+                <span class="no">${OptionsDto.optionsNo}</span>
+                <span class="name">${OptionsDto.optionsName}</span>
+                <span class="price">${OptionsDto.optionsPrice}</span>
+                <span class="stock">${OptionsDto.optionsStock}</span>
+            </div>
+        </c:when>
+
+        <c:when test="${currentStock==0}">
+            <div class="selectOption"  onclick="alert('품절');">
+                <span class="no">${OptionsDto.optionsNo}</span>
+                <span class="name">${OptionsDto.optionsName}</span>
+                <span class="price">${OptionsDto.optionsPrice}</span>
+                <span class="stock">${OptionsDto.optionsStock}</span>
+            </div>
+        </c:when>
+
+        <c:when test="${OrderCount==0&&currentStock!=0}">
+            <div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
+                <span class="no">${OptionsDto.optionsNo}</span>
+                <span class="name">${OptionsDto.optionsName}</span>
+                <span class="price">${OptionsDto.optionsPrice}</span>
+                <span class="stock">${OptionsDto.optionsStock}</span>
+            </div>
+        </c:when>
+    </c:choose>
+
+    </c:forEach>
+
 
     </div>
 

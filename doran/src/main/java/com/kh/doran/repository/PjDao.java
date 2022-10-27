@@ -3,6 +3,7 @@ package com.kh.doran.repository;
 import java.util.List;
 
 import com.kh.doran.entity.PjDto;
+import com.kh.doran.vo.OrderCountVO;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
 
@@ -13,6 +14,8 @@ public interface PjDao {
 	void insert(PjDto pjDto);
 	//R
 	PjDto selectOne(int pjNo); //프로젝트 1개의 정보 보기
+	
+	int orderCount(OrderCountVO vo);
 
 	//통합 검색 메소드(목록+검색)
 	List<PjDto> selectList(PjListSearchVO vo); 

@@ -14,9 +14,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
+import com.kh.doran.vo.OrderCountVO;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
 import com.kh.doran.vo.SupportPjVO;
+import com.kh.doran.vo.OrderCountVO;
 
 @Repository
 public class PjDaoImpl implements PjDao {
@@ -288,8 +290,31 @@ public class PjDaoImpl implements PjDao {
 //				
 //		return jdbcTemplate.query(sql,supportMapper);
 //	}
-
 	
+	//구매여부확인용
+	private RowMapper<OrderCountVO> orderCountMapper=new RowMapper<OrderCountVO>() {
+
+		@Override
+		public OrderCountVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return OrderCountVO.builder()
+											.optionsPjNo(rs.getInt("options_pj_no"))
+											.ordersMemNo(rs.getInt("orders_mem_no"))
+											.build();
+		}
+		
+	};
+
+	//구매여부확인(int 1일 경우 이력있음, 0일 경우 없음)
+@Override
+public int orderCount(OrderCountVO vo) {
+	String sql="select count(*) from (select options.options_no, "
+			+ "options.options_pj_no, orders.orders_options_no, "
+			+ "orders.orders_mem_no from options "
+			+ "left outer join orders on options.options_no=orders.orders_options_no) "
+			+ "where options_pj_no=? and orders_mem_no=?";
+	Object[] param={vo.getOptionsPjNo(), vo.getOrdersMemNo()};
+	return jdbcTemplate.queryForObject(sql, int.class,param);
+}
 	
 
 }
