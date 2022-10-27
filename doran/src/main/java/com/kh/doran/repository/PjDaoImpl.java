@@ -186,6 +186,18 @@ public class PjDaoImpl implements PjDao {
 		Object[] param = {vo.getCategory(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql,mapper,param);
 	}
+	
+	@Override
+	public List<PjDto> prelaunching(PjListSearchVO vo) {
+		String sql = "select * from ( "
+				+  "select rownum rn, TMP.* from( "
+					+ "	select * from pj where sysdate-pj_funding_start_date<0 "
+						+ "order by sysdate-pj_funding_start_date desc "
+				 				+")TMP "
+						+	") where rn between ? and ?";
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql,mapper,param);
+	}
 
 	@Override
 	public int count(PjListSearchVO vo) {
@@ -253,6 +265,8 @@ public class PjDaoImpl implements PjDao {
 			    + "group by op.options_pj_no, pj_target_money,pj_no";
 		return jdbcTemplate.query(sql,calMapper);
 	}
+	
+
 
 	
 	

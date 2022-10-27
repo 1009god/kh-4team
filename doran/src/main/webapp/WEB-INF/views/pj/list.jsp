@@ -16,26 +16,27 @@
 
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="loading-bar.css"/>
-    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.css"/>
     
 
     <!--jquery를 사용하기 위하여 라이브러리 js파일을 불러온다-->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
-    
-    <!-- 프로그레스바 라이브러리 -->
-	<script type="text/javascript" src="loading-bar.js"></script>
-   
+    <!-- 로딩바 라이브러리 -->
+    <script type="text/javascript" src="loading-bar.js"></script>
     <script type="text/javascript">
     
+    
     /* construct manually */
-    var bar1 = new ldBar("#myItem1");
+    var bar1 = new ldBar(.ldBar);
     /* ldBar stored in the element */
-    var bar2 = document.getElementById('myItem1').ldBar;
+//     var bar2 = document.getElementById('myItem1').ldBar;
     bar1.set(60);
+
         
 
     </script>
+    
+    
     <style>
     
     .pjImg{
@@ -80,6 +81,7 @@
 </head>
 <body>
     <div class="container-1200">
+	<div class="ldBar" data-value="50"></div>
         <div class="row">
             <h1>상품 목록</h1>
         </div>
@@ -119,48 +121,57 @@
             <button name="category" value="기타">기타</button>
 
         </form>
-    </div>        
+    </div>   
+    
 
         
         <div class="row center list">
-	            <c:forEach var="amountCalList" items="${amountCalList}">
 	            <c:forEach var="pjDto" items="${list}">
+	            <c:forEach var="amountCalList" items="${amountCalList}">
+	            
 	            	<div class="row item">
 	            			<div class="a">
 		           		 		<img class="pjImg" src="/img/test.jpg" >
 	            			</div>
+	            			
 		                <div class="row">
+		                	<span>${pjDto.pjNo}</span>
 			                <a href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
 			                <span> ♥ ${pjDto.pjLikesNumber}</span>
 		                </div>
+		                
 		                <div class="row">
 			                <a href="detail?pjNo=${pjDto.pjNo}">
 			                ${pjDto.pjName}</a>
 		                </div>
-                                <div class="left">
-	                                <c:choose>
-		                                <c:when test="${amountCalList.pjNo==pjDto.pjNo}">
+                        <div class="left">
+	                          <c:choose>
+		                           <c:when test="${amountCalList.pjNo==pjDto.pjNo}">
 		                               		 ${amountCalList.achievementRate}%	${amountCalList.priceTotal}원
-		                                </c:when>
-		                                <c:otherwise>
-		                                	0% 	0원
-		                                </c:otherwise>
-	                                </c:choose>
-	                            </div>
+		                           </c:when>
+		                           <c:otherwise>
+		                                0% 	0원
+		                           </c:otherwise>
+	                          </c:choose>
+	                   </div>
+	                            
 		                <div class="row">
-                            <div class="progressbar">
-                            	<div class="inner" id="myItem1"></div>
-<!--                                  <input type="number" name="percent" class="percent input w-100"  -->
-<%--                                  min="0" max="100" value="${amountCalList.achievementRate}"> --%>
+                            <div class="progressbar ">
+                                <div class="inner"></div>
+                                <div>
+<%--                                  <input type="number" name="percent" class="percent input" min="0" max="100" value="${amountCalList.achievementRate}"> --%>
+                                </div>
                             </div>
-                        </div>
+                       </div>
 	       			</div>
+	       			
 	       			</c:forEach>
 	       		</c:forEach>
         </div>
 
         
         <!--페이지 네비게이터  -->
+    
     <div class="row center">
         <ul class="pagination on">
 	        <c:choose>

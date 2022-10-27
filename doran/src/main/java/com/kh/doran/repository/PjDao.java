@@ -30,6 +30,12 @@ public interface PjDao {
 	//카테고리별 정렬
 	List<PjDto> category(PjListSearchVO vo);
 	
+	//펀딩예정 
+	List<PjDto> prelaunching(PjListSearchVO vo);
+	//펀딩중 
+	
+	//펀딩 마감 
+	
 	//검색과 목록의 총 데이터 갯수를 구하는 메소드(마지막 페이지 번호를 구하기 위해서 사용하는 메소드)
 	int count(PjListSearchVO vo);
 	int searchCount(PjListSearchVO vo);
@@ -41,10 +47,6 @@ public interface PjDao {
 	//주문금액, 달성률 계산
 	List<OrdersCalVO> achievementRate();
 
-	
-
-	
-	
 	//U
 	//D
 }
