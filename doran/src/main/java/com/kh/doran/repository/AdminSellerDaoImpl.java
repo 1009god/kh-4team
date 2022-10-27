@@ -43,7 +43,7 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 		public AdminsellerListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return AdminsellerListVO.builder()
 					.memNick(rs.getString("mem_nick"))
-					.sellerMemNo(rs.getInt("sellerMemNo"))
+					.sellerMemNo(rs.getInt("seller_mem_no"))
 					.sellerRegistryDate(rs.getDate("seller_registry_date"))
 					.sellerBank(rs.getString("seller_bank"))
 					.sellerAccount(rs.getString("seller_account"))
@@ -72,8 +72,8 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 					.memJoinDate(rs.getDate("mem_join_date"))
 					.memRoute(rs.getString("mem_route"))
 					.sellerRegistryDate(rs.getDate("seller_registry_date"))
-					.sellerBank(rs.getString("seller_back"))
-					.sellerAccount(rs.getString("seller_bank"))
+					.sellerBank(rs.getString("seller_bank"))
+					.sellerAccount(rs.getString("seller_account"))
 					.sellerCheck(rs.getString("seller_check"))
 					.build();
 		}
@@ -85,7 +85,7 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 //	아우터 sql구문 추가 select * from mem m join seller s on mem.mem_no = seller.seller_mem_no;
 	@Override
 	public AdminsellerDetailVO selectOne1(int sellerMemNo) {
-		String sql = "select * from mem m join seller s on m.mem_no = s.seller_mem_no where seller_mem_no=?;";
+		String sql = "select * from mem m left join seller s on m.mem_no = s.seller_mem_no where s.seller_mem_no=?";
 		Object[] param = {sellerMemNo};
 		return jdbcTemplate.query(sql,  detailExtractor, param);
 }
@@ -102,13 +102,7 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 	
 	@Override
 	public List<AdminsellerListVO> search(SellerListSearchVO vo) {
-		String sql = "select * from ( "
-							+ "select rownum rn, TMP.* from ( "
-								+ "select * from seller "
-								+ "where instr(#1, ?) > 0 "
-								+ "order by seller_mem_no desc "
-								+ ")TMP "
-								+ ") where rn between ? and ? ";
+		String sql = "";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
@@ -118,11 +112,8 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 	
 	@Override
 	public List<AdminsellerListVO> list(SellerListSearchVO vo) {
-		String sql = "select * from ( "
-							+ "select rownum rn, TMP.* from ( "
-								+ "select * from seller order by seller_mem_no desc "
-							+ ")TMP "
-						+ ") where rn between ? and ?";
+		String sql = "SELECT ROWNUM ,S.SELLER_MEM_NO,S.SELLER_BANK,S.SELLER_REGISTRY_DATE,S.SELLER_ACCOUNT,S.SELLER_CHECK,(SELECT MEM_NICK FROM MEM M WHERE M.MEM_NO = S.SELLER_MEM_NO) AS MEM_NICK FROM SELLER S"
+				+" WHERE ROWNUM BETWEEN ? AND ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listmapper, param);
 	}

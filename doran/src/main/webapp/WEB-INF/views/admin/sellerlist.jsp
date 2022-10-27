@@ -47,7 +47,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="dto" items="${list}">
-				<tr>
+				<tr align="center">
 					<td>
 						 <a href="/admin/sellerdetail?sellerMemNo=${dto.sellerMemNo}">
 							${dto.sellerMemNo}
