@@ -79,7 +79,7 @@
           <ul class="dropdown-menu text-small">
           	<c:choose>
          		<c:when test = "${login}">
-	            <li><a class="dropdown-item" href="#">프로필</a></li>
+	            <li><a class="dropdown-item" href="/mypage/profile">프로필</a></li>
 	            <li><a class="dropdown-item" href="#">좋아요</a></li>
 	            <li><a class="dropdown-item" href="#">1:1 문의</a></li>
 	            <li><a class="dropdown-item" href="#">관심 프로젝트</a></li>
