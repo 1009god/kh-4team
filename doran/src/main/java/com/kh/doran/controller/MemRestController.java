@@ -32,9 +32,9 @@ public class MemRestController { //아이디 검사
 		}
 	}
 	
-	@GetMapping("/nick")
+	@RequestMapping("/nick")
 	public String nick(@RequestParam String memNick) {
-		MemDto memDto = memDao.selectNick(memNick);
+		MemDto memDto = memDao.findByNickname(memNick);
 		if(memDto == null) {
 			return "NNNNY"; //사용 가능 닉네임 (당신이 첫 사람)
 		}
