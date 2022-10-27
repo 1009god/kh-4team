@@ -96,11 +96,11 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 			return AdminMemListVO.builder()
 					.memNo(rs.getInt("mem_no"))
 					.memEmail(rs.getString("mem_email"))
-					.memPw(rs.getString("mem_pw"))
+//					.memPw(rs.getString("mem_pw"))
 					.memNick(rs.getString("mem_nick"))
-					.memTel(rs.getString("mem_tel"))
-					.memJoinDate(rs.getDate("mem_join_date"))
-					.memRoute(rs.getString("mem_route"))
+//					.memTel(rs.getString("mem_tel"))
+//					.memJoinDate(rs.getDate("mem_join_date"))
+//					.memRoute(rs.getString("mem_route"))
 					.sellerCheck(rs.getString("seller_Check"))
 					.build();
 		}
@@ -124,13 +124,7 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	
 	@Override
 	public List<AdminMemListVO> search(MemListSearchVO vo) {
-		String sql = "select * from ( "
-							+ "select rownum rn, TMP.* from ( "
-								+ "select * from mem "
-								+ "where instr(#1, ?) > 0 "
-								+ "order by mem_no desc "
-								+ ")TMP "
-								+ ") where rn between ? and ? ";
+		String sql = "";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
@@ -140,11 +134,8 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 	
 	@Override
 	public List<AdminMemListVO> list(MemListSearchVO vo) {
-		String sql = "select * from ( "
-							+ "select rownum rn, TMP.* from ( "
-								+ "select * from mem order by mem_no desc "
-							+ ")TMP "
-						+ ") where rn between ? and ?";
+		String sql = "SELECT ROWNUM , M.MEM_NO, M.MEM_NICK,M.MEM_EMAIL,(SELECT SELLER_CHECK FROM SELLER S WHERE M.MEM_NO = S.SELLER_MEM_NO) AS SELLER_CHECK FROM MEM M"
+				+ " WHERE ROWNUM BETWEEN ? AND ?";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listmapper, param);
 	}
