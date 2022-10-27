@@ -119,7 +119,42 @@
 			});
 		});
 		
-	});
+        
+        $("input[name=memNick]").blur(function(){
+        	
+        	//작성된 닉네임 불러오기
+        	var memNick = $(this).val();
+        	
+        	//형식 검사 실시
+        	var regex = /^[가-힣a-z0-9]{2,10}$/;
+        	var judge = regex.test(memNick);
+        	
+        	//형식 검사 결과에 따라 다른 처리를 수행한다
+        	// - 성공 : AJAX 통신으로 닉네임 중복검사 실시
+        	//- 실패 : 실패 메세지 처리
+        	$(this).removeClass("fail NNNNN NNNNY");
+        	
+        	if(judge) {
+        		
+        		var that = this;
+        		$.ajax({
+	        		uri:"http://localhost:8888/rest/mem/nick?memNick="+memNick,
+	        		method:"get",
+	        		success:function(resp){
+	        			if(resp == "NNNNN"){
+	        				$(that).addClass("NNNNN");
+	        			}
+			        	else if(resp == "NNNNY") {
+			        		$(that).addClass("NNNNY");
+			        	}
+	        		},
+	        		error:function(){} //통신 오류 발생 시
+	       		});
+	        }
+        	else{
+        		$(this).addClass("fail");
+        	}
+		});
 	</script>
 	
 	<form action="join" method="post" class="login-formcheck">
@@ -142,6 +177,9 @@
 		<div class="row">
             <label>닉네임</label>
             <input type="text" name="memNick" class="input w-100" placeholder="한글, 영어, 숫자로 2-10글자" required>
+            <span class="NNNNN-message">이미 사용중인 아이디입니다</span>
+            <span class="NNNNY-message">사용 가능한 아이디입니다!</span>
+            <span class="fail-message">한글과 영어, 숫자 2~10글자로 작성해주세요</span>
         </div>
 		
 		<div class="row">
