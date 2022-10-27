@@ -125,6 +125,12 @@ public class MemDaoImpl implements MemDao {
 		return jdbcTemplate.update(sql, param) > 0;	
 	}
 
+	@Override
+	public MemDto selectNick(String memNick) {
+		String sql = "select * from mem where mem_nick=?";
+		Object[] param = {memNick};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
 	
 	
 }

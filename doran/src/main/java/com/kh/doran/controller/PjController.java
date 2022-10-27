@@ -66,7 +66,7 @@ public class PjController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
-	
+	@Autowired
 	private FilesDao filesDao;
 	
 	@GetMapping("/insert")
@@ -75,9 +75,14 @@ public class PjController {
 	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute PjDto pjDto,
-			@RequestParam List<MultipartFile> files
+			@RequestParam List<MultipartFile> files,
+			HttpSession session, RedirectAttributes attr
 			)throws IllegalStateException, IOException  {
 		pjDao.insert(pjDto);
+		
+		int pjsellerNo = (int)session.getAttribute("pjselleresNo");
+		pjDto.setPjSellerMemNo(pjsellerNo);
+		
 		for(MultipartFile file : files) {
 			if(!file.isEmpty()) {
 				System.out.println("첨부파일 발견");
@@ -97,10 +102,13 @@ public class PjController {
 			file.transferTo(target);
 			}
 	}
-		return "redirect:/";
+		
+		return "rediret:pj/insertfinish";
 	}
-
-
+	@GetMapping("/insertfinish")
+	public String insertfinish() {
+		return "pj/insertfinish";
+	}
 
 	
 	@GetMapping("/detail")

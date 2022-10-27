@@ -97,5 +97,20 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {filesNo};
 		return jdbcTemplate.update(sql,param)>0;
 	}
+	
+	
+	//mem 프로필 이미지
+	@Override
+	public void connectFiles(int filesNo, int memNo) {
+		String sql = "insert into profile_img values ( ? , ? )";
+		Object[] param = {filesNo, memNo};
+		jdbcTemplate.update(sql,param);		
+	}
+	@Override
+	public List<FilesDto> profileImgList(int memNo) {
+		String sql = "select * from profile_img_view where mem_no = ?";
+		Object[] param = {memNo};
+		return jdbcTemplate.query(sql, mapper,param);
+	}
 
 }
