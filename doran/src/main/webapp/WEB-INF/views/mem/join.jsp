@@ -1,24 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	
+
 	 		<link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-        
+
             <link rel="stylesheet" type="text/css" href="/css/reset.css">
             <link rel="stylesheet" type="text/css" href="/css/commons.css">
-            
-        
+
+
             <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
        		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-       		
-        
-            <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>  
-            <script src="/js/checkbox.js"></script>
+
+
             
+
 	<style>
 	
-	<style>
         .input.NNNNN ~ .NNNNN-message ,
         .input.NNNNY ~ .NNNNY-message ,
         .input.fail ~ .fail-message {
@@ -100,7 +98,8 @@
 			var memEmail = $(this).val();
 			if(!memEmail) return;
 			
-			console.log(memEmail)
+			console.log(memEmail);
+		
 			
 			$.ajax({
 				url:"http://localhost:8888/rest/mem/id?memEmail="+memEmail,
@@ -119,69 +118,91 @@
 			});
 		});
 		
-        
-        $("input[name=memNick]").blur(function(){
+		//닉네임 입력창을 만들고 blur 상황에서 중복 검사를 실시하도록 구현
+        //- 닉네임은 한글+숫자 2~10글자 이내로 작성해야 함
+        //- 형식에 맞지 않을 경우 "닉네임은 한글과 숫자 2~10글자로 작성하세요" 출력
+        //- 형식에 맞을 경우 ajax 통신을 사용하여 서버로 확인 요청을 전송
+        //- 서버에서 처리를 위하여 MemberRestController에 /nick 주소 처리 매핑 생성
+        //- 닉네임이 존재할 경우 NNNNN , 존재하지 않을 경우 NNNNY를 반환
+        //- 반환된 결과에 따라 메세지 출력
+        $("input[name=memNick]").blur(function() {
         	
-        	//작성된 닉네임 불러오기
+        	//작성된 닉네임을 불러온다
         	var memNick = $(this).val();
         	
-        	//형식 검사 실시
+        	//형식 검사를 실시한다
         	var regex = /^[가-힣a-z0-9]{2,10}$/;
         	var judge = regex.test(memNick);
         	
         	//형식 검사 결과에 따라 다른 처리를 수행한다
-        	// - 성공 : AJAX 통신으로 닉네임 중복검사 실시
-        	//- 실패 : 실패 메세지 처리
-        	$(this).removeClass("fail NNNNN NNNNY");
+        	//- 성공 : ajax 통신으로 닉네임 중복 검사 실시
+        	//- 실패 : 실패 메시지 처리
         	
-        	if(judge) {
-        		
-        		var that = this;
-        		$.ajax({
-	        		uri:"http://localhost:8888/rest/mem/nick?memNick="+memNick,
-	        		method:"get",
-	        		success:function(resp){
-	        			if(resp == "NNNNN"){
-	        				$(that).addClass("NNNNN");
-	        			}
-			        	else if(resp == "NNNNY") {
-			        		$(that).addClass("NNNNY");
-			        	}
-	        		},
-	        		error:function(){} //통신 오류 발생 시
-	       		});
-	        }
-        	else{
-        		$(this).addClass("fail");
-        	}
-		});
+        	console.log(memNick);
+        	
+        	$(this).removeClass("fail NNNNN NNNNY");
+            if(judge){
+
+                var that = this;//this를 보관
+
+                $.ajax({
+                    //url:"http://localhost:8888/rest/mem/nick?memberNick="+memberNick,
+                    //method:"get",
+
+                    url:"http://localhost:8888/rest/mem/nick",
+                    method:"post",
+                    data:{
+                        memNick:memNick
+                    },
+                    success:function(resp){
+                        //(+주의) 이곳에서의 this는 입력창이 아니다
+                        if(resp == "NNNNN"){
+                            $(that).addClass("NNNNN");
+                            inputStatus.memNickValid = false;
+                        }
+                        else if(resp == "NNNNY"){
+                            $(that).addClass("NNNNY");
+                            inputStatus.memNickValid = true;
+                        }
+                    },
+                    error:function(){}//통신 오류 발생 시
+                });
+
+            }
+            else {
+                $(this).addClass("fail");
+                inputStatus.memNickValid = false;
+            }
+
+        });
+    });
 	</script>
-	
+
 	<form action="join" method="post" class="login-formcheck">
 	<div class="container-300">
 		<div class="row center">
 			<h1>회원 가입</h1>
 		</div>
-		
+
 		 <div class="row">
             <label>이메일</label>
             <input type="text" name="memEmail" class="input w-100" placeholder="name@example.com" id="floatingInput" required>
             <span></span>
         </div>
-        
+
          <div class="row">
             <label>비밀번호</label>
             <input type="password" name="memPw" class="input w-100" placeholder="Password" required>
         </div>
-		
+
 		<div class="row">
             <label>닉네임</label>
             <input type="text" name="memNick" class="input w-100" placeholder="한글, 영어, 숫자로 2-10글자" required>
-            <span class="NNNNN-message">이미 사용중인 아이디입니다</span>
+       		<span class="NNNNN-message">이미 사용중인 아이디입니다</span>
             <span class="NNNNY-message">사용 가능한 아이디입니다!</span>
-            <span class="fail-message">한글과 영어, 숫자 2~10글자로 작성해주세요</span>
+            <span class="fail-message">한글과 숫자 2~10글자로 작성해주세요</span>
         </div>
-		
+
 		<div class="row">
             <label>전화번호</label>
             <input type="tel" name="memTel" class="input w-100" placeholder="- 제외하고 입력"  required>
@@ -201,6 +222,5 @@
 		</div>
 	</div>
 	</form>
-		
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-		
