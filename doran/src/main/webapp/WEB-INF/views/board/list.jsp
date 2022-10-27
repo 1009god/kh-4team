@@ -38,7 +38,6 @@
 			<th width="45%">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
-			<th>댓글수</th>
 			<th>조회수</th>
 		</tr>
 	</thead>
@@ -72,7 +71,6 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-			<td>${boardDto.boardReplyCnt}</td>
 			<td>${boardDto.boardViewCnt}</td>
 		</tr>
 	</c:forEach>

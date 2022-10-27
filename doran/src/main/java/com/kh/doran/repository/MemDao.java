@@ -10,6 +10,7 @@ public interface MemDao {
 	void insert(MemDto memDto);
 	MemDto selectOne(int memNo);
 	MemDto selectOne(String memEmail);
+	MemDto selectNick(String memNick);
 
 	
 	boolean profileUpdate(MemDto dto);  //구버전
