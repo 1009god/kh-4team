@@ -84,9 +84,9 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 };
 //	아우터 sql구문 추가 select * from mem m join seller s on mem.mem_no = seller.seller_mem_no;
 	@Override
-	public AdminsellerDetailVO selectOne1(int boardPostNo) {
-		String sql = "";
-		Object[] param = {boardPostNo};
+	public AdminsellerDetailVO selectOne1(int sellerMemNo) {
+		String sql = "select * from mem m join seller s on m.mem_no = s.seller_mem_no where seller_mem_no=?;";
+		Object[] param = {sellerMemNo};
 		return jdbcTemplate.query(sql,  detailExtractor, param);
 }
 
@@ -146,16 +146,16 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 	};
 	
 	@Override
-	public SellerDto selectOne(int sellerNo) {
+	public SellerDto selectOne(int sellerMemNo) {
 		String sql = "select * from seller where seller_mem_no=?";
-		Object[]param = {sellerNo};
+		Object[]param = {sellerMemNo};
 		return jdbcTemplate.query(sql, extractor,param);
 	}
 
 	@Override
-	public boolean delete(int sellerNo) {
+	public boolean delete(int sellerMemNo) {
 		String sql = "delete seller where seller_mem_no=?";
-		Object[]param= {sellerNo};
+		Object[]param= {sellerMemNo};
 		return jdbcTemplate.update(sql,param)>0;
 	}
 	

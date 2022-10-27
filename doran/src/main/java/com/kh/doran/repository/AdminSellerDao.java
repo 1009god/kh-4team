@@ -24,6 +24,6 @@ public interface AdminSellerDao {
 	
 	AdminsellerDetailVO selectOne1(int sellerMemNo);
 	
-	SellerDto selectOne(int sellerNo);
-	boolean delete(int sellerNo);
+	SellerDto selectOne(int sellerMemNo);
+	boolean delete(int sellerMemNo);
 }

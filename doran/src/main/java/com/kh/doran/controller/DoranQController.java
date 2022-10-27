@@ -27,19 +27,6 @@ public class DoranQController {
 	@Autowired
 	private DoranQDao doranQDao;
 	
-	@RequestMapping("/list")
-	public String list(Model model,
-			@ModelAttribute(name="vo") DoranQListSearchVO vo) {
-		//페이지 네비게이터를 위한 게시글 수를 구한다
-		int count = doranQDao.count(vo);
-		vo.setCount(count);
-		
-		model.addAttribute("list", doranQDao.selectList(vo));
-		return "doranq/list";
-	}
-	
-
-	
 	@GetMapping("/write")
 	public String write() {
 		return "doranq/write";
@@ -54,20 +41,18 @@ public class DoranQController {
 		doranQDto.setDoranQmemNo(memNo);
 		
 		doranQDao.insert(doranQDto);
-		//return "redirect:list";
+		return "redirect:detail";
 		
 		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
 		//해결책 : 번호를 미리 생성하고 등록하도록 메소드 변경
-		int doranQNo = doranQDao.insert2(doranQDto);
-		attr.addAttribute("doranQNo", doranQNo);
-		return "redirect:detail";
 	}
+	
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int doranQNo) {
 		boolean result = doranQDao.delete(doranQNo);
 	      if(result) {//삭제 성공
-	         return "redirect:list";
+	         return "";
 	      }
 	      else {//구문은 실행되었지만 바뀐 게 없는 경우 (강제 예외 처리)
 	         throw new TargetNotFoundException();

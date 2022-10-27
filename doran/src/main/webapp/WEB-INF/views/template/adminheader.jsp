@@ -30,6 +30,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
 <script src="/js/checkbox.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </head>
 <body>
@@ -92,7 +93,7 @@
 						<a href="#">1:1문의 관리</a>
 					</div>
 					<div class="row">
-						<a href="#">FAQ 작성</a>
+						<a href="/admin/faqlist">FAQ 작성</a>
 					</div>
 
 				</div>
