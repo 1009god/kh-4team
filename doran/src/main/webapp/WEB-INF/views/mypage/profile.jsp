@@ -32,7 +32,9 @@
 	 color: #0072b2;
 }
 
-
+#proimg {
+	border-radius: 100%;
+}
 
 
 </style>
@@ -51,7 +53,7 @@
 		
 		<c:forEach var="vo" items="${profileImg}" varStatus="status">	
 			<c:if test="${status.last}">			
-				<img width="100px" height="100px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}">
+				<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
 			</c:if>
 		</c:forEach>
 				

@@ -60,7 +60,7 @@
 </label>
 </div>
  <div class="mt-50 right">
- <button type="submit" class="btn btn-neutral agree" disabled>판매자 가입 신청</button>
+ <button type="submit" class="btn btn-neutral agree" >판매자 가입 신청</button>
  </div>
  </form>
 </div>

@@ -127,6 +127,14 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {memNo};
 		return jdbcTemplate.query(sql, mapper2,param);
 	}
+	
+	// 판매자 인증 첨부파일
+	@Override
+	public void connectSellerFiles(int sellerMemNo, int filesNo) {
+		String sql = "insert into SF values( ? , ? )";
+		Object[] param = {sellerMemNo, filesNo};
+		jdbcTemplate.update(sql,param);			
+	}
 
 	
 	
