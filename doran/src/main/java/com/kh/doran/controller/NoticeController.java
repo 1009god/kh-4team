@@ -1,7 +1,5 @@
 package com.kh.doran.controller;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.NoticeDto;
-import com.kh.doran.entity.ReplyDto;
 import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.NoticeDao;
 import com.kh.doran.vo.NoticeListSearchVO;
@@ -69,8 +66,8 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam int boardPostNo) {
-		boolean result = boardDao.delete(boardPostNo);
+	public String delete(@RequestParam int noticeNo) {
+		boolean result = noticeDao.delete(noticeNo);
 	      if(result) {//삭제 성공
 	         return "redirect:list";
 	      }
@@ -81,21 +78,21 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/edit")
-	public String edit(@RequestParam int boardPostNo, Model model) {
-		BoardDetailVO boardDto = boardDao.selectOne(boardPostNo);
-		if(boardDto == null) { //없는 경우 내가 만든 예외 발생
+	public String edit(@RequestParam int noticeNo, Model model) {
+		NoticeDto noticeDto = noticeDao.selectOne(noticeNo);
+		if(noticeDto == null) { //없는 경우 내가 만든 예외 발생
 			throw new TargetNotFoundException();
 		}
-		model.addAttribute("boardDto", boardDto);
+		model.addAttribute("noticeDto", noticeDto);
 		return "board/edit";
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute BoardDto boardDto,
+	public String edit(@ModelAttribute NoticeDto noticeDto,
 			RedirectAttributes attr) {
-		boolean result = boardDao.update(boardDto);
+		boolean result = noticeDao.update(noticeDto);
 		if(result) {//성공했으면 상세페이지
-			attr.addAttribute("boardPostNo", boardDto.getBoardPostNo());
+			attr.addAttribute("noticeNo", noticeDto.getNoticeNo());
 			return "redirect:detail";
 		}
 		

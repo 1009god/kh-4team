@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.NoticeDto;
 import com.kh.doran.vo.NoticeListSearchVO;
-import com.kh.doran.vo.NoticeListSearchVO;
+
+
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao{
@@ -52,22 +53,6 @@ public class NoticeDaoImpl implements NoticeDao{
 								.build();
 		}
 	};
-//	
-//	private RowMapper<BoardListVO> listMapper = new RowMapper<BoardListVO>() {
-//		@Override
-//		public BoardListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			return BoardListVO.builder()
-//									.boardPostNo(rs.getInt("board_post_no"))
-//									.boardMemNo(rs.getInt("board_mem_no"))
-//									.boardTitle(rs.getString("board_title"))
-//									.boardWriteTime(rs.getDate("board_writetime"))
-//									.boardViewCnt(rs.getInt("board_view_cnt"))
-//									.boardReplyCnt(rs.getInt("board_reply_cnt"))
-//									.replyCount(rs.getInt("reply_count"))
-//									.memNick(rs.getString("mem_nick"))
-//								.build();
-//		}
-//	};
 	
 
 	
@@ -80,131 +65,127 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Override
 	public List<NoticeDto> selectList(NoticeListSearchVO vo) {
-		String sql = "select * from notice where instr(#1, ?) > 0 order by notice_no desc";
+		if(vo.isSearch()) {//검색이라면
+			return search(vo);
+		}
+		else {//목록이라면
+			return list(vo);
+		}
+	}
+
+	
+	private ResultSetExtractor<NoticeDto> extractor = new ResultSetExtractor<NoticeDto>() {
+		
+		@Override
+		public NoticeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return NoticeDto.builder()
+						.noticeNo(rs.getInt("notice_no"))
+						.noticeAdminNo(rs.getInt("notice_admin_no"))
+						.noticeTitle(rs.getString("notice_title"))
+						.noticeContent(rs.getString("notice_content"))
+						.noticeWriteTime(rs.getDate("notice_writetime"))
+					.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	
+	
+	@Override
+	public NoticeDto selectOne(int noticeNo) {
+		String sql = "select * from board where notice_no = ?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
+	@Override
+	public int insert2(NoticeDto noticeDto) {
+		//번호를 미리 생성한 뒤 등록하는 기능
+		String sql = "select notice_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+		
+		//등록 시퀀스 생성 xx
+		sql = "insert into notice("
+				+ "notice_no, notice_admin_no, notice_title, notice_content)"
+				+ " values (?,?,?,?)";
+		Object[] param = {
+				noticeNo, noticeDto.getNoticeAdminNo(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContent()
+		};
+		jdbcTemplate.update(sql, param);
+		
+		return noticeNo;
+	}
+	
+	@Override
+	public boolean delete(int noticeNo) {
+		String sql = "delete notice where notice_no = ?";
+		Object[] param = {noticeNo};
+		return jdbcTemplate.update(sql,param) > 0;
+	}
+	
+	@Override
+	public boolean update(NoticeDto noticeDto) {
+		String sql = "update notice set notice_title=?, notice_content=? where notice_no=?";
+		Object[] param = {
+			noticeDto.getNoticeTitle(), noticeDto.getNoticeContent(), noticeDto.getNoticeNo()
+		};
+		
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	@Override
+	public List<NoticeDto> list(NoticeListSearchVO vo) {
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select * from notice order by notice_no desc"
+				+ ")TMP"
+				+ ")where rn between ? and ?";
+		Object[] param = {
+			vo.startRow(), vo.endRow()
+		};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	@Override
+	public List<NoticeDto> search(NoticeListSearchVO vo) {
+		String sql = "select * from ( "
+							+ "select rownum rn, TMP.* from ( "
+							+ "select * from notice "
+							+ "where instr(#1, ?) > 0 "
+							+ "order by notice_no desc"
+							+ ")TMP"
+							+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword()};
+		Object[] param = {vo.getKeyword(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 
-	
-private ResultSetExtractor<NoticeDto> extractor = new ResultSetExtractor<NoticeDto>() {
-	
 	@Override
-	public NoticeDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-		if(rs.next()) {
-			return NoticeDto.builder()
-					.noticeNo(rs.getInt("notice_no"))
-					.noticeAdminNo(rs.getInt("notice_admin_no"))
-					.noticeTitle(rs.getString("notice_title"))
-					.noticeContent(rs.getString("notice_content"))
-					.noticeWriteTime(rs.getDate("notice_writetime"))
-				.build();
+	public int count(NoticeListSearchVO vo) {
+		if(vo.isSearch()) {
+			return searchCount(vo);
 		}
 		else {
-			return null;
+			return listCount(vo);
 		}
 	}
-};
-
-
-@Override
-public NoticeDto selectOne(int noticeNo) {
-	String sql = "select * from board where notice_no = ?";
-	Object[] param = {noticeNo};
-	return jdbcTemplate.query(sql, extractor, param);
-}
-
-@Override
-public int insert2(NoticeDto noticeDto) {
-	//번호를 미리 생성한 뒤 등록하는 기능
-	String sql = "select notice_seq.nextval from dual";
-	int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
 	
-	//등록 시퀀스 생성 xx
-	sql = "insert into notice("
-			+ "notice_no, notice_admin_no, notice_title, notice_content)"
-			+ " values (?,?,?,?)";
-	Object[] param = {
-			noticeNo, noticeDto.getNoticeAdminNo(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContent()
-	};
-	jdbcTemplate.update(sql, param);
+	@Override
+	public int listCount(NoticeListSearchVO vo) {
+		String sql = "select count(*) from notice";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
 	
-	return boardPostNo;
-}
+	@Override
+	public int searchCount(NoticeListSearchVO vo) {
+		String sql = "select count(*) from notice "
+				+ "where instr(#1, ?) > 0";
+			sql = sql.replace("#1", vo.getType());
+			Object[] param = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 
-//@Override
-//public boolean delete(int boardPostNo) {
-//	String sql = "delete board where board_post_no = ?";
-//	Object[] param = {boardPostNo};
-//	return jdbcTemplate.update(sql,param) > 0;
-//}
-//
-//@Override
-//public boolean update(NoticeDto noticeDto) {
-//	String sql = "update board set board_title=?, board_content=? where board_post_no=?";
-//	Object[] param = {
-//		boardDto.getBoardTitle(), boardDto.getBoardContent(), boardDto.getBoardPostNo()
-//	};
-//	
-//return jdbcTemplate.update(sql, param) > 0;
-//}
-//
-//@Override
-//public List<BoardListVO> search(NoticeListSearchVO vo) {
-//	String sql = "select * from ("
-//			+ "select rownum rn, TMP.* from (select board_post_no, mem_nick, reply_count "
-//			+ "from board B "
-//			+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
-//			+ "(select distinct reply_board_post_no, count(R.reply_no) "
-//			+ "over(partition by reply_board_post_no) reply_count "
-//			+ "from reply R) on board_post_no = reply_board_post_no) "
-//			+ "where instr(#1, ?) > 0 order by board_post_no desc) TMP where rn between ? and ?";
-//	sql = sql.replace("#1", vo.getType());
-//	Object[] param = {
-//		vo.getKeyword(), vo.startRow(), vo.endRow()
-//	};
-//	return jdbcTemplate.query(sql, listMapper, param);
-//}
-//
-//@Override
-//public List<BoardListVO> list(NoticeListSearchVO vo) {
-//	String sql = "select * from ( "
-//						+ "select rownum rn, TMP.* from ( "
-//						+ "select B.*, mem_nick, reply_count "
-//								+ "from board B "
-//								+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
-//								+ "(select distinct reply_board_post_no, count(R.reply_no) "
-//								+ "over(partition by reply_board_post_no) reply_count "
-//								+ "from reply R) on board_post_no = reply_board_post_no "
-//							+ "order by board_post_no desc "
-//						+ ")TMP "
-//					+ ") where rn between ? and ?";
-//	Object[] param = {vo.startRow(), vo.endRow()};
-//	return jdbcTemplate.query(sql, listMapper, param);
-//}
-//
-//@Override
-//public int count(NoticeListSearchVO vo) {
-//	if(vo.isSearch()) {//검색이라면
-//		return searchCount(vo); //검색 카운트 구하는 메소드
-//	}
-//	else {
-//		return listCount(vo);
-//	}
-//}
-//
-//@Override
-//public int listCount(NoticeListSearchVO vo) {
-//	String sql = "select count(*) from board";
-//	return jdbcTemplate.queryForObject(sql, int.class);
-//}
-//
-//@Override
-//public int searchCount(NoticeListSearchVO vo) {
-//	String sql = "select count(*) from board where instr(#1, ?) > 0";
-//	sql = sql.replace("#1", vo.getType());
-//	Object[] param = {vo.getKeyword()};
-//	return jdbcTemplate.queryForObject(sql, int.class, param);
-//}
-//
 }

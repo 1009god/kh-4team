@@ -22,6 +22,15 @@
 			</td>
 		</tr>
 	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="2" align="right">
+				<a href="write">공지 작성</a>
+				<a href="write">공지 수정</a>
+				<a href="delete?noticeNo=${noticeDto.noticeNo}">공지 삭제</a>
+			</td>
+		</tr>
+	</tfoot>
 
 <button type="submit">목록보기</button>
 
