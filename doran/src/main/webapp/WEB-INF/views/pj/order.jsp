@@ -42,7 +42,8 @@
                 $(".target").toggle();
             });
 
-
+       
+			
             
         });
 
@@ -101,7 +102,7 @@
 
     
 
-    <div>
+    <div id="choose">
         
         <h2>배송지 선택</h2>
         
@@ -123,7 +124,7 @@
         <button class="toggle-control">배송지 등록</button>
     
 
-    <form method ="post" class="target" action="http://localhost:8888/edit/address_plus">
+    <form method ="post" class="target" action="http://localhost:8888/edit/address_plus" target="http://localhost:8888/pj/order?optionsNo=${OptionsDto.optionsNo}">
         <div>
             <h2>배송지 입력</h2>
         </div>
@@ -165,7 +166,7 @@
 	</div>
 	
 	<div>
-	<button type="submit">등록완료</button>
+	<button type="submit" class="updateAddress">등록완료</button>
 	</div>
         
     </form>
