@@ -135,9 +135,9 @@
                         <nav>
                             <ul>                                
                                 <li><a href="#"><i class="fa-solid fa-bars"></i>&nbsp;전체 프로젝트</a></li>
-                                <li><a href="#">인기</a></li>
-                                <li><a href="#">신규</a></li>
-                                <li><a href="#">마감임박</a></li>
+                                <li><a href="http://localhost:8888/pj/list?sort=pj_likes_number">인기</a></li>
+                                <li><a href="http://localhost:8888/pj/list?sort=pj_no">신규</a></li>
+                                <li><a href="http://localhost:8888/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>
                                 <li><a href="#">커뮤니티</a></li>
                                 <li><a href="#">고객센터</a></li>
                             </ul>

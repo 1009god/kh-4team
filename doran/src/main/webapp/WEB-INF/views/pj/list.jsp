@@ -2,38 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 목록</title>
+<%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="메인페이지" name="title"/>
+</jsp:include>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.css"/>
+     <!-- 로딩바 라이브러리 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css">
+    <script src="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.min.js"></script>
     
 
     <!--jquery를 사용하기 위하여 라이브러리 js파일을 불러온다-->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
-    <!-- 로딩바 라이브러리 -->
-    <script type="text/javascript" src="loading-bar.js"></script>
+   
     <script type="text/javascript">
     
-    
-    /* construct manually */
-    var bar1 = new ldBar(.ldBar);
-    /* ldBar stored in the element */
-//     var bar2 = document.getElementById('myItem1').ldBar;
-    bar1.set(60);
-
-        
-
+    $(function(){
+        //var bar1 = new ldBar(".progressbar");
+		var list = document.querySelectorAll(".progressbar");
+		for(var i=0; i < list.length; i++){
+			var bar = new ldBar(list[i]);
+		}
+    });
     </script>
     
     
@@ -62,17 +53,14 @@
     .item{
      	width : "33%"; 
     }
-    .progressbar{
+    .inner{
     	height : 3px;
-        position: relative;
-        background : lightgray;
-            }
-    .progressbar> .inner{
-        position: absolute;
+    	width:100%;
+/*         position: absolute; */
         top:0;
         left:0;
         bottom:0;
-		background: #0072b2;
+/*  		background: #0072b2;  */
             }
     
     </style>
@@ -81,7 +69,8 @@
 </head>
 <body>
     <div class="container-1200">
-	<div class="ldBar" data-value="50"></div>
+
+	
         <div class="row">
             <h1>상품 목록</h1>
         </div>
@@ -110,6 +99,15 @@
         </select> 
         </form>
     </div>   
+    
+    <div class="row center">
+        <form action = "list" method ="get">
+        	<button name="sort" value="prelaunching">펀딩예정</button>
+            <button name="sort" value="ongoing">펀딩중</button>
+            <button name="sort" value="finishing">펀딩마감</button>
+        </form>
+    </div>   
+    
     <div class="row center">
         <form action = "list" method ="get">
         	<button name="" value="">전체</button>
@@ -121,13 +119,9 @@
             <button name="category" value="기타">기타</button>
 
         </form>
-    </div>   
     
-
-        
         <div class="row center list">
 	            <c:forEach var="pjDto" items="${list}">
-	            <c:forEach var="amountCalList" items="${amountCalList}">
 	            
 	            	<div class="row item">
 	            			<div class="a">
@@ -135,7 +129,7 @@
 	            			</div>
 	            			
 		                <div class="row">
-		                	<span>${pjDto.pjNo}</span>
+		                	<span> ${pjDto.pjNo}</span>
 			                <a href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
 			                <span> ♥ ${pjDto.pjLikesNumber}</span>
 		                </div>
@@ -143,29 +137,19 @@
 		                <div class="row">
 			                <a href="detail?pjNo=${pjDto.pjNo}">
 			                ${pjDto.pjName}</a>
+                                	
 		                </div>
-                        <div class="left">
-	                          <c:choose>
-		                           <c:when test="${amountCalList.pjNo==pjDto.pjNo}">
-		                               		 ${amountCalList.achievementRate}%	${amountCalList.priceTotal}원
-		                           </c:when>
-		                           <c:otherwise>
-		                                0% 	0원
-		                           </c:otherwise>
-	                          </c:choose>
-	                   </div>
-	                            
-		                <div class="row">
-                            <div class="progressbar ">
-                                <div class="inner"></div>
-                                <div>
-<%--                                  <input type="number" name="percent" class="percent input" min="0" max="100" value="${amountCalList.achievementRate}"> --%>
-                                </div>
-                            </div>
-                       </div>
-	       			</div>
-	       			
-	       			</c:forEach>
+		                <div class="left">${pjDto.achievementRate}% ${pjDto.nvl}원 
+		                </div> 
+                        <div class="progressbar"  
+		                        data-value = "${pjDto.achievementRate}" 
+		                        data-stroke ="#0072b2" 
+		                        data-stroke-width = "5px"
+		                        data-stroke-trail ="lightgray"
+		                        data-stroke-trail-width = "5px"
+                        >
+                        </div>
+                     </div>
 	       		</c:forEach>
         </div>
 
@@ -222,7 +206,7 @@
     </div>
 
 </div>
-</body>
-</html>
+
+
 
 

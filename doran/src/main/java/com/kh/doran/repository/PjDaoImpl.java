@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
-import com.kh.doran.vo.SupportPjVO;
+import com.kh.doran.vo.PjVO;
 
 @Repository
 public class PjDaoImpl implements PjDao {
@@ -71,8 +71,6 @@ public class PjDaoImpl implements PjDao {
 				return null;
 			}
 		}
-
-	
 	};
 
 
@@ -85,11 +83,10 @@ public class PjDaoImpl implements PjDao {
 	
 	
 	@Override
-	public List<PjDto> selectList(PjListSearchVO vo) {
+	public List<PjListSearchVO> selectList(PjListSearchVO vo) {
 		if(vo.isSearch()) {//검색
 			return search(vo);
 		}
-		
 		else if(vo.isPopular()) {//인기순
 			return popular(vo);
 		}
@@ -98,6 +95,15 @@ public class PjDaoImpl implements PjDao {
 		}
 		else if(vo.isLatest()) {//최신순
 			return latest(vo);
+		}
+		else if(vo.isPrelaunching()) {//펀딩예정
+			return prelaunching(vo);
+		}
+		else if(vo.isOngoing()) {//펀딩예정
+			return ongoing(vo);
+		}
+		else if(vo.isFinishing()) {//펀딩마감
+			return finishing(vo);
 		}
 		else if(vo.isCategory()) {//카테고리별
 			return category(vo);
@@ -108,96 +114,227 @@ public class PjDaoImpl implements PjDao {
 		}
 	}
 	
+	//검색
 	@Override
-	public List<PjDto> search(PjListSearchVO vo) {
-		String sql = "select * from ( "
-				+ "select rownum rn, TMP.* from( "
-					+ "select*from pj "
-					+ "where instr(#1,?)>0 "
-					+ "order by pj_no desc "
-				+ ")TMP "
-			+ ") where rn between ? and ?";
+	public List<PjListSearchVO> search(PjListSearchVO vo) {
+			String sql ="select * from ( "  
+			        + " select rownum rn, TMP.* from( "
+			               + "select " 
+			       + " PJ.*, "
+			       + " nvl(ACH.total, 0), "
+			      + " nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate "
+			   + " from pj PJ "
+			      + " left outer join ( "
+			          + " select " 
+			             + " OPT.options_pj_no, " 
+			              + " sum(OPT.options_price) total "
+			           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
+			          + " group by OPT.options_pj_no "
+			      + " ) ACH on PJ.pj_no = ACH.options_pj_no "
+			      	+ "where instr(#1, ?)>0 order by pj_no desc"
+								+")TMP" 
+						+	" ) where rn between ? and ? " ;
+			
 	sql=sql.replace("#1", vo.getType());
 	Object[]param = {
 			vo.getKeyword(), vo.startRow(),vo.endRow()
 		};
-	return jdbcTemplate.query(sql,mapper,param);
+	return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
+	//목록
 	@Override
-	public List<PjDto> list(PjListSearchVO vo) {
-		String sql = "select * from ( "
-					+ "select rownum rn, TMP.* from( "
-						+ "select*from pj order by pj_no desc "
-					+ ")TMP "
-				+ ") where rn between ? and ?";
+	public List<PjListSearchVO> list(PjListSearchVO vo) {
+		String sql ="    select * from ( "
+				+ "        select rownum rn, TMP.* from( "
+				+ "                select "
+				+ "        PJ.*,"
+				+ "        nvl(ACH.total, 0),"
+				+ "        nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate"
+				+ "    from pj PJ"
+				+ "        left outer join ("
+				+ "            select "
+				+ "                OPT.options_pj_no, "
+				+ "                sum(OPT.options_price) total"
+				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
+				+ "            group by OPT.options_pj_no"
+				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
+				+ "					)TMP "
+				+ "				) where rn between ? and ?  ";
 
 		Object[]param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql,mapper,param);
+		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
-	// 인기순
+	// 좋아요순
 	@Override
-	public List<PjDto> popular (PjListSearchVO vo) {
-		String sql = "select * from ( "
-			   + "select rownum rn, TMP.* from( " 
-					+ "select*from pj order by #1 desc " 
-							+ ")TMP " 
-						+") where rn between ? and ?";
+	public List<PjListSearchVO> popular (PjListSearchVO vo) {
+		String sql ="select * from ( "  
+		        + " select rownum rn, TMP.* from( "
+		               + "select " 
+		       + " PJ.*, "
+		       + " nvl(ACH.total, 0), "
+		      + " nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate "
+		   + " from pj PJ "
+		      + " left outer join ( "
+		          + " select " 
+		             + " OPT.options_pj_no, " 
+		              + " sum(OPT.options_price) total "
+		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
+		          + " group by OPT.options_pj_no "
+		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by #1 desc"
+							+")TMP order by #1 desc" 
+					+	" ) where rn between ? and ? " ;
 		sql=sql.replace("#1", vo.getSort());
 		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql,mapper,param);
+		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
 	//마감임박순
 	@Override
-	public List<PjDto> imminent(PjListSearchVO vo) {
-		String sql = "select * from ( "
-			  +  "select rownum rn, TMP.* from( "
-					+ "select*from pj order by #1 asc " 
-							+	")TMP " 
-						+	") where rn between ? and ?";
+	public List<PjListSearchVO> imminent(PjListSearchVO vo) {
+		String sql ="select * from ( "  
+		        + " select rownum rn, TMP.* from( "
+		               + "select " 
+		       + " PJ.*, "
+		       + " nvl(ACH.total, 0), "
+		      + " nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate "
+		   + " from pj PJ "
+		      + " left outer join ( "
+		          + " select " 
+		             + " OPT.options_pj_no, " 
+		              + " sum(OPT.options_price) total "
+		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
+		          + " group by OPT.options_pj_no "
+		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by #1 asc"
+							+")TMP order by #1 asc" 
+					+	" ) where rn between ? and ? " ;
 		sql=sql.replace("#1", vo.getSort());
 		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql,mapper,param);
+		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
 	//최신순
 	@Override
-	public List<PjDto> latest(PjListSearchVO vo) {
-		String sql = "select * from ( "
-				  +  "select rownum rn, TMP.* from( "
-						+ "select*from pj order by #1 desc " 
-								+	")TMP " 
-							+	") where rn between ? and ?";
+	public List<PjListSearchVO> latest(PjListSearchVO vo) {
+		String sql ="select * from ( "  
+		        + " select rownum rn, TMP.* from( "
+		               + "select " 
+		       + " PJ.*, "
+		       + " nvl(ACH.total, 0), "
+		      + " nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate "
+		   + " from pj PJ "
+		      + " left outer join ( "
+		          + " select " 
+		             + " OPT.options_pj_no, " 
+		              + " sum(OPT.options_price) total "
+		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
+		          + " group by OPT.options_pj_no "
+		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
+							+")TMP order by #1 desc" 
+					+	" ) where rn between ? and ? " ;
 			sql=sql.replace("#1", vo.getSort());
 			Object[] param = {vo.startRow(), vo.endRow()};
-			return jdbcTemplate.query(sql,mapper,param);
+			return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
 	// 카테고리별 정렬순
-	
 	@Override
-	public List<PjDto> category(PjListSearchVO vo) {
-		String sql = "select * from ( "
-				+  "select rownum rn, TMP.* from( "
-					+ "	select*from pj where pj_category in ? order by pj_no desc "
-				 				+")TMP "
-						+	") where rn between ? and ?";
+	public List<PjListSearchVO> category(PjListSearchVO vo) {
+		String sql ="select * from ( "  
+		        + " select rownum rn, TMP.* from( "
+		               + "select " 
+		       + " PJ.*, "
+		       + " nvl(ACH.total, 0), "
+		      + " nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate "
+		   + " from pj PJ "
+		      + " left outer join ( "
+		          + " select " 
+		             + " OPT.options_pj_no, " 
+		              + " sum(OPT.options_price) total "
+		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
+		          + " group by OPT.options_pj_no "
+		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
+							+")TMP where pj_category in ?" 
+					+	" ) where rn between ? and ? " ;
 		Object[] param = {vo.getCategory(), vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql,mapper,param);
+		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
 	@Override
-	public List<PjDto> prelaunching(PjListSearchVO vo) {
-		String sql = "select * from ( "
-				+  "select rownum rn, TMP.* from( "
-					+ "	select * from pj where sysdate-pj_funding_start_date<0 "
-						+ "order by sysdate-pj_funding_start_date desc "
-				 				+")TMP "
-						+	") where rn between ? and ?";
+	public List<PjListSearchVO> prelaunching(PjListSearchVO vo) {
+		String sql = "    select #1.* from ( ("
+				+ "        select rownum rn, TMP.* from( "
+				+ "                select "
+				+ "        PJ.*,"
+				+ "        nvl(ACH.total, 0),"
+				+ "        nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate"
+				+ "    from pj PJ"
+				+ "        left outer join ("
+				+ "            select "
+				+ "                OPT.options_pj_no, "
+				+ "                sum(OPT.options_price) total"
+				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
+				+ "            group by OPT.options_pj_no"
+				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
+				+ "					)TMP where (sysdate-pj_funding_start_date<0) "
+				+ "						order by sysdate-pj_funding_start_date desc  ) #1"
+				+ "				) where rn between ? and ?  ";
+		sql=sql.replace("#1", vo.getSort());
 		Object[] param = {vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql,mapper,param);
+		return jdbcTemplate.query(sql,pjListMapper,param);
+	}
+	
+	@Override
+	public List<PjListSearchVO> ongoing(PjListSearchVO vo) {
+		String sql = "    select #1.* from ( ("
+				+ "        select rownum rn, TMP.* from( "
+				+ "                select "
+				+ "			PJ.*,"
+				+ "        nvl(ACH.total, 0),"
+				+ "        nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate"
+				+ "    from pj PJ"
+				+ "        left outer join ("
+				+ "            select "
+				+ "                OPT.options_pj_no, "
+				+ "                sum(OPT.options_price) total"
+				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
+				+ "            group by OPT.options_pj_no"
+				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
+				+ "					)TMP where "
+				+ "                                pj_funding_start_date < sysdate and "
+				+ "                                sysdate-pj_funding_end_date<=0 "
+				+ "                               order by sysdate-pj_funding_end_date desc ) #1"
+				+ "				) where rn between ? and ?  ";
+		
+		sql=sql.replace("#1", vo.getSort());
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql,pjListMapper,param);
+	}
+	
+	@Override
+	public List<PjListSearchVO> finishing(PjListSearchVO vo) {
+		String sql = "        select #1.* from ( ("
+				+ "        select rownum rn, TMP.* from( "
+				+ "                select "
+				+ "        PJ.*,"
+				+ "        nvl(ACH.total, 0),"
+				+ "        nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate"
+				+ "    from pj PJ"
+				+ "        left outer join ("
+				+ "            select "
+				+ "                OPT.options_pj_no, "
+				+ "                sum(OPT.options_price) total"
+				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
+				+ "            group by OPT.options_pj_no"
+				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
+				+ "					)TMP where sysdate-pj_funding_end_date>0"
+				+ "                            order by sysdate-pj_funding_end_date desc ) #1"
+				+ "				) where rn between ? and ?  ";
+				
+		sql=sql.replace("#1", vo.getSort());
+		Object[] param = {vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 
 	@Override
@@ -210,6 +347,15 @@ public class PjDaoImpl implements PjDao {
 		}
 		else if(vo.isCategory()) {
 			return categoryCount(vo);
+		}
+		else if(vo.isPrelaunching()) {
+			return prelaunchingCount(vo);
+		}
+		else if(vo.isOngoing()) {
+			return ongoingCount(vo);
+		}
+		else if(vo.isFinishing()) {
+			return finishingCount(vo);
 		}
 		else {
 			return listCount(vo);
@@ -239,7 +385,31 @@ public class PjDaoImpl implements PjDao {
 		Object[] param = {vo.getCategory()};
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
-
+	
+	// 펀딩 예정 데이터 갯수
+	@Override
+	public int prelaunchingCount(PjListSearchVO vo) {
+		String sql = "select count(*) from pj where (sysdate-pj_funding_start_date<0) ";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	// 펀딩중 데이터 갯수
+	@Override
+	public int ongoingCount(PjListSearchVO vo) {
+		String sql = " select count(*) from pj "
+				+ "			where"
+				+ "      (pj_funding_start_date < sysdate and "
+				+ "        sysdate-pj_funding_end_date<=0 )";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	// 펀딩 마감 데이터 갯수
+	@Override
+	public int finishingCount(PjListSearchVO vo) {
+		String sql = "select count(*) from pj where sysdate-pj_funding_end_date>0";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
 
 
 	@Override
@@ -250,35 +420,31 @@ public class PjDaoImpl implements PjDao {
 		jdbcTemplate.update(sql, param);
 		
 	}
+	
+	private RowMapper<PjListSearchVO> pjListMapper = new RowMapper<>() {
 
-
-	//달성률 계산 위한 매퍼	
-			private RowMapper<OrdersCalVO> calMapper = new RowMapper<>() {
-				@Override
-				public OrdersCalVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-					return OrdersCalVO.builder()
-								.optionsPjNo(rs.getInt("options_pj_no"))
-								.pjNo(rs.getInt("pj_no"))
-								.priceTotal(rs.getInt("price_total"))
-								.pjTargetMoney(rs.getInt("pj_target_money"))
-								.achievementRate(rs.getInt("achievement_rate"))
-							.build();
+		@Override
+		public PjListSearchVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return PjListSearchVO.builder()
+					.pjNo(rs.getInt("pj_no"))
+					.pjSellerMemNo(rs.getInt("pj_seller_mem_no"))
+					.pjCategory(rs.getString("pj_category"))
+					.pjName(rs.getString("pj_name"))
+					.pjSummary(rs.getString("pj_summary"))
+					.pjTargetMoney(rs.getInt("pj_target_money"))
+					.pjFundingStartDate(rs.getDate("pj_funding_start_date"))
+					.pjFundingEndDate(rs.getDate("pj_funding_end_date"))
+					.pjEndDate(rs.getDate("pj_end_date"))
+					.pjLikesNumber(rs.getInt("pj_likes_number"))
+					.nvl(rs.getInt("nvl(ACH.total,0)"))
+					.achievementRate(rs.getInt("achievement_rate"))
+				.build();
 		}
 	};
 
 	
-	@Override
-	public List<OrdersCalVO> achievementRate() {
-		String sql = "select " 
-					+ " op.options_pj_no, "
-					+" sum(options_price) price_total, "
-					+ "sum(options_price)/pj_target_money*100 achievement_rate, "
-					+ "pj_target_money, pj_no "
-			+ " from options op inner join orders ord on op.options_no=ord.orders_options_no" 
-			    	+ " inner join pj on options_pj_no = pj_no "
-			    + "group by op.options_pj_no, pj_target_money,pj_no";
-		return jdbcTemplate.query(sql,calMapper);
-	}
+	
+	
 	
 
 

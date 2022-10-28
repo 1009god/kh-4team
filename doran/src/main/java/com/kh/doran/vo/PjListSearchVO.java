@@ -1,10 +1,33 @@
 package com.kh.doran.vo;
 
+import java.sql.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data
+@Data 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PjListSearchVO {
+	
+	private int pjNo;
+	private int pjSellerMemNo;
+	private String pjCategory;
+	private String pjName;
+	private String pjSummary;
+	private int pjTargetMoney;
+	private Date pjFundingStartDate;
+	private Date pjFundingEndDate;
+	private Date pjEndDate;
+	private int pjLikesNumber;
+	private int nvl;
+	private int achievementRate;
+	
+	
 	//검색 분류와 검색어
 	private String type, keyword;
 	
@@ -41,6 +64,34 @@ public class PjListSearchVO {
 		else{
 			return false;
 		}
+	}
+	
+	public boolean isPrelaunching() {
+		if(sort!=null) {
+			return sort.equals("prelaunching");
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean isOngoing() {
+		if(sort!=null) {
+			return sort.equals("ongoing");
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean isFinishing() {
+		if(sort!=null) {
+			return sort.equals("finishing");
+		}
+		else{
+			return false;
+		}
+		
 	}
 	
 	private String category;
@@ -138,6 +189,15 @@ public class PjListSearchVO {
 		if(isLatest()) {
 			return "size="+size+"&sort="+sort;
 		}
+		if(isPrelaunching()) {
+			return "size="+size+"&sort="+sort;
+		}
+		if(isOngoing()) {
+			return "size="+size+"&sort="+sort;
+		}
+		if(isFinishing()) {
+			return "size="+size+"&sort="+sort;
+		}
 		else {
 			return "size="+size;
 		}
@@ -152,6 +212,8 @@ public class PjListSearchVO {
 			return "size="+size;
 		}
 	}
+	
+	
 
 
 
