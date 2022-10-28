@@ -131,7 +131,7 @@
        
 	<div>
 	<label>해당 회원 번호
-		<input name="addressMemNo" value="${sessionScope.loginNo}" > 
+		<input name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
 	</label>
 	
 	<label>받는 사람
