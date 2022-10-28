@@ -123,12 +123,22 @@ function shareKakao() {
 
     <c:forEach var="OptionsDto" items="${OptionsDto}">
         
-
+ 	<c:set var="loginNo" value="${loginNo}" />
     <c:set var="currentStock" value="${OptionsDto.optionsStock}" />
     <c:set var="orderCount" value="${OrderCount}" />
     
 
     <c:choose>
+    	
+    	<c:when test="${loginNo==null}">
+    		<div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
+                <span class="no">${OptionsDto.optionsNo}</span>
+                <span class="name">${OptionsDto.optionsName}</span>
+                <span class="price">${OptionsDto.optionsPrice}</span>
+                <span class="stock">${OptionsDto.optionsStock}</span>
+    	</c:when>
+    
+    
         <c:when test="${OrderCount==1}">
             <div class="selectOption"  onclick="alert('이미 후원한 프로젝트입니다. 추가로 후원할 수 없습니다');">
                 <span class="no">${OptionsDto.optionsNo}</span>
@@ -147,7 +157,7 @@ function shareKakao() {
             </div>
         </c:when>
 
-        <c:when test="${OrderCount==0&&currentStock!=0}">
+        <c:when test="${loginNo!=null&&OrderCount==0&&currentStock!=0}">
             <div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
                 <span class="no">${OptionsDto.optionsNo}</span>
                 <span class="name">${OptionsDto.optionsName}</span>

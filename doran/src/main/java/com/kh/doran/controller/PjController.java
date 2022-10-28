@@ -127,6 +127,7 @@ public class PjController {
 				
 		Integer loginNo=(Integer) session.getAttribute("loginNo");
 		if(loginNo==null) {
+			model.addAttribute("loginNo",loginNo);//integer loginNo==null을 전송
 			return "pj/detail";
 		}
 		else {
