@@ -12,12 +12,14 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.NoticeDto;
+import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.NoticeListSearchVO;
 
 
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao{
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -39,8 +41,6 @@ public class NoticeDaoImpl implements NoticeDao{
 		jdbcTemplate.update(sql);
 	}
 	
-	
-	
 	private RowMapper<NoticeDto> mapper = new RowMapper<NoticeDto>() {
 		@Override
 		public NoticeDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -53,8 +53,6 @@ public class NoticeDaoImpl implements NoticeDao{
 								.build();
 		}
 	};
-	
-
 	
 	
 	@Override
@@ -102,15 +100,21 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 	
 	@Override
-	public void insert2(NoticeDto noticeDto) {
-		String sql = "insert into notice("
+	public int insert2(NoticeDto noticeDto) {
+		//번호를 미리 생성한 뒤 등록하는 기능
+		String sql = "select notice_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+				
+		sql = "insert into notice("
 				+ "notice_no, notice_admin_no, notice_title, notice_content)"
 				+ " values (?,?,?,?)";
 		Object[] param = {
-				noticeDto.getNoticeNo(), noticeDto.getNoticeAdminNo(), 
+				noticeNo, noticeDto.getNoticeAdminNo(), 
 				noticeDto.getNoticeTitle(), noticeDto.getNoticeContent()
 		};
 		jdbcTemplate.update(sql, param);
+		
+		return noticeNo;
 	}
 	
 	@Override
@@ -129,33 +133,33 @@ public class NoticeDaoImpl implements NoticeDao{
 		
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+	@Override
+	public List<NoticeDto> search(NoticeListSearchVO vo) {
+		String sql = "select * from ( "
+				+ "select rownum rn, TMP.* from ( "
+				+ "select * from notice "
+				+ "where instr(#1, ?) > 0 "
+				+ "order by notice_no desc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword(), vo.startRow(), vo.endRow()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 	@Override
 	public List<NoticeDto> list(NoticeListSearchVO vo) {
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ("
-				+ "select * from notice order by notice_no desc"
-				+ ")TMP"
-				+ ")where rn between ? and ?";
+		String sql = "select * from ( "
+				+ "select rownum rn, TMP.* from ( "
+				+ "select * from notice order by notice_no desc "
+				+ ")TMP "
+				+ ") where rn between ? and ?";
 		Object[] param = {
 			vo.startRow(), vo.endRow()
 		};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
-	@Override
-	public List<NoticeDto> search(NoticeListSearchVO vo) {
-		String sql = "select * from ( "
-							+ "select rownum rn, TMP.* from ( "
-							+ "select * from notice "
-							+ "where instr(#1, ?) > 0 "
-							+ "order by notice_no desc"
-							+ ")TMP"
-							+ ") where rn between ? and ?";
-		sql = sql.replace("#1", vo.getType());
-		Object[] param = {vo.getKeyword(), vo.startRow(), vo.endRow()};
-		return jdbcTemplate.query(sql, mapper, param);
-	}
 
 	@Override
 	public int count(NoticeListSearchVO vo) {
@@ -175,8 +179,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	
 	@Override
 	public int searchCount(NoticeListSearchVO vo) {
-		String sql = "select count(*) from notice "
-				+ "where instr(#1, ?) > 0";
+		String sql = "select count(*) from notice where instr(#1, ?) > 0";
 			sql = sql.replace("#1", vo.getType());
 			Object[] param = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, param);

@@ -1,6 +1,9 @@
 package com.kh.doran.controller;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +25,12 @@ import com.kh.doran.vo.NoticeListSearchVO;
 @Controller
 @RequestMapping("/notice")
 public class NoticeController {
+	
 	@Autowired
 	private NoticeDao noticeDao;
 	
+//	참고 : ModelAttribute로 수신한 데이터는 자동으로 Model에 첨부된다
+//	- 옵션에 name을 작성하면 해당하는 이름으로 model에 첨부
 	@RequestMapping("/list")
 	public String list(Model model,
 			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
@@ -37,8 +43,10 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(@RequestParam int noticeNo, Model model) {
-		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo)); 
+	public String detail(
+		@RequestParam int noticeNo, Model model, HttpSession session) {
+		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
+
 		return "notice/detail";
 	}
 	
@@ -55,29 +63,31 @@ public class NoticeController {
 		int adminNo = (int)session.getAttribute("loginNo");
 		noticeDto.setNoticeAdminNo(adminNo);
 		
+		noticeDao.insert(noticeDto);
+		//return "redirect:list";
+		
 		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
 		//해결책 : 번호를 미리 생성하고 등록하도록 메소드 변경
-		//int noticeNo = noticeDao.insert2(noticeDto);
-		//attr.addAttribute("noticeNo", noticeNo);
+		int noticeNo = noticeDao.insert2(noticeDto);
+		attr.addAttribute("noticeNo", noticeNo);
 		return "redirect:detail";
 	}
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int noticeNo) {
 		boolean result = noticeDao.delete(noticeNo);
-	      if(result) {//삭제 성공
-	         return "redirect:list";
-	      }
-	      else {//구문은 실행되었지만 바뀐 게 없는 경우 (강제 예외 처리)
-	         throw new TargetNotFoundException();
-	      }
-		
+		if(result) {//성공
+			return "redirect:list";
+		}
+		else {//구문은 실행되었지만 바뀐 게 없는 경우(강제 예외 처리)
+			throw new TargetNotFoundException();
+		}
 	}
 	
 	@GetMapping("/edit")
 	public String edit(@RequestParam int noticeNo, Model model) {
 		NoticeDto noticeDto = noticeDao.selectOne(noticeNo);
-		if(noticeDto == null) { //없는 경우 내가 만든 예외 발생
+		if(noticeDto == null) {//없는 경우 내가 만든 예외 발생
 			throw new TargetNotFoundException();
 		}
 		model.addAttribute("noticeDto", noticeDto);
@@ -88,12 +98,11 @@ public class NoticeController {
 	public String edit(@ModelAttribute NoticeDto noticeDto,
 			RedirectAttributes attr) {
 		boolean result = noticeDao.update(noticeDto);
-		if(result) {//성공했으면 상세페이지
+		if(result) {//성공했다면 상세페이지로 이동
 			attr.addAttribute("noticeNo", noticeDto.getNoticeNo());
 			return "redirect:detail";
 		}
-		
-		else { //실패했으면 오류 발생
+		else {//실패했다면 오류 발생
 			throw new TargetNotFoundException();
 		}
 	}
