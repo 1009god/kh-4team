@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.SellerDto;
 import com.kh.doran.repository.AdminSellerDao;
+import com.kh.doran.vo.AdminsellerDetailVO;
 import com.kh.doran.vo.MemListSearchVO;
 import com.kh.doran.vo.SellerListSearchVO;
 
@@ -36,8 +37,8 @@ public class AdminSellerController {
 	}
 	
 	@GetMapping("/sellerdetail")
-	public String detail(Model model, @RequestParam int sellerNo) {
-		SellerDto sellerDto = adminSellerDao.selectOne(sellerNo);
+	public String detail(Model model, @RequestParam int sellerMemNo) {
+		AdminsellerDetailVO sellerDto = adminSellerDao.selectOne1(sellerMemNo);
 		model.addAttribute("sellerDto",sellerDto);
 		
 		return "admin/sellerdetail";

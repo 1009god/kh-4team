@@ -10,6 +10,8 @@ import com.kh.doran.vo.PjListSearchVO;
 
 public interface AdminPjDao {
 
+	
+	
 	List<PjDto> selectList();
 	List<AdminpjListVO> selectList(PjListSearchVO vo);
 	List<AdminpjListVO> list(PjListSearchVO vo);

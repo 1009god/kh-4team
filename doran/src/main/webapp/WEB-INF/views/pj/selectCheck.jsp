@@ -8,11 +8,17 @@
 </head>
 <body>
 
+
+
+
+
+
 <span>${OptionsDto.optionsNo}</span>
 <span>${OptionsDto.optionsName}</span>
 <span>${OptionsDto.optionsPrice}</span>
 <span>${OptionsDto.optionsStock}</span>
 <span>${OptionsDto.optionsDeliveryPrice}</span>
+
 
 <a href="order?optionsNo=${OptionsDto.optionsNo}"><button>다음</button></a>
 </body>

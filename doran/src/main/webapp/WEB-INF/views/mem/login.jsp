@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>로그인 창</title>
-</head>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="로그인" name="title"/>
+</jsp:include>
 <body>
 	<div align="center">
 		<!-- 정상 / 이상 모두 나옴 -->
@@ -23,6 +20,8 @@
 		</c:if>
 		
 	</div>
+	<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 </body>
 </html>

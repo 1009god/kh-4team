@@ -7,34 +7,40 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
+
+<div class="container-1400">
 <h1>설정</h1>
-<%--	이미지 디비랑 연결 어케 하지 ???
-	<div class="row left">
-		<label>profile img</label>
-		<input class="input w-100" type="text" name="profileImg" value="${memDto.이미지}" >
-	</div>
- --%>
+
  
- <a href="//edit/profile">프로필</a>
- <a href="/edit/account">계정</a>
- <a href="/edit/address_list">배송지</a>
+ <div>
+ <span><a href="//edit/profile">프로필</a></span>
+ <span><a href="/edit/account">계정</a></span>
+ <span><a href="/edit/address_list">배송지</a></span>
+ </div>
+ 
+ <hr style="border:1px color= silver;" width="100%">
  
  
+ <form method="post" enctype="multipart/form-data">
+ <!-- 이미지 첨부파일 -->
  <div>프로필 이미지 수정</div>
- <form method="post">
-	<div class="row">
+ <input type="file" name= files>
+ 
+ 
+ 
+	<div>
 		<label>닉네임</label>
 		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">
 		<input type="hidden" name="memNo" value="${memDto.memNo}" > 
 	</div>
-	<div class="row center">
+	<div class="left">
 	
 		<button type="submit" >수정</button>
 	
 	</div>
 </form>
 
+</div>
 
-
-</body>
-</html>
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

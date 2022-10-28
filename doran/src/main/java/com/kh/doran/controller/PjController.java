@@ -40,8 +40,10 @@ import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
+import com.kh.doran.repository.SellerDao;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
+import com.kh.doran.vo.OrderCountVO;
 
 @Controller
 @RequestMapping("/pj")
@@ -66,8 +68,10 @@ public class PjController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
-	
+	@Autowired
 	private FilesDao filesDao;
+	
+
 	
 	@GetMapping("/insert")
 	public String insert() {
@@ -75,9 +79,14 @@ public class PjController {
 	}
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute PjDto pjDto,
-			@RequestParam List<MultipartFile> files
+			@RequestParam List<MultipartFile> files,
+			HttpSession session, RedirectAttributes attr
 			)throws IllegalStateException, IOException  {
 		pjDao.insert(pjDto);
+		
+		int pjsellerNo = (int)session.getAttribute("pjselleresNo");
+		pjDto.setPjSellerMemNo(pjsellerNo);
+		
 		for(MultipartFile file : files) {
 			if(!file.isEmpty()) {
 				System.out.println("첨부파일 발견");
@@ -97,18 +106,25 @@ public class PjController {
 			file.transferTo(target);
 			}
 	}
-		return "redirect:/";
+		
+		return "rediret:pj/insertfinish";
 	}
-
-
+	@GetMapping("/insertfinish")
+	public String insertfinish() {
+		return "pj/insertfinish";
+	}
 
 	
 	@GetMapping("/detail")
-	public String detail(@RequestParam int pjNo, Model model, HttpSession session) {
+	public String detail(@RequestParam int pjNo, @ModelAttribute OrderCountVO vo, Model model, HttpSession session) {
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트넘버로 검색해서 나온 값 model에 저장해서 넘김
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
-
 		
+		//프로젝트개설판매자의  회원테이블을 넘김
+//		PjDto pjDto=pjDao.selectOne(pjNo);
+//		int sellerNo=pjDto.getPjSellerMemNo();
+//		model.addAttribute("Seller",memDao.selectOne(sellerNo));
+				
 		Integer loginNo=(Integer) session.getAttribute("loginNo");
 		if(loginNo==null) {
 			return "pj/detail";
@@ -118,6 +134,10 @@ public class PjController {
 			likesDto.setLikesMemNo(loginNo);
 			likesDto.setLikesPjNo(pjNo);
 			model.addAttribute("check",likesDao.check(likesDto));
+			vo.setOptionsPjNo(pjNo);
+			int loginNo2=(int) session.getAttribute("loginNo");
+			vo.setOrdersMemNo(loginNo2);
+			model.addAttribute("OrderCount", pjDao.orderCount(vo));//구매여부
 		}
 		return "pj/detail";
 	};
@@ -156,18 +176,19 @@ public class PjController {
 	
 	@PostMapping("/order")
 	public String order(@ModelAttribute OrdersDto ordersDto, @ModelAttribute AddressDto addressDto,
-			@RequestParam int optionsNo, Model model, HttpSession session) {
+			@RequestParam int ordersOptionsNo, Model model, HttpSession session) {
 		Integer loginNo=(Integer) session.getAttribute("loginNo");
 		if(loginNo==null) {
 			return "redirect:/mem/login";
 		}
 		int loginNo2=(int) session.getAttribute("loginNo");
 		model.addAttribute("memNo", loginNo2);
-		OptionsDto optionsDto=optionsDao.selectOne(optionsNo);
+		OptionsDto optionsDto=optionsDao.selectOne(ordersOptionsNo);
 		int optionsPjNo=optionsDto.getOptionsPjNo();
 		model.addAttribute("PjDto", pjDao.selectOne(optionsPjNo));
-		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));
+		model.addAttribute("OptionsDto", optionsDao.selectOne(ordersOptionsNo));
 		ordersDao.insert(ordersDto);//주문 작성
+		optionsDao.stockUpdate(ordersOptionsNo);//주문한 옵션의 재고를 1 깎음
 		return "redirect:/pj/orderComplete";
 	};
 	

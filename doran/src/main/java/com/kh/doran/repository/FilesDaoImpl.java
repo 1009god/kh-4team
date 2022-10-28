@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.FilesDto;
+import com.kh.doran.vo.profileImgVO;
 
 @Repository
 public class FilesDaoImpl implements FilesDao{
@@ -97,5 +98,44 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {filesNo};
 		return jdbcTemplate.update(sql,param)>0;
 	}
+	
+	
+	
+	private RowMapper<profileImgVO> mapper2= new RowMapper<profileImgVO>() {
+		
+		@Override
+		public profileImgVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			return profileImgVO.builder()
+					.memNo(rs.getInt("mem_no"))
+					.profileImgFileNo(rs.getInt("profile_img_file_no"))					
+					.build();
+		}
+	};
+	
+	//mem 프로필 이미지
+	@Override
+	public void connectFiles(int filesNo, int memNo) {
+		String sql = "insert into profile_img values ( ? , ? )";
+		Object[] param = {filesNo, memNo};
+		jdbcTemplate.update(sql,param);		
+	}
+	
+	@Override
+	public List<profileImgVO> profileImgList(int memNo) {
+		String sql = "select * from profile_img_view where mem_no = ?";
+		Object[] param = {memNo};
+		return jdbcTemplate.query(sql, mapper2,param);
+	}
+	
+	// 판매자 인증 첨부파일
+	@Override
+	public void connectSellerFiles(int sellerMemNo, int filesNo) {
+		String sql = "insert into SF values( ? , ? )";
+		Object[] param = {sellerMemNo, filesNo};
+		jdbcTemplate.update(sql,param);			
+	}
 
-}
+	
+	
+	}

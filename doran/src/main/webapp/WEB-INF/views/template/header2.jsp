@@ -103,7 +103,9 @@
                 <header>
                     <div class="container-1400">
                         <div id="logo">
-                            <img src="/img/DoranMini.png" id="logo_img" width="170px" height="70px">
+                        	<a href="/">
+                            	<img src="/img/DoranMini.png" id="logo_img" width="170px" height="70px">
+                            </a>
                         </div>
             
                         <div id="top_menu">

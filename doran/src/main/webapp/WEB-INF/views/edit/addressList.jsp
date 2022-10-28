@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="메인페이지" name="title"/>
+</jsp:include>
+
+
 
 <style>
 .border{
@@ -15,9 +16,22 @@ border:solid;
 }
 </style>
 
-</head>
 
-<body>
+<div class="container-1400">
+
+<h1>설정</h1>
+
+ 
+ <div>
+ <span><a href="//edit/profile">프로필</a></span>
+ <span><a href="/edit/account">계정</a></span>
+ <span><a href="/edit/address_list">배송지</a></span>
+ </div>
+ 
+ <hr style="border:1px color= silver;" width="100%">
+
+
+
 
 <div>
 등록된 배송지<button><a href="http://localhost:8888/edit/address_plus">+추가</a></button>
@@ -44,5 +58,9 @@ ${dto.addressNo}
 </div>
 
 </c:forEach>
-</body>
-</html>
+
+</div>
+
+
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

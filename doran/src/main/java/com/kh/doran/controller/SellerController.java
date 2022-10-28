@@ -40,7 +40,7 @@ public class SellerController {
 	@Autowired
 	private PjDao pjDao;
 	
-	private final File directory =new File("D:/doranupload");
+	private final File directory =new File(System.getProperty("user.home"), "doranupload");
 	@PostConstruct
 	public void prepare() {
 		directory.mkdirs();
@@ -60,6 +60,10 @@ public class SellerController {
 			//리퀘스트파람 멀티파트파일 멤버프로필
 			) throws IllegalStateException, IOException {
 		//SellerDto findDto = sellerDao.
+		
+		int sellerMemNo = (int)session.getAttribute("loginNo");
+		
+		
 		sellerDao.insert(sellerDto);
 		for(MultipartFile file : files) {
 			if(!file.isEmpty()) {
@@ -74,24 +78,27 @@ public class SellerController {
 					.filesSize(file.getSize())
 					.build());
 			//파일저장
-			File dir = new File("D:/doranuplaod/sellerfiles");
+			File dir = new File(System.getProperty("user.home"), "doranupload");
 			dir.mkdirs();
 			File target = new File(dir,String.valueOf(filesNo));
 			file.transferTo(target);
+			
+			//연결 테이블에 연결정보 저장(셀러회원번호, 첨부파일번호)
+			filesDao.connectSellerFiles(sellerMemNo, filesNo);
+			
 			}
 		}
 		
 		
-		return "redircet:/";
+		return "redircet:sellerfinish";
 	}
 	
-	@GetMapping("/pjinsert")
-	public String pjinsert( 
-			@ModelAttribute PjDto pjDto,
-			@RequestParam List<MultipartFile> files
-			) throws IllegalStateException, IOException {
-		
-		return "";
+	@GetMapping("/sellerfinish")
+	public String sellerfinish(){
+		return "seller/sellerfinish";
 	}
+	
+	
+	
 	
 }

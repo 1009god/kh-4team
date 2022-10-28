@@ -56,7 +56,7 @@
 					
 					<td>${dto.memEmail}</td>	
 					
-					<td>회원/판매자</td>
+					<td>${dto.sellerCheck }</td>
 			     	</tr>
 				</c:forEach>
 			</tbody>
