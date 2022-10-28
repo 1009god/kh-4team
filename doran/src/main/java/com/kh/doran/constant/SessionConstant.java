@@ -1,6 +1,6 @@
-//package com.kh.doran.constant;
-//
-//public interface SessionConstant {
+package com.kh.doran.constant;
+
+public interface SessionConstant {
 //	String NO="loginNo";
 //	String EMAIL="loginEmail";
-//}
+}
