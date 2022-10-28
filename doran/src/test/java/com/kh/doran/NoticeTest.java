@@ -21,9 +21,9 @@ public class NoticeTest {
 	
 	@BeforeEach
 	public void beforeEach() {
-		for(int i = 1;i<=10;i++) {
+		for(int i = 1;i<=50;i++) {
 			noticeDao.insert(NoticeDto.builder()
-					.noticeAdminNo(1)
+					.noticeAdminNo(2)
 					.noticeTitle("테스트" + i)
 					.noticeContent("테스트" + i)
 					.build());

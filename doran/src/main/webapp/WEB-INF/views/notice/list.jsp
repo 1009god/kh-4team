@@ -1,36 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	
-	<jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!-- 현재 시간 구하기 -->
+<jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <c:set var="today">
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
+<style>
+	 .table.table-slit {
+            border: 3px solid gray;
+            border-left: none;
+            border-right: none;
+        }
+        .table.table-slit > thead {
+            border-bottom: 2px solid gray;
+        }
+        .table.table-slit > tfoot {
+            border-top: 2px solid gray;
+        }
+</style>
 
-<h1>공지사항</h1>
+<!-- 테스트용 데이터 출력 -->
+<!-- <h3>${vo}</h3> -->
 
-<table border="1" width="800">
+
+
+<table class="table table-slit">
 	<thead>
+	<tr>
+		<td align = "right" colspan="6">
+			<a href="write">글쓰기</a>
+		</td>
 		<tr>
-			공지사항
-			<th>제목</th>
+			<th width="45%">제목</th>
 			<th>작성일</th>
 		</tr>
 	</thead>
 	<tbody align="center">
-		<c:forEach var="noticeDto" items="${list}">
+	<c:forEach var="noticeDto" items="${list}">
 		<tr>
 			<td align="left">
-				<a href="detail?noticeNo=${noticeDto.noticeNo})">
+				<a href="detail?noticeNo=${noticeDto.noticeNo}">
 					${noticeDto.noticeTitle}
 				</a>
 			</td>
-			<td>${noticeDto.noticeWriteTime}</td>
+			<td>
+				<c:set var="current">
+					<fmt:formatDate value="${noticeDto.noticeWriteTime}" pattern="yyyy-MM-dd"/>
+				</c:set>
+					<c:choose>
+						<c:when test="${today == current}">
+							<fmt:formatDate value="${noticeDto.noticeWriteTime}" 
+								pattern="HH:mm"/>
+						</c:when>
+						<c:otherwise>
+							<fmt:formatDate value="${noticeDto.noticeWriteTime}" 
+								pattern="yyyy-MM-dd"/>
+						</c:otherwise>
+					</c:choose>
+				</td>
 		</tr>
-		</c:forEach>
+	</c:forEach>
 	</tbody>
 	<tfoot>
+		<tr>
+			<td align = "right" colspan="6">
+				<a href="write">글쓰기</a>
+			</td>
+		</tr>
 	</tfoot>
 </table>
 
@@ -84,16 +123,13 @@
 </c:choose>
 </h3>
 
-<div class="row center">
-		<form action="list" method="get">
-			<input type="hidden" name="size" value="${vo.size}">
-			<select class="input" name="type" required>
-				<option value="board_title" <c:if test="${vo.type == 'notice_title'}">selected</c:if>>제목</option>
-			</select>
-			
-			<input class="input" type="search" name="keyword" placeholder="검색어" required value="${vo.keyword}">
-			
-			<button class="btn btn-positive" type="submit">검색</button>
-		</form>
-	</div>
-
+<!-- 검색창 -->
+<form action="list" method="get">
+	<select name="type" required>
+		<option value="notice_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
+	</select>
+	
+	<input type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
+	
+	<button type="submit">검색</button>
+</form>

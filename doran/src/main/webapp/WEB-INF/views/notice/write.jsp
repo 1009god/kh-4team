@@ -22,7 +22,7 @@
     		<tfoot>
     			<tr>
     				<td align="right" colspan="2">
-    				<a href="list">목록으로</a>
+    				<a href="/notice/list">목록으로</a>
     				<button type="submit">등록하기</button>
     			</tr>
     		</tfoot>
