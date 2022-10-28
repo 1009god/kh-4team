@@ -8,6 +8,11 @@
 </head>
 <body>
 
+
+
+
+
+
 <span>${OptionsDto.optionsNo}</span>
 <span>${OptionsDto.optionsName}</span>
 <span>${OptionsDto.optionsPrice}</span>

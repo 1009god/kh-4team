@@ -180,20 +180,20 @@ public class EditController {
 		
 //account		
 // 전화번호 수정			
-		@GetMapping("/account_change_tel")
-		public String editAccount(HttpSession session, Model model) {
-			
-			//(1)아이디 획득(HttpSession)
-			int memNo = (int)session.getAttribute("loginNo");			
-			//(2) 아이디로 정보를 조회
-			MemDto memDto = memDao.selectOne(memNo);			
-			//(3) 조회한 정보를 화면으로 전달
-			model.addAttribute("memDto",memDto);			
-			//(4) 연결될 화면 주소를 반환
-			return "edit/accountChangeTel";
-		}
+//		@GetMapping("/account_change_tel")
+//		public String editAccount(HttpSession session, Model model) {
+//			
+//			//(1)아이디 획득(HttpSession)
+//			int memNo = (int)session.getAttribute("loginNo");			
+//			//(2) 아이디로 정보를 조회
+//			MemDto memDto = memDao.selectOne(memNo);			
+//			//(3) 조회한 정보를 화면으로 전달
+//			model.addAttribute("memDto",memDto);			
+//			//(4) 연결될 화면 주소를 반환
+//			return "edit/accountChangeTel";
+//		}
 		
-		@PostMapping("/account_change_tel")
+		@PostMapping("/account")
 		public String editAccount(HttpSession session, 
 												@ModelAttribute MemDto inputDto, //client가 입력한 값
 												RedirectAttributes attr) {
@@ -214,15 +214,10 @@ public class EditController {
 
 		@GetMapping("/account_result")
 		public String accountResult() {
-			return "edit/account";
+			return "redirect:/edit/account";
 		}
 		
-		
-		
-		
-		
-		
-		
+				
 		
 		
 		

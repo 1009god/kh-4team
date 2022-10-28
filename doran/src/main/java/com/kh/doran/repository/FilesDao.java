@@ -16,4 +16,12 @@ public interface FilesDao {
 	void connectFiles(int filesNo, int memNo);
 	//프로필 이미지 첨부파일 list(profile_img_view 조회)
 	List<profileImgVO> profileImgList(int memNo);
+	
+	
+	//프로젝트 신청시 첨부파일(이미지) 저장
+	//void connectFiles(int filesNo, int pjNo, String pjFileClassify);
+	
+	//셀러 첨부파일 이미지 저장
+	void connectSellerFiles(int filesNo, int sellerMemNo);
+	
 }

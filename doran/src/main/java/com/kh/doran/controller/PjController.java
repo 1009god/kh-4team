@@ -42,6 +42,7 @@ import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
+import com.kh.doran.repository.SellerDao;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.PjListSearchVO;
 import com.kh.doran.vo.OrderCountVO;
@@ -71,6 +72,8 @@ public class PjController {
 	private OrdersDao ordersDao;
 	@Autowired
 	private FilesDao filesDao;
+	
+
 	
 	@GetMapping("/insert")
 	public String insert() {
@@ -163,8 +166,12 @@ public class PjController {
 	public String detail(@RequestParam int pjNo, @ModelAttribute OrderCountVO vo, Model model, HttpSession session) {
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트넘버로 검색해서 나온 값 model에 저장해서 넘김
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
-
 		
+		//프로젝트개설판매자의  회원테이블을 넘김
+//		PjDto pjDto=pjDao.selectOne(pjNo);
+//		int sellerNo=pjDto.getPjSellerMemNo();
+//		model.addAttribute("Seller",memDao.selectOne(sellerNo));
+				
 		Integer loginNo=(Integer) session.getAttribute("loginNo");
 		if(loginNo==null) {
 			return "pj/detail";
@@ -265,11 +272,16 @@ public class PjController {
 		//페이지 네비게이터를 위한 게시글 수를 구한 것
 		int count = pjDao.count(vo);
 		vo.setCount(count);
-	
+		
+//		double achievementRate = vo.getAchievementRate();
+		
+//		vo.setAchievementRate(Math.round(achievementRate)); //말이 안 되나?
+		
 		model.addAttribute("list",pjDao.selectList(vo));
-		model.addAttribute("amountCalList", pjDao.achievementRate());
 		return "pj/list";
 	};
+	
+	
 	
 	
 
