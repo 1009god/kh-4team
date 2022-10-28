@@ -55,7 +55,20 @@
 <div class="row">
 프로젝트 마감일<input class="input" type="date" name="pjEndDate">
 </div>
+
+<input>
+
+
+
 프로젝트 첨부파일<input type="file" name="files" multiple accept=".jpg,.png">
+
+
+
+
+
+
+
+
 <button type="submit">전송</button>
 </form>
 </div>

@@ -77,5 +77,14 @@ public class OptionsDaoImpl implements OptionsDao {
 		Object[] param= {optionsNo};
 		return jdbcTemplate.update(sql, param) > 0 ;
 	}
+
+	@Override
+	public void insert(OptionsDto optionsDto) {
+		String sql="insert into Options(OPTIONS_NO NUMBER, OPTIONS_PJ_NO, OPTIONS_NAME, OPTIONS_PRICE, OPTIONS_STOCK, OPTIONS_DELIVERY_PRICE) "
+				+ "values(OPTIONS_SEQ.nextval, ?,?,?,?,?)";
+		Object[] param= {optionsDto.getOptionsPjNo(),optionsDto.getOptionsName(), 
+						 optionsDto.getOptionsPrice(), optionsDto.getOptionsStock(), optionsDto.getOptionsDeliveryPrice()};
+		jdbcTemplate.update(sql, param);
+	}
 	
 }
