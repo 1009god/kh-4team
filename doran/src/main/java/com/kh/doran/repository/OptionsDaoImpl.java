@@ -79,12 +79,22 @@ public class OptionsDaoImpl implements OptionsDao {
 	}
 
 	@Override
-	public void insert(OptionsDto optionsDto) {
-		String sql="insert into Options(OPTIONS_NO NUMBER, OPTIONS_PJ_NO, OPTIONS_NAME, OPTIONS_PRICE, OPTIONS_STOCK, OPTIONS_DELIVERY_PRICE) "
-				+ "values(OPTIONS_SEQ.nextval, ?,?,?,?,?)";
-		Object[] param= {optionsDto.getOptionsPjNo(),optionsDto.getOptionsName(), 
-						 optionsDto.getOptionsPrice(), optionsDto.getOptionsStock(), optionsDto.getOptionsDeliveryPrice()};
+	public void insert(OptionsDto optionsDto) {	//						
+		String sql="insert into OPTIONS(OPTIONS_NO,OPTIONS_PJ_NO,OPTIONS_NAME,OPTIONS_PRICE,OPTIONS_STOCK,OPTIONS_DELIVERY_PRICE) "
+				//							1				2			3			4				5				6
+				//					1		  2 3 4 5 6
+				+ "values(OPTIONS_SEQ.nextval,?,?,?,?,?)";
+						//				1						2								3								4						5					
+		Object[] param= {optionsDto.getOptionsPjNo(), optionsDto.getOptionsName(), optionsDto.getOptionsPrice(), optionsDto.getOptionsStock(), optionsDto.getOptionsDeliveryPrice()};
 		jdbcTemplate.update(sql, param);
 	}
+
+//	@Override
+//	public int sequence() {
+//		String sql="select OPTIONS_SEQ.nextval from dual";
+//		int optionsSeqNo =jdbcTemplate.queryForObject(sql, int.class); 
+//		return optionsSeqNo;
+//		//미리 생성한 
+	//}
 	
 }
