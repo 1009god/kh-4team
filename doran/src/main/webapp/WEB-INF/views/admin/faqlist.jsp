@@ -24,13 +24,10 @@
 	<!-- 목록 출력 -->
 	<div class="container-900 mt-40 mb-40">
 		<h1 align="center">FAQ 관리</h1>
-		<td colspan="2" align="right">
+		
+		<td colspan="2" align="right"> 
 				<a class="btn btn-neutral"
-				href="faqedit">수정하기</a>
-				
-				<a class="btn btn-neutral"
-				href="faqwrite">작성하기</a>
-				</td>
+				href="faqwrite">작성하기</a></td>
 	<div class="row">
 		<table class="table table-hover table-slit">
 			<thead>

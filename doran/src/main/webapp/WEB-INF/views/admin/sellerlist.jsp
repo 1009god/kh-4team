@@ -9,7 +9,8 @@
 <div class="container-700 mt-40 mb-50">
 	<!-- 제목 -->
 	<div class="row">
-		<h2>판매자 리스트</h2>
+		<h2>판매자 신청 리스트
+		</h2>
 	</div>
 	
 	<!-- 검색창 -->

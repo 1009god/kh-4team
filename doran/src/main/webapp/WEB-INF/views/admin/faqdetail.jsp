@@ -32,7 +32,10 @@
 				href="faqlist">목록으로</a>
 				
 				<a class="btn btn-neutral"
-				href="faqedit">수정하기</a>
+				href="faqedit?faqNo=${faqDto.faqNo}">수정하기</a>
+				
+				<a class="btn btn-neutral"
+				 href="faqdelete?faqNo=${faqDto.faqNo}">삭제하기</a>
 
 				</td>
 				

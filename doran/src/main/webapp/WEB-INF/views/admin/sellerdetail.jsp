@@ -8,9 +8,15 @@
 .btn-small {
 	padding: 0.25em !important;
 }
+.btn-color{
+	color : red;
+}
+.adminbtn-color{
+	color : green;
+}
 </style>
 		<jsp:include page="/WEB-INF/views/template/adminheader.jsp">
-			<jsp:param value="${sellerdto.memNo} 판매자 정보" name="title" />
+			<jsp:param value="${sellerdto.sellerMemNo} 판매자 정보" name="title" />
 		</jsp:include>
 
 		
@@ -42,11 +48,20 @@
 											<td><a class="btn btn-neutral btn-small"
 												href="change?memNo=${sellerDto.sellerMemNo}">정보 변경</a></td>
 										</tr>
+
+
+								<c:choose>
+									<c:when test="${sellerDto.sellerCheck eq '승인'}">
 										<tr>
 											<td><a class="btn btn-neutral btn-small"
-												href="delete?memNo=${sellerDto.sellerMemNo}">판매자 취소</a></td>
+												href="revoke?sellerMemNo=${sellerDto.sellerMemNo}">판매자 취소</a></td>
 										</tr>
-									
+									</c:when>
+									<c:otherwise>
+										<td><a class="btn btn-neutral btn-small"
+												href="agree?sellerMemNo=${sellerDto.sellerMemNo}">판매자 승인</a></td>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
 					</th>
