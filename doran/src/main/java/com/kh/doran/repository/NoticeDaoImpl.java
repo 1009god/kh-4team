@@ -96,7 +96,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	
 	@Override
 	public NoticeDto selectOne(int noticeNo) {
-		String sql = "select * from board where notice_no = ?";
+		String sql = "select * from notice where notice_no = ?";
 		Object[] param = {noticeNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
