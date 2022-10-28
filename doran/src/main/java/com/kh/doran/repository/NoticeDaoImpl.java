@@ -114,25 +114,24 @@ public NoticeDto selectOne(int noticeNo) {
 	return jdbcTemplate.query(sql, extractor, param);
 }
 
-//@Override
-//public int insert2(BoardDto boardDto) {
-//	//번호를 미리 생성한 뒤 등록하는 기능
-//	String sql = "select board_seq.nextval from dual";
-//	int boardPostNo = jdbcTemplate.queryForObject(sql, int.class);
-//	
-//	//등록 시퀀스 생성 xx
-//	sql = "insert into board(board_post_no, board_mem_no, "
-//			+ "board_title, board_content) "
-//			+ "values(?, ?, ?, ?)";
-//	Object[] param = {
-//			boardPostNo, boardDto.getBoardMemNo(),
-//			boardDto.getBoardTitle(), boardDto.getBoardContent()
-//	};
-//	jdbcTemplate.update(sql, param);
-//	
-//	return boardPostNo;
-//}
-//
+@Override
+public int insert2(NoticeDto noticeDto) {
+	//번호를 미리 생성한 뒤 등록하는 기능
+	String sql = "select notice_seq.nextval from dual";
+	int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+	
+	//등록 시퀀스 생성 xx
+	sql = "insert into notice("
+			+ "notice_no, notice_admin_no, notice_title, notice_content)"
+			+ " values (?,?,?,?)";
+	Object[] param = {
+			noticeNo, noticeDto.getNoticeAdminNo(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContent()
+	};
+	jdbcTemplate.update(sql, param);
+	
+	return boardPostNo;
+}
+
 //@Override
 //public boolean delete(int boardPostNo) {
 //	String sql = "delete board where board_post_no = ?";

@@ -17,7 +17,9 @@
 			<td>${noticeDto.noticeWriteTime}</td>
 		</tr>
 		<tr>
-			<td>${noticeDto.noticeContent}</td>
+			<td>
+				<pre>${noticeDto.noticeContent}</pre>
+			</td>
 		</tr>
 	</tbody>
 

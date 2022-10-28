@@ -33,8 +33,8 @@ public class NoticeTest {
 	@Test
 	public void test() {
 		//조회
-		//List<NoticeDto> list = noticeDao.selectList();
-		List<NoticeDto> list = noticeDao.selectList("notice_title", "테스트");
+		List<NoticeDto> list = noticeDao.selectList();
+		//List<NoticeDto> list = noticeDao.selectList("notice_title", "테스트");
 		for(NoticeDto noticeDto : list) {
 			System.out.println(noticeDto);
 		}

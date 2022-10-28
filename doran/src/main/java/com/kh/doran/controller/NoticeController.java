@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.doran.entity.NoticeDto;
 import com.kh.doran.entity.ReplyDto;
 import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.NoticeDao;
@@ -46,24 +47,24 @@ public class NoticeController {
 	
 	@GetMapping("/write")
 	public String write() {
-		return "board/write";
+		return "notice/write";
 	}
 	
 	@PostMapping("/write") 
 	public String write(
-			@ModelAttribute BoardDto boardDto,
+			@ModelAttribute NoticeDto noticeDto,
 			HttpSession session, RedirectAttributes attr) {
 		//session 에 있는 회원 번호를 작성자로 추가한 뒤 등록해야 함
-		int memNo = (int)session.getAttribute("loginNo");
-		boardDto.setBoardMemNo(memNo);
+		int adminNo = (int)session.getAttribute("loginNo");
+		noticeDto.setNoticeAdminNo(adminNo);
 		
-		boardDao.insert(boardDto);
+//		noticeDao.insert(noticeDto);
 		//return "redirect:list";
 		
 		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
 		//해결책 : 번호를 미리 생성하고 등록하도록 메소드 변경
-		int boardPostNo = boardDao.insert2(boardDto);
-		attr.addAttribute("boardPostNo", boardPostNo);
+		int noticeNo = noticeDao.insert2(noticeDto);
+		attr.addAttribute("noticeNo", noticeNo);
 		return "redirect:detail";
 	}
 	
