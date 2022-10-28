@@ -35,6 +35,19 @@
             display: none;
         }
         
+        .input.success {
+            border-color: green;
+        }
+        .input.success ~ .success-message {
+            display: block;
+        }
+        .input.fail {
+            border-color: red;
+        }
+        .input.fail ~ .fail-message {
+            display: block;
+        }
+        
 	.progressbar {
 	    height:10px;
 	    width:100%;
@@ -95,10 +108,24 @@
 		//- 직접 할 수 없으므로 서버에 요청을 보냄
 		$("input[name=memEmail]").blur(function() {
 			
+			var regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+			
 			var memEmail = $(this).val();
 			if(!memEmail) return;
 			
 			console.log(memEmail);
+			
+			var judge = regex.test(memEmail);
+			if (!judge) {
+				$(this).next("span").text(
+						"이메일을 형식에 맞게 작성해 주세요.");
+				status.memEmail = false;
+				return;
+			} 
+			else {
+				$(this).next("span").text("사용 가능한 이메일입니다.");
+				status.memEmail = true;
+			}
 		
 			
 			$.ajax({
@@ -175,11 +202,62 @@
             }
 
         });
+		
+        $("input[name=memPw]").blur(function(){
+            var text = $(this).val();
+            var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$])[a-z0-9!@#$]{8,16}$/;
+            var judge = regex.test(text);
+
+            $(this).removeClass("success fail");
+            if(judge){
+                $(this).addClass("success");
+            }
+            else {
+                $(this).addClass("fail");
+            }
+        });
+        
+        $("#password-check").blur(function(){
+            var origin = $("input[name=memPw]").val();
+            var repeat = $(this).val();
+            var judge = origin == repeat;
+
+            $(this).removeClass("success fail");
+            if(judge){
+                $(this).addClass("success");
+            }
+            else {
+                $(this).addClass("fail");
+            }
+        });
+
+        
+        $("input[name=memTel]").blur(function() {
+			var regex = /^010([0-9]{8})$/;
+			var memTel = $(this).val();
+			var span = $(this).next("span");
+			var judge = regex.test(memTel);
+			if (!judge) {
+				$(this).next("span").text(
+					"올바른 형식의 번호를 입력해 주세요");
+				status.memTel = false;
+				return;
+			} 
+			else {
+				$(this).next("span").text("사용 가능한 번호입니다");
+				status.memtel = true;
+			}
+			
+		
+		});
+
+		
+		
     });
 	</script>
 
 	<form action="join" method="post" class="login-formcheck">
-	<div class="container-300">
+	<div class="container-350">
 		<div class="row center">
 			<h1>회원 가입</h1>
 		</div>
@@ -192,20 +270,30 @@
 
          <div class="row">
             <label>비밀번호</label>
-            <input type="password" name="memPw" class="input w-100" placeholder="Password" required>
+            <input type="password" name="memPw" class="input w-100" placeholder="8-16자 영문 소문자/숫자/특수문자" required>
+        	<span class="success-message">올바른 비밀번호 형식입니다</span>
+            <span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
+        </div>
+        
+        <div class="row">
+            <label>비밀번호 확인</label>
+            <input type="password" class="input w-100" id="password-check" placeholder="8-16자 영문 소문자/숫자/특수문자" >
+            <span class="success-message">비밀번호가 일치합니다</span>
+            <span class="fail-message">비밀번호가 일치하지 않습니다</span>
         </div>
 
 		<div class="row">
             <label>닉네임</label>
             <input type="text" name="memNick" class="input w-100" placeholder="한글, 영어, 숫자로 2-10글자" required>
-       		<span class="NNNNN-message">이미 사용중인 아이디입니다</span>
-            <span class="NNNNY-message">사용 가능한 아이디입니다!</span>
+       		<span class="NNNNN-message">이미 사용중인 닉네임입니다</span>
+            <span class="NNNNY-message">사용 가능한 닉네임입니다!</span>
             <span class="fail-message">한글과 숫자 2~10글자로 작성해주세요</span>
         </div>
 
 		<div class="row">
             <label>전화번호</label>
             <input type="tel" name="memTel" class="input w-100" placeholder="- 제외하고 입력"  required>
+       		<span></span>
         </div>
 
 		<div class="row">
