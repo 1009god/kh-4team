@@ -225,11 +225,16 @@ public class PjController {
 		//페이지 네비게이터를 위한 게시글 수를 구한 것
 		int count = pjDao.count(vo);
 		vo.setCount(count);
-	
+		
+//		double achievementRate = vo.getAchievementRate();
+		
+//		vo.setAchievementRate(Math.round(achievementRate)); //말이 안 되나?
+		
 		model.addAttribute("list",pjDao.selectList(vo));
-		model.addAttribute("amountCalList", pjDao.achievementRate());
 		return "pj/list";
 	};
+	
+	
 	
 	
 
