@@ -12,6 +12,8 @@
 </head>
 <body>
 
+    <form action="order" method="post">
+
     <h2>결제</h2>
     <div>
         ${PjDto.pjName}
@@ -23,10 +25,11 @@
         <input type="hidden" name="ordersPayDate" value="${PjDto.pjFundingEndDate}">
         <input type="text" name="ordersMessage" placeholder="배달시 요청사항(예: 경비실에 맡겨주세요)">
         <input type="hidden" name="ordersDeliveryPay" value="${OptionsDto.optionsDeliveryPrice}">
-        
+        <input type="hidden" name="ordersMemNo" value="${AddressDto[0].addressMemNo}">       
     </div>
 
 
+    
 
     <div>
         
@@ -45,8 +48,8 @@
     
 
 
-
-    <!--체크박스선택시에만보이게해야함-->
+<!--
+    체크박스 선택했을때에만 보이게해야함 아이고 빡세다 빡세
     <form method ="post">
         <div>
             <h2>배송지 입력</h2>
@@ -90,8 +93,10 @@
         </div>
         
     </form>
+-->
+<button type="submit">주문하기</button>
 
-<button>주문하기</button>
+</form>
 
 
 

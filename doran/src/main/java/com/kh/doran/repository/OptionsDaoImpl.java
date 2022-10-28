@@ -70,4 +70,12 @@ public class OptionsDaoImpl implements OptionsDao {
 		Object[] param= {optionsNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+	
+	@Override
+	public boolean stockUpdate(int optionsNo) {
+		String sql="update options set options_stock=options_stock-1 where options_no=?";
+		Object[] param= {optionsNo};
+		return jdbcTemplate.update(sql, param) > 0 ;
+	}
+	
 }

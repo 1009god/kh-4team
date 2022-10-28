@@ -23,6 +23,7 @@ public class AdminPjController {
 	@Autowired
 	private PjDao pjDao;
 	
+	
 	@RequestMapping("/pjlist")
 	public String list(Model model, 
 			@ModelAttribute(name="pjListSearchVo") PjListSearchVO vo) {

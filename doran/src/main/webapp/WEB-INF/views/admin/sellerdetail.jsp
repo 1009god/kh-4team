@@ -15,9 +15,9 @@
 
 		
 
-<div class="container-600 mt-40 mb-40">
+<div class="container-600">
 	<div class="row left">
-		<h1 style="padding-left: 20px">${sellerDto.sellerMemNo}판매자 정보</h1>
+		<h1 style="padding-left: 20px">${sellerDto.sellerMemNo}번째 판매자 정보</h1>
 	</div>
 
 	<div class="row center">
@@ -25,7 +25,7 @@
 			<tbody>
 				<!-- 프로필 이미지를 출력 -->
 				<tr>
-					<th width="25%" valign="top" class="center">
+					<th width="30%" valign="top" class="center">
 						<table class="table">
 							<tbody class="center">
 								<tr>
@@ -44,7 +44,7 @@
 										</tr>
 										<tr>
 											<td><a class="btn btn-neutral btn-small"
-												href="delete?memNo=${sellerDto.sellerMemNo}">판매자 박탈</a></td>
+												href="delete?memNo=${sellerDto.sellerMemNo}">판매자 취소</a></td>
 										</tr>
 									
 							</tbody>
@@ -54,24 +54,20 @@
 					<table class="table table-border">
 							<tr>
 								<th width="20%">아이디</th>
-								<td>${memDto.memEmail}</td>
-							</tr>
-							<tr>
-								<th>번호</th>
-								<td>${memDto.memNo}</td>
+								<td>${sellerDto.memEmail}</td>
 							</tr>
 							<tr>
 								<th>닉네임</th>
-								<td>${memDto.memNick}</td>
+								<td>${sellerDto.memNick}</td>
 							</tr>
 							<tr>
 								<th>전화번호</th>
-								<td>${memDto.memTel}</td>
+								<td>${sellerDto.memTel}</td>
 							</tr>
 							
 							<tr>
 								<th>가입일시</th>
-								<td><fmt:formatDate value="${memDto.memJoinDate}"
+								<td><fmt:formatDate value="${sellerDto.memJoinDate}"
 										pattern="y년 M월 d일 E a h시 m분 s초" /></td>
 							</tr>
 							
@@ -80,24 +76,24 @@
 						<table class="table table-border">
 							<tr>
 								<th width="20%">판매자 번호</th>
-								<td>${dto.sellerMemNo}</td>
+								<td>${sellerDto.sellerMemNo}</td>
 							</tr>
 							<tr>
 								<th>은행</th>
-								<td>${dto.sellerBank}</td>
+								<td>${sellerDto.sellerBank}</td>
 							</tr>
 							<tr>
 								<th>계좌</th>
-								<td>${dto.sellerAccount}</td>
+								<td>${sellerDto.sellerAccount}</td>
 							</tr>
 							<tr>
 								<th>판매자 여부</th>
-								<td>${dto.sellerCheck}</td>
+								<td>${sellerDto.sellerCheck}</td>
 							</tr>
 							
 							<tr>
 								<th>판매자 신청 날짜</th>
-								<td><fmt:formatDate value="${dto.registryDate}"
+								<td><fmt:formatDate value="${sellerDto.sellerRegistryDate}"
 										pattern="y년 M월 d일 E a h시 m분 s초" /></td>
 							</tr>
 							
