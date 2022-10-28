@@ -217,12 +217,7 @@ public class EditController {
 			return "edit/account";
 		}
 		
-		
-		
-		
-		
-		
-		
+				
 		
 		
 		

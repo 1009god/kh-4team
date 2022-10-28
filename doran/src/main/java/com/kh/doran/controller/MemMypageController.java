@@ -94,12 +94,21 @@ public class MemMypageController {
 	}
 	
 	
-//후원한 프로젝트 finished
+//후원한 프로젝트 supported
 	@GetMapping("/supported")
 	public String supported(HttpSession session, Model model) {
 		int memNo = (int)session.getAttribute("loginNo");
-		
-		
+		 //2. 아이드를 이용하여 회원정보를 불러온다
+	     MemDto memDto = memDao.selectOne(memNo);
+	     
+	     //3.불러온 정보를 모델에 첨부한다
+	     model.addAttribute("memDto", memDto);
+	     
+	     //(+추가) 프로필 이미지
+	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
+	     
+	     //(+추가) 후원한 목록- 아마 모델에 첨부해서 프론트에서 배열 돌릴것으로 예상
+	    
 		return "mypage/supported";
 	}
 	
