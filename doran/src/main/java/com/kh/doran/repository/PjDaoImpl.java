@@ -270,6 +270,14 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,calMapper);
 	}
 
+	//달성율 계산용 extractor 필요
+	
+//	@Override
+//	public OrdersCalVO calVo(int pjNo) {
+//		String sql="select op.options_pj_no, sum(options_price) price_total, sum(options_price)/pj_target_money*100 achievement_rate, pj_target_money, pj_no from options op inner join orders ord on op.options_no=ord.orders_options_no inner join pj on options_pj_no = pj_no where pj_no=? group by op.options_pj_no, pj_target_money,pj_no";
+//		Object[] param= {pjNo};
+//		return jdbcTemplate.query(sql, calMapper, param);
+//	}
 	
 //	//support맵퍼
 //	private RowMapper<SupportPjVO> supportMapper = new RowMapper<SupportPjVO>() {

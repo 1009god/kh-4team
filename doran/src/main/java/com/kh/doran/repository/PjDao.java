@@ -44,6 +44,9 @@ public interface PjDao {
 	
 	//주문금액, 달성률 계산
 	List<OrdersCalVO> achievementRate();
+	
+	//주문금액, 달성률 계산(개별)
+//	OrdersCalVO calVo(int pjNo);
 
 	//마이페이지- 후원한 프로젝트에 쓰임	
 	//	List<SupportPjVO> supportList(); 
