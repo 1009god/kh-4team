@@ -55,9 +55,6 @@ public class NoticeController {
 		int adminNo = (int)session.getAttribute("loginNo");
 		noticeDto.setNoticeAdminNo(adminNo);
 		
-//		noticeDao.insert(noticeDto);
-		//return "redirect:list";
-		
 		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
 		//해결책 : 번호를 미리 생성하고 등록하도록 메소드 변경
 		int noticeNo = noticeDao.insert2(noticeDto);
@@ -84,7 +81,7 @@ public class NoticeController {
 			throw new TargetNotFoundException();
 		}
 		model.addAttribute("noticeDto", noticeDto);
-		return "board/edit";
+		return "notice/edit";
 	}
 	
 	@PostMapping("/edit")

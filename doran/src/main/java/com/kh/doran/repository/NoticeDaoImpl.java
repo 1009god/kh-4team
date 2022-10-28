@@ -102,21 +102,15 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 	
 	@Override
-	public int insert2(NoticeDto noticeDto) {
-		//번호를 미리 생성한 뒤 등록하는 기능
-		String sql = "select notice_seq.nextval from dual";
-		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
-		
-		//등록 시퀀스 생성 xx
-		sql = "insert into notice("
+	public void insert2(NoticeDto noticeDto) {
+		String sql = "insert into notice("
 				+ "notice_no, notice_admin_no, notice_title, notice_content)"
 				+ " values (?,?,?,?)";
 		Object[] param = {
-				noticeNo, noticeDto.getNoticeAdminNo(), noticeDto.getNoticeTitle(), noticeDto.getNoticeContent()
+				noticeDto.getNoticeNo(), noticeDto.getNoticeAdminNo(), 
+				noticeDto.getNoticeTitle(), noticeDto.getNoticeContent()
 		};
 		jdbcTemplate.update(sql, param);
-		
-		return noticeNo;
 	}
 	
 	@Override
