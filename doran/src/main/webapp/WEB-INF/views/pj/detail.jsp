@@ -103,7 +103,15 @@ function shareKakao() {
                 </tr>
                 <tr>
                     <th>남은 시간</th>
-                    <td><span class="endCount"></span></td>
+                    <td>
+                        <c:set var="dateCount" value="${DateCount}" />
+                        <c:if test="${dateCount>0}">
+                                <span class="endCount"></span>
+                        </c:if>    
+                        <c:if test="${dateCount<=0}">
+                            <span>마감된 프로젝트입니다</span>
+                        </c:if>
+                    </td>
                 </tr>
                <tr>
                		<th>좋아요</th>
