@@ -45,7 +45,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="dto" items="${list}">
-				<tr>
+				<tr align="center">
 					<td>${dto.memNo}</td>
 					
 					<td>

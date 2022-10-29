@@ -83,7 +83,7 @@
 						<a href="/admin/sellerlist">판매자 신청 관리</a>
 					</div>
 					<div class="row">
-						<a href="#">공지사항 관리</a>
+						<a href="/admin/noticelist">공지사항 관리</a>
 					</div>
 					<div class="row">
 						<a href="#">1:1문의 관리</a>
