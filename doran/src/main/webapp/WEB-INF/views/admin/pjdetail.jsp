@@ -3,12 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:include page="/WEB-INF/views/template/adminheader.jsp">
+	<jsp:param value="프로젝트 상세" name="title"/>
+</jsp:include>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상품 상세</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 <style>
 	.shareParent {
@@ -97,12 +95,12 @@ function shareKakao() {
                		<td>
                		${PjDto.pjLikesNumber}
                		
-	               		<c:if test="${check==true}">
+	               	<%-- 	<c:if test="${check==true}">
 	               		<button><a href="like?pjNo=${PjDto.pjNo}">좋아요 취소하기</a></button>
 	               		</c:if>
 	               		<c:if test="${check==false}">
 	               		<button><a href="like?pjNo=${PjDto.pjNo}">좋아요 하기</a></button>
-	               		</c:if>
+	               		</c:if> --%>
                		
                		</td>
                </tr>
@@ -111,14 +109,7 @@ function shareKakao() {
     </div>
 
 	
-	<div class="shareParent">
-	<button type="button">sns 공유 버튼</button>
-	</div>
 	
-	<div class="shareChild">
-	<a href="javascript:shareTwitter();">트위터에 공유</a>
-	<a id="btnKakao" href="javascript:shareKakao();">카카오톡에 공유</a>
-	</div>
 
 
     <c:forEach var="OptionsDto" items="${OptionsDto}">
@@ -162,5 +153,5 @@ function shareKakao() {
 
     </div>
 
-</body>
-</html>
+
+<jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>
