@@ -3,12 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:include page="/WEB-INF/views/template/header2.jsp"></jsp:include>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상품 상세</title>
+
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 <style>
 	.shareParent {
@@ -77,9 +74,31 @@ function shareKakao() {
         border: 1px dotted gray;
     }
 </style>
-</head>
-<body>
 
+    <div class="container-1400">
+
+    <div class="center">
+        <button class="btn btn-neutral" onclick="location.href='list?category=${PjDto.pjCategory}'">${PjDto.pjCategory}</button>
+    </div>
+
+    <div class="center">
+        <h3>${PjDto.pjSummary}</h2>
+        <h1>${PjDto.pjName}</h1>
+    </div>
+        
+    <div class="center" style="margin:0px 100px;"><!--프로젝트 대표이미지, 정보 들어가는 자리(float써야됨 구와아악)-->
+    
+        <div style="width:600px; border:1px dotted gray;float:left;">
+            그림자리
+        </div>
+        
+        <aside style="width:360px; border:1px dotted red;float:left;">
+            사이드바(프로젝트정보자리)
+        </aside>
+    
+    </div>
+
+    <div class="float-container"></div>
 
     <div>
         <div>
@@ -213,5 +232,7 @@ function shareKakao() {
 
     </div>
 
-</body>
-</html>
+</div>
+
+    <!--푸터-->
+    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
