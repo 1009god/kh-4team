@@ -113,7 +113,7 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 	@Override
 	public List<AdminsellerListVO> list(SellerListSearchVO vo) {
 		String sql = "SELECT ROWNUM ,S.SELLER_MEM_NO,S.SELLER_BANK,S.SELLER_REGISTRY_DATE,S.SELLER_ACCOUNT,S.SELLER_CHECK,(SELECT MEM_NICK FROM MEM M WHERE M.MEM_NO = S.SELLER_MEM_NO) AS MEM_NICK FROM SELLER S"
-				+" WHERE ROWNUM BETWEEN ? AND ?";
+				+" WHERE ROWNUM BETWEEN ? AND ? order by seller_mem_no desc";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listmapper, param);
 	}
@@ -172,6 +172,21 @@ public class AdminSellerDaoImpl implements AdminSellerDao {
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+
+	//판매자 신청후 관리자가 승인해주는 기능
+	@Override
+	public boolean agree(int sellerMemNo) {
+		String sql = "update seller set seller_check='승인' where seller_mem_no=?";
+		Object[]param= {sellerMemNo};
+		return jdbcTemplate.update(sql,param) > 0;
+	}
+	//판매자 승인 이후 판매자 승인 취소
+	@Override
+	public boolean revoke(int sellerMemNo) {
+		String sql = "update seller set seller_check='대기' where seller_mem_no=?";
+		Object[]param = {sellerMemNo};
+		return jdbcTemplate.update(sql,param)>0;
 	}
 
 

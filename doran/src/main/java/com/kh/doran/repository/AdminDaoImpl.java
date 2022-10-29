@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.entity.SellerDto;
 import com.kh.doran.vo.AdminMemListVO;
 import com.kh.doran.vo.MemListSearchVO;
 
@@ -201,6 +202,7 @@ private ResultSetExtractor<AdminDto> extractor = new ResultSetExtractor<AdminDto
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
+
 
 	
 

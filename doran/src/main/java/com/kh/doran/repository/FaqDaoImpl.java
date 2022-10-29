@@ -72,19 +72,19 @@ public class FaqDaoImpl implements FaqDao {
 
 	@Override
 	public void insert(FaqDto faqDto) {
-		String sql="insert into faq(faq_no,faq_admin_no,faq_type,faq_title,faq_content)"
-				+ "values(faq_seq.nextval,?,?,?,?)";
+		String sql="insert into faq(faq_no,faq_type,faq_title,faq_content)"
+				+ "values(faq_seq.nextval,?,?,?)";
+		Object[]param= {faqDto.getFaqType(),faqDto.getFaqTitle(),
+				faqDto.getFaqContent()};
+		jdbcTemplate.update(sql,param);
 		
 	}
 
 	@Override
 	public boolean update(FaqDto faqDto) {
-		String sql="update faq"
-				+ "set"
-				+ "faq_type=?"
-				+ "faq_title=?"
-				+ "faq_content=?"
-				+ "where faq_no=?";
+		String sql="update faq "
+				+ "set faq_type=?,faq_title=?,faq_content=?"
+				+ " where faq_no=?";
 		Object[]param= {
 				faqDto.getFaqType(),faqDto.getFaqTitle(),
 				faqDto.getFaqContent(),faqDto.getFaqNo()};

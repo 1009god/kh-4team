@@ -10,7 +10,9 @@ import com.kh.doran.entity.FaqDto;
 public interface FaqDao {
 
 	void insert(FaqDto faqDto);
+	
 	boolean update(FaqDto faqDto); 
+	
 	boolean delete(int faqNo);
 	
 	
@@ -18,5 +20,7 @@ public interface FaqDao {
 	List<FaqDto>selectList(String type,String keyword);
 	
 	FaqDto selectOne(int faqNo);
+	
+	
 	
 }
