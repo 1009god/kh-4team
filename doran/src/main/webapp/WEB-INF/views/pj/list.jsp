@@ -9,21 +9,28 @@
 
 
      <!-- 로딩바 라이브러리 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css">
-    <script src="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.min.js"></script>
+<!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css"> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.min.js"></script> -->
     
 
     <!--jquery를 사용하기 위하여 라이브러리 js파일을 불러온다-->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
    
+   	<!-- 로딩바 라이브러리 -->
+	<script src="https://cdn.jsdelivr.net/gh/hiphop5782/progress-bar@latest/dist/progress-bar.min.js"></script>
+
     <script type="text/javascript">
     
     $(function(){
-        //var bar1 = new ldBar(".progressbar");
-		var list = document.querySelectorAll(".progressbar");
-		for(var i=0; i < list.length; i++){
-			var bar = new ldBar(list[i]);
-		}
+    	
+    	$("#loading-bar").progressbar({
+    	
+    	});
+    	
+// 		var list = document.querySelectorAll("#loading-bar");
+// 		for(var i=0; i < list.length; i++){
+// 				var bar = new ldBar(list[i]);
+        
     });
     </script>
     
@@ -62,6 +69,9 @@
         bottom:0;
 /*  		background: #0072b2;  */
             }
+     .progressbar{
+     	background : lightgray;
+     }
     
     </style>
 
@@ -141,18 +151,15 @@
 		                </div>
 		                <div class="left">${pjDto.achievementRate}% ${pjDto.nvl}원 
 		                </div> 
-                        <div class="progressbar"  
-		                        data-value = "${pjDto.achievementRate}" 
-		                        data-stroke ="#0072b2" 
-		                        data-stroke-width = "5px"
-		                        data-stroke-trail ="lightgray"
-		                        data-stroke-trail-width = "5px"
-                        >
+                        <div class="row progressbar" id="loading-bar" 
+                        data-value = "${pjDto.achievementRate}"
+                        data-color = #0072b2>  
+
                         </div>
                      </div>
 	       		</c:forEach>
         </div>
-
+</div>
         
         <!--페이지 네비게이터  -->
     
