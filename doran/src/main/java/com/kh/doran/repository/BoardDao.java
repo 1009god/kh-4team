@@ -9,6 +9,7 @@ import com.kh.doran.vo.BoardListVO;
 
 public interface BoardDao {
 	void insert(BoardDto boardDto);
+	int sequence();
 	int insert2(BoardDto boardDto); //int 인 이유, 번호를 알아야 하니까 최근 게시물 올리면 디테일로 가게 해 주는
 	
 	List<BoardDto> selectList(); //더이상 사용 x
@@ -31,5 +32,8 @@ public interface BoardDao {
 	
 	void clear();
 	boolean updateReadcount(int boardPostNo);
+	
+	//첨부파일 관련 기능
+	void connectFiles(int boardImgPostNo, int boardImgNo);
 
 }
