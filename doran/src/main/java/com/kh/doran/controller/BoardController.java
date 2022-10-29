@@ -27,6 +27,7 @@ import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.BoardDao;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.ReplyDao;
+import com.kh.doran.service.BoardService;
 import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.BoardListSearchVO;
 
@@ -42,6 +43,9 @@ public class BoardController {
 	
 	@Autowired
 	private FilesDao filesDao; 
+	
+	@Autowired 
+	private BoardService boardService;
 	
 	private final File directory = new File(System.getProperty("user.home"), "doranupload");
 	
@@ -120,35 +124,7 @@ public class BoardController {
 		int memNo = (int)session.getAttribute("loginNo");
 		boardDto.setBoardMemNo(memNo);
 		
-		//boardDao.insert(boardDto);
-		//return "redirect:list";
-		
-		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
-		//해결책 : 번호를 미리 생성하고 등록하도록 메소드 변경
-		int boardPostNo = boardDao.insert2(boardDto);
-		
-		//(+ 추가) 게시글이 등록된 다음 파일이 있다면 해당 파일을 등록 및 연결
-				//- 첨부파일이 없어도 리스트에는 1개의 객체가 들어있다
-				for(MultipartFile file : files) {
-					if(!file.isEmpty()) {
-						System.out.println("첨부파일 발견");
-						
-						int filesNo = filesDao.sequence();
-						filesDao.insert(FilesDto.builder()
-								.filesNo(filesNo)
-								.filesUploadname(file.getOriginalFilename())
-								.filesType(file.getContentType())
-								.filesSize(file.getSize())
-								.build());
-						//파일저장
-						File target = new File(directory,String.valueOf(filesNo));
-						System.out.println(target.getAbsolutePath());
-						file.transferTo(target);
-						
-						//+ 연결 테이블에 연결 정보를 저장 (게시글 번호, 첨부파일 번호)
-						boardDao.connectFiles(boardPostNo, filesNo);
-					}
-				}
+		int boardPostNo = boardService.write(boardDto, files);
 		
 		attr.addAttribute("boardPostNo", boardPostNo);
 		return "redirect:detail";
@@ -156,7 +132,7 @@ public class BoardController {
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int boardPostNo) {
-		boolean result = boardDao.delete(boardPostNo);
+		boolean result = boardService.remove(boardPostNo);
 	      if(result) {//삭제 성공
 	         return "redirect:list";
 	      }

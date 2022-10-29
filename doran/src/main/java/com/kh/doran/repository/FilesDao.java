@@ -27,6 +27,6 @@ public interface FilesDao {
 	//공지사항 게시판 첨부파일 저장 (notice_file_view)
 	List<FilesDto> selectNoticeFileList(int noticeFileNoticeNo);
 	
-	//공지사항 게시판 첨부파일 저장 (notice_file_view)
+	//일반 게시판 (도란도란) 첨부파일 저장 (notice_file_view)
 	List<FilesDto> selectBoardFileList(int boardImgPostNo);
 }
