@@ -92,6 +92,14 @@ function shareKakao() {
                     <th>프로젝트 이름</th>
                     <td>${PjDto.pjName}</td>
                 </tr>
+                <tr>
+                    <th>모인 금액</th>
+                    <td>${OrdersCalVO.priceTotal} 원 ${OrdersCalVO.achievementRate} %</td>
+                </tr>
+                <tr>
+                    <th>후원자</th>
+                    <td>${OrderCount}명</td>
+                </tr>
                <tr>
                		<th>좋아요</th>
                		<td>

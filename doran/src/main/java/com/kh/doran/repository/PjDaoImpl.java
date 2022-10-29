@@ -255,6 +255,29 @@ public class PjDaoImpl implements PjDao {
 							.build();
 		}
 	};
+	
+	//단일프로젝트 달성도추출용 extractor 필요
+	private ResultSetExtractor<OrdersCalVO> calExtractor=new ResultSetExtractor<OrdersCalVO>() {
+
+		@Override
+		public OrdersCalVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return OrdersCalVO.builder()
+						.optionsPjNo(rs.getInt("options_pj_no"))
+						.pjNo(rs.getInt("pj_no"))
+						.priceTotal(rs.getInt("price_total"))
+						.pjTargetMoney(rs.getInt("pj_target_money"))
+						.achievementRate(rs.getInt("achievement_rate"))
+					.build();
+			}
+			
+			else {
+				return null;
+			}
+		}
+		
+		
+	};
 
 	
 	@Override
@@ -270,14 +293,14 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,calMapper);
 	}
 
-	//달성율 계산용 extractor 필요
 	
-//	@Override
-//	public OrdersCalVO calVo(int pjNo) {
-//		String sql="select op.options_pj_no, sum(options_price) price_total, sum(options_price)/pj_target_money*100 achievement_rate, pj_target_money, pj_no from options op inner join orders ord on op.options_no=ord.orders_options_no inner join pj on options_pj_no = pj_no where pj_no=? group by op.options_pj_no, pj_target_money,pj_no";
-//		Object[] param= {pjNo};
-//		return jdbcTemplate.query(sql, calMapper, param);
-//	}
+	//프로젝트번호로 검색하면 그 프로젝트의 결제총액, 달성율을 뽑아주는 메소드
+	@Override
+	public OrdersCalVO calVo(int pjNo) {
+		String sql="select op.options_pj_no, sum(options_price) price_total, sum(options_price)/pj_target_money*100 achievement_rate, pj_target_money, pj_no from options op inner join orders ord on op.options_no=ord.orders_options_no inner join pj on options_pj_no = pj_no where pj_no=? group by op.options_pj_no, pj_target_money,pj_no";
+		Object[] param= {pjNo};
+		return jdbcTemplate.query(sql, calExtractor, param);
+	}
 	
 //	//support맵퍼
 //	private RowMapper<SupportPjVO> supportMapper = new RowMapper<SupportPjVO>() {
@@ -311,6 +334,33 @@ public class PjDaoImpl implements PjDao {
 		}
 		
 	};
+	
+	private ResultSetExtractor<OrderCountVO> orderCountExtractor=new ResultSetExtractor<OrderCountVO>() {
+
+		@Override
+		public OrderCountVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return OrderCountVO.builder()
+						.optionsPjNo(rs.getInt("options_pj_no"))
+						.ordersMemNo(rs.getInt("orders_mem_no"))
+						.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	
+	//이 프로젝트를 구매한 회원이 몇명인가
+	@Override
+	public int orderCount(int pjNo) {
+		String sql="select count(*) from (select options.options_no, options.options_pj_no, "
+				+ "orders.orders_options_no, orders.orders_mem_no "
+				+ "from options left outer join orders on options.options_no=orders.orders_options_no) "
+				+ "where options_pj_no=?";
+		Object[] param= {pjNo};
+		return jdbcTemplate.queryForObject(sql, int.class,param);
+	}
 
 	//구매여부확인(int 1일 경우 이력있음, 0일 경우 없음)
 @Override
