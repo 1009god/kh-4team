@@ -31,8 +31,9 @@ $(function(){
         $(".shareChild").toggle();
     });
 
+    const datecountonjs=Math.ceil("${DateCount}");
+    $(".endCount").text(datecountonjs+"일");
 
-    
 });
 
 
@@ -67,7 +68,7 @@ function shareKakao() {
 	  });
 	}
 
-
+    
 
 
 </script>
@@ -92,6 +93,26 @@ function shareKakao() {
                     <th>프로젝트 이름</th>
                     <td>${PjDto.pjName}</td>
                 </tr>
+                <tr>
+                    <th>모인 금액</th>
+                    <td>${OrdersCalVO.priceTotal} 원 ${OrdersCalVO.achievementRate} %</td>
+                </tr>
+                <tr>
+                    <th>후원자</th>
+                    <td>${OrderCount}명</td>
+                </tr>
+                <tr>
+                    <th>남은 시간</th>
+                    <td>
+                        <c:set var="dateCount" value="${DateCount}" />
+                        <c:if test="${dateCount>0}">
+                                <span class="endCount"></span>
+                        </c:if>    
+                        <c:if test="${dateCount<=0}">
+                            <span>마감된 프로젝트입니다</span>
+                        </c:if>
+                    </td>
+                </tr>
                <tr>
                		<th>좋아요</th>
                		<td>
@@ -110,6 +131,12 @@ function shareKakao() {
         </table>
     </div>
 
+    <div>
+        <span>목표금액 ${PjDto.pjTargetMoney}</span>
+        <span>펀딩기간 ${PjDto.pjFundingStartDate} ~ ${PjDto.pjFundingEndDate}</span>
+        <span>결제 목표금액 달성시 ${PjDto.pjFundingEndDate}에 진행</span>
+    </div>
+
 	
 	<div class="shareParent">
 	<button type="button">sns 공유 버튼</button>
@@ -123,12 +150,36 @@ function shareKakao() {
 
     <c:forEach var="OptionsDto" items="${OptionsDto}">
         
-
+ 	<c:set var="loginNo" value="${loginNo}" />
     <c:set var="currentStock" value="${OptionsDto.optionsStock}" />
     <c:set var="orderCount" value="${OrderCount}" />
     
 
     <c:choose>
+
+        <c:when test="${DateCount<=0}">
+            <div>
+                <span>마감된 프로젝트입니다</span>
+            </div>
+            <div>
+                
+                <span class="no">${OptionsDto.optionsNo}</span>
+                <span class="name">${OptionsDto.optionsName}</span>
+                <span class="price">${OptionsDto.optionsPrice}</span>
+                <span class="stock">${OptionsDto.optionsStock}</span>
+            </div>
+        </c:when>
+    	
+    	<c:when test="${loginNo==null}">
+    		<div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
+                <span class="no">${OptionsDto.optionsNo}</span>
+                <span class="name">${OptionsDto.optionsName}</span>
+                <span class="price">${OptionsDto.optionsPrice}</span>
+                <span class="stock">${OptionsDto.optionsStock}</span>
+            </div>
+    	</c:when>
+    
+    
         <c:when test="${OrderCount==1}">
             <div class="selectOption"  onclick="alert('이미 후원한 프로젝트입니다. 추가로 후원할 수 없습니다');">
                 <span class="no">${OptionsDto.optionsNo}</span>
@@ -147,7 +198,7 @@ function shareKakao() {
             </div>
         </c:when>
 
-        <c:when test="${OrderCount==0&&currentStock!=0}">
+        <c:when test="${loginNo!=null&&OrderCount==0&&currentStock!=0}">
             <div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
                 <span class="no">${OptionsDto.optionsNo}</span>
                 <span class="name">${OptionsDto.optionsName}</span>
