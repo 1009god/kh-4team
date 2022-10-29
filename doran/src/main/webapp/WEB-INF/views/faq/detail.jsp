@@ -11,14 +11,14 @@
 <table class="table table-border mt-50">
 	<tbody>
 		<tr>
-			<th width="25%">번호</th>
+			<th width="5%">번호</th>
 			<td>${faqDto.faqNo}</td>
 		</tr>
 		<tr>
 			<th>제목</th>
 			<td>${faqDto.faqTitle}</td>
 		</tr>
-		<tr height="200" valign="top"">
+		<tr height="300" valign="top"">
 			<th>내용</th>
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 --> <pre>${faqDto.faqContent}</pre>

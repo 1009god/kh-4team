@@ -55,7 +55,37 @@
 <div class="row">
 프로젝트 마감일<input class="input" type="date" name="pjEndDate">
 </div>
-프로젝트 첨부파일<input type="file" name="files" multiple accept=".jpg,.png">
+
+<h1>옵션 설정</h1>
+
+ 
+<div class="row">
+<input type="text" name="optionsName" placeholder="옵션이름">
+</div>
+<div class="row">
+<input type="text" name="optionsPrice" placeholder="옵션가격">
+</div>
+<div class="row">
+<input type="text" name="optionsStock" placeholder="옵션재고">
+</div>
+<div class="row">
+<input type="text" name="optionsDeliveryPrice" placeholder="배송비2500or0">
+</div>
+
+
+
+<!-- 
+
+ 프로젝트 첨부파일<input type="file" name="files" multiple accept=".jpg,.png">
+ -->
+
+
+
+
+
+
+
+
 <button type="submit">전송</button>
 </form>
 </div>

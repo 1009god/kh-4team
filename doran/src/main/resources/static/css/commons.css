@@ -544,7 +544,7 @@ ul.pagination.pagination-small {
 }
 
 /* 황태현이 추가한 것 필요하면 사용할 것 */
-.pagination {
+/* .pagination {
   display: -ms-flexbox;
   display: flex;
   padding-left: 0;
@@ -634,3 +634,9 @@ ul.pagination.pagination-small {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
+.btn-color{
+	color : red;
+}
+.adminbtn-color{
+	color : green;
+} */

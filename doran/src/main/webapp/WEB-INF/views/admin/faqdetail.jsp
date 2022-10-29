@@ -18,7 +18,7 @@
 			<th>제목</th>
 			<td>${faqDto.faqTitle}</td>
 		</tr>
-		<tr height="200" valign="top"">
+		<tr height="200" valign="top">
 			<th>내용</th>
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 --> <pre>${faqDto.faqContent}</pre>
@@ -32,7 +32,10 @@
 				href="faqlist">목록으로</a>
 				
 				<a class="btn btn-neutral"
-				href="faqedit">수정하기</a>
+				href="faqedit?faqNo=${faqDto.faqNo}">수정하기</a>
+				
+				<a class="btn btn-neutral"
+				 href="faqdelete?faqNo=${faqDto.faqNo}">삭제하기</a>
 
 				</td>
 				

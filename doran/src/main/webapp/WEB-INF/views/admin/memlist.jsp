@@ -38,14 +38,14 @@
 					<th>번호</th>
 					<th>닉네임</th>
 					<th>이메일</th>
-					<th>회원 분류</th>
+					<th>판매자 신청 여부</th>
 					
 					
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="dto" items="${list}">
-				<tr>
+				<tr align="center">
 					<td>${dto.memNo}</td>
 					
 					<td>

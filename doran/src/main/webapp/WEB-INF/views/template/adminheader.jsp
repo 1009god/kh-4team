@@ -50,14 +50,10 @@
 						<li><a href="/admin">홈</a></li>
 						<li class="right-menu"><a href="#">${loginId} 님</a>
 							<ul>
-								<!-- 관리자 기능 -->
-								<c:if test="${login && admin}">
-									<li><a href="/admin/home">관리자페이지</a></li>
-								</c:if>
-
 								<li><a href="/admin/logout">로그아웃</a></li>
 							</ul></li>
 					</c:when>
+					
 					<c:otherwise>
 						<li><a href="/admin">홈</a></li>
 
@@ -84,10 +80,10 @@
 						<a href="/admin/memlist">전체 회원 관리</a>
 					</div>
 					<div class="row">
-						<a href="/admin/sellerlist">판매자 관리</a>
+						<a href="/admin/sellerlist">판매자 신청 관리</a>
 					</div>
 					<div class="row">
-						<a href="#">공지사항 관리</a>
+						<a href="/admin/noticelist">공지사항 관리</a>
 					</div>
 					<div class="row">
 						<a href="#">1:1문의 관리</a>

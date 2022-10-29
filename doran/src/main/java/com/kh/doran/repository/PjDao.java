@@ -13,6 +13,7 @@ import com.kh.doran.vo.PjListSearchVO;
 public interface PjDao {
 	//C
 	void insert(PjDto pjDto);
+	int sequence();
 	//R
 	PjDto selectOne(int pjNo); //프로젝트 1개의 정보 보기
 	
@@ -23,21 +24,30 @@ public interface PjDao {
 	float dateCount(int pjNo);
 	
 	//통합 검색 메소드(목록+검색)
-	List<PjDto> selectList(PjListSearchVO vo); 
-	List<PjDto> list(PjListSearchVO vo); 
-	List<PjDto> search(PjListSearchVO vo);
+	List<PjListSearchVO> selectList(PjListSearchVO vo); 
+	List<PjListSearchVO> list(PjListSearchVO vo); 
+	List<PjListSearchVO> search(PjListSearchVO vo);
 	
 	//인기순
-	List<PjDto> popular(PjListSearchVO vo);
+	List<PjListSearchVO> popular(PjListSearchVO vo);
 	
 	//마감임박순
-	List<PjDto> imminent(PjListSearchVO vo);
+	List<PjListSearchVO> imminent(PjListSearchVO vo);
 	
 	//최신순
-	List<PjDto> latest(PjListSearchVO vo);
+	List<PjListSearchVO> latest(PjListSearchVO vo);
 	
 	//카테고리별 정렬
-	List<PjDto> category(PjListSearchVO vo);
+	List<PjListSearchVO> category(PjListSearchVO vo);
+	
+//	//펀딩예정 
+	List<PjListSearchVO> prelaunching(PjListSearchVO vo);
+	
+	//펀딩중 
+	List<PjListSearchVO> ongoing(PjListSearchVO vo);
+	
+	//펀딩 마감
+	List<PjListSearchVO> finishing(PjListSearchVO vo);
 	
 	//검색과 목록의 총 데이터 갯수를 구하는 메소드(마지막 페이지 번호를 구하기 위해서 사용하는 메소드)
 	int count(PjListSearchVO vo);
@@ -47,17 +57,28 @@ public interface PjDao {
 	//카테고리별 데이터 갯수
 	int categoryCount(PjListSearchVO vo);
 	
-	//주문금액, 달성률 계산
-	List<OrdersCalVO> achievementRate();
+
 	
 	//주문금액, 달성률 계산(개별)
 	OrdersCalVO calVo(int pjNo);
+
+	//펀딩예정 데이터 갯수
+	int prelaunchingCount(PjListSearchVO vo);
+	
+	//펀딩중 데이터 갯수
+	int ongoingCount(PjListSearchVO vo);
+	
+	//펀딩마감 데이터 갯수
+	int finishingCount(PjListSearchVO vo);
+	
+
 
 	//마이페이지- 후원한 프로젝트에 쓰임	
 	//	List<SupportPjVO> supportList(); 
 
 	
 	
+
 	//U
 	//D
 }

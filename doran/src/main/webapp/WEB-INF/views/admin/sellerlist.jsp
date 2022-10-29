@@ -9,7 +9,8 @@
 <div class="container-700 mt-40 mb-50">
 	<!-- 제목 -->
 	<div class="row">
-		<h2>판매자 리스트</h2>
+		<h2>판매자 신청 리스트
+		</h2>
 	</div>
 	
 	<!-- 검색창 -->
@@ -35,7 +36,7 @@
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr>
-					<th>판매자번호</th>
+					<th>판매자 닉네임</th>
 					<th>등록 날짜</th>
 					<th>입금은행</th>
 					<th>입금 계좌</th>
@@ -50,7 +51,7 @@
 				<tr align="center">
 					<td>
 						 <a href="/admin/sellerdetail?sellerMemNo=${dto.sellerMemNo}">
-							${dto.sellerMemNo}
+							${dto.memNick}
 							</a>
 					</td>
 					<td>
