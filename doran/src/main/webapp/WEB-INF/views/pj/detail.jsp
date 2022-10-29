@@ -131,6 +131,12 @@ function shareKakao() {
         </table>
     </div>
 
+    <div>
+        <span>목표금액 ${PjDto.pjTargetMoney}</span>
+        <span>펀딩기간 ${PjDto.pjFundingStartDate} ~ ${PjDto.pjFundingEndDate}</span>
+        <span>결제 목표금액 달성시 ${PjDto.pjFundingEndDate}에 진행</span>
+    </div>
+
 	
 	<div class="shareParent">
 	<button type="button">sns 공유 버튼</button>
@@ -150,6 +156,19 @@ function shareKakao() {
     
 
     <c:choose>
+
+        <c:when test="${DateCount<=0}">
+            <div>
+                <span>마감된 프로젝트입니다</span>
+            </div>
+            <div>
+                
+                <span class="no">${OptionsDto.optionsNo}</span>
+                <span class="name">${OptionsDto.optionsName}</span>
+                <span class="price">${OptionsDto.optionsPrice}</span>
+                <span class="stock">${OptionsDto.optionsStock}</span>
+            </div>
+        </c:when>
     	
     	<c:when test="${loginNo==null}">
     		<div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
@@ -157,6 +176,7 @@ function shareKakao() {
                 <span class="name">${OptionsDto.optionsName}</span>
                 <span class="price">${OptionsDto.optionsPrice}</span>
                 <span class="stock">${OptionsDto.optionsStock}</span>
+            </div>
     	</c:when>
     
     
