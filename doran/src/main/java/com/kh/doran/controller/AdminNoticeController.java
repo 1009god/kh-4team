@@ -30,8 +30,8 @@ import com.kh.doran.vo.NoticeListSearchVO;
 
 
 @Controller
-@RequestMapping("/notice")
-public class NoticeController {
+@RequestMapping("/admin")
+public class AdminNoticeController {
 	
 	@Autowired
 	private NoticeDao noticeDao;
@@ -48,7 +48,7 @@ public class NoticeController {
 	
 //	참고 : ModelAttribute로 수신한 데이터는 자동으로 Model에 첨부된다
 //	- 옵션에 name을 작성하면 해당하는 이름으로 model에 첨부
-	@RequestMapping("/list")
+	@RequestMapping("/noticelist")
 	public String list(Model model,
 			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
 		//페이지 네비게이터를 위한 게시글 수를 구한다
@@ -56,10 +56,10 @@ public class NoticeController {
 		vo.setCount(count);
 		
 		model.addAttribute("list", noticeDao.selectList(vo));
-		return "notice/list";
+		return "admin/noticelist";
 	}
 	
-	@GetMapping("/detail")
+	@GetMapping("/noticedetail")
 	public String detail(
 		@RequestParam int noticeNo, Model model, HttpSession session) {
 		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
@@ -67,15 +67,15 @@ public class NoticeController {
 		//(+) 추가 게시글에 대한 첨부파일을 조회하여 첨부
 		model.addAttribute("filesList", 
 				filesDao.selectNoticeFileList(noticeNo));
-		return "notice/detail";
+		return "admin/noticedetail";
 	}
 	
-	@GetMapping("/write")
+	@GetMapping("/noticewrite")
 	public String write() {
-		return "notice/write";
+		return "admin/noticewrite";
 	}
 	
-	@PostMapping("/write") 
+	@PostMapping("/noticewrite") 
 	public String write(
 			@ModelAttribute NoticeDto noticeDto,
 			@RequestParam List<MultipartFile> files,
@@ -115,37 +115,37 @@ public class NoticeController {
 			}
 		}
 		attr.addAttribute("noticeNo", noticeNo);
-		return "redirect:detail";
+		return "redirect:noticedetail";
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/noticedelete")
 	public String delete(@RequestParam int noticeNo) {
 		boolean result = noticeDao.delete(noticeNo);
 		if(result) {//성공
-			return "redirect:list";
+			return "redirect:noticelist";
 		}
 		else {//구문은 실행되었지만 바뀐 게 없는 경우(강제 예외 처리)
 			throw new TargetNotFoundException();
 		}
 	}
 	
-	@GetMapping("/edit")
+	@GetMapping("/noticeedit")
 	public String edit(@RequestParam int noticeNo, Model model) {
 		NoticeDto noticeDto = noticeDao.selectOne(noticeNo);
 		if(noticeDto == null) {//없는 경우 내가 만든 예외 발생
 			throw new TargetNotFoundException();
 		}
 		model.addAttribute("noticeDto", noticeDto);
-		return "notice/edit";
+		return "admin/noticeedit";
 	}
 	
-	@PostMapping("/edit")
+	@PostMapping("/noticeedit")
 	public String edit(@ModelAttribute NoticeDto noticeDto,
 			RedirectAttributes attr) {
 		boolean result = noticeDao.update(noticeDto);
 		if(result) {//성공했다면 상세페이지로 이동
 			attr.addAttribute("noticeNo", noticeDto.getNoticeNo());
-			return "redirect:detail";
+			return "redirect:noticedetail";
 		}
 		else {//실패했다면 오류 발생
 			throw new TargetNotFoundException();
