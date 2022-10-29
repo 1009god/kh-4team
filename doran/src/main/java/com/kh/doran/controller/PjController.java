@@ -2,7 +2,9 @@ package com.kh.doran.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.KeyStore.Entry.Attribute;
 import java.util.List;
+import java.util.jar.Attributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -77,37 +79,82 @@ public class PjController {
 	public String insert() {
 		return "pj/insert";
 	}
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute PjDto pjDto,
-			@RequestParam List<MultipartFile> files,
-			HttpSession session, RedirectAttributes attr
+	@PostMapping("/insert")//프로젝트 입력 받은거 저장             옵션정보 저장
+	public String insert(@ModelAttribute PjDto pjDto, @ModelAttribute OptionsDto optionsDto,
+			
+			//파일 정보
+//			@RequestParam List<MultipartFile> files , 
+			Attributes attr,
+			//세션 관련된거 쓰겠다는거
+			HttpSession session
 			)throws IllegalStateException, IOException  {
-		pjDao.insert(pjDto);
 		
-		int pjsellerNo = (int)session.getAttribute("pjselleresNo");
+		//등록될 프로젝트의 번호를 미리 생성함
+		int pjSeqNo= pjDao.sequence();
+		//생성된 번호를 프로젝트 번호로 저장함
+		pjDto.setPjNo(pjSeqNo); 
+		
+		//세션에 있는 셀러 번호를 가져온다음 pjsellerNo에 집어넣음
+		int pjsellerNo = (int)session.getAttribute("sellerNo");
+		//세션에 있는 셀러번호를 PjSellerMemNo에 저장시킨다
 		pjDto.setPjSellerMemNo(pjsellerNo);
 		
-		for(MultipartFile file : files) {
-			if(!file.isEmpty()) {
-				System.out.println("첨부파일 발견");
-				
-			//db등록
-			int filesNo = filesDao.sequence();
-			filesDao.insert(FilesDto.builder()
-					.filesNo(filesNo)
-					.filesUploadname(file.getOriginalFilename())
-					.filesType(file.getContentType())
-					.filesSize(file.getSize())
-					.build());
-			//파일저장
-			File dir = new File("D:/doranuplaod/pjinsertimg");
-			dir.mkdirs();
-			File target = new File(dir,String.valueOf(filesNo));
-			file.transferTo(target);
-			}
-	}
+	
+		//db에 프로젝트를 먼저 만든다(dao에 있는 인서트 문에 넣어서 만들어) 
+		//or 이거인가 pjDao.insert(pjDto)
+		pjDao.insert(PjDto.builder()
+									.pjNo(pjSeqNo)
+									.pjSellerMemNo(pjsellerNo)
+									.pjCategory(pjDto.getPjCategory())
+									.pjName(pjDto.getPjName())
+									.pjSummary(pjDto.getPjSummary())
+									.pjTargetMoney(pjDto.getPjTargetMoney())
+									.pjFundingStartDate(pjDto.getPjFundingStartDate())
+									.pjFundingEndDate(pjDto.getPjFundingEndDate())
+									.pjEndDate(pjDto.getPjFundingEndDate())
+									.pjLikesNumber(pjDto.getPjLikesNumber())
+									.build());
 		
-		return "rediret:pj/insertfinish";
+		//그 다음엔 Dto에 미리만든 프로젝트 시퀀스 번호를 OptionsPjNo에 저장해서 줘
+		//optionsDto.setOptionsPjNo(pjSeqNo);
+		//시퀀스 번호를 dto에 넣었으니까 Dao에 있는 인서트 문을 돌려 
+		optionsDao.insert(OptionsDto.builder()
+				
+				.optionsPjNo(pjSeqNo)
+				.optionsName(optionsDto.getOptionsName())
+				.optionsPrice(optionsDto.getOptionsPrice())
+				.optionsStock(optionsDto.getOptionsStock())
+				.optionsDeliveryPrice(optionsDto.getOptionsDeliveryPrice())
+				.build());
+		
+		
+		
+		
+//		System.out.println(pjDto.getPjNo());
+//		System.out.println(pjDto.getPjSellerMemNo());
+		
+		
+//		for(MultipartFile file : files) {
+//			if(!file.isEmpty()) {
+//				System.out.println("첨부파일 발견");
+//				
+//			//db등록
+//			int filesNo = filesDao.sequence();
+//			filesDao.insert(FilesDto.builder()
+//					.filesNo(filesNo)
+//					.filesUploadname(file.getOriginalFilename())
+//					.filesType(file.getContentType())
+//					.filesSize(file.getSize())
+//					.build());
+//			//파일저장
+//			File dir = new File("D:/doranuplaod/pjinsertimg");
+//			dir.mkdirs();
+//			File target = new File(dir,String.valueOf(filesNo));
+//			file.transferTo(target);
+//			}
+//	}
+		
+		return "pj/insertfinish";
 	}
 	@GetMapping("/insertfinish")
 	public String insertfinish() {
@@ -225,11 +272,16 @@ public class PjController {
 		//페이지 네비게이터를 위한 게시글 수를 구한 것
 		int count = pjDao.count(vo);
 		vo.setCount(count);
-	
+		
+//		double achievementRate = vo.getAchievementRate();
+		
+//		vo.setAchievementRate(Math.round(achievementRate)); //말이 안 되나?
+		
 		model.addAttribute("list",pjDao.selectList(vo));
-		model.addAttribute("amountCalList", pjDao.achievementRate());
 		return "pj/list";
 	};
+	
+	
 	
 	
 
