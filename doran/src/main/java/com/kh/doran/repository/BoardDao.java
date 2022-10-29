@@ -31,5 +31,8 @@ public interface BoardDao {
 	
 	void clear();
 	boolean updateReadcount(int boardPostNo);
+	
+	//첨부파일 관련 기능
+	void connectFiles(int boardImgPostNo, int boardImgNo);
 
 }

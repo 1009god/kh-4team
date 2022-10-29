@@ -143,6 +143,14 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {noticeFileNoticeNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	
+	@Override
+	public List<FilesDto> selectBoardFileList(int boardImgPostNo) {
+		String sql = "select * from board_img_view "
+				+ "where board_img_post_no = ?";
+		Object[] param = {boardImgPostNo};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 
 	
 	
