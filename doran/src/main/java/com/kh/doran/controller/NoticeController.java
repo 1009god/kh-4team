@@ -63,7 +63,10 @@ public class NoticeController {
 	public String detail(
 		@RequestParam int noticeNo, Model model, HttpSession session) {
 		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
-
+		
+		//(+) 추가 게시글에 대한 첨부파일을 조회하여 첨부
+		model.addAttribute("filesList", 
+				filesDao.selectNoticeFileList(noticeNo));
 		return "notice/detail";
 	}
 	
@@ -81,7 +84,7 @@ public class NoticeController {
 		int adminNo = (int)session.getAttribute("loginNo");
 		noticeDto.setNoticeAdminNo(adminNo);
 		
-		noticeDao.insert(noticeDto);
+		//noticeDao.insert(noticeDto);
 		//return "redirect:list";
 		
 		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
@@ -103,9 +106,12 @@ public class NoticeController {
 						.filesSize(file.getSize())
 						.build());
 				//파일저장
-			
 				File target = new File(directory,String.valueOf(filesNo));
+				System.out.println(target.getAbsolutePath());
 				file.transferTo(target);
+				
+				//+ 연결 테이블에 연결 정보를 저장 (게시글 번호, 첨부파일 번호)
+				noticeDao.connectFiles(noticeNo, filesNo);
 			}
 		}
 		attr.addAttribute("noticeNo", noticeNo);

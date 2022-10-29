@@ -24,4 +24,7 @@ public interface FilesDao {
 	//셀러 첨부파일 이미지 저장
 	void connectSellerFiles(int filesNo, int sellerMemNo);
 	
+	//공지사항 게시판 첨부파일 저장 (notice_file_view)
+	List<FilesDto> selectNoticeFileList(int noticeFileNoticeNo);
+	
 }

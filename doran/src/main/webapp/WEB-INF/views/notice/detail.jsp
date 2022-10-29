@@ -22,6 +22,10 @@
 			<th>내용</th>
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
+				<c:forEach var="filesDto" items="${filesList}" >		
+					<img width="auto" height="auto" src="http://localhost:8888/files/download/${filesDto.filesNo}" >
+				</c:forEach>
+				
 				<pre>${noticeDto.noticeContent}</pre>
 			</td>
 		</tr>
