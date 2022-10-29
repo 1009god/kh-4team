@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.BoardDto;
-import com.kh.doran.entity.FilesDto;
 import com.kh.doran.entity.ReplyDto;
 import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.BoardDao;

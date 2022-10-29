@@ -66,8 +66,6 @@ public class BoardServiceImpl implements BoardService{
 				boolean result = boardDao.delete(boardPostNo);
 				
 				if(result) {
-					 //첨부파일 (files) 테이블 삭제
-			    	  //실제 파일 삭제
 			    	  for(FilesDto filesDto : filesList) {
 			    		  //첨부파일(files) 테이블 삭제
 			    		  filesDao.delete(filesDto.getFilesNo());
