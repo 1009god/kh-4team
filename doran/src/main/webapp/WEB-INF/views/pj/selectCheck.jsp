@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-
+    <jsp:include page="/WEB-INF/views/template/header2.jsp"></jsp:include>
 
 
 
@@ -21,5 +13,6 @@
 
 
 <a href="order?optionsNo=${OptionsDto.optionsNo}"><button>다음</button></a>
-</body>
-</html>
+
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

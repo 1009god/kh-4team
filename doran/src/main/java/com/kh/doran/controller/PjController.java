@@ -286,6 +286,12 @@ public class PjController {
 	};
 	
 	
+	@GetMapping("/basket")
+	public String basket(Model model, HttpSession session) {
+		int loginNo2=(int) session.getAttribute("loginNo");
+		model.addAttribute("OrdersMemSearchDto", ordersDao.memNoSearch(loginNo2));
+		return "pj/basket";
+	};
 	
 	
 
