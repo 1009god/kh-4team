@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.OrdersDto;
 import com.kh.doran.vo.OrdersCalVO;
+import com.kh.doran.vo.OrdersMemNoSearchVO;
 
 @Repository
 public class OrdersDaoImpl implements OrdersDao{
@@ -77,6 +78,62 @@ public class OrdersDaoImpl implements OrdersDao{
 		jdbcTemplate.update(sql, param);
 	}
 
+	private RowMapper<OrdersMemNoSearchVO> memNoSearchMapper=new RowMapper<OrdersMemNoSearchVO>() {
 
+		@Override
+		public OrdersMemNoSearchVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			return OrdersMemNoSearchVO.builder()
+														.pjNo(rs.getInt("PJ_NO"))
+														.pjName(rs.getString("PJ_NAME"))
+														.optionsNo(rs.getInt("OPTIONS_NO"))
+														.optionsName(rs.getString("OPTIONS_NAME"))
+														.optionsPrice(rs.getInt("OPTIONS_PRICE"))
+														.optionsStock(rs.getInt("OPTIONS_STOCK"))
+														.optionsDeliveryPrice(rs.getInt("OPTIONS_DELIVERY_PRICE"))
+														.ordersNo(rs.getInt("ORDERS_NO"))
+														.ordersMemNo(rs.getInt("ORDERS_MEM_NO"))
+														.build();
+		}	
+	};
+	
+	
+	private ResultSetExtractor<OrdersMemNoSearchVO> memNoSearchExtractor=new ResultSetExtractor<OrdersMemNoSearchVO>() {
+
+		@Override
+		public OrdersMemNoSearchVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return OrdersMemNoSearchVO.builder()
+						.pjNo(rs.getInt("PJ_NO"))
+						.pjName(rs.getString("PJ_NAME"))
+						.optionsNo(rs.getInt("OPTIONS_NO"))
+						.optionsName(rs.getString("OPTIONS_NAME"))
+						.optionsPrice(rs.getInt("OPTIONS_PRICE"))
+						.optionsStock(rs.getInt("OPTIONS_STOCK"))
+						.optionsDeliveryPrice(rs.getInt("OPTIONS_DELIVERY_PRICE"))
+						.ordersNo(rs.getInt("ORDERS_NO"))
+						.ordersMemNo(rs.getInt("ORDERS_MEM_NO"))
+						.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	
+@Override
+public List<OrdersMemNoSearchVO> memNoSearch(int ordersMemNo) {
+	String sql="select*from (select p.pj_no, p.pj_name, op.options_no, "
+			+ "op.options_name, op.options_price, op.options_stock, "
+			+ "op.options_delivery_price, ord.orders_no, "
+			+ "ord.orders_mem_no "
+			+ "from pj p, options op, orders ord "
+			+ "where p.pj_no=op.options_pj_no "
+			+ "and op.options_no=ord.orders_options_no) "
+			+ "where orders_mem_no=?";
+	Object[] param= {ordersMemNo};
+	return jdbcTemplate.query(sql, memNoSearchMapper, param);
+}
+	
 	
 }
