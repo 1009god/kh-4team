@@ -58,8 +58,6 @@ public interface PjDao {
 	int categoryCount(PjListSearchVO vo);
 	
 
-	//주문금액, 달성률 계산
-	List<OrdersCalVO> achievementRate();
 	
 	//주문금액, 달성률 계산(개별)
 	OrdersCalVO calVo(int pjNo);

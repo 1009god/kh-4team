@@ -604,11 +604,6 @@ public float dateCount(int pjNo) {
 }
 
 
-@Override
-public List<OrdersCalVO> achievementRate() {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 
 
