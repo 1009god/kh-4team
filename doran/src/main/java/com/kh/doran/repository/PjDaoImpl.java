@@ -138,7 +138,9 @@ public class PjDaoImpl implements PjDao {
 			          + " group by OPT.options_pj_no "
 			      + " ) ACH on PJ.pj_no = ACH.options_pj_no "
 			      	+ "where instr(#1, ?)>0 order by pj_no desc"
-								+")TMP" 
+								+")TMP "
+								+ "where  pj_funding_start_date < sysdate "
+								+ "and sysdate-pj_funding_end_date<=0 " 
 						+	" ) where rn between ? and ? " ;
 			
 	sql=sql.replace("#1", vo.getType());
@@ -166,6 +168,8 @@ public class PjDaoImpl implements PjDao {
 				+ "            group by OPT.options_pj_no"
 				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
 				+ "					)TMP "
+				+ "					where  pj_funding_start_date < sysdate "
+				+ "					and sysdate-pj_funding_end_date<=0 "
 				+ "				) where rn between ? and ?  ";
 
 		Object[]param = {vo.startRow(), vo.endRow()};
@@ -189,7 +193,10 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by #1 desc"
-							+")TMP order by #1 desc" 
+							+")TMP "
+							+ "where pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0  "
+							+ "order by #1 desc" 
 					+	" ) where rn between ? and ? " ;
 		sql=sql.replace("#1", vo.getSort());
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -213,7 +220,10 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by #1 asc"
-							+")TMP order by #1 asc" 
+							+")TMP "
+							+ "where pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0 "
+							+ "order by #1 asc" 
 					+	" ) where rn between ? and ? " ;
 		sql=sql.replace("#1", vo.getSort());
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -237,7 +247,10 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-							+")TMP order by #1 desc" 
+							+")TMP "
+							+ "where pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0 "
+							+ "order by #1 desc" 
 					+	" ) where rn between ? and ? " ;
 			sql=sql.replace("#1", vo.getSort());
 			Object[] param = {vo.startRow(), vo.endRow()};
@@ -261,12 +274,16 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-							+")TMP where pj_category in ?" 
+							+")TMP "
+							+ "where pj_category in ? "
+							+ "and pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0" 
 					+	" ) where rn between ? and ? " ;
 		Object[] param = {vo.getCategory(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
+	//펀딩예정
 	@Override
 	public List<PjListSearchVO> prelaunching(PjListSearchVO vo) {
 		String sql = "    select #1.* from ( ("
@@ -291,6 +308,7 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
+	//펀딩중
 	@Override
 	public List<PjListSearchVO> ongoing(PjListSearchVO vo) {
 		String sql = "    select #1.* from ( ("
@@ -307,10 +325,10 @@ public class PjDaoImpl implements PjDao {
 				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
 				+ "            group by OPT.options_pj_no"
 				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-				+ "					)TMP where "
-				+ "                                pj_funding_start_date < sysdate and "
-				+ "                                sysdate-pj_funding_end_date<=0 "
-				+ "                               order by sysdate-pj_funding_end_date desc ) #1"
+				+ "					)TMP "
+				+ "					where pj_funding_start_date < sysdate "
+				+ "					and sysdate-pj_funding_end_date<=0 "
+				+ "                 order by sysdate-pj_funding_end_date desc ) #1"
 				+ "				) where rn between ? and ?  ";
 		
 		sql=sql.replace("#1", vo.getSort());
@@ -318,6 +336,7 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
+	//펀딩마감
 	@Override
 	public List<PjListSearchVO> finishing(PjListSearchVO vo) {
 		String sql = "        select #1.* from ( ("
@@ -334,8 +353,9 @@ public class PjDaoImpl implements PjDao {
 				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
 				+ "            group by OPT.options_pj_no"
 				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-				+ "					)TMP where sysdate-pj_funding_end_date>0"
-				+ "                            order by sysdate-pj_funding_end_date desc ) #1"
+				+ "					)TMP "
+				+ "					where sysdate-pj_funding_end_date>0"
+				+ "                 order by sysdate-pj_funding_end_date desc ) #1"
 				+ "				) where rn between ? and ?  ";
 				
 		sql=sql.replace("#1", vo.getSort());
@@ -371,14 +391,19 @@ public class PjDaoImpl implements PjDao {
 	// 전체 데이터 갯수
 	@Override
 	public int listCount(PjListSearchVO vo) {
-		String sql = "select count(*) from pj";
+		String sql = "select count(*) from pj "
+				+ "where pj_funding_start_date < sysdate "
+				+ "and sysdate-pj_funding_end_date<=0";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	// 검색 데이터 갯수
 	@Override
 	public int searchCount(PjListSearchVO vo) {
-		String sql = "select count(*) from pj where instr(#1,?)>0";
+		String sql = "select count(*) from pj "
+				+ "where instr(#1,?)>0 "
+				+ "and pj_funding_start_date < sysdate "
+				+ "and sysdate-pj_funding_end_date<=0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class,param);
@@ -387,7 +412,10 @@ public class PjDaoImpl implements PjDao {
 	// 카테고리별 데이터 갯수
 	@Override
 	public int categoryCount(PjListSearchVO vo) {
-		String sql = "select count(*) from pj where pj_category in ? ";
+		String sql = "select count(*) from pj "
+				+ "where pj_category in ? "
+				+ "and pj_funding_start_date < sysdate "
+				+ "and sysdate-pj_funding_end_date<=0";
 		Object[] param = {vo.getCategory()};
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
