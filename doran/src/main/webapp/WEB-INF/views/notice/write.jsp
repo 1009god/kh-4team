@@ -3,7 +3,7 @@
 
     <h1>공지사항 작성</h1>
     
-    <form action="write" method="post">
+    <form action="write" method="post" enctype="multipart/form-data">
     	<table border="1" width="500">
     		<tbody>
     			<tr>
@@ -16,6 +16,13 @@
     				<th>내용</th>
     				<td>
     					<textarea name="noticeContent" rows="10" cols="60" required></textarea>
+    				</td>
+    			</tr>
+    			
+    			<tr>
+    				<th>첨부파일</th>
+    				<td>
+    					<input type="file" name="files" multiple></input>
     				</td>
     			</tr>
     		</tbody>

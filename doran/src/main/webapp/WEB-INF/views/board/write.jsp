@@ -17,7 +17,7 @@
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea name="boradContent" rows="10" cols="60" required></textarea>
+				<textarea name="boardContent" rows="10" cols="60" required></textarea>
 			</td>
 		</tr>
 	</tbody>

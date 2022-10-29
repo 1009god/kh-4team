@@ -135,6 +135,14 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {sellerMemNo, filesNo};
 		jdbcTemplate.update(sql,param);			
 	}
+	
+	@Override
+	public List<FilesDto> selectNoticeFileList(int noticeFileNoticeNo) {
+		String sql = "select * from notice_file_view "
+							+ "where notice_file_notice_no = ?";
+		Object[] param = {noticeFileNoticeNo};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 
 	
 	

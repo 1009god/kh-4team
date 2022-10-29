@@ -100,7 +100,7 @@ public class BoardController {
 		int memNo = (int)session.getAttribute("loginNo");
 		boardDto.setBoardMemNo(memNo);
 		
-		boardDao.insert(boardDto);
+		//boardDao.insert(boardDto);
 		//return "redirect:list";
 		
 		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
