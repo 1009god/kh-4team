@@ -31,8 +31,9 @@ $(function(){
         $(".shareChild").toggle();
     });
 
+    const datecountonjs=Math.ceil("${DateCount}");
+    $(".endCount").text(datecountonjs+"일");
 
-    
 });
 
 
@@ -67,7 +68,7 @@ function shareKakao() {
 	  });
 	}
 
-
+    
 
 
 </script>
@@ -99,6 +100,10 @@ function shareKakao() {
                 <tr>
                     <th>후원자</th>
                     <td>${OrderCount}명</td>
+                </tr>
+                <tr>
+                    <th>남은 시간</th>
+                    <td><span class="endCount"></span></td>
                 </tr>
                <tr>
                		<th>좋아요</th>

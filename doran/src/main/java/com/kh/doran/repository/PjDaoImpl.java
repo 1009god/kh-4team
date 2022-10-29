@@ -2,6 +2,7 @@ package com.kh.doran.repository;
 
 
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -374,5 +375,12 @@ public int orderCount(OrderCountVO vo) {
 	return jdbcTemplate.queryForObject(sql, int.class,param);
 }
 	
+//오늘부터 프로젝트 마감일까지 며칠남았는지(결제가능기간)
+@Override
+public float dateCount(int pjNo) {
+	String sql="select pj_funding_end_date-sysdate from pj where pj_no=?";
+	Object[] param= {pjNo};
+	return jdbcTemplate.queryForObject(sql, float.class, param);
+}
 
 }

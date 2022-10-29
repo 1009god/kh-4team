@@ -1,5 +1,6 @@
 package com.kh.doran.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.kh.doran.entity.PjDto;
@@ -17,7 +18,9 @@ public interface PjDao {
 	
 	int orderCount(OrderCountVO vo);//로그인한 사용자가 이 프로젝트를 이미 후원한 상태인지 확인(boolean이 맞는거같긴함)
 
-	int orderCount(int pjNo);
+	int orderCount(int pjNo);//이 프로젝트의 후원자는 몇 명인지
+	
+	float dateCount(int pjNo);
 	
 	//통합 검색 메소드(목록+검색)
 	List<PjDto> selectList(PjListSearchVO vo); 
