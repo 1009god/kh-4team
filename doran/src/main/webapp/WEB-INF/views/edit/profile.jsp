@@ -13,7 +13,7 @@
 
  
  <div>
- <span><a href="//edit/profile">프로필</a></span>
+ <span><a href="/edit/profile">프로필</a></span>
  <span><a href="/edit/account">계정</a></span>
  <span><a href="/edit/address_list">배송지</a></span>
  </div>
@@ -24,10 +24,8 @@
  <form method="post" enctype="multipart/form-data">
  <!-- 이미지 첨부파일 -->
  <div>프로필 이미지 수정</div>
- <input type="file" name= files>
- 
- 
- 
+ <input type="file" name= files">
+  
 	<div>
 		<label>닉네임</label>
 		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">

@@ -12,7 +12,7 @@
 
  
  <div>
- <span><a href="//edit/profile">프로필</a></span>
+ <span><a href="/edit/profile">프로필</a></span>
  <span><a href="/edit/account">계정</a></span>
  <span><a href="/edit/address_list">배송지</a></span>
  </div>

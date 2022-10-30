@@ -14,6 +14,25 @@
 .border{
 border:solid;
 }
+
+.container-800 {
+margin : 30px
+}
+
+.btn-round {
+  color: white; 
+  text-align: center;
+  background: lightgrey;
+  border: solid 1px lightgrey;
+  border-radius: 50px;  
+  
+  }
+  
+ .atag {
+   text-decoration: none;
+   color:white;
+}
+
 </style>
 
 
@@ -23,44 +42,46 @@ border:solid;
 
  
  <div>
- <span><a href="//edit/profile">프로필</a></span>
+ <span><a href="/edit/profile">프로필</a></span>
  <span><a href="/edit/account">계정</a></span>
  <span><a href="/edit/address_list">배송지</a></span>
  </div>
- 
- <hr style="border:1px color= silver;" width="100%">
-
-
-
 
 <div>
-등록된 배송지<button><a href="http://localhost:8888/edit/address_plus">+추가</a></button>
+ 	<hr style="border:1px color= silver;" width="100%">
+</div> 
 
+
+
+<div class="container-800 left">
+	
+		등록된 배송지<button class="btn-round"><a class="atag" href="http://localhost:8888/edit/address_plus">배송지 추가</a></button>
+		
+		</div>
+		<div class="container-800 left">
+		<c:forEach var= "dto" items = "${list}"> <!-- 컨트롤러에서 넘어온 list -->
+		
+		<div class="border">
+		<button class="btn-round"><a class="atag" href="address_delete?addressNo=${dto.addressNo}">삭제</a></button>
+		<button class="btn-round"><a class="atag" href="address_change?addressNo=${dto.addressNo}">수정</a></button>
+		<!--  ${dto.addressNo}-->
+			<div>
+				${dto.addressName}
+			</div>
+			<div>
+				${dto.addressPost}
+				${dto.addressBasic}
+				${dto.addressDetail}
+			</div>
+			<div>
+				${dto.addressTel}
+			</div>
+		</div>
+		
+		</c:forEach>
+		
+		</div>
 </div>
-
-<c:forEach var= "dto" items = "${list}"> <!-- 컨트롤러에서 넘어온 list -->
-
-<div class="border">
-<button><a href="address_delete?addressNo=${dto.addressNo}">삭제</a></button>
-<button><a href="address_change?addressNo=${dto.addressNo}">수정</a></button>
-${dto.addressNo}
-	<div>
-		${dto.addressName}
-	</div>
-	<div>
-		${dto.addressPost}
-		${dto.addressBasic}
-		${dto.addressDetail}
-	</div>
-	<div>
-		${dto.addressTel}
-	</div>
-</div>
-
-</c:forEach>
-
-</div>
-
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

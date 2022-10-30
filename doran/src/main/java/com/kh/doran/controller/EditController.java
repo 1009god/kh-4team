@@ -120,6 +120,7 @@ public class EditController {
 		public String profileResult() {
 			return "profile";
 		}		
+		
 //account 수정 전 정보확인 페이지 
 		@GetMapping("/account")
 		public String account(Model model, HttpSession session) {
