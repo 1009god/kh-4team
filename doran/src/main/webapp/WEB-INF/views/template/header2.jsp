@@ -140,8 +140,18 @@
                                 <li><a href="http://localhost:8888/pj/list?sort=pj_likes_number">인기</a></li>
                                 <li><a href="http://localhost:8888/pj/list?sort=pj_no">신규</a></li>
                                 <li><a href="http://localhost:8888/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>
-                                <li><a href="#">커뮤니티</a></li>
-                                <li><a href="#">고객센터</a></li>
+                                <li class="dropdown"><a class="dropdown-toggle" href="#">커뮤니티</a>
+                                	<ul class="dropdown-menu">
+								  	<li><a class="dropdown-item" href="#">공지사항</a></li>
+								    <li><a class="dropdown-item" href="#">도란도란</a></li>
+								 </ul>
+                                </li>
+                                <li class="dropdown"><a class="dropdown-toggle" href="#">고객센터</a>
+                                	<ul class="dropdown-menu">
+								      <li><a class="dropdown-item" href="#">FAQ</a></li>
+								      <li><a class="dropdown-item" href="#">1:1 문의</a></li>
+								    </ul>
+                                </li>
                             </ul>
                         </nav>
                     </div>

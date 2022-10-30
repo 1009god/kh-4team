@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.doran.entity.OrdersDto;
 import com.kh.doran.vo.OrdersCalVO;
 import com.kh.doran.vo.OrdersMemNoSearchVO;
+import com.kh.doran.vo.SupportDetailVO;
+import com.kh.doran.vo.SupportListVO;
 
 @Repository
 public class OrdersDaoImpl implements OrdersDao{
@@ -134,6 +136,102 @@ public List<OrdersMemNoSearchVO> memNoSearch(int ordersMemNo) {
 	Object[] param= {ordersMemNo};
 	return jdbcTemplate.query(sql, memNoSearchMapper, param);
 }
-	
-	
+
+//후원(support list) 목록 뽑는 mapper
+	private RowMapper<SupportListVO> supportListMapper = new RowMapper<SupportListVO>() {
+		
+		@Override
+		public SupportListVO mapRow(ResultSet rs, int rowNum) throws SQLException {	
+			
+			return SupportListVO.builder()
+					.ordersNo(rs.getInt("orders_no"))
+					.ordersMemNo(rs.getInt("orders_mem_no"))
+					.pjNo(rs.getInt("pj_no"))
+					.pjSellerMemNo(rs.getInt("pj_seller_mem_no"))
+					.pjCategory(rs.getString("pj_category"))
+					.pjName(rs.getString("pj_name"))
+					.memNick(rs.getString("mem_nick"))
+					.build();
+		}		
+		
+	};
+
+// 후원 목록 (support list) 
+@Override
+public List<SupportListVO> selectSupportList(int ordersMemNo) {
+	String sql = "select * from support_list_view where ORDERS_MEM_NO = ?";
+	Object[] param = {ordersMemNo};
+	return jdbcTemplate.query(sql, supportListMapper, param);
 }
+
+
+//후원 내역 상세 extractor
+private ResultSetExtractor<SupportListVO> SupportDetailPjExtractor = new ResultSetExtractor<SupportListVO>() {
+	
+	@Override
+	public SupportListVO extractData(ResultSet rs) throws SQLException, DataAccessException {	
+		if(rs.next()) {
+			return SupportListVO.builder()
+					.ordersNo(rs.getInt("orders_no"))
+					.ordersMemNo(rs.getInt("orders_mem_no"))
+					.pjNo(rs.getInt("pj_no"))
+					.pjSellerMemNo(rs.getInt("pj_seller_mem_no"))
+					.pjCategory(rs.getString("pj_category"))
+					.pjName(rs.getString("pj_name"))
+					.memNick(rs.getString("mem_nick"))
+					.build();
+			}
+			else {
+				return null;
+				}
+			}
+		};
+
+		
+//후원 내역 상세-프로젝트 정보
+@Override
+public SupportListVO selectSupportDetail(int  ordersNo) {
+	String sql = "select * from support_list_view where orders_no = ?";
+	Object[] param = {ordersNo};
+	return jdbcTemplate.query(sql, SupportDetailPjExtractor, param);
+}
+
+//후원 내역 상세 extractor
+private ResultSetExtractor<SupportDetailVO> SupportDetailExtractor = new ResultSetExtractor<SupportDetailVO>() {
+	
+	@Override
+	public SupportDetailVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+		if(rs.next()) {
+		return SupportDetailVO.builder()
+				.ordersNo(rs.getInt("ORDERS_NO"))
+				.ordersDate(rs.getDate("ORDERS_DATE"))
+				.pjFundingEndDate(rs.getDate("PJ_FUNDING_END_DATE"))
+				.optionsName(rs.getString("OPTIONS_NAME"))
+				.optionsPrice(rs.getInt("OPTIONS_PRICE"))
+				.optionsDeliveryPrice(rs.getInt("OPTIONS_DELIVERY_PRICE"))
+				.addressNo(rs.getInt("ADDRESS_NO"))
+				.addressMemNo(rs.getInt("ADDRESS_MEM_NO"))
+				.addressName(rs.getString("ADDRESS_NAME"))
+				.addressTel(rs.getString("ADDRESS_TEL"))
+				.addressPost(rs.getString("ADDRESS_POST"))
+				.addressBasic(rs.getString("ADDRESS_BASIC"))
+				.addressDetail(rs.getString("ADDRESS_DETAIL"))
+				.build();
+		}
+		else {
+			return null;
+			}
+		}	
+};
+
+//후원 내역 상세- 주문, 옵션, 배송지 정보
+@Override
+public SupportDetailVO selectSupportDetail2(int ordersNo) {
+	String sql = "select * from support_detail_view where orders_no = ?";
+	Object[] param = {ordersNo};
+	return jdbcTemplate.query(sql, SupportDetailExtractor, param);
+}
+
+}
+	
+

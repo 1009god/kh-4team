@@ -6,7 +6,7 @@ public interface MemDao {
 	void insert(MemDto memDto);
 	MemDto selectOne(int memNo);
 	MemDto selectOne(String memEmail);
-	MemDto findByNickname(String memNick);
+	MemDto findByNickname(String memNick);  
 
 	
 	boolean profileUpdate(MemDto dto);  //구버전
