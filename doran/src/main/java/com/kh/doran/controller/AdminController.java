@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.AdminDto;
+import com.kh.doran.entity.DoranQDto;
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.AdminDao;
+import com.kh.doran.repository.DoranQDao;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.PjDao;
+import com.kh.doran.vo.DoranQListSearchVO;
 import com.kh.doran.vo.MemListSearchVO;
 
 @Controller
@@ -34,7 +38,11 @@ public class AdminController {
 	private PjDao pjDao;
 	
 	@Autowired
+	private DoranQDao doranQDao;
+	
+	@Autowired
 	private FilesDao filesDao;
+
 	
 //	@Autowired
 //	private SellerDao sellerDao;
@@ -157,8 +165,58 @@ public class AdminController {
 			return "admin/editFail";
 		}
 	}
-
 	
+	@GetMapping("doran-q/write")
+	public String doranQWrite() {
+		return "doranq/adminWrite";
+	}
 	
+	@PostMapping("doran-q/write") 
+	public String doranQWrite(
+			@ModelAttribute DoranQDto doranQDto,
+			/*HttpSession session,*/ RedirectAttributes attr) {
+		//session 에 있는 회원 번호를 작성자로 추가한 뒤 등록해야 함
+//		int memNo = (int)session.getAttribute("loginNo");
+//		doranQDto.setDoranQMemNo(memNo);
+		int doranQNo = doranQDao.sequence();
+		doranQDto.setDoranQNo(doranQNo);
+		
+		DoranQDto parentDto = doranQDao.selectOne(
+								doranQDto.getDoranQParent());
+		doranQDto.setDoranQGroup(parentDto.getDoranQGroup());
+		doranQDto.setDoranQDepth(parentDto.getDoranQDepth()+1);
+		
+		doranQDao.adminInsert(doranQDto);
+		attr.addAttribute("doranQNo",doranQNo);
+		
+		return "redirect:detail";
+	}
 	
+	@GetMapping("doran-q/list")
+	public String doranQList(Model model, 
+			@ModelAttribute(name="doranQListSearchVo") 
+			DoranQListSearchVO vo) {
+		int count = doranQDao.listCount(vo);
+		vo.setCount(count);
+		model.addAttribute("list",doranQDao.selectList(vo));
+		return "doranq/adminList";
+	}
+	
+	@GetMapping("doran-q/detail")
+	public String doranQDetail(@RequestParam int doranQNo, Model model) {
+		model.addAttribute("doranQDto", doranQDao.selectOne(doranQNo));
+		return "doranq/adminDetail";
+	}
+	
+	@GetMapping("doran-q/delete")
+	public String doranQDelete(@RequestParam int doranQNo) {
+		boolean result = doranQDao.delete(doranQNo);
+	      if(result) {//삭제 성공
+	         return "redirect:list";
+	      }
+	      else {//구문은 실행되었지만 바뀐 게 없는 경우 (강제 예외 처리)
+	         throw new TargetNotFoundException();
+	      }
+		
+	}
 }

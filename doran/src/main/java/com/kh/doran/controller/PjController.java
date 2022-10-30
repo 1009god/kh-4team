@@ -1,11 +1,5 @@
 package com.kh.doran.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.KeyStore.Entry.Attribute;
-import java.util.List;
-import java.util.jar.Attributes;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,37 +10,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.doran.entity.AddressDto;
 import com.kh.doran.entity.LikesDto;
 import com.kh.doran.entity.OptionsDto;
 import com.kh.doran.entity.OrdersDto;
-
-import com.kh.doran.repository.FilesDao;
-
+import com.kh.doran.entity.PjDto;
 import com.kh.doran.repository.AddressDao;
-
+import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.MemDao;
-
-import com.kh.doran.entity.FilesDto;
-
-import com.kh.doran.entity.AddressDto;
-
-
-import com.kh.doran.entity.PjDto;
-import com.kh.doran.entity.MemDto;
-
-import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
-import com.kh.doran.repository.SellerDao;
 import com.kh.doran.service.Pjservice;
-import com.kh.doran.vo.OrdersCalVO;
-import com.kh.doran.vo.PjListSearchVO;
 import com.kh.doran.vo.OrderCountVO;
+import com.kh.doran.vo.PjListSearchVO;
 
 @Controller
 @RequestMapping("/pj")
@@ -127,7 +107,7 @@ public class PjController {
 		model.addAttribute("OrderCount", pjDao.orderCount(pjNo));//이 프로젝트를 구입한 회원 명수
 		model.addAttribute("DateCount", pjDao.dateCount(pjNo));//마감일까지 며칠 남았는지(date로는 못 받고 float치환)
 		//프로젝트개설판매자의  회원테이블을 넘김
-//		PjDto pjDto=pjDao.selectOne(pjNo);
+		PjDto pjDto=pjDao.selectOne(pjNo);
 //		int sellerNo=pjDto.getPjSellerMemNo();
 //		model.addAttribute("Seller",memDao.selectOne(sellerNo));
 				

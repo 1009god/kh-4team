@@ -1,6 +1,5 @@
 package com.kh.doran.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.kh.doran.entity.PjDto;
@@ -40,7 +39,7 @@ public interface PjDao {
 	//카테고리별 정렬
 	List<PjListSearchVO> category(PjListSearchVO vo);
 	
-//	//펀딩예정 
+	//펀딩예정 
 	List<PjListSearchVO> prelaunching(PjListSearchVO vo);
 	
 	//펀딩중 
