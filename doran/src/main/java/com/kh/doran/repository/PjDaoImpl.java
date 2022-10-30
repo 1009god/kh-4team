@@ -2,6 +2,7 @@ package com.kh.doran.repository;
 
 
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -138,7 +139,9 @@ public class PjDaoImpl implements PjDao {
 			          + " group by OPT.options_pj_no "
 			      + " ) ACH on PJ.pj_no = ACH.options_pj_no "
 			      	+ "where instr(#1, ?)>0 order by pj_no desc"
-								+")TMP" 
+								+")TMP "
+								+ "where  pj_funding_start_date < sysdate "
+								+ "and sysdate-pj_funding_end_date<=0 " 
 						+	" ) where rn between ? and ? " ;
 			
 	sql=sql.replace("#1", vo.getType());
@@ -166,6 +169,8 @@ public class PjDaoImpl implements PjDao {
 				+ "            group by OPT.options_pj_no"
 				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
 				+ "					)TMP "
+				+ "					where  pj_funding_start_date < sysdate "
+				+ "					and sysdate-pj_funding_end_date<=0 "
 				+ "				) where rn between ? and ?  ";
 
 		Object[]param = {vo.startRow(), vo.endRow()};
@@ -189,7 +194,10 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by #1 desc"
-							+")TMP order by #1 desc" 
+							+")TMP "
+							+ "where pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0  "
+							+ "order by #1 desc" 
 					+	" ) where rn between ? and ? " ;
 		sql=sql.replace("#1", vo.getSort());
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -213,7 +221,10 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by #1 asc"
-							+")TMP order by #1 asc" 
+							+")TMP "
+							+ "where pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0 "
+							+ "order by #1 asc" 
 					+	" ) where rn between ? and ? " ;
 		sql=sql.replace("#1", vo.getSort());
 		Object[] param = {vo.startRow(), vo.endRow()};
@@ -237,7 +248,10 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-							+")TMP order by #1 desc" 
+							+")TMP "
+							+ "where pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0 "
+							+ "order by #1 desc" 
 					+	" ) where rn between ? and ? " ;
 			sql=sql.replace("#1", vo.getSort());
 			Object[] param = {vo.startRow(), vo.endRow()};
@@ -261,12 +275,16 @@ public class PjDaoImpl implements PjDao {
 		           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 		          + " group by OPT.options_pj_no "
 		      + " ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-							+")TMP where pj_category in ?" 
+							+")TMP "
+							+ "where pj_category in ? "
+							+ "and pj_funding_start_date < sysdate "
+							+ "and sysdate-pj_funding_end_date<=0" 
 					+	" ) where rn between ? and ? " ;
 		Object[] param = {vo.getCategory(), vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
+	//펀딩예정
 	@Override
 	public List<PjListSearchVO> prelaunching(PjListSearchVO vo) {
 		String sql = "    select #1.* from ( ("
@@ -291,6 +309,7 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
+	//펀딩중
 	@Override
 	public List<PjListSearchVO> ongoing(PjListSearchVO vo) {
 		String sql = "    select #1.* from ( ("
@@ -307,10 +326,10 @@ public class PjDaoImpl implements PjDao {
 				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
 				+ "            group by OPT.options_pj_no"
 				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-				+ "					)TMP where "
-				+ "                                pj_funding_start_date < sysdate and "
-				+ "                                sysdate-pj_funding_end_date<=0 "
-				+ "                               order by sysdate-pj_funding_end_date desc ) #1"
+				+ "					)TMP "
+				+ "					where pj_funding_start_date < sysdate "
+				+ "					and sysdate-pj_funding_end_date<=0 "
+				+ "                 order by sysdate-pj_funding_end_date desc ) #1"
 				+ "				) where rn between ? and ?  ";
 		
 		sql=sql.replace("#1", vo.getSort());
@@ -318,6 +337,7 @@ public class PjDaoImpl implements PjDao {
 		return jdbcTemplate.query(sql,pjListMapper,param);
 	}
 	
+	//펀딩마감
 	@Override
 	public List<PjListSearchVO> finishing(PjListSearchVO vo) {
 		String sql = "        select #1.* from ( ("
@@ -334,8 +354,9 @@ public class PjDaoImpl implements PjDao {
 				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
 				+ "            group by OPT.options_pj_no"
 				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
-				+ "					)TMP where sysdate-pj_funding_end_date>0"
-				+ "                            order by sysdate-pj_funding_end_date desc ) #1"
+				+ "					)TMP "
+				+ "					where sysdate-pj_funding_end_date>0"
+				+ "                 order by sysdate-pj_funding_end_date desc ) #1"
 				+ "				) where rn between ? and ?  ";
 				
 		sql=sql.replace("#1", vo.getSort());
@@ -371,14 +392,19 @@ public class PjDaoImpl implements PjDao {
 	// 전체 데이터 갯수
 	@Override
 	public int listCount(PjListSearchVO vo) {
-		String sql = "select count(*) from pj";
+		String sql = "select count(*) from pj "
+				+ "where pj_funding_start_date < sysdate "
+				+ "and sysdate-pj_funding_end_date<=0";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	// 검색 데이터 갯수
 	@Override
 	public int searchCount(PjListSearchVO vo) {
-		String sql = "select count(*) from pj where instr(#1,?)>0";
+		String sql = "select count(*) from pj "
+				+ "where instr(#1,?)>0 "
+				+ "and pj_funding_start_date < sysdate "
+				+ "and sysdate-pj_funding_end_date<=0";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class,param);
@@ -387,7 +413,10 @@ public class PjDaoImpl implements PjDao {
 	// 카테고리별 데이터 갯수
 	@Override
 	public int categoryCount(PjListSearchVO vo) {
-		String sql = "select count(*) from pj where pj_category in ? ";
+		String sql = "select count(*) from pj "
+				+ "where pj_category in ? "
+				+ "and pj_funding_start_date < sysdate "
+				+ "and sysdate-pj_funding_end_date<=0";
 		Object[] param = {vo.getCategory()};
 		return jdbcTemplate.queryForObject(sql, int.class,param);
 	}
@@ -447,6 +476,29 @@ public class PjDaoImpl implements PjDao {
 				.build();
 		}
 	};
+	
+	//단일프로젝트 달성도추출용 extractor 필요
+	private ResultSetExtractor<OrdersCalVO> calExtractor=new ResultSetExtractor<OrdersCalVO>() {
+
+		@Override
+		public OrdersCalVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return OrdersCalVO.builder()
+						.optionsPjNo(rs.getInt("options_pj_no"))
+						.pjNo(rs.getInt("pj_no"))
+						.priceTotal(rs.getInt("price_total"))
+						.pjTargetMoney(rs.getInt("pj_target_money"))
+						.achievementRate(rs.getInt("achievement_rate"))
+					.build();
+			}
+			
+			else {
+				return null;
+			}
+		}
+		
+		
+	};
 
 	
 	
@@ -454,6 +506,21 @@ public class PjDaoImpl implements PjDao {
 	
 
 
+	
+	//프로젝트번호로 검색하면 그 프로젝트의 결제총액, 달성율을 뽑아주는 메소드
+	//취소날짜가 들어간 주문은 빼고 검색
+	@Override
+	public OrdersCalVO calVo(int pjNo) {
+		String sql="select op.options_pj_no, sum(options_price) price_total, "
+				+ "sum(options_price)/pj_target_money*100 achievement_rate, "
+				+ "pj_target_money, pj_no from options op inner join "
+				+ "orders ord on op.options_no=ord.orders_options_no inner join "
+				+ "pj on options_pj_no = pj_no where pj_no=? "
+				+ "and orders_cancel_date is null "
+				+ "group by op.options_pj_no, pj_target_money,pj_no";
+		Object[] param= {pjNo};
+		return jdbcTemplate.query(sql, calExtractor, param);
+	}
 	
 //	//support맵퍼
 //	private RowMapper<SupportPjVO> supportMapper = new RowMapper<SupportPjVO>() {
@@ -487,15 +554,44 @@ public class PjDaoImpl implements PjDao {
 		}
 		
 	};
+	
+	private ResultSetExtractor<OrderCountVO> orderCountExtractor=new ResultSetExtractor<OrderCountVO>() {
+
+		@Override
+		public OrderCountVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				return OrderCountVO.builder()
+						.optionsPjNo(rs.getInt("options_pj_no"))
+						.ordersMemNo(rs.getInt("orders_mem_no"))
+						.build();
+			}
+			else {
+				return null;
+			}
+		}
+	};
+	
+	//이 프로젝트를 구매한 회원이 몇명인가
+	@Override
+	public int orderCount(int pjNo) {
+		String sql="select count(*) from (select options.options_no, options.options_pj_no, "
+				+ "orders.orders_options_no, orders.orders_mem_no "
+				+ "from options left outer join orders on options.options_no=orders.orders_options_no) "
+				+ "where options_pj_no=?";
+		Object[] param= {pjNo};
+		return jdbcTemplate.queryForObject(sql, int.class,param);
+	}
 
 	//구매여부확인(int 1일 경우 이력있음, 0일 경우 없음)
+	//취소상태인 주문은 빼고 검색
 @Override
 public int orderCount(OrderCountVO vo) {
 	String sql="select count(*) from (select options.options_no, "
 			+ "options.options_pj_no, orders.orders_options_no, "
-			+ "orders.orders_mem_no from options "
+			+ "orders.orders_mem_no, orders.orders_cancel_date from options "
 			+ "left outer join orders on options.options_no=orders.orders_options_no) "
-			+ "where options_pj_no=? and orders_mem_no=?";
+			+ "where options_pj_no=? and orders_mem_no=? "
+			+ "and orders_cancel_date is null";
 	Object[] param={vo.getOptionsPjNo(), vo.getOrdersMemNo()};
 	return jdbcTemplate.queryForObject(sql, int.class,param);
 }
@@ -508,5 +604,16 @@ public int orderCount(OrderCountVO vo) {
 	return pjSeqNo;
 }
 	
+//오늘부터 프로젝트 마감일까지 며칠남았는지(결제가능기간)
+@Override
+public float dateCount(int pjNo) {
+	String sql="select pj_funding_end_date-sysdate from pj where pj_no=?";
+	Object[] param= {pjNo};
+	return jdbcTemplate.queryForObject(sql, float.class, param);
+}
+
+
+
+
 
 }

@@ -160,6 +160,13 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	
 	@Override
+	public int sequence() {
+		String sql = "select board_seq.nextval from dual";
+		int boardNo = jdbcTemplate.queryForObject(sql, int.class);
+		return boardNo;
+	}
+	
+	@Override
 	public int insert2(BoardDto boardDto) {
 		//번호를 미리 생성한 뒤 등록하는 기능
 		String sql = "select board_seq.nextval from dual";
@@ -251,6 +258,15 @@ public class BoardDaoImpl implements BoardDao{
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
+	public void connectFiles(int boardImgPostNo, int boardImgNo) {
+		String sql = "insert into board_img("
+				+ "board_img_post_no, board_img_no"
+				+ ") values(?, ?)";
+		Object[] param = {boardImgPostNo, boardImgNo};
+		jdbcTemplate.update(sql, param);
 	}
 }
 

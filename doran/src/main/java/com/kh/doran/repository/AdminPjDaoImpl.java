@@ -46,11 +46,12 @@ public class AdminPjDaoImpl implements AdminPjDao {
 		public AdminpjListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return AdminpjListVO.builder()
 					.pjNo(rs.getInt("pj_no"))
-					.pjSellerMemNo(rs.getInt("pj_seller_no"))
+					.pjSellerMemNo(rs.getInt("pj_seller_mem_no"))
 					.pjCategory(rs.getString("pj_category"))
 					.pjName(rs.getString("pj_name"))
 					.pjTargetMoney(rs.getInt("pj_target_money"))
-					.memNick(rs.getString("mem_nick"))	
+					.memNick(rs.getString("mem_nick"))
+					.pjFundingStartDate(rs.getDate("pj_funding_start_date"))
 				.build();
 }
 };
@@ -108,14 +109,7 @@ public class AdminPjDaoImpl implements AdminPjDao {
 	
 	@Override
 	public List<AdminpjListVO> search(PjListSearchVO vo) {
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from (select board_post_no, mem_nick, reply_count "
-				+ "from board B "
-				+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
-				+ "(select distinct reply_board_post_no, count(R.reply_no) "
-				+ "over(partition by reply_board_post_no) reply_count "
-				+ "from reply R) on board_post_no = reply_board_post_no) "
-				+ "where instr(#1, ?) > 0 order by board_post_no desc) TMP where rn between ? and ?";
+		String sql = "";
 		sql = sql.replace("#1", vo.getType());
 		Object[] param = {
 			vo.getKeyword(), vo.startRow(), vo.endRow()
@@ -125,17 +119,9 @@ public class AdminPjDaoImpl implements AdminPjDao {
 	
 	@Override
 	public List<AdminpjListVO> list(PjListSearchVO vo) {
-		String sql = "select * from ( "
-							+ "select rownum rn, TMP.* from ( "
-							+ "select B.*, mem_nick, reply_count "
-									+ "from board B "
-									+ "left outer join mem M on B.board_mem_no = M.mem_no left outer join "
-									+ "(select distinct reply_board_post_no, count(R.reply_no) "
-									+ "over(partition by reply_board_post_no) reply_count "
-									+ "from reply R) on board_post_no = reply_board_post_no "
-								+ "order by board_post_no desc "
-							+ ")TMP "
-						+ ") where rn between ? and ?";
+		String sql = "select rownum , p.pj_no,p.pj_seller_mem_no,p.pj_category,p.pj_name,p.pj_target_money,p.pj_funding_start_date,"
+				+ "(select m.mem_nick from mem m where m.mem_no=p.pj_seller_mem_no) as mem_nick from pj p "
+				+ " where rownum between ? and ? order by pj_no desc";
 		Object[] param = {vo.startRow(), vo.endRow()};
 		return jdbcTemplate.query(sql, listmapper, param);
 	}
