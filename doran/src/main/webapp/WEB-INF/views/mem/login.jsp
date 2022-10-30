@@ -5,6 +5,11 @@
 	<jsp:param value="로그인" name="title"/>
 </jsp:include>
 <body>
+    <div class="" style="float: left;">
+      <img src="./image/logo.png" width="50%">
+    </div>
+    <div class=container style="float: right;">
+      
 	<div align="center">
 		<!-- 정상 / 이상 모두 나옴 -->
 		<h1>로그인</h1>

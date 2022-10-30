@@ -102,52 +102,49 @@
              <img src="/img/DoranMini.png" id="logo_img" width="170px" height="70px">
           </a>
           <c:choose>
-						        <c:when test = "${login}">
-						        	<button type="submit" class="btn btn-neutral" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
-								</c:when>
-							</c:choose>    
+			<c:when test = "${login}">
+				<button type="submit" class="btn btn-neutral" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+			</c:when>
+		</c:choose>    
   	</div>
 
     <div class="container mb-10">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="#">
-             <img src="/img/burger.png" width="25px" height="25px">
-          </a>
-          
-			<ul class="nav nav-pills ">
-			<li class="nav-item">
-			   <a class="nav-link " href="#">전체 프로젝트</a>
-			 </li>
-			  <li class="nav-item">
-			    <a class="nav-link disabled">인기</a>
-			  </li>
-			   <li class="nav-item">
-			    <a class="nav-link disabled">신규</a>
-			  </li>
-			   <li class="nav-item">
-			    <a class="nav-link disabled">마감임박</a>
-			  </li>
-			  <li class="nav-item dropdown">
-			    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">커뮤니티</a>
-			    <ul class="dropdown-menu">
-			      <li><a class="dropdown-item" href="#">공지사항</a></li>
-			      <li><a class="dropdown-item" href="#">도란도란</a></li>
-			    </ul>
-			  </li>
-			  <li class="nav-item dropdown">
-			    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">고객센터</a>
+        	<img src="/img/burger.png" width="25px" height="25px">
+        </a>
+		<ul class="nav nav-pills ">
+		<li class="nav-item">
+			<a class="nav-link " href="#">전체 프로젝트</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">인기</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">신규</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">마감임박</a>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">커뮤니티</a>
+			 <ul class="dropdown-menu">
+			  	<li><a class="dropdown-item" href="#">공지사항</a></li>
+			    <li><a class="dropdown-item" href="#">도란도란</a></li>
+			 </ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">고객센터</a>
 			    <ul class="dropdown-menu">
 			      <li><a class="dropdown-item" href="#">FAQ</a></li>
 			      <li><a class="dropdown-item" href="#">1:1 문의</a></li>
 			    </ul>
-			  </li>
-			</ul>
-		
-        </div>
-
-		</div>
-      </div>
-  </header>
+		</li>
+	</ul>
+</div>
+</div>
+</div>
+</header>
 
 
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

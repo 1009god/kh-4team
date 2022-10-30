@@ -101,8 +101,6 @@ public class MemController {
 	public String findEmail(
 			@RequestParam String memTel, Model model) {
 		MemDto memDto = memDao.findEmail(memTel); 
-////		String memEmail = memDao.findEmail(inputDto.);
-//	//	MemDto emailFindDto = memDao.selectOne(findDto.getMemEmail());
 		if(memDto == null) { //번호 틀리면 안 됨
 			return "redirect:findEmail?error";   
 		}
@@ -112,17 +110,6 @@ public class MemController {
 		}
 	}
 	
-//	@PostMapping("/findEmail")
-//	public String findEmail(@ModelAttribute MemDto inputDto, Model model) {
-//		MemDto findDto = memDao.findEmail(inputDto);
-//		if(findDto == null) {
-//			return "redirect:findEmail?error";
-//		}
-//		else {
-//			model.addAttribute("memDto", findDto.getMemEmail());
-//			return "redirect:findEmailSuccess"; 
-//		}
-//	}
 
 	
 	@GetMapping("/findEmailSuccess")
