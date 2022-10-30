@@ -14,6 +14,13 @@
 .adminbtn-color{
 	color : green;
 }
+
+#proimg {
+	border-radius: 100%;
+}
+
+
+
 </style>
 		<jsp:include page="/WEB-INF/views/template/adminheader.jsp">
 			<jsp:param value="${sellerdto.sellerMemNo} 판매자 정보" name="title" />
@@ -21,28 +28,29 @@
 
 		
 
-<div class="container-600">
+<div class="container-700">
 	<div class="row left">
-		<h1 style="padding-left: 20px">${sellerDto.sellerMemNo}번째 판매자 정보</h1>
+		<h1 style="padding-left: 20px">NO.${sellerDto.sellerMemNo}회원 판매자 정보</h1>
 	</div>
 
-	<div class="row center">
+	<div class="center">
 		<table class="table">
 			<tbody>
 				<!-- 프로필 이미지를 출력 -->
 				<tr>
-					<th width="30%" valign="top" class="center">
+					<th width="10%" valign="top" class="center">
 						<table class="table">
-							<tbody class="center">
+							<tbody class="left">
 								<tr>
-									<td><img class="image image-circle image-shadow"
-										src="download?memNo=${sellerDto.sellerMemNo}" width="100"
-										height="100"></td>
+									<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+										<c:if test="${status.last}">			
+											<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+										</c:if>
+									</c:forEach>
 								</tr>
 							
 										<tr>
-											<td><a class="btn btn-neutral btn-small" href="/admin/sellerlist">목록
-													보기</a></td>
+											<td><a class="btn btn-neutral btn-small" href="/admin/sellerlist">목록 보기</a></td>
 										</tr>
 										<tr>
 											<td><a class="btn btn-neutral btn-small"
@@ -65,10 +73,10 @@
 							</tbody>
 						</table>
 					</th>
-					<td>
+					<div>
 					<table class="table table-border">
 							<tr>
-								<th width="20%">아이디</th>
+								<th width="15%">아이디</th>
 								<td>${sellerDto.memEmail}</td>
 							</tr>
 							<tr>
@@ -88,9 +96,17 @@
 							
 						</table>
 						
+						<style>
+						.table table-border >tr > td {
+							width=600px;
+						} 
+						</style>
+						
+						
+						
 						<table class="table table-border">
 							<tr>
-								<th width="20%">판매자 번호</th>
+								<th width="15%">판매자 번호</th>
 								<td>${sellerDto.sellerMemNo}</td>
 							</tr>
 							<tr>
@@ -111,12 +127,25 @@
 								<td><fmt:formatDate value="${sellerDto.sellerRegistryDate}"
 										pattern="y년 M월 d일 E a h시 m분 s초" /></td>
 							</tr>
+							<tr>
+								<th>판매자 신청 첨부파일</th>
+									<td>
+										<c:forEach var="sellerfileListVo" items="${sellerfileList}">
+											<li><a href = "http://localhost:8888/files/download/${sellerfileListVo.sfFileNo}">
+													${sellerfileListVo.filesUploadName}(${sellerfileListVo.filesSize} bytes) 
+													-
+													[${sellerfileListVo.filesType}]
+													</a>					
+											</li>	
+										</c:forEach>
+									</td>
+							</tr>
 							
 						</table>
 						
 						
 						
-					</td>
+					</div>
 				</tr>
 			</tbody>
 		</table>

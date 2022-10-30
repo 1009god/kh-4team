@@ -8,6 +8,10 @@
 .btn-small {
 	padding: 0.25em !important;
 }
+
+#proimg {
+	border-radius: 100%;
+}
 </style>
 		<jsp:include page="/WEB-INF/views/template/adminheader.jsp">
 			<jsp:param value="${memDto.memNo} 회원 정보" name="title" />
@@ -29,9 +33,15 @@
 						<table class="table">
 							<tbody class="center">
 								<tr>
-									<td><img class="image image-circle image-shadow"
-										src="download?memNo=${memDto.memNo}" width="100"
-										height="100"></td>
+									<td>
+									<c:if test=""></c:if>	
+									<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+										<c:if test="${status.last}">			
+											<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+										</c:if>
+									</c:forEach>
+										
+									</td>
 								</tr>
 							
 										<tr>
