@@ -36,33 +36,33 @@
 	border-radius: 100%;
 }
 
+.proinline {
+	display: inline-block;
+}
+
+.container-1200 {
+	padding: 20px;
+}
 
 </style>
-
-
-
-
-
 
 		
 <div class="container-1400">
 
-	<div>
-	<c:if test=""></c:if>
+	<div class="container-1400" >
 		
-		
-		<c:forEach var="vo" items="${profileImg}" varStatus="status">	
-			<c:if test="${status.last}">			
-				<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
-			</c:if>
-		</c:forEach>
-				
-		<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span>
-		<a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
-		
-		<span>${memDto.memJoinDate} 회원 가입일</span>
-		
-		
+		<div class="proinline">		
+			 <!-- 반복문 -->
+			<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+				<c:if test="${status.last}">			
+					<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+				</c:if>
+			</c:forEach>
+		</div>
+		<div class="proinline">					
+			<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>				
+			<div style="padding-left:20px">${memDto.memJoinDate} 회원 가입일</div>			
+		</div>	
 		
 		
 	</div>
