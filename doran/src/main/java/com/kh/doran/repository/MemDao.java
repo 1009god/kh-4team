@@ -19,6 +19,7 @@ public interface MemDao {
 	
 
 	MemDto findEmail(String memTel); //아이디 찾기
+	MemDto findPw(String memEmail, String memTel); //아이디 찾기
 	
 
 
