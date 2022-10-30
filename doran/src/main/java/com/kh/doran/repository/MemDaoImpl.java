@@ -120,13 +120,22 @@ public class MemDaoImpl implements MemDao {
 		Object[] param = {memNick};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
-	
+
 	@Override
 	public MemDto findEmail(String memTel) {
-		String sql = "select * from mem where mem_tel=?";
+		String sql = "select * from mem where mem_tel = ?";
 		Object[] param = {memTel};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+		
+
+	@Override
+	public MemDto findPw(String memEmail, String memTel) {
+		String sql = "select * from mem where mem_email = ? and mem_tel = ?";
+		Object[] param = {memEmail, memTel};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
 	
 	
 // 비밀번호 변경 비동기통신 : 방법1

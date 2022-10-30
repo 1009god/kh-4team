@@ -96,27 +96,34 @@ public class MemController {
 		return "mem/findEmail";
 	}
 	
-	
 	@PostMapping("/findEmail")
-	public String findEmail(
-			@RequestParam String memTel, Model model) {
-		MemDto memDto = memDao.findEmail(memTel); 
-		if(memDto == null) { //번호 틀리면 안 됨
-			return "redirect:findEmail?error";   
+	public String findEmail(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
+		MemDto findDto = memDao.findEmail(inputDto.getMemTel());
+		if(findDto == null) {
+			return "redirect:findEmail?error";
 		}
 		else {
-			model.addAttribute("memDto", memDto);
-			return "redirect:findEmailSuccess"; 
+			model.addAttribute("memDto", findDto);
+			return "mem/findEmailSuccess";
 		}
 	}
 	
-
-	
-	@GetMapping("/findEmailSuccess")
-	public String findEmailSuccess() {
-		return "mem/findEmailSuccess";
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "mem/findPw";
 	}
 	
+	@PostMapping("/findPw")
+	public String findPw(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
+		MemDto findDto = memDao.findPw(inputDto.getMemEmail(), inputDto.getMemTel());
+		if(findDto == null) {
+			return "redirect:findPw?error";
+		}
+		else {
+			model.addAttribute("memDto", findDto);
+			return "mem/findPwSuccess";
+		}
+	}
 	
 	
 }

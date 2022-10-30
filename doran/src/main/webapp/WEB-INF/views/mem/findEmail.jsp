@@ -5,13 +5,21 @@
 		<!-- 정상 / 이상 모두 나옴 -->
 		<h1>이메일 찾기</h1>
 		<form action="findEmail" method="post">
-			<input type="tel"  name="memTel" placeholder="번호" required><br><br>
-			<button type="submit">찾기</button>	
+				<div class="row center">
+				</div>
+			
+				<div class="row center">
+					<input type="tel" name="memTel" placeholder="핸드폰 번호" required><br><br>
+				</div>
+		
+				<div class="row center">
+					<button type="submit">확인</button>
+				</div>
+		
+				<c:if test="${param.error != null}">
+					<h5>없는 회원 정보입니다</h5>
+				</c:if>
 		</form>
 		
-		<!-- 이상인 경우만 나오는 화면 -->
-		<c:if test="${param.error != null}">
-			<h2>입력한 정보가 </h2>
-		</c:if>
 		
 	</div>
