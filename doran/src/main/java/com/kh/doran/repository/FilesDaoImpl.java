@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.FilesDto;
+import com.kh.doran.vo.PjFileVO;
 import com.kh.doran.vo.SellerFileVO;
 import com.kh.doran.vo.profileImgVO;
 
@@ -164,6 +165,11 @@ public class FilesDaoImpl implements FilesDao{
 		jdbcTemplate.update(sql,param);
 		//List일 경우 맵퍼를 새로 짜야하는가
 		//select * from PJ_FILES_VIEW where PJ_FILE_PJ_NO=?
+	}
+	@Override
+	public List<PjFileVO> pjfile(int sellerMemNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	private RowMapper<SellerFileVO> mapper3 = new RowMapper<SellerFileVO>() {

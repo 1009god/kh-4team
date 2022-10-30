@@ -28,7 +28,7 @@ public class AdminFaqController {
 
 
 	@GetMapping("/faqlist")
-	public String list(Model model, @RequestParam(required = false) String type,
+	public String list(Model model,HttpSession session, @RequestParam(required = false) String type,
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if (isSearch) {// 검색
