@@ -1,108 +1,153 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<c:set var="login" value = "${loginId != null}"></c:set>
-<html lang="en">
-<head>
+   <c:set var="login" value="${loginId != null}"></c:set>
+	<c:set var="admin" value="${mg == '관리자'}"></c:set>
 
-<title>
-			<c:choose>
-				<c:when test="${param.title != null}">
-					${param.title}
-				</c:when>
+
+	<html>
+		<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+	    <meta name="generator" content="Hugo 0.104.2">
+			<title>
+				<c:choose>
+					<c:when test="${param.title != null}">
+						${param.title}
+					</c:when>
 				<c:otherwise>
 					홈페이지
 				</c:otherwise>
 			</c:choose>
 		</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link 
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
-<!-- <link rel="stylesheet" href="/css/bootstrap.css"> -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<body>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/headers/">
 
-	<!-- <h2>loginId = ${sessionScope.loginId}</h2>
-	<h2>로그인 상태 = ${loginId != null}</h2>
-	<h2>세션넘버 = ${sessionScope.loginNo}</h2> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    
 
+    
 
-    <div class="b-example-divider"></div>
+<link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-  <header class="p-3 mb-3 border-bottom">
-    <div class="container mt-5">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-        </a>
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+<meta name="theme-color" content="#712cf9">
+
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
         
-        <img src="/img/logo.png" width="10%">
         
-        
-        <img src="/img/burger.png" width="2%">
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-         
-          <li><a href="#" class="nav-link px-2 link-secondary">전체 프로젝트</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">인기</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">신규</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">마감임박</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark ">커뮤니티</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">고객센터</a></li>
-          
-        </ul>
-        
-		<c:choose>
-        <c:when test = "${login}">
-        <button type="submit" class="btn btn-outline-secondary" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
-		</c:when>
-		</c:choose>
-        &nbsp;
-        &nbsp;
 
-       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
+		
+    </style>
+    
+     <!-- Custom styles for this template -->
+    <link href="headers.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
 
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+  </head>
+  <body>
+
+  <header class="p-3 mb-3 border-bottom ">
+  	<div class="container">
+  		<div id="logo">
+          <a href="/">
+             <img src="/img/DoranMini.png" id="logo_img" width="170px" height="70px">
           </a>
-          <ul class="dropdown-menu text-small">
-          	<c:choose>
-         		<c:when test = "${login}">
-	            <li><a class="dropdown-item" href="/mypage/profile">프로필</a></li>
-	            <li><a class="dropdown-item" href="#">좋아요</a></li>
-	            <li><a class="dropdown-item" href="#">1:1 문의</a></li>
-	            <li><a class="dropdown-item" href="#">관심 프로젝트</a></li>
-	            <li><a class="dropdown-item" href="#">후원한 프로젝트</a></li>
-	            <li><a class="dropdown-item" href="#">설정</a></li>
-	            <li><hr class="dropdown-divider"></li>
-	            <li><a class="dropdown-item" href="/mem/logout">로그아웃</a></li>
-	          </c:when>
-	          <c:otherwise>
-	          	 <li><a class="dropdown-item" href="/mem/join">회원가입</a></li>
-                  <li><a class="dropdown-item" href="/mem/login">로그인</a></li>
-	          </c:otherwise>
-      		</c:choose>
-	          	
-          	
-          </ul>
-        </div>
-       </div>
-      </div>
-  </header>
- </body>
- </head>
-</html>
+          <c:choose>
+			<c:when test = "${login}">
+				<button type="submit" class="btn btn-neutral" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+			</c:when>
+		</c:choose>    
+  	</div>
+
+    <div class="container mb-10">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="#">
+        	<img src="/img/burger.png" width="25px" height="25px">
+        </a>
+		<ul class="nav nav-pills ">
+		<li class="nav-item">
+			<a class="nav-link " href="#">전체 프로젝트</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">인기</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">신규</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">마감임박</a>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">커뮤니티</a>
+			 <ul class="dropdown-menu">
+			  	<li><a class="dropdown-item" href="#">공지사항</a></li>
+			    <li><a class="dropdown-item" href="#">도란도란</a></li>
+			 </ul>
+		</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">고객센터</a>
+			    <ul class="dropdown-menu">
+			      <li><a class="dropdown-item" href="#">FAQ</a></li>
+			      <li><a class="dropdown-item" href="#">1:1 문의</a></li>
+			    </ul>
+		</li>
+	</ul>
+</div>
+</div>
+</div>
+</header>
 
 
-   
+    <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
+  

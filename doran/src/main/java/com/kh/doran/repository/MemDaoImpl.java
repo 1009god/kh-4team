@@ -18,7 +18,6 @@ public class MemDaoImpl implements MemDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	
 	private ResultSetExtractor<MemDto> extractor = new ResultSetExtractor<MemDto>() {
 		
 		@Override
@@ -89,16 +88,6 @@ public class MemDaoImpl implements MemDao {
 	}
 	
 	
-//	@Override 로그인 시간 구현 필요하게 되면
-//	public boolean updateLoginTime(int memNo) { //로그인 시간 업데이트
-//		String sql = "update mem "
-//							+ "set mem_login=sysdate "
-//							+ "where mem_no=?";
-//		Object[] param = {memNo};
-//		return jdbcTemplate.update(sql, param) > 0;
-//	}
-	
-	
 	//수정-계정 delete 
 	@Override
 	public boolean delete(String memEmail) {
@@ -129,6 +118,13 @@ public class MemDaoImpl implements MemDao {
 	public MemDto findByNickname(String memNick) {
 		String sql = "select * from mem where mem_nick = ?";
 		Object[] param = {memNick};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
+	@Override
+	public MemDto findEmail(String memTel) {
+		String sql = "select * from mem where mem_tel=?";
+		Object[] param = {memTel};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
 	
