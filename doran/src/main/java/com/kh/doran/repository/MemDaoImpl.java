@@ -133,6 +133,15 @@ public class MemDaoImpl implements MemDao {
 	}
 	
 	
+// 비밀번호 변경 비동기통신 : 방법1
+//	@Override
+//	public MemDto findByPw(int memNo, String memPw) {
+//		String sql = "select * from mem where mem_no = ? and mem_pw= ?";
+//		Object[] param = {memNo, memPw};		
+//		return jdbcTemplate.query(sql, extractor, param);
+//	}
+	
+	
 }
 
 

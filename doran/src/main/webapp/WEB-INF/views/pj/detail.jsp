@@ -149,12 +149,20 @@ function shareKakao() {
             </tbody>
         </table>
     </div>
+<<<<<<< HEAD
+	
+	<div>
+		<button><a href="/sellerq/write?pjNo=${PjDto.pjNo}">판매자에게 문의</a></button>
+	</div>
+	
+
 
     <div>
         <span>목표금액 ${PjDto.pjTargetMoney}</span>
         <span>펀딩기간 ${PjDto.pjFundingStartDate} ~ ${PjDto.pjFundingEndDate}</span>
         <span>결제 목표금액 달성시 ${PjDto.pjFundingEndDate}에 진행</span>
     </div>
+
 
 	
 	<div class="shareParent">
