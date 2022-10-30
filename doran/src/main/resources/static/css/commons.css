@@ -515,6 +515,10 @@ ul.pagination.pagination-small {
     right:0;
 }
 
+.jb-wrap {
+        padding: px 0px;
+      }
+
 /*
     float 설정
     - float를 설정하면 현재 영역에서 left 혹은 right 방향에 붙는다(cf : 자석)
