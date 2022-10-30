@@ -19,7 +19,9 @@ public interface FilesDao {
 	
 	
 	//프로젝트 신청시 첨부파일(이미지) 저장
-	//void connectFiles(int filesNo, int pjNo, String pjFileClassify);
+	//컬럼3개인 테이블
+	//List<FilesDto> connectPjFiles(int pjNo, int filesNo);
+	void connectPjFiles(int pjNo, int filesNo);
 	
 	//셀러 첨부파일 이미지 저장
 	void connectSellerFiles(int filesNo, int sellerMemNo);
@@ -29,4 +31,6 @@ public interface FilesDao {
 	
 	//일반 게시판 (도란도란) 첨부파일 저장 (notice_file_view)
 	List<FilesDto> selectBoardFileList(int boardImgPostNo);
+	
+	//프로젝트 
 }

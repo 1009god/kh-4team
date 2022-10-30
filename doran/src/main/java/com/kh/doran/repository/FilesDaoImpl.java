@@ -151,6 +151,17 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {boardImgPostNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	@Override
+	//프로젝트 첨부파일
+	//컬럼을 전부 변수로 받아야 하는가
+	//용도별 분류 컬럼을 어떻게 써야하는가
+	public void connectPjFiles(int pjNo, int filesNo) {
+		String sql ="insert into PJ_FILE(PJ_FILE_PJ_NO, PJ_FILE_NO, PJ_FILE_CLASSIFY) values(?,?,?)";
+		Object[] param = {pjNo,filesNo,     };
+		jdbcTemplate.update(sql,param);
+		//List일 경우 맵퍼를 새로 짜야하는가
+		//select * from PJ_FILES_VIEW where PJ_FILE_PJ_NO=?
+	}
 
 	
 	
