@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.FilesDto;
+import com.kh.doran.vo.SellerFileVO;
 import com.kh.doran.vo.profileImgVO;
 
 @Repository
@@ -151,6 +152,41 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {boardImgPostNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	
+	
+	@Override
+	//프로젝트 첨부파일
+	//컬럼을 전부 변수로 받아야 하는가
+	//용도별 분류 컬럼을 어떻게 써야하는가
+	public void connectPjFiles(int pjNo, int filesNo) {
+		String sql ="insert into PJ_FILE(PJ_FILE_PJ_NO, PJ_FILE_NO, PJ_FILE_CLASSIFY) values(?,?,?)";
+		Object[] param = {pjNo,filesNo,     };
+		jdbcTemplate.update(sql,param);
+		//List일 경우 맵퍼를 새로 짜야하는가
+		//select * from PJ_FILES_VIEW where PJ_FILE_PJ_NO=?
+	}
+	
+	private RowMapper<SellerFileVO> mapper3 = new RowMapper<SellerFileVO>() {
+		
+		@Override
+		public SellerFileVO mapRow(ResultSet rs, int rowNum) throws SQLException {			
+			return SellerFileVO.builder()
+					.sellerMemNo(rs.getInt("seller_mem_no"))
+					.sfFileNo(rs.getInt("sf_file_no"))
+					.filesUploadName(rs.getString("FILES_UPLOADNAME"))
+					.filesSize(rs.getInt("FILES_SIZE"))
+					.filesType(rs.getString("FILES_TYPE"))
+					.build();
+		}
+	};
+	
+	@Override
+	public List<SellerFileVO> sellerFileList(int sellerMemNo) {
+		String sql = "select * from seller_file_view where seller_mem_no = ?";
+		Object[] param = {sellerMemNo};		
+		return jdbcTemplate.query(sql,mapper3,param);
+	}
+
 
 	
 	

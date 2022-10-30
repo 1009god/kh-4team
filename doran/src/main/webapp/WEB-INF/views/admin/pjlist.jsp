@@ -18,20 +18,20 @@
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr>
-					<th>판매자 번호 </th>
+					<th>판매자 닉네임</th>
 					<th>카테고리</th>
 					<th>프로젝트명</th>
 					<th>목표금액</th>
 					<th>시작일</th>
-					<th>승인상태</th>
+					
 					
 					
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="dto" items="${list}">
-				<tr>
-			    	<td>${dto.pjNo}</td> 
+				<tr align="center">
+			    	<td>${dto.memNick}</td> 
 					
 					<td>${dto.pjCategory}</td>
 					
@@ -43,7 +43,7 @@
 
 					<td>${dto.pjFundingStartDate}</td>
 					
-					<td><%-- ${dto.JudgePjState} --%>심사중/승인/거절(사유)</td> 
+					
 					
 					
 			     	</tr>

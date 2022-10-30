@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.AdminDao;
+import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.PjDao;
 import com.kh.doran.vo.MemListSearchVO;
@@ -31,6 +32,9 @@ public class AdminController {
 	
 	@Autowired
 	private PjDao pjDao;
+	
+	@Autowired
+	private FilesDao filesDao;
 	
 //	@Autowired
 //	private SellerDao sellerDao;
@@ -111,6 +115,10 @@ public class AdminController {
 						@RequestParam int memNo) {
 		MemDto memDto=adminDao.selectOne1(memNo);
 		model.addAttribute("memDto",memDto);
+		
+		//(+추가) 프로필 이미지
+	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
+		
 		return "admin/detail";
 	}
 

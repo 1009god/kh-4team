@@ -43,7 +43,7 @@ public class AdminPjController {
 		int count = pjDao.count(vo);
 		vo.setCount(count);
 	
-		model.addAttribute("list",pjDao.selectList(vo));
+		model.addAttribute("list",adminPjDao.selectList(vo));
 		return "admin/pjlist";
 	};
 	

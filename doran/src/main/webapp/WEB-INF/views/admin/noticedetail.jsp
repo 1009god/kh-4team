@@ -12,7 +12,7 @@
 <table class="table table-border mt-50">
 	<tbody>
 		<tr>
-			<th width = "25%">제목</th>
+			<th width = "10%">제목</th>
 			<td>${noticeDto.noticeTitle}</td>
 		</tr>
 		<tr>
@@ -21,7 +21,7 @@
 				<fmt:formatDate value="${noticeDto.noticeWriteTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
 			</td>
 		</tr>
-		<tr height="200" valign="top">
+		<tr height="400" valign="top">
 			<th>내용</th>
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->

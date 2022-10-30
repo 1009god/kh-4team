@@ -21,5 +21,7 @@ public class AdminpjListVO {
 	private String pjName;
 	private String pjSummary;
 	private int pjTargetMoney;
+	private Date pjFundingStartDate;
 	private String memNick;
+	
 }

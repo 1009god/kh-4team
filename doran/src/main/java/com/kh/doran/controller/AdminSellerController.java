@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.SellerDto;
 import com.kh.doran.repository.AdminSellerDao;
+import com.kh.doran.repository.FilesDao;
 import com.kh.doran.vo.AdminsellerDetailVO;
 import com.kh.doran.vo.MemListSearchVO;
 import com.kh.doran.vo.SellerListSearchVO;
@@ -24,6 +25,9 @@ public class AdminSellerController {
 
 	@Autowired
 	private AdminSellerDao adminSellerDao;
+	
+	@Autowired
+	private FilesDao filesDao;	
 	
 	
 
@@ -45,8 +49,16 @@ public class AdminSellerController {
 			@RequestParam int sellerMemNo) {
 		AdminsellerDetailVO sellerDto = adminSellerDao.selectOne1(sellerMemNo);
 		model.addAttribute("sellerDto",sellerDto);
+		
+		//(+추가) 프로필 이미지
+	     model.addAttribute("profileImg", filesDao.profileImgList(sellerMemNo));
+	     
+	     //(+추가) 셀러 첨부파일 다운로드
+	     model.addAttribute("sellerfileList", filesDao.sellerFileList(sellerMemNo));
+		
 		return "admin/sellerdetail";
 	}
+	
 	@GetMapping("/agree")
 	public String agree(@RequestParam int sellerMemNo,
 			RedirectAttributes attr) {

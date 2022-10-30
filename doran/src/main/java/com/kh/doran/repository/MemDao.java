@@ -17,8 +17,12 @@ public interface MemDao {
 	boolean editAccountPw(MemDto dto); // 수정-계정수정
 	boolean editAccountTel(MemDto dto); // 수정-계정수정
 	
+
 	MemDto findEmail(String memTel); //아이디 찾기
 	
+
+
+//	MemDto findByPw(int memNo, String memPw);  //비동기 pw 일치불일치 메소드
 
 	
 

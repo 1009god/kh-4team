@@ -36,7 +36,7 @@
 <body>
 	<main>
 		<header>
-			<div class="container-700">
+			<div class="container-1200">
 				<div class="row center">
 					<h1>도란도란 관리자 전용 페이지</h1>
 				</div>
@@ -69,7 +69,7 @@
 		<div class="float-container">
 			<!-- 관리자 메뉴 추가 -->
 			<aside>
-				<div class="container-400">
+				<div class="container-150">
 					<div class="row">
 						<h2>관리자메뉴</h2>
 					</div>

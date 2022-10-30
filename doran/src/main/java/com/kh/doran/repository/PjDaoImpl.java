@@ -508,9 +508,16 @@ public class PjDaoImpl implements PjDao {
 
 	
 	//프로젝트번호로 검색하면 그 프로젝트의 결제총액, 달성율을 뽑아주는 메소드
+	//취소날짜가 들어간 주문은 빼고 검색
 	@Override
 	public OrdersCalVO calVo(int pjNo) {
-		String sql="select op.options_pj_no, sum(options_price) price_total, sum(options_price)/pj_target_money*100 achievement_rate, pj_target_money, pj_no from options op inner join orders ord on op.options_no=ord.orders_options_no inner join pj on options_pj_no = pj_no where pj_no=? group by op.options_pj_no, pj_target_money,pj_no";
+		String sql="select op.options_pj_no, sum(options_price) price_total, "
+				+ "sum(options_price)/pj_target_money*100 achievement_rate, "
+				+ "pj_target_money, pj_no from options op inner join "
+				+ "orders ord on op.options_no=ord.orders_options_no inner join "
+				+ "pj on options_pj_no = pj_no where pj_no=? "
+				+ "and orders_cancel_date is null "
+				+ "group by op.options_pj_no, pj_target_money,pj_no";
 		Object[] param= {pjNo};
 		return jdbcTemplate.query(sql, calExtractor, param);
 	}
@@ -576,13 +583,15 @@ public class PjDaoImpl implements PjDao {
 	}
 
 	//구매여부확인(int 1일 경우 이력있음, 0일 경우 없음)
+	//취소상태인 주문은 빼고 검색
 @Override
 public int orderCount(OrderCountVO vo) {
 	String sql="select count(*) from (select options.options_no, "
 			+ "options.options_pj_no, orders.orders_options_no, "
-			+ "orders.orders_mem_no from options "
+			+ "orders.orders_mem_no, orders.orders_cancel_date from options "
 			+ "left outer join orders on options.options_no=orders.orders_options_no) "
-			+ "where options_pj_no=? and orders_mem_no=?";
+			+ "where options_pj_no=? and orders_mem_no=? "
+			+ "and orders_cancel_date is null";
 	Object[] param={vo.getOptionsPjNo(), vo.getOrdersMemNo()};
 	return jdbcTemplate.queryForObject(sql, int.class,param);
 }
