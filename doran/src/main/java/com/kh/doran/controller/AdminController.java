@@ -99,7 +99,7 @@ public class AdminController {
 	
 	//회원 리스트
 	@GetMapping("/memlist")
-	public String list(Model model, 
+	public String list(Model model,HttpSession session, 
 			@ModelAttribute(name="vo") MemListSearchVO vo) {
 		
 		//페이지 네비게이터를 위한 게시글 수를 구한 것
@@ -107,7 +107,12 @@ public class AdminController {
 		vo.setCount(count);
 	
 		model.addAttribute("list",adminDao.selectList(vo));
-		return "admin/memlist";
+		if(session.getAttribute("loginNo")!=null) {
+			return "admin/memlist";			
+		}
+		else {
+			return "admin/login";
+		}
 	};
 	
 	@GetMapping("/detail")

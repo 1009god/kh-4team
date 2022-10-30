@@ -17,20 +17,21 @@
 <input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
 <table class="table table-border mt-50">
 	<tbody>
+	<tr>
 			<th width="20%">제목</th>
 			<td>
 				<input class="input" type="text" name="noticeTitle" required value="${noticeDto.noticeTitle}">
 			</td>
 		</tr>
-		<div>
+		
 		
 		<tr class="input" height="200" valign="top">
-			<th>내용</th>
+			<th valign="top">내용</th>
 			<td>
 				<textarea name="noticeContent" rows="20" cols="80" required>${noticeDto.noticeContent}</textarea>
 			</td>
 		</tr>
-		</div>
+		
 		<tr>
     				<th>첨부파일</th>
     				<td>

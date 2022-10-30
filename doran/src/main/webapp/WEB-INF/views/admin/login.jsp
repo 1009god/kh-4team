@@ -13,12 +13,12 @@
 	
 	<div class="row left">
 		<label>아이디</label>
-		<input class="input w-100" name="adminEmail" placeholder="이메일" type="text" required>
+		<input class="input login w-100 " name="adminEmail" placeholder="아이디" type="text" required>
 	</div>	
 	
 	<div class="row left mt-20">
 		<label>패스워드</label>
-		<input class="input w-100" name="adminPw" placeholder="비밀번호" type="password" required>
+		<input class="input login w-100" name="adminPw" placeholder="비밀번호" type="password" required>
 	</div>
 	
 </div>

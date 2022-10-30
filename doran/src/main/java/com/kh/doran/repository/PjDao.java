@@ -1,17 +1,18 @@
 package com.kh.doran.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.OrderCountVO;
 import com.kh.doran.vo.OrdersCalVO;
+import com.kh.doran.vo.PjFileVO;
 import com.kh.doran.vo.PjListSearchVO;
 
 
 
 public interface PjDao {
 	//C
+	
 	void insert(PjDto pjDto);
 	int sequence();
 	//R
@@ -22,6 +23,13 @@ public interface PjDao {
 	int orderCount(int pjNo);//이 프로젝트의 후원자는 몇 명인지
 	
 	float dateCount(int pjNo);
+	
+	
+	
+	
+	
+	
+	
 	
 	//통합 검색 메소드(목록+검색)
 	List<PjListSearchVO> selectList(PjListSearchVO vo); 

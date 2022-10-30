@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ public class AdminFaqController {
 	private FaqDao faqDao;
 
 	@GetMapping("/faqlist")
-	public String list(Model model, @RequestParam(required = false) String type,
+	public String list(Model model,HttpSession session, @RequestParam(required = false) String type,
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if (isSearch) {// 검색
