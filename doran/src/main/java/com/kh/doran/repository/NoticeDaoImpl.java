@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.NoticeDto;
-import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.NoticeListSearchVO;
 
 
@@ -100,6 +99,13 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 	
 	@Override
+	public int sequence() {
+		String sql = "select notice_seq.nextval from dual";
+		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
+		return noticeNo;
+	}
+	
+	@Override
 	public int insert2(NoticeDto noticeDto) {
 		//번호를 미리 생성한 뒤 등록하는 기능
 		String sql = "select notice_seq.nextval from dual";
@@ -183,6 +189,15 @@ public class NoticeDaoImpl implements NoticeDao{
 			sql = sql.replace("#1", vo.getType());
 			Object[] param = {vo.getKeyword()};
 			return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
+	public void connectFiles(int noticeFileNoticeNo, int noticeFileNo) {
+		String sql = "insert into notice_file("
+				+ "notice_file_notice_no, notice_file_no"
+				+ ") values(?, ?)";
+		Object[] param = {noticeFileNoticeNo, noticeFileNo};
+		jdbcTemplate.update(sql, param);
 	}
 
 }

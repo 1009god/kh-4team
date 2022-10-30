@@ -8,6 +8,7 @@ import com.kh.doran.vo.NoticeListSearchVO;
 
 public interface NoticeDao {
 	void insert(NoticeDto noticeDto);
+	int sequence();
 	int insert2(NoticeDto noticeDto);
 
 	List<NoticeDto> selectList();//더이상 사용 x
@@ -28,4 +29,7 @@ public interface NoticeDao {
 	boolean delete(int boardNo);
 	
 	void clear();
+	
+	//첨부파일 관련 기능
+	void connectFiles(int noticeFileNoticeNo, int noticeFileNo);
 }

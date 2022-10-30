@@ -7875,11 +7875,11 @@ button.bg-dark:focus {
 }
 
 .float-left {
-  float: left !important;
+  float: left;
 }
 
 .float-right {
-  float: right !important;
+  float: right;
 }
 
 .float-none {
@@ -10221,5 +10221,19 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.left-box {
+  background: red;
+  float: left;
+}
+.right-box {
+  background: yellow;
+  float: right;
+}
 }
 /*# sourceMappingURL=bootstrap.css.map */

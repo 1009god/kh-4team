@@ -7,6 +7,7 @@
 
 <form action="faqedit" method="post">
 <div class="container-500 mt-40">
+	
 	<div class="row left">
 		<h1>FAQ 수정</h1>
 	</div>
@@ -33,6 +34,8 @@
 		<button class="btn btn-positive" type="submit">수정</button>
 		<a class="btn btn-neutral" href="faqlist">목록</a>
 	</div>
+	</tbody>
+	</table>
 </div>
 </form>
 

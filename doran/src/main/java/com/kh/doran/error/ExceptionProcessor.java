@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 //컨트롤러 어드바이스는 컨트롤러의 오류를 간섭하는 객체
 //@ControllerAdvice(annotations = {Controller.class})//annotation으로 특정
-@ControllerAdvice(basePackages = {"com.kh.springhome.controller"})
+@ControllerAdvice(basePackages = {"com.kh.doran.controller"})
 public class ExceptionProcessor {
 	
 	//원하는 상황이 발생하면 자동으로 간섭하여 실행할 메소드
