@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.OrdersDto;
-import com.kh.doran.vo.OrdersCalVO;
 
 @Repository
 public class OrdersDaoImpl implements OrdersDao{
