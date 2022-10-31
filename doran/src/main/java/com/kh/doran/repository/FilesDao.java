@@ -45,5 +45,5 @@ public interface FilesDao {
 	//강사추가 메소드
 	void connectPjFiles(int pjNo, int filesNo, String type);
 	
-	//프로젝트 
+	//프로젝트
 }

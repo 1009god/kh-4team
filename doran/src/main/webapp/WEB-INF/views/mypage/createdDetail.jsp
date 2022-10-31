@@ -27,6 +27,7 @@ margin: 40px;
     console.log(${myCreatedPjDto});
 </script>
 
+<div class="container-1400 center">
 
 <c:forEach var="createdDetailDto" items="${createdDetailDto}">
 <div class="box">
@@ -48,7 +49,7 @@ margin: 40px;
 </c:forEach>
 
 	
-
+</div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
