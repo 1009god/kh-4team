@@ -148,6 +148,11 @@ public class MemMypageController {
 	
 
 
+	@GetMapping("/supported/cancel")
+	public String supportedCancel(@RequestParam int ordersNo) {
+		ordersDao.orderCancel(ordersNo);
+		return "redirect:/mypage/supported";
+	};
 	
 	
 	

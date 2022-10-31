@@ -577,7 +577,7 @@ public class PjDaoImpl implements PjDao {
 	
 	//이 프로젝트를 구매한 회원이 몇명인가
 	@Override
-	public int orderCount(int pjNo) {
+	public int orderCountAll(int pjNo) {
 		String sql="select count(*) from(select orders.orders_no, orders.orders_mem_no, orders.orders_options_no, orders.orders_cancel_date, options.options_no, options.options_pj_no from orders left outer join options on orders.orders_options_no=options.options_no) where options_pj_no=? and orders_cancel_date is null";
 		Object[] param= {pjNo};
 		return jdbcTemplate.queryForObject(sql, int.class,param);

@@ -232,6 +232,16 @@ public SupportDetailVO selectSupportDetail2(int ordersNo) {
 	return jdbcTemplate.query(sql, SupportDetailExtractor, param);
 }
 
+//주문취소메소드
+@Override
+public boolean orderCancel(int ordersNo) {
+	String sql="update orders set orders_cancel_date=sysdate where orders_no=?";
+	Object[] param= {ordersNo};
+	return jdbcTemplate.update(sql,param)>0;
+}
+
+
+
 }
 	
 
