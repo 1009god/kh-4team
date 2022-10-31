@@ -22,7 +22,7 @@
                     <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
                 </div>
                 <div style="float: right;">
-                   <a class="btn btn-primary" href="#" role="button">도란도란에게 1:1 문의</a>
+                   <a class="btn btn-primary" href="/doran-q/write" role="button">도란도란에게 1:1 문의</a>
                 </div>
               </footer>
           </div>

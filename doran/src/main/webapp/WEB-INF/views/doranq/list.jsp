@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <jsp:include page="/WEB-INF/views/template/adminheader.jsp">
-	
-	<jsp:param value="1대1문의" name="title"/>
+    
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
+
 <style>
 
         .table > thead > tr > th,
@@ -14,20 +15,20 @@
         .table > tbody > tr > td,
         .table > tfoot > tr > th,
         .table > tfoot > tr > td {  
-            border : 1px solid lightgray;
+           border : 1px solid lightgray;
         }
 	
 </style>
 
 
-<div class="container-730 mt-40 mb-50">
-<table class="table" border="1"  >
+<div class="container-900 mt-40 mb-50">
+<table class="table" border="1" width="700px" >
 	<thead>
 	<tr>
 <!-- 		<td align = "right" colspan="6"> -->
 <!-- 			<a href="write">글쓰기</a> -->
 <!-- 		</td> -->
-		<tr>
+		<tr align = "center">
 			<th>글번호</th>
 			<th>문의유형</th>
 			<th width="45%">제목</th>
@@ -143,4 +144,6 @@
 
     </div>
 </div>
-<jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>
+
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
