@@ -40,6 +40,9 @@
 </style>
 
 
+<script>
+    console.log(${myCreatedPjDto});
+</script>
 
 
 
@@ -78,34 +81,42 @@
 </div>	
                        
 
-	<!-- 후원 내역 list -->	
+	<!-- 후원 내역 list	
 	<div class=container-800>
 		<table class="table table-hover table-slit">
 			<thead>
 				<tr align="center">
-					<th>주문 번호</th>
-					<th>판매자</th>
-					<th>카테고리</th>
-					<th>프로젝트</th>												
+					<th>프로젝트 번호</th>
+					<th>프로젝트 제목</th>												
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="supportVO" items="${supportList}" >	
+				<c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}" >	
 					<tr align="center">								
-							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
-							<td>${supportVO.memNick}</td>			
-							<td>${supportVO.pjCategory}</td>			
-							<td>${supportVO.pjName}</td>							
+							<td>${myCreatedPjDto.pjNo}</td>
+                            <td>${myCreatedPjDto.pjName}</td>						
 						</tr>							
 				</c:forEach>
 			</tbody>
 		</table>	
 
-		</div>	
+		</div>	 -->
 
+        <c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}">
+            
+        <span>
+            <a href="/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}">
+            ${myCreatedPjDto}
+            </a>
+        </span>   
+            
+        </c:forEach>
+
+            
+        
 	
 
-
+    </div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

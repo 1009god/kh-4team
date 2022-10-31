@@ -3,6 +3,7 @@ package com.kh.doran.repository;
 import java.util.List;
 
 import com.kh.doran.entity.OrdersDto;
+import com.kh.doran.vo.CreatedDetailVO;
 import com.kh.doran.vo.OrdersMemNoSearchVO;
 import com.kh.doran.vo.SupportDetailVO;
 import com.kh.doran.vo.SupportListVO;
@@ -19,6 +20,9 @@ public interface OrdersDao {
 	
 	//구매취소
 	boolean orderCancel(int ordersNo);
+	
+	//내가 만든 프로젝트들 중에서 한 개의 프로젝트를 골라서 주문 들어온 거 모아보기
+	List<CreatedDetailVO> selectCreatedDetail(int optionsPjNo);
 	
 
 }

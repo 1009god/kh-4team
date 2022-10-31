@@ -613,8 +613,13 @@ public float dateCount(int pjNo) {
 	return jdbcTemplate.queryForObject(sql, float.class, param);
 }
 
-
-
+//특정 판매자가 개설한 모든 프로젝트
+@Override
+public List<PjDto> selectSeller(int pjSellerMemNo) {
+	String sql="select*from pj where pj_seller_mem_no=?";
+	Object[] param= {pjSellerMemNo};
+	return jdbcTemplate.query(sql, mapper, param);
+}
 
 
 
