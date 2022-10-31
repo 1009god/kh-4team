@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
+import com.kh.doran.repository.OrdersDao;
+import com.kh.doran.vo.OrdersMemNoSearchVO;
 
 
 
@@ -28,6 +32,9 @@ public class MemMypageController {
 	
 	@Autowired
 	private FilesDao filesDao;
+	
+	@Autowired
+	private OrdersDao ordersDao;
 	
 	//프로필 홈
   @GetMapping("/profile")
@@ -107,8 +114,12 @@ public class MemMypageController {
 	     //(+추가) 프로필 이미지
 	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
+	     //내가 후원한 목록
+	     
+	     
+	     
 	     //(+추가) 후원한 목록- 아마 모델에 첨부해서 프론트에서 배열 돌릴것으로 예상
-	    
+	     model.addAttribute("OrdersMemSearchDto", ordersDao.memNoSearch(memNo));
 		return "mypage/supported";
 	}
 	
