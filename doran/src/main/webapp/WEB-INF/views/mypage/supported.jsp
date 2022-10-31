@@ -82,6 +82,21 @@
      <hr style="border:1px color= silver;" width="100%">          
                        
 <div>
+
+	<div>
+		<c:forEach var="OrdersMemSearchDto" items="${OrdersMemSearchDto}">
+        <div>
+            <span>${OrdersMemSearchDto.ordersNo}</span>
+            <span>${OrdersMemSearchDto.pjNo}</span>
+            <span>${OrdersMemSearchDto.pjName}</span>
+            <span>${OrdersMemSearchDto.optionsNo}</span>
+            <span>${OrdersMemSearchDto.optionsName}</span>
+            <span>${OrdersMemSearchDto.optionsPrice}</span>
+            <span>${OrdersMemSearchDto.optionsDeliveryPrice}</span>
+        </div>
+    </c:forEach>
+	</div>
+
 </div>	
                        
 

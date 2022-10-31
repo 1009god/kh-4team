@@ -65,6 +65,7 @@ margin: 40px;
 
 <div class=" center">
 	<button><a href="/mypage/supported">후원 목록으로 가기</a></button>
+	<button><a href="/mypage/supported/cancel?ordersNo=${supportDetail.ordersNo}">주문 취소하기</a></button>
 </div>
 
 

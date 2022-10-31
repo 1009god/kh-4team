@@ -20,7 +20,7 @@ public interface PjDao {
 	
 	int orderCount(OrderCountVO vo);//로그인한 사용자가 이 프로젝트를 이미 후원한 상태인지 확인(boolean이 맞는거같긴함)
 
-	int orderCount(int pjNo);//이 프로젝트의 후원자는 몇 명인지
+	int orderCountAll(int pjNo);//이 프로젝트의 후원자는 몇 명인지
 	
 	float dateCount(int pjNo);
 	

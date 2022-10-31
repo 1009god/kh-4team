@@ -17,6 +17,8 @@ public interface OrdersDao {
 	SupportListVO selectSupportDetail(int ordersNo); //support한 내역 detail - 프로젝트 정보
 	SupportDetailVO selectSupportDetail2(int ordersNo); // support한 내역 detatil - order, 옵션, 배송지 정보
 	
+	//구매취소
+	boolean orderCancel(int ordersNo);
 	
 
 }

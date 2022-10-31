@@ -119,7 +119,7 @@ public class PjController {
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트넘버로 검색해서 나온 값 model에 저장해서 넘김
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
 		model.addAttribute("OrdersCalVO", pjDao.calVo(pjNo));//선택한 프로젝트의 총 결제금액, 달성율
-		model.addAttribute("OrderCount", pjDao.orderCount(pjNo));//이 프로젝트를 구입한 회원 명수
+		model.addAttribute("OrderCountAll", pjDao.orderCountAll(pjNo));//이 프로젝트를 구입한 회원 명수
 		model.addAttribute("DateCount", pjDao.dateCount(pjNo));//마감일까지 며칠 남았는지(date로는 못 받고 float치환)
 		//프로젝트개설판매자의  회원테이블을 넘김
 		PjDto pjDto=pjDao.selectOne(pjNo);

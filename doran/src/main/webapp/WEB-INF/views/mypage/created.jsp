@@ -1,49 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-    
-    
-    <%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
+
+
+
+
+
+<%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
 <style>
-
 .mypage_menu > li {
 	float: left;
 	line-height: 3em;             
 	padding-left: 20px;
 	 list-style: none;	 
 }
-
 .mypage_menu > li >a {
 	color: black;
 	display: block;
 	text-align: center;
 	text-decoration: none;
 }
-
 .mypage_menu > li > a:hover {
 	 color: #0072b2;
 }
-
 #proimg {
 	border-radius: 100%;
 }
-
 .proinline {
 	display: inline-block;
 }
-
 .container-1200 {
 	padding: 20px;
 }
-
 </style>
 
-		
+
+
+
+
+
+	
 <div class="container-1400">
 
 	<div class="container-1400" >
@@ -75,21 +76,36 @@
                        
 <div>
 </div>	
+                       
 
+	<!-- 후원 내역 list -->	
+	<div class=container-800>
+		<table class="table table-hover table-slit">
+			<thead>
+				<tr align="center">
+					<th>주문 번호</th>
+					<th>판매자</th>
+					<th>카테고리</th>
+					<th>프로젝트</th>												
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="supportVO" items="${supportList}" >	
+					<tr align="center">								
+							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
+							<td>${supportVO.memNick}</td>			
+							<td>${supportVO.pjCategory}</td>			
+							<td>${supportVO.pjName}</td>							
+						</tr>							
+				</c:forEach>
+			</tbody>
+		</table>	
 
+		</div>	
 
-
-
-만든 프로젝트
-
-
-
+	
 
 
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-
-
