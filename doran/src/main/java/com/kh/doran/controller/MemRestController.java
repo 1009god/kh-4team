@@ -58,7 +58,7 @@ public class MemRestController { //아이디 검사
 //	}
 	
 	@RequestMapping("/pw")
-	public String pw(HttpSession session, @RequestParam String memPw) {
+	public String pw(HttpSession session, @RequestParam int memPw) {
 		 int memNo = (int)session.getAttribute("loginNo");  
 		 MemDto memDto = memDao.selectOne(memNo);  //selectOne을 이용한 비밀번호 수정 비동기통신
 		 

@@ -187,7 +187,7 @@
                         </nav>
                         
                     </div>
-                    <hr style="border:1px color= silver;" width="100%">
+                    <hr style="border:1px color= silver;" width="1400px">
                     <body>
                         
                     

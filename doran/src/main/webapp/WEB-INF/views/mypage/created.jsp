@@ -77,35 +77,16 @@
 <div>
 </div>	
                        
+          
+                       
+                       
+                       
+                       
 
-	<!-- 후원 내역 list -->	
-	<div class=container-800>
-		<table class="table table-hover table-slit">
-			<thead>
-				<tr align="center">
-					<th>주문 번호</th>
-					<th>판매자</th>
-					<th>카테고리</th>
-					<th>프로젝트</th>												
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="supportVO" items="${supportList}" >	
-					<tr align="center">								
-							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
-							<td>${supportVO.memNick}</td>			
-							<td>${supportVO.pjCategory}</td>			
-							<td>${supportVO.pjName}</td>							
-						</tr>							
-				</c:forEach>
-			</tbody>
-		</table>	
-
-		</div>	
 
 	
 
 
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

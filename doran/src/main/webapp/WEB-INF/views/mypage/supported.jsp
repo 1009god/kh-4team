@@ -98,8 +98,16 @@
 	</div>
 
 </div>	
-                       
-
+            
+            <c:choose>
+           		<c:when test="${empty supportList}">
+	           		<div class="container-1000 center" >
+	           			<img src="/img/nopj.png" width="1000px" height="800px">
+	           		</div>
+           		</c:when>
+          		
+          		<c:otherwise>
+          		
 	<!-- 후원 내역 list -->	
 	<div class=container-800>
 		<table class="table table-hover table-slit">
@@ -124,10 +132,13 @@
 		</table>	
 
 		</div>	
+          		</c:otherwise>
+           
+           </c:choose>            
 
 	
 
 
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
