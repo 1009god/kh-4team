@@ -17,4 +17,11 @@ public class DoranQDto {
 
 	//계층형 게시판 데이터
 	private int doranQGroup, doranQParent, doranQDepth;
+	
+	public Integer getDoranQParentInteger() {
+		if(doranQParent==0)
+			return null;
+		else
+			return doranQParent;
+	}
 }

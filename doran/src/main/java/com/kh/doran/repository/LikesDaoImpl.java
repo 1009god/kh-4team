@@ -1,10 +1,16 @@
 package com.kh.doran.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.LikesDto;
+import com.kh.doran.vo.likeVO;
 
 @Repository
 public class LikesDaoImpl implements LikesDao {
@@ -50,6 +56,31 @@ public class LikesDaoImpl implements LikesDao {
 				+ "WHERE LIKES_PJ_NO=?) WHERE PJ_NO=?";
 		Object[] param= {pjNo, pjNo};
 		jdbcTemplate.update(sql,param);
+	}
+	
+	
+	//좋아요 mapper
+	private RowMapper<likeVO> likeMapper = new RowMapper<likeVO>() {
+		
+		@Override
+		public likeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			return likeVO.builder()
+					.pjNo(rs.getInt("PJ_NO"))
+					.pjName(rs.getString("PJ_NAME"))
+					.pjCategory(rs.getString("PJ_CATEGORY"))
+					.sellerMemNo(rs.getInt("SELLER_MEM_NO"))
+					.build();
+		}
+	};
+	
+	
+	//좋아요 list
+	@Override
+	public List<likeVO> likeList(int sellerMemNo) {
+		String sql = "select * from like_view where LIKES_MEM_NO = ?";
+		Object[] param = {sellerMemNo};
+		return jdbcTemplate.query(sql, likeMapper, param);
 	}
 	
 }

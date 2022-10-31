@@ -32,7 +32,7 @@
 /*         } */
 </style>
 
-<div class="container-700 mt-40 mb-50">
+<div class="container-900 mt-40 mb-50">
 	<table class= "table tableA" border="1" width="700" >
 		<tbody>
 			<tr>
@@ -40,8 +40,17 @@
 				<td>${doranQDto.doranQNo}</td>
 			</tr>
 			<tr>
-				<th width = "25%">문의유형</th>
-				<td>[${doranQDto.doranQType}]</td>
+			
+			<th width = "25%">문의유형</th>
+			<c:choose>
+				<c:when test="${empty doranQDto.doranQType}">
+					<td>답변</td>
+				</c:when>
+				<c:otherwise>
+					<td>[${doranQDto.doranQType}]</td>
+				</c:otherwise>
+			</c:choose>
+			
 			</tr>
 			<tr>
 				<th width = "25%">작성일</th>
