@@ -24,7 +24,7 @@
  <form method="post" enctype="multipart/form-data">
  <!-- 이미지 첨부파일 -->
  <div>프로필 이미지 수정</div>
- <input type="file" name= files" >
+ <input type="file" name= "files" >
   
 	<div>
 		<label>닉네임</label>

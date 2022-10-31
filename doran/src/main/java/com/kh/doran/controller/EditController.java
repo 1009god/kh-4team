@@ -73,6 +73,7 @@ public class EditController {
 												RedirectAttributes attr) throws IllegalStateException, IOException {
 			// memberNo는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
 			int memNo = (int)session.getAttribute("loginNo");
+			
 			inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 memNo를 넣어줌  // 지금 사용자의 no
 			
 			boolean result = memDao.editProfile(inputDto);
