@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.entity.PjFileDto;
+import com.kh.doran.vo.PjListSearchVO;
 
 @Repository
 public class PjFileDaoImpl implements PjFileDao {
@@ -59,5 +60,11 @@ public class PjFileDaoImpl implements PjFileDao {
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
+	@Override
+	public List<PjFileDto> pjFileList(PjListSearchVO vo) {
+		String sql="select*from pj_file where pj_file_pj_no=#1 and pj_file_classify='대표'";
+		sql = sql.replace("#1", Integer.toString(vo.getPjNo()));
+		return jdbcTemplate.query(sql, mapper);
+	}
 	
 }
