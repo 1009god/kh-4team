@@ -24,6 +24,7 @@ public interface PjDao {
 	
 	float dateCount(int pjNo);
 	
+	List<PjDto> selectSeller(int pjSellerMemNo);//특정 판매자가 개설한 프로젝트들 목록
 	
 	
 	

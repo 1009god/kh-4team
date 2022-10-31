@@ -1,9 +1,6 @@
 package com.kh.doran.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
 
 import javax.servlet.http.HttpSession;
 
@@ -15,20 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.AddressDto;
-
-import com.kh.doran.entity.FilesDto;
-
 import com.kh.doran.entity.LikesDto;
 import com.kh.doran.entity.OptionsDto;
 import com.kh.doran.entity.OrdersDto;
 import com.kh.doran.entity.PjDto;
-
-import com.kh.doran.entity.SellerDto;
-
 import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.LikesDao;
@@ -38,13 +28,12 @@ import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
 import com.kh.doran.service.Pjservice;
 import com.kh.doran.vo.OrderCountVO;
+import com.kh.doran.vo.PjInsertVO;
 import com.kh.doran.vo.PjListSearchVO;
 
 @Controller
 @RequestMapping("/pj")
 public class PjController {
-	
-	
 	
 	@Autowired
 	private PjDao pjDao;
@@ -63,53 +52,29 @@ public class PjController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+	
 	@Autowired
-	private FilesDao filesDao;
-	@Autowired
-	private Pjservice pjservice;
+	private Pjservice pjService;
 
 	
 	@GetMapping("/insert")
 	public String insert() {
 		return "pj/insert";
 	}
-	@PostMapping("/insert")//프로젝트 입력 받은거 저장             옵션정보 저장
-	public String insert(@ModelAttribute SellerDto sellerDto,
-						@ModelAttribute OptionsDto optionsDto, 
-						@ModelAttribute PjDto pjDto, HttpSession session,
-						@RequestParam List<MultipartFile> files,
-						RedirectAttributes attr ) throws IllegalStateException, IOException {
-		
-		int pjsellerMemNo = (int)session.getAttribute("loginNo");
-		sellerDto.setSellerMemNo(pjsellerMemNo);
 	
-			int pjNo = pjservice.insert(pjDto, files, optionsDto);
-		
-		for(MultipartFile file : files) {
-			if(!file.isEmpty()) {
-				System.out.println("첨부파일 발견");
-				
-			//db등록
-			int filesNo = filesDao.sequence();
-			filesDao.insert(FilesDto.builder()
-					.filesNo(filesNo)
-					.filesUploadname(file.getOriginalFilename())
-					.filesType(file.getContentType())
-					.filesSize(file.getSize())
-					.build());
-			//파일저장
-			File dir = new File("D:/doranuplaod/pjinsertimg");
-			dir.mkdirs();
-			File target = new File(dir,String.valueOf(filesNo));
-			file.transferTo(target);
-			
-			filesDao.connectPjFiles(pjNo, filesNo);
-			}
+	@PostMapping("/insert")
+	public String insert(
+				@ModelAttribute PjInsertVO pjInsertVO, HttpSession session
+			) throws IllegalStateException, IOException {
+		int sellerMemNo = (int)session.getAttribute("loginNo");
+		pjInsertVO.setSellerMemNo(sellerMemNo);
+		pjService.insert(pjInsertVO);
+		return "redirect:insert_success";
 	}
-		System.out.println(files);
-			
-		
-		return "/";
+	
+	@GetMapping("/insert_success")
+	public String insertSuccess() {
+		return "pj/insertfinish";
 	}
 
 	
