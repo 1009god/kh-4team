@@ -124,20 +124,40 @@
                 }
             });
 
+            
+            $("input[name=oldPw]").blur(function(){
+            	var old = $("input[name=oldPw]").val();
+            	var judge2 = old == ${memDto.memPw};
+            	
+            	$(this).removeClass("no fail success");
+                if(judge){
+                    $(this).addClass("success");
+                }
+                else if(judge == null){
+                	$(this).addClass("no")
+                }
+                else {
+                    $(this).addClass("fail");
+                }          	
+            	
+            });
+            
             //만약에 위 조건이 만족한다면
             
             $.ajax({
 				url:"http://localhost:8888/rest/mem/pw?memPw=" + ${memDto.memPw},
-				method:"post",
+				method:"put",
 				success:function(resp){
 					
 					if(resp == "NNNNN") {
 						inputStatus.memPwValid = true;
-						$("input[name=oldPw").next("span").text("비밀번호가 일치합니다");
+						$("input[name=oldPw").next("span").text("비밀번호가 일치합니다"); 
+						System.out.println("성공");
 					}
 					else if(resp == "NNNNY") {
 						inputStatus.memPwValid = false;
 						$("input[name=oldPw").next("span").text("비밀번호가 일치하지 않습니다");
+						System.out.println("실패");
 					}
 				}
 			});
@@ -181,7 +201,7 @@
 			<span class="fail-message">6자 이상, 20자 이내로 입력해주세요.</span>
 			
 			<!-- 최종적으로 넘어갈 pw -->
-			<input type="text" name="memPw" value="${memDto.memPw}" required autocomplete="off">
+			<input type="text" name="memPw"  required autocomplete="off">
 			<span class = "success-message">성공</span>
 			<span class ="no-message">비워두시면 안됩니다</span>
 			<span class="fail-message">6자 이상, 20자 이내로 입력해주세요.</span>

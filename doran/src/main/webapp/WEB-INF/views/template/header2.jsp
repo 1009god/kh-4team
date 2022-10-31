@@ -196,8 +196,12 @@ nav li a:hover {
 							        </form>
   								</div>    
                         
-		</nav>
 
-	</div>
-	<hr style="border: 1px color= silver;" width="100%">
-<body>
+                    </div>
+                    <hr style="border:1px color= silver;" width="1400px">
+                    <body>
+                        
+                    
+    
+                    
+>>>>>>> refs/remotes/origin/main
