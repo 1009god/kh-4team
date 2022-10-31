@@ -505,9 +505,11 @@ ul.pagination.pagination-small {
 /* (10) */
 .dropdown-menu li {
     position: relative;
+    text-align: center;
 }
 .dropdown-menu > li > ul ul
  {
+ 	text-align:center;
     position: absolute;
     top:0;
     left:100%;
