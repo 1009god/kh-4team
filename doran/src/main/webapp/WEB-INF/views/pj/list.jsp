@@ -27,11 +27,22 @@
     	
     	});
     	
-// 		var list = document.querySelectorAll("#loading-bar");
+
+    	var list = [$("#loading-bar").val('data-value')];
+// 		console.log(list)
+		
+// 		$(list).each(function(index,value){
+// 			$('#loading-bar').append(value);
+// 		});
+
+    	
 // 		for(var i=0; i < list.length; i++){
 // 				var bar = new ldBar(list[i]);
-        
+// 		}
+    	
     });
+        
+
     </script>
     
     
@@ -152,10 +163,10 @@
 		                </div>
 		                <div class="left">${pjDto.achievementRate}% ${pjDto.nvl}원 
 		                </div> 
-                        <div class="row progressbar" id="loading-bar" 
+                        <div 
+                        class="row progressbar" id="loading-bar" 
                         data-value = "${pjDto.achievementRate}"
                         data-color = #0072b2>  
-
                         </div>
                      </div>
 	       		</c:forEach>
@@ -215,6 +226,8 @@
 
 </div>
 
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 
 
