@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.doran.entity.LikesDto;
+import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.AdminPjDao;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
@@ -36,15 +37,20 @@ public class AdminPjController {
 	
 	
 	@RequestMapping("/pjlist")
-	public String list(Model model, 
+	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="pjListSearchVo") PjListSearchVO vo) {
 		
 		//페이지 네비게이터를 위한 게시글 수를 구한 것
 		int count = pjDao.count(vo);
 		vo.setCount(count);
-	
-		model.addAttribute("list",pjDao.selectList(vo));
-		return "admin/pjlist";
+		model.addAttribute("list",adminPjDao.selectList(vo));
+		//세션 추가후 관리자번호 불러오는 if문 추가(관리자 기능 로그인 이후 사용 가능)
+		if(session.getAttribute("loginNo")!=null) {
+			return "admin/pjlist";			
+		}
+		else {
+			return "admin/login";
+		}
 	};
 	
 	@GetMapping("/pjdetail")

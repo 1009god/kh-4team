@@ -3,9 +3,7 @@ package com.kh.doran.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -26,6 +24,7 @@ import com.kh.doran.entity.NoticeDto;
 import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.NoticeDao;
+import com.kh.doran.service.NoticeService;
 import com.kh.doran.vo.NoticeListSearchVO;
 
 
@@ -41,6 +40,9 @@ public class AdminNoticeController {
 	
 	private final File directory = new File(System.getProperty("user.home"), "doranupload");
 	
+	@Autowired
+	private NoticeService noticeService;
+	
 	@PostConstruct //최초 실행시 딱 한 번만 실행되는 메소드
 	public void prepare() {
 		directory.mkdirs();
@@ -49,14 +51,19 @@ public class AdminNoticeController {
 //	참고 : ModelAttribute로 수신한 데이터는 자동으로 Model에 첨부된다
 //	- 옵션에 name을 작성하면 해당하는 이름으로 model에 첨부
 	@RequestMapping("/noticelist")
-	public String list(Model model,
+	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
 		//페이지 네비게이터를 위한 게시글 수를 구한다
 		int count = noticeDao.count(vo);
 		vo.setCount(count);
 		
 		model.addAttribute("list", noticeDao.selectList(vo));
-		return "admin/noticelist";
+		if(session.getAttribute("loginNo")!=null) {
+			return "admin/noticelist";			
+		}
+		else {
+			return "admin/login";
+		}
 	}
 	
 	@GetMapping("/noticedetail")
@@ -84,43 +91,15 @@ public class AdminNoticeController {
 		int adminNo = (int)session.getAttribute("loginNo");
 		noticeDto.setNoticeAdminNo(adminNo);
 		
-		//noticeDao.insert(noticeDto);
-		//return "redirect:list";
+		int noticeNo = noticeService.write(noticeDto, files);
 		
-		//문제점 : 등록은 되는데 몇 번인지 알 수 없다
-		//해결책 : 번호를 미리 생성하고 등록하도록 메소드 변경
-		int noticeNo = noticeDao.insert2(noticeDto);
-		
-		
-		//(+ 추가) 게시글이 등록된 다음 파일이 있다면 해당 파일을 등록 및 연결
-		//- 첨부파일이 없어도 리스트에는 1개의 객체가 들어있다
-		for(MultipartFile file : files) {
-			if(!file.isEmpty()) {
-				System.out.println("첨부파일 발견");
-				
-				int filesNo = filesDao.sequence();
-				filesDao.insert(FilesDto.builder()
-						.filesNo(filesNo)
-						.filesUploadname(file.getOriginalFilename())
-						.filesType(file.getContentType())
-						.filesSize(file.getSize())
-						.build());
-				//파일저장
-				File target = new File(directory,String.valueOf(filesNo));
-				System.out.println(target.getAbsolutePath());
-				file.transferTo(target);
-				
-				//+ 연결 테이블에 연결 정보를 저장 (게시글 번호, 첨부파일 번호)
-				noticeDao.connectFiles(noticeNo, filesNo);
-			}
-		}
 		attr.addAttribute("noticeNo", noticeNo);
 		return "redirect:noticedetail";
 	}
 	
 	@GetMapping("/noticedelete")
 	public String delete(@RequestParam int noticeNo) {
-		boolean result = noticeDao.delete(noticeNo);
+		boolean result = noticeService.remove(noticeNo);
 		if(result) {//성공
 			return "redirect:noticelist";
 		}

@@ -4,13 +4,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.doran.entity.AdminDto;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.SellerDto;
+import com.kh.doran.error.TargetNotFoundException;
 import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.SellerDao;
 
@@ -85,6 +89,40 @@ public class MemController {
 		session.removeAttribute("loginNo"); //세션에 loginNo 라는 이름의 데이터 삭제
 		session.removeAttribute("sellerNo");
 		return "redirect:/"; //메인페이지로 강제 이동
+	}
+	
+	@GetMapping("/findEmail")
+	public String findEmail() {
+		return "mem/findEmail";
+	}
+	
+	@PostMapping("/findEmail")
+	public String findEmail(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
+		MemDto findDto = memDao.findEmail(inputDto.getMemTel());
+		if(findDto == null) {
+			return "redirect:findEmail?error";
+		}
+		else {
+			model.addAttribute("memDto", findDto);
+			return "mem/findEmailSuccess";
+		}
+	}
+	
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "mem/findPw";
+	}
+	
+	@PostMapping("/findPw")
+	public String findPw(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
+		MemDto findDto = memDao.findPw(inputDto.getMemEmail(), inputDto.getMemTel());
+		if(findDto == null) {
+			return "redirect:findPw?error";
+		}
+		else {
+			model.addAttribute("memDto", findDto);
+			return "mem/findPwSuccess";
+		}
 	}
 	
 	

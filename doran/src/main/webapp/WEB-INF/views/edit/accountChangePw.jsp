@@ -40,28 +40,14 @@
             display: block;
         }
         
-	.progressbar {
-	    height:10px;
-	    width:100%;
-	    overflow: hidden;/* 넘어갈 경우에 대한 처리*/
-	    position:relative;
-	}
-	.progressbar > .inner {
-	    position: absolute;
-	    top:0;
-	    left:0;
-	    bottom:0;
-	    width:0%;
-	    background: rgb(131,58,180);
-	    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-	    transition: width 0.2s linear;
-	}
+	
+	
 	/* 메세지는 숨김처리 */
 	.success-message,
 	.fail-message, .no-message { 
 	    display: none;
 	}
-	.success-message {
+	.success-message{
 	    color:green;
 	}
 	.fail-message, .no-message {
@@ -80,63 +66,86 @@
 	.input.fail ~ .fail-message {
 	    display: block;
 	}
-	.fa-asterisk {
-		color:red;
-	}
+	
 	</style>
 
 
+  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+ 	<script type="text/javascript">
+		//AJAX 이용시 주의사항
+		 //- 기존처럼 즉시 검사가 불가능하므로 상태를 저장할 객체 필요
+		 var inputStatus = {
+		     memPwValid:false		     
+		 };
+  
  
- <script type="text/javascript">
         $(function(){
 
-//             $("input[name=memberId]").blur(function(){
-//                 var text = $(this).val();
-//                 var regex = /^[a-z][a-z0-9]{7,19}$/;
-//                 var judge = regex.test(text);
-
-//                 //$(this).removeClass("success");
-//                 //$(this).removeClass("fail");
-                
-//                 //$(this).removeClass("success").removeClass("fail");
-
-//                 $(this).removeClass("success fail");
-//                 if(judge){
-//                     $(this).addClass("success");
-//                 }
-//                 else {
-//                     $(this).addClass("fail");
-//                 }
-//             });
-
+	// 1.newPw의 정규식 검사 진행
             $("input[name=newPw]").blur(function(){
                 var text = $(this).val();
-                var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,16}$/;
+                var regex = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;                
                 var judge = regex.test(text);
 
-                $(this).removeClass("no fail");
-                if(judge){
-                    $(this).addClass("no");
+                console.log(text);
+                console.log(judge);
+                
+                $(this).removeClass("no fail success");
+                if(judge){ //정규식 표현이 맞으면
+                    $(this).addClass("success");
+                }
+                else if(text == null){
+                	$(this).addClass("no");
                 }
                 else {
                     $(this).addClass("fail");
                 }
             });
 
-            $("#password-check").blur(function(){
-                var origin = $("input[name=memPw]").val();
+            $("input[name=memPw]").blur(function(){
+                var origin = $("input[name=newPw]").val();
                 var repeat = $(this).val();
                 var judge = origin == repeat;
 
-                $(this).removeClass("no fail");
+                console.log(origin);
+                console.log(repeat);
+                console.log(judge);
+                
+                
+                $(this).removeClass("no fail success");
                 if(judge){
-                    $(this).addClass("no");
+                    $(this).addClass("success");
+                }
+                else if(judge == null){
+                	$(this).addClass("no")
                 }
                 else {
                     $(this).addClass("fail");
                 }
             });
 
+            //만약에 위 조건이 만족한다면
+            
+            $.ajax({
+				url:"http://localhost:8888/rest/mem/pw?memPw=" + ${memDto.memPw},
+				method:"post",
+				success:function(resp){
+					
+					if(resp == "NNNNN") {
+						inputStatus.memPwValid = true;
+						$("input[name=oldPw").next("span").text("비밀번호가 일치합니다");
+					}
+					else if(resp == "NNNNY") {
+						inputStatus.memPwValid = false;
+						$("input[name=oldPw").next("span").text("비밀번호가 일치하지 않습니다");
+					}
+				}
+			});
+            
+            
+            console.log(inputStatus)
+            
+            
         });
     </script>
 
@@ -159,6 +168,7 @@
 		<div class="row">
 			<label>현재 비밀번호</label>
 			<input type="text" name="oldPw" required autocomplete="off">
+			<span></span>
 			<span class ="no-message">비워두시면 안됩니다</span>
 			<span class="fail-message">6자 이상, 20자 이내로 입력해주세요.</span>
 		</div>
@@ -166,13 +176,16 @@
 		<div class="row">
 			<label>변경할 비밀번호</label>
 			<input type="text" name="newPw" required autocomplete="off">
+			<span class = "success-message">성공</span>
 			<span class ="no-message">비워두시면 안됩니다</span>
 			<span class="fail-message">6자 이상, 20자 이내로 입력해주세요.</span>
 			
 			<!-- 최종적으로 넘어갈 pw -->
 			<input type="text" name="memPw" value="${memDto.memPw}" required autocomplete="off">
+			<span class = "success-message">성공</span>
 			<span class ="no-message">비워두시면 안됩니다</span>
 			<span class="fail-message">6자 이상, 20자 이내로 입력해주세요.</span>
+			
 		</div>
 		
 	</div>

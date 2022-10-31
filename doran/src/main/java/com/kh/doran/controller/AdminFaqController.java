@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.kh.doran.entity.FaqDto;
 import com.kh.doran.error.TargetNotFoundException;
+import com.kh.doran.repository.DoranQDao;
 import com.kh.doran.repository.FaqDao;
 
 @Controller
@@ -20,9 +24,11 @@ public class AdminFaqController {
 
 	@Autowired
 	private FaqDao faqDao;
+	
+
 
 	@GetMapping("/faqlist")
-	public String list(Model model, @RequestParam(required = false) String type,
+	public String list(Model model,HttpSession session, @RequestParam(required = false) String type,
 			@RequestParam(required = false) String keyword) {
 		boolean isSearch = type != null && keyword != null;
 		if (isSearch) {// 검색
@@ -88,6 +94,8 @@ public class AdminFaqController {
 			throw new TargetNotFoundException();
 		}
 	}
+	
+
 
 
 }

@@ -17,47 +17,35 @@ import com.kh.doran.repository.DoranQDao;
 public class DoranQTest {
 
 	@Autowired
-	private DoranQDao dao;
+	private DoranQDao doranQDao;
 	
-//	@BeforeEach
-	
-
 	@Test
 	public void before() {
 		for(int i=1;i<=10;i++) {
-		dao.insert(DoranQDto.builder()
+		doranQDao.insert(DoranQDto.builder()
+							.doranQMemNo(36)
 							.doranQTitle("테스트"+i)
 							.doranQContent("테스트"+i)
-							.doranQType("취소문의")
-							.doranQProcessing("답변완료")
+							.doranQType("기타문의")
 							.build());
 		}
 	}
 
 //	@Test
-//	public void before() {
-//		for(int i=1;i<=10;i++) {
-//		dao.insert(DoranQDto.builder()
-//							.DoranQTitle("테스트"+i)
-//							.DoranQContent("테스트"+i)
-//							.DoranQType("취소문의")
-//							.DoranQProcessing("답변완료")
-//							.build());
-//		}
-//	}
-
-//	@Test
 //	public void test() {
-//		List<DoranQDto> list = dao.selectList();
-//		for(DoranQDto doranqdto:list) {
-//			System.out.println(doranqdto);
+//		//조회
+//		List<DoranQDto> list = doranQDao.selectList(null);
+//		for(DoranQDto doranQDto : list) {
+//			System.out.println(doranQDto);
 //		}
 //		
-//		assertEquals(list.size(),10);
+//		assertEquals(list.size(), 20);
 //	}
-//	
+	
+	
 //	@AfterEach
 //	public void after() {
-//		dao.clear();
+//		doranQDao.clear();
 //	}
+	
 }

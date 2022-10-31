@@ -128,6 +128,7 @@
 		                           </button>				          	  
 						          </c:otherwise>
 					      		</c:choose>
+					      		
                       
 					</div>					
                  </div>                 
@@ -143,7 +144,21 @@
                                 <li><a href="#">커뮤니티</a></li>
                                 <li><a href="#">고객센터</a></li>
                             </ul>
+                            
+							     <!-- 검색창 -->
+                                <div class="row right">
+							        <form action = "list" method = "get">
+							            <select name="type">
+							                <option value="pj_name" <c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>
+							                <option value="pj_category" <c:if test="${pjListSearchVo.type=='pj_category'}">selected</c:if>>프로젝트 카테고리</option>
+							            </select>
+							                
+							            <input type="search" name="keyword" placeholder="검색어" required value="${pjListSearchVo.keyword}">
+							            <button type="submit">검색</button>
+							        </form>
+  								</div>    
                         </nav>
+                        
                     </div>
                     <hr style="border:1px color= silver;" width="100%">
                         

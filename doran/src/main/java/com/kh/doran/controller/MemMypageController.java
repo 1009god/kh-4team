@@ -119,7 +119,9 @@ public class MemMypageController {
 	     
 	     
 	     //(+추가) 후원한 목록- 아마 모델에 첨부해서 프론트에서 배열 돌릴것으로 예상
+
 	     model.addAttribute("OrdersMemSearchDto", ordersDao.memNoSearch(memNo));
+
 		return "mypage/supported";
 	}
 	
