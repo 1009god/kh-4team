@@ -160,12 +160,29 @@ public class FilesDaoImpl implements FilesDao{
 	//컬럼을 전부 변수로 받아야 하는가
 	//용도별 분류 컬럼을 어떻게 써야하는가
 	public void connectPjFiles(int pjNo, int filesNo) {
-		String sql ="insert into PJ_FILE(PJ_FILE_PJ_NO, PJ_FILE_NO, PJ_FILE_CLASSIFY) values(?,?,?)";
+		String sql ="insert into PJ_FILE("
+				+ "PJ_FILE_PJ_NO, "
+				+ "PJ_FILE_NO, "
+				+ "PJ_FILE_CLASSIFY"
+			+ ") values(?,?,?)";
 		Object[] param = {pjNo,filesNo,     };
 		jdbcTemplate.update(sql,param);
 		//List일 경우 맵퍼를 새로 짜야하는가
 		//select * from PJ_FILES_VIEW where PJ_FILE_PJ_NO=?
 	}
+	
+	//강사 추가 - 파일 유형을 추가하여 연결 등록
+	@Override
+	public void connectPjFiles(int pjNo, int filesNo, String type) {
+		String sql ="insert into PJ_FILE("
+				+ "PJ_FILE_PJ_NO, "
+				+ "PJ_FILE_NO, "
+				+ "PJ_FILE_CLASSIFY"
+			+ ") values(?,?,?)";
+		Object[] param = {pjNo,filesNo, type};
+		jdbcTemplate.update(sql,param);
+	}
+	
 	@Override
 	public List<PjFileVO> pjfile(int sellerMemNo) {
 		// TODO Auto-generated method stub

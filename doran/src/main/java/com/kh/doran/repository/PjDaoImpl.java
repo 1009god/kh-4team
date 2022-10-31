@@ -452,10 +452,27 @@ public class PjDaoImpl implements PjDao {
 //	}
 	@Override
 	public void insert(PjDto pjDto) {
-		String sql ="insert into Pj(PJ_NO, PJ_SELLER_MEM_NO, PJ_CATEGORY, PJ_NAME, PJ_SUMMARY, PJ_TARGET_MONEY, PJ_FUNDING_START_DATE, PJ_FUNDING_END_DATE, PJ_END_DATE) values(?,?,?,?,?,?,?,?,?)";
-		Object[] param = {pjDto.getPjNo()
-						, pjDto.getPjSellerMemNo(),pjDto.getPjCategory(),pjDto.getPjName(),pjDto.getPjSummary(),pjDto.getPjTargetMoney(),pjDto.getPjFundingStartDate(),pjDto.getPjFundingEndDate(),pjDto.getPjEndDate()};
-		//							1					2						3				4 					5							6							7							8					9
+		String sql ="insert into Pj("
+					+ "PJ_NO, "
+					+ "PJ_SELLER_MEM_NO, "
+					+ "PJ_CATEGORY, "
+					+ "PJ_NAME, PJ_SUMMARY, "
+					+ "PJ_TARGET_MONEY, "
+					+ "PJ_FUNDING_START_DATE, "
+					+ "PJ_FUNDING_END_DATE, "
+					+ "PJ_END_DATE"
+				+ ") values(?,?,?,?,?,?,?,?,?)";
+		Object[] param = {
+				pjDto.getPjNo(), 
+				pjDto.getPjSellerMemNo(),
+				pjDto.getPjCategory(),
+				pjDto.getPjName(),
+				pjDto.getPjSummary(),
+				pjDto.getPjTargetMoney(),
+				pjDto.getPjFundingStartDate(),
+				pjDto.getPjFundingEndDate(),
+				pjDto.getPjEndDate()
+		};
 		jdbcTemplate.update(sql, param);
 		
 	}
