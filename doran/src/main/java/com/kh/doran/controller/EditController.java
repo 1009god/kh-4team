@@ -154,10 +154,12 @@ public class EditController {
 		@PostMapping("/account_change_pw")
 		public String editAccountChangePw(HttpSession session, 
 												@ModelAttribute MemDto inputDto, //client가 입력한 값
-												RedirectAttributes attr) {
+												RedirectAttributes attr, Model model) {
 			// memberNo는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
 			int memNo = (int)session.getAttribute("loginNo");
 			inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 memNo를 넣어줌  // 지금 사용자의 no
+			
+			model.addAttribute("findPw", memDao.findPw(memNo)); // 해당 회원의 비밀번호 찾아옴
 			
 			boolean result = memDao.editAccountPw(inputDto);
 			
