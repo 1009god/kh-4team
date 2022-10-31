@@ -53,12 +53,13 @@ margin : 30px
 
 
 
-<div class="container-800 left">
+<div class="container-1400 left" >
 	
+	<div width="50%">
 		등록된 배송지<button class="btn-round"><a class="atag" href="http://localhost:8888/edit/address_plus">배송지 추가</a></button>
 		
 		</div>
-		<div class="container-800 left">
+		<div class="container-1400 left" width = "50%">
 		<c:forEach var= "dto" items = "${list}"> <!-- 컨트롤러에서 넘어온 list -->
 		
 		<div class="border">
@@ -81,7 +82,9 @@ margin : 30px
 		</c:forEach>
 		
 		</div>
+		
+		</div>
 </div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

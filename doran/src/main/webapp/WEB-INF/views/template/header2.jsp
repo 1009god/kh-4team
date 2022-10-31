@@ -32,7 +32,7 @@
             <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
         
             <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>  
-            <script src="/js/checkbox.js"></script>
+            
 
             <style>
                 header{
@@ -92,7 +92,24 @@
                 
                 #login_menu {
                 	border: 1px;
-                }
+                	}
+                	
+               .ghost {
+                align-items: center;
+                display: inline-block;
+                padding: 25px 40px;
+                margin:  320px 70px;
+                border: 3px solid #d9cbb3;
+                color: black;
+                text-align: center; 
+				
+            }
+            .ghost:hover {
+                background-color:#d9cbb3;
+                color:black;
+            }
+
+                
             </style>
         </head>
         <body>
@@ -112,7 +129,7 @@
                         
                         	<c:choose>
 						        <c:when test = "${login}">
-						        	<button type="submit" class="btn btn-neutral" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+						        	<button type="submit" class= "ghost" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
 								</c:when>
 							</c:choose>               
                         
@@ -171,6 +188,7 @@
                         
                     </div>
                     <hr style="border:1px color= silver;" width="100%">
+                    <body>
                         
                     
     
