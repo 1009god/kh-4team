@@ -42,21 +42,13 @@
     
     .list{
      	display : flex; 
-     	justify-content: space-between; 
+      	justify-content: flex-start;  
      	flex-wrap: wrap; 
     }
-    .item{
-     	width : "33%"; 
-    }
-    .inner{
-    	height : 3px;
-    	width:100%;
-/*         position: absolute; */
-        top:0;
-        left:0;
-        bottom:0;
-/*  		background: #0072b2;  */
-            }
+     .item{ 
+     	padding : 13px;
+     } 
+    
      .progressbar{
      	background : lightgray;
      }
