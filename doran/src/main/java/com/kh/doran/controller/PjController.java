@@ -28,6 +28,7 @@ import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
+import com.kh.doran.repository.PjFileDao;
 import com.kh.doran.service.Pjservice;
 import com.kh.doran.vo.OrderCountVO;
 import com.kh.doran.vo.PjInsertVO;
@@ -54,6 +55,9 @@ public class PjController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+	
+	@Autowired
+	private PjFileDao pjFileDao;
 	
 	@Autowired
 	private Pjservice pjService;
@@ -88,6 +92,7 @@ public class PjController {
 		model.addAttribute("OrdersCalVO", pjDao.calVo(pjNo));//선택한 프로젝트의 총 결제금액, 달성율
 		model.addAttribute("OrderCountAll", pjDao.orderCountAll(pjNo));//이 프로젝트를 구입한 회원 명수
 		model.addAttribute("DateCount", pjDao.dateCount(pjNo));//마감일까지 며칠 남았는지(date로는 못 받고 float치환)
+		model.addAttribute("PjFileList", pjFileDao.pjFileList(pjNo));//프로젝트 대표이미지들
 		//프로젝트개설판매자의  회원테이블을 넘김
 		PjDto pjDto=pjDao.selectOne(pjNo);
 //		int sellerNo=pjDto.getPjSellerMemNo();
