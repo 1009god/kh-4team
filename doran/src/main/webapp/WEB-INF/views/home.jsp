@@ -12,8 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
 <div class = "container-1400">
-<h1>어서오세요!</h1>
-</div>
+
+
 
      <!-- 로딩바 라이브러리 -->
 <!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css"> -->
@@ -90,7 +90,12 @@
      .progressbar{
      	background : lightgray;
      }
-    
+    .swiper-button-prev{
+    	color : gray;
+    }
+    .swiper-button-next{
+    	color : gray;
+    }
     </style>
 
     
