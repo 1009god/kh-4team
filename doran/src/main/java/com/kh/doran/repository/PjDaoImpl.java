@@ -521,13 +521,6 @@ public class PjDaoImpl implements PjDao {
 		
 	};
 
-	
-	
-	
-	
-
-
-	
 	//프로젝트번호로 검색하면 그 프로젝트의 결제총액, 달성율을 뽑아주는 메소드
 	//취소날짜가 들어간 주문은 빼고 검색
 	@Override

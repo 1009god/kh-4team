@@ -150,7 +150,6 @@ public class AdminPjDaoImpl implements AdminPjDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
-	
 
 }
 
