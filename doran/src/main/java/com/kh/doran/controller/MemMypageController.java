@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.entity.OrdersDto;
+import com.kh.doran.entity.PjDto;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.OrdersDao;
+import com.kh.doran.repository.PjDao;
+import com.kh.doran.vo.CreatedDetailVO;
 
 
 
@@ -32,6 +38,9 @@ public class MemMypageController {
 	
 	@Autowired
 	private OrdersDao ordersDao;
+	
+	@Autowired
+	private PjDao pjDao;
 	
 	
 	//프로필 홈
@@ -105,10 +114,19 @@ public class MemMypageController {
 	     //(+추가) 프로필 이미지
 	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
-	     //(+추가) 만든 프로젝트 목록
+	     //(+추가) 지금 접속한 유저가 생성한 모든 프로젝트
+	     List<PjDto> myCreatedPjDto=pjDao.selectSeller(memDto.getMemNo());
+	     model.addAttribute("myCreatedPjDto", myCreatedPjDto);
 		
 		return "mypage/created";
 	}
+	
+	//내가 올린 프로젝트들 중->특정 프로젝트를 선택하면->얼마나 팔렸는지 현황
+	@GetMapping("/created/detail")
+	public String createdDetail(@RequestParam int pjNo, HttpSession session, Model model) {
+		model.addAttribute("createdDetailDto", ordersDao.selectCreatedDetail(pjNo));
+		return "mypage/createdDetail";
+	};
 	
 	
 //후원한 프로젝트 supported

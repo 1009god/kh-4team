@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doran.entity.OrdersDto;
+import com.kh.doran.vo.CreatedDetailVO;
 import com.kh.doran.vo.OrdersMemNoSearchVO;
 import com.kh.doran.vo.SupportDetailVO;
 import com.kh.doran.vo.SupportListVO;
@@ -240,6 +241,67 @@ public boolean orderCancel(int ordersNo) {
 	return jdbcTemplate.update(sql,param)>0;
 }
 
+
+//내가 개설한 프로젝트 디테일 mapper
+private RowMapper<CreatedDetailVO> createdDetailMapper = new RowMapper<CreatedDetailVO>() {
+	
+	@Override
+	public CreatedDetailVO mapRow(ResultSet rs, int rowNum) throws SQLException {	
+		
+		return CreatedDetailVO.builder()
+										.ordersNo(rs.getInt("orders_no"))
+										.ordersMemNo(rs.getInt("orders_mem_no"))
+										.ordersOptionsNo(rs.getInt("orders_options_no"))
+										.ordersDate(rs.getDate("orders_date"))
+										.ordersCancelDate(rs.getDate("orders_cancel_date"))
+										.ordersMessage(rs.getString("orders_message"))
+										.ordersPayDate(rs.getDate("orders_pay_date"))
+										.ordersDeliveryPay(rs.getInt("orders_delivery_pay"))
+										.ordersAddressNo(rs.getInt("orders_address_no"))
+										.optionsNo(rs.getInt("options_no"))
+										.optionsPjNo(rs.getInt("options_pj_no"))
+										.optionsName(rs.getString("options_name"))
+										.build();
+	}		
+	
+};
+
+
+//createdDetailVO 익스트랙터
+private ResultSetExtractor<CreatedDetailVO> createdDetailExtractor = new ResultSetExtractor<CreatedDetailVO>() {
+	
+	@Override
+	public CreatedDetailVO extractData(ResultSet rs) throws SQLException, DataAccessException {
+		if(rs.next()) {
+			return CreatedDetailVO.builder()
+					.ordersNo(rs.getInt("orders_no"))
+					.ordersMemNo(rs.getInt("orders_mem_no"))
+					.ordersOptionsNo(rs.getInt("orders_options_no"))
+					.ordersDate(rs.getDate("orders_date"))
+					.ordersCancelDate(rs.getDate("orders_cancel_date"))
+					.ordersMessage(rs.getString("orders_message"))
+					.ordersPayDate(rs.getDate("orders_pay_date"))
+					.ordersDeliveryPay(rs.getInt("orders_delivery_pay"))
+					.ordersAddressNo(rs.getInt("orders_address_no"))
+					.optionsNo(rs.getInt("options_no"))
+					.optionsPjNo(rs.getInt("options_pj_no"))
+					.optionsName(rs.getString("options_name"))
+					.build();
+		}
+		else {
+			return null;
+			}
+		}	
+};
+
+
+//특정 유저가->개설한 프로젝트들 중에서->하나를 골라서 그 프로젝트에 들어온 주문 검색하기
+@Override
+public List<CreatedDetailVO> selectCreatedDetail(int optionsPjNo) {
+	String sql="select* from(select orders.orders_no, orders.orders_mem_no, orders.orders_options_no, orders.orders_date, orders.orders_cancel_date, orders.orders_message, orders.orders_pay_date, orders.orders_delivery_pay, orders.orders_address_no, options.options_no, options.options_pj_no, options.options_name from orders left outer join options on orders.orders_options_no=options.options_no) where options_pj_no=? order by options_pj_no asc";
+	Object[] param= {optionsPjNo};
+	return jdbcTemplate.query(sql, createdDetailMapper, param);
+}
 
 
 }
