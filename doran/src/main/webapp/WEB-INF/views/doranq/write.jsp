@@ -24,7 +24,7 @@
 		<tr>
 			<th>제목</th>
 			<td>
-				<input type="text" name="doranQTitle" required>
+				<input class="input" type="text" name="doranQTitle" required>
 			</td>
 		</tr>
 		<tr>
