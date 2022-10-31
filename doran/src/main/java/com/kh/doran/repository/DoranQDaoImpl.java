@@ -57,7 +57,7 @@ public class DoranQDaoImpl implements DoranQDao {
 				doranQDto.getDoranQContent(),
 				doranQDto.getDoranQType(),
 				doranQDto.getDoranQGroup(),
-				doranQDto.getDoranQParent(),
+				doranQDto.getDoranQParentInteger(),
 				doranQDto.getDoranQDepth()
 				};
 		jdbcTemplate.update(sql,param);

@@ -33,7 +33,7 @@
 			<th width="45%">제목</th>
 			<th>회원번호</th>
 			<th>작성일</th>
-			<th>처리상태</th>
+<!-- 			<th>처리상태</th> -->
 <!-- 			<th>그룹</th> -->
 <!-- 			<th>부모글</th> -->
 <!-- 			<th>차수</th> -->
@@ -74,14 +74,14 @@
 			
 			<td>${doranQDto.doranQWritetime}</td>
 			
-			<c:choose>
-				<c:when test="${doranQDto.doranQMemNo==0}">
-					<td></td>
-				</c:when>
-				<c:otherwise>
-					<td>${doranQDto.doranQProcessing}</td>
-				</c:otherwise>
-			</c:choose>
+<%-- 			<c:choose> --%>
+<%-- 				<c:when test="${doranQDto.doranQMemNo==0}"> --%>
+<!-- 					<td></td> -->
+<%-- 				</c:when> --%>
+<%-- 				<c:otherwise> --%>
+<%-- 					<td>${doranQDto.doranQProcessing}</td> --%>
+<%-- 				</c:otherwise> --%>
+<%-- 			</c:choose> --%>
 			
 			
 <%-- 			<td>${doranQDto.doranQGroup}</td> --%>
