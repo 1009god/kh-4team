@@ -13,6 +13,7 @@ public class ExceptionProcessor {
 	//- 반환 시 view resolver의 영향을 받는다
 	@ExceptionHandler(Exception.class)
 	public String handle(Exception e) {
+		e.printStackTrace();
 		return "error/exception";
 	}
 	

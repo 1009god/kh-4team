@@ -40,6 +40,9 @@
 </style>
 
 
+<script>
+    console.log(${myCreatedPjDto});
+</script>
 
 
 
@@ -84,9 +87,44 @@
                        
 
 
+
+	<!-- 후원 내역 list	
+	<div class=container-800>
+		<table class="table table-hover table-slit">
+			<thead>
+				<tr align="center">
+					<th>프로젝트 번호</th>
+					<th>프로젝트 제목</th>												
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}" >	
+					<tr align="center">								
+							<td>${myCreatedPjDto.pjNo}</td>
+                            <td>${myCreatedPjDto.pjName}</td>						
+						</tr>							
+				</c:forEach>
+			</tbody>
+		</table>	
+
+		</div>	 -->
+
+
+        <c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}">
+            
+        <span>
+            <a href="/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}">
+            ${myCreatedPjDto}
+            </a>
+        </span>   
+            
+        </c:forEach>
+
+            
+        
 	
 
-
+    </div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
