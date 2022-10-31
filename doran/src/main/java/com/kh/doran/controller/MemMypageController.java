@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.MemDto;
+import com.kh.doran.entity.OrdersDto;
+import com.kh.doran.entity.PjDto;
+import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
+import com.kh.doran.repository.OrdersDao;
+import com.kh.doran.repository.PjDao;
+import com.kh.doran.vo.CreatedDetailVO;
 
 
 
@@ -28,6 +36,15 @@ public class MemMypageController {
 	
 	@Autowired
 	private FilesDao filesDao;
+	
+	@Autowired
+	private OrdersDao ordersDao;
+	
+	@Autowired
+	private PjDao pjDao;
+	
+	@Autowired
+	private AddressDao addressDao;
 	
 	//프로필 홈
   @GetMapping("/profile")
@@ -89,9 +106,30 @@ public class MemMypageController {
 	
 //올린 프로젝트 created
 	@GetMapping("/created")
-	public String created() {
+	public String created(HttpSession session, Model model) {
+		int memNo = (int)session.getAttribute("loginNo");
+		 //2. 아이드를 이용하여 회원정보를 불러온다
+	     MemDto memDto = memDao.selectOne(memNo);
+	     
+	     //3.불러온 정보를 모델에 첨부한다
+	     model.addAttribute("memDto", memDto);
+	     
+	     //(+추가) 프로필 이미지
+	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
+	     
+	     //(+추가) 지금 접속한 유저가 생성한 모든 프로젝트
+	     List<PjDto> myCreatedPjDto=pjDao.selectSeller(memDto.getMemNo());
+	     model.addAttribute("myCreatedPjDto", myCreatedPjDto);
+		
 		return "mypage/created";
 	}
+	
+	//내가 올린 프로젝트들 중->특정 프로젝트를 선택하면->얼마나 팔렸는지 현황
+	@GetMapping("/created/detail")
+	public String createdDetail(@RequestParam int pjNo, HttpSession session, Model model) {
+		model.addAttribute("createdDetailDto", ordersDao.selectCreatedDetail(pjNo));
+		return "mypage/createdDetail";
+	};
 	
 	
 //후원한 프로젝트 supported
@@ -107,14 +145,35 @@ public class MemMypageController {
 	     //(+추가) 프로필 이미지
 	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
-	     //(+추가) 후원한 목록- 아마 모델에 첨부해서 프론트에서 배열 돌릴것으로 예상
+	     //(+추가) 후원한 목록
+	     model.addAttribute("supportList", ordersDao.selectSupportList(memNo));
 	     
 	    
 		return "mypage/supported";
 	}
 	
+	//후원한 프로젝트 상세 supported/detail
+	@GetMapping("/supported/detail")
+	public String supportedDetail(@RequestParam int ordersNo, Model model,HttpSession session) {
+		//세션에서 멤버 번호 저장
+		int memNo = (int)session.getAttribute("loginNo");
+		
+		//(+추가) 후원한 프로젝트 상세
+	     model.addAttribute("supportPjImfo", ordersDao.selectSupportDetail(ordersNo));
+	     
+	     //(+추가) 후원한 프로젝트 상세-order,option,deliver
+		model.addAttribute("supportDetail", ordersDao.selectSupportDetail2(ordersNo));		
+		
+		return "mypage/supportedDetail";
+	}
+	
 
 
+	@GetMapping("/supported/cancel")
+	public String supportedCancel(@RequestParam int ordersNo) {
+		ordersDao.orderCancel(ordersNo);
+		return "redirect:/mypage/supported";
+	};
 	
 	
 	

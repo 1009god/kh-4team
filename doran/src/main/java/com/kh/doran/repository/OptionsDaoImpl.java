@@ -80,12 +80,21 @@ public class OptionsDaoImpl implements OptionsDao {
 
 	@Override
 	public void insert(OptionsDto optionsDto) {	//						
-		String sql="insert into OPTIONS(OPTIONS_NO,OPTIONS_PJ_NO,OPTIONS_NAME,OPTIONS_PRICE,OPTIONS_STOCK,OPTIONS_DELIVERY_PRICE) "
-				//							1				2			3			4				5				6
-				//					1		  2 3 4 5 6
+		String sql="insert into OPTIONS("
+				+ "OPTIONS_NO,"
+				+ "OPTIONS_PJ_NO,"
+				+ "OPTIONS_NAME,"
+				+ "OPTIONS_PRICE,"
+				+ "OPTIONS_STOCK,"
+				+ "OPTIONS_DELIVERY_PRICE) "
 				+ "values(OPTIONS_SEQ.nextval,?,?,?,?,?)";
-						//				1						2								3								4						5					
-		Object[] param= {optionsDto.getOptionsPjNo(), optionsDto.getOptionsName(), optionsDto.getOptionsPrice(), optionsDto.getOptionsStock(), optionsDto.getOptionsDeliveryPrice()};
+		Object[] param= {
+				optionsDto.getOptionsPjNo(), 
+				optionsDto.getOptionsName(), 
+				optionsDto.getOptionsPrice(),
+				optionsDto.getOptionsStock(), 
+				optionsDto.getOptionsDeliveryPrice()
+		};
 		jdbcTemplate.update(sql, param);
 	}
 

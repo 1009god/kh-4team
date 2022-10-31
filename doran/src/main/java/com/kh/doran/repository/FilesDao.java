@@ -41,6 +41,9 @@ public interface FilesDao {
 	
 	//일반 게시판 (도란도란) 첨부파일 저장 (notice_file_view)
 	List<FilesDto> selectBoardFileList(int boardImgPostNo);
+
+	//강사추가 메소드
+	void connectPjFiles(int pjNo, int filesNo, String type);
 	
 	//프로젝트 
 }

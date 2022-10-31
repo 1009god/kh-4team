@@ -32,7 +32,7 @@
             <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
         
             <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>  
-            <script src="/js/checkbox.js"></script>
+            
 
             <style>
                 header{
@@ -92,7 +92,24 @@
                 
                 #login_menu {
                 	border: 1px;
-                }
+                	}
+                	
+               .ghost {
+                align-items: center;
+                display: inline-block;
+                padding: 25px 40px;
+                margin:  320px 70px;
+                border: 3px solid #d9cbb3;
+                color: black;
+                text-align: center; 
+				
+            }
+            .ghost:hover {
+                background-color:#d9cbb3;
+                color:black;
+            }
+
+                
             </style>
         </head>
         <body>
@@ -112,7 +129,7 @@
                         
                         	<c:choose>
 						        <c:when test = "${login}">
-						        	<button type="submit" class="btn btn-neutral" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+						        	<button type="submit" class= "ghost" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
 								</c:when>
 							</c:choose>               
                         
@@ -128,6 +145,7 @@
 		                           </button>				          	  
 						          </c:otherwise>
 					      		</c:choose>
+					      		
                       
 					</div>					
                  </div>                 
@@ -140,12 +158,37 @@
                                 <li><a href="http://localhost:8888/pj/list?sort=pj_likes_number">인기</a></li>
                                 <li><a href="http://localhost:8888/pj/list?sort=pj_no">신규</a></li>
                                 <li><a href="http://localhost:8888/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>
-                                <li><a href="#">커뮤니티</a></li>
-                                <li><a href="#">고객센터</a></li>
+                                <li class="dropdown"><a class="dropdown-toggle" href="#">커뮤니티</a>
+                                	<ul class="dropdown-menu">
+								  	<li><a class="dropdown-item" href="#">공지사항</a></li>
+								    <li><a class="dropdown-item" href="#">도란도란</a></li>
+								 </ul>
+                                </li>
+                                <li class="dropdown"><a class="dropdown-toggle" href="#">고객센터</a>
+                                	<ul class="dropdown-menu">
+								      <li><a class="dropdown-item" href="#">FAQ</a></li>
+								      <li><a class="dropdown-item" href="#">1:1 문의</a></li>
+								    </ul>
+                                </li>
                             </ul>
+                            
+							     <!-- 검색창 -->
+                                <div class="row right">
+							        <form action = "list" method = "get">
+							            <select name="type">
+							                <option value="pj_name" <c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>
+							                <option value="pj_category" <c:if test="${pjListSearchVo.type=='pj_category'}">selected</c:if>>프로젝트 카테고리</option>
+							            </select>
+							                
+							            <input type="search" name="keyword" placeholder="검색어" required value="${pjListSearchVo.keyword}">
+							            <button type="submit">검색</button>
+							        </form>
+  								</div>    
                         </nav>
+                        
                     </div>
                     <hr style="border:1px color= silver;" width="100%">
+                    <body>
                         
                     
     

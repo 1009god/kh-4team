@@ -117,8 +117,9 @@ function shareKakao() {
                     <td>${OrdersCalVO.priceTotal} 원 ${OrdersCalVO.achievementRate} %</td>
                 </tr>
                 <tr>
+                    <c:set var="OrderCountAll" value="${OrderCountAll}" />
                     <th>후원자</th>
-                    <td>${OrderCount}명</td>
+                    <td>${OrderCountAll} 명</td>
                 </tr>
                 <tr>
                     <th>남은 시간</th>
@@ -149,7 +150,7 @@ function shareKakao() {
             </tbody>
         </table>
     </div>
-<<<<<<< HEAD
+
 	
 	<div>
 		<button><a href="/sellerq/write?pjNo=${PjDto.pjNo}">판매자에게 문의</a></button>

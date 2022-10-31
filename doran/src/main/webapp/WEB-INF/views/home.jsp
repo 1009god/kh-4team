@@ -7,9 +7,13 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<div class = "container-1400">
+<h1>어서오세요!</h1>
+</div>
 
      <!-- 로딩바 라이브러리 -->
 <!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css"> -->
@@ -177,3 +181,7 @@
       
    
 </div>
+
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
+
