@@ -52,29 +52,22 @@
      .progressbar{
      	background : lightgray;
      }
+     
+     .white{
+     	background : white;
+     	border : 2px white;
+     	font-size : 20px;
+     	font-weight : bold;
+     	padding : 5px;
+     }
+     .white:hover{
+     	color : #0072b2;
+     }
     
     </style>
 
     <div class="container-1200">
 
-	
-        <div class="row">
-            <h1>상품 목록</h1>
-        </div>
-			
-		<!-- 검색창 헤더로 이동! -->
-<!--     <div class="row right"> -->
-<!--          검색창 -->
-<!--         <form action = "list" method = "get"> -->
-<!--             <select name="type"> -->
-<%--                 <option value="pj_name" <c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option> --%>
-<%--                 <option value="pj_category" <c:if test="${pjListSearchVo.type=='pj_category'}">selected</c:if>>프로젝트 카테고리</option> --%>
-<!--             </select> -->
-                
-<%--             <input type="search" name="keyword" placeholder="검색어" required value="${pjListSearchVo.keyword}"> --%>
-<!--             <button type="submit">검색</button> -->
-<!--         </form> -->
-<!--     </div>     -->
 
     <div class="row right">
         <form action ="list" method = "get">
@@ -88,36 +81,46 @@
         </form>
     </div>   
     
-    <div class="row center">
+    <div class="row center mb-30">
         <form action = "list" method ="get">
-        	<button name="sort" value="prelaunching">펀딩예정</button>
-            <button name="sort" value="ongoing">펀딩중</button>
-            <button name="sort" value="finishing">펀딩마감</button>
+        	<button class="white ms-30 me-30" name="sort" value="prelaunching">펀딩예정</button>
+            <button class="white ms-30 me-30" name="sort" value="ongoing">펀딩중</button>
+            <button class="white ms-30 me-30" name="sort" value="finishing">펀딩마감</button>
         </form>
     </div>   
+    <hr>
     
-    <div class="row center">
+    <div class="row center mt-30">
         <form action = "list" method ="get">
         
-      
-        	
-        	<button name="" value="">전체</button>
-            <button name="category" value="패션/잡화">패션/잡화</button>
-            <button name="category" value="뷰티">뷰티</button>
-<!--              <i class="fas fa-pizza-slice fa-5x"></i> -->
-            <button name="category" value="푸드">푸드</button>
-            <button name="category" value="홈/리빙">홈/리빙</button>
-            <button name="category" value="테크/가전">테크/가전</button>
-            <button name="category" value="기타">기타</button>
+        	<button class="white ms-10 me-10" name="" value="">
+        	<i class="fa-sharp fa-solid fa-border-all"></i> 전체</button>
+        	<i class="fa-solid fa-fork-knife"></i>
+            <button class="white ms-10 me-10" name="category" value="패션/잡화">
+            <i class="fa-solid fa-shirt"></i> 패션/잡화</button>
+            <button class="white ms-10 me-10" name="category" value="뷰티">
+          	<i class="fa-solid fa-face-smile"></i> 뷰티</button>
+            <button class="white ms-10 me-10" name="category" value="푸드">
+            <i class="fa-solid fa-utensils"></i> 푸드</button>
+            <button class="white ms-10 me-10" name="category" value="홈/리빙">
+            <i class="fa-solid fa-house"></i> 홈/리빙</button>
+            <button class="white ms-10 me-10" name="category" value="테크/가전">
+            <i class="fa-solid fa-laptop"></i> 테크/가전</button>
+            <button class="white ms-10 me-10" name="category" value="기타">
+            <i class="fa-solid fa-guitar"></i> 기타</button>
 
         </form>
+    </div>
     
-        <div class="row center list">
+        <div class="row center list" >
 	            <c:forEach var="pjDto" items="${list}">
 	            
 	            	<div class="row item">
 	            			<div class="a">
-		           		 		<img class="pjImg" src="/img/test.jpg" >
+	            			<img class="pjImg" src="/img/test.jpg" >
+	            			<c:forEach var="PjFileList" items="${PjFileList}">
+<%-- 		           		 		<img class="pjImg" width = "372px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}" > --%>
+	            			</c:forEach>
 	            			</div>
 	            			
 		                <div class="row">
@@ -141,7 +144,7 @@
                      </div>
 	       		</c:forEach>
         </div>
-</div>
+
         
         <!--페이지 네비게이터  -->
     
