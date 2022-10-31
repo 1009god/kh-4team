@@ -5,6 +5,10 @@
 
 <h1>게시글 보기</h1>
 
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="메인페이지" name="title"/>
+</jsp:include>
+
 <form action="edit" method="post">
 <!-- input[type=hidden] 은 form 안에 위치해야 한다 -->
 <input type="hidden" name="boardPostNo" value="${boardDto.boardPostNo}">
@@ -35,3 +39,6 @@
 
 
 </form>
+
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

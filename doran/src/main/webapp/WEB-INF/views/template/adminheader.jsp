@@ -57,6 +57,7 @@
 					<c:otherwise>
 						<li><a href="/admin">홈</a></li>
 
+
 						<li class="right-menu"><a href="/admin/login">로그인</a>
 							<ul>
 								<li><a href="/admin/insert">회원가입</a></li>

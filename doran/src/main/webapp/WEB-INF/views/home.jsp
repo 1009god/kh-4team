@@ -93,9 +93,7 @@
     
     </style>
 
-    
-    
-    
+
     <div class="container-1200">
 
 		<!-- Slider main container -->
