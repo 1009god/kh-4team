@@ -149,7 +149,7 @@ function shareKakao() {
             </tbody>
         </table>
     </div>
-<<<<<<< HEAD
+
 	
 	<div>
 		<button><a href="/sellerq/write?pjNo=${PjDto.pjNo}">판매자에게 문의</a></button>
