@@ -30,8 +30,19 @@ margin: 40px;
 
 <c:forEach var="createdDetailDto" items="${createdDetailDto}">
 <div class="box">
+	<c:if test="${createdDetailDto.ordersCancelDate!=null}">
+		<span>취소된 주문입니다</span>
+	</c:if>
 	<span>주문번호: ${createdDetailDto.ordersNo}</span>
-	<span>상품명: ${createdDetailDto.ordersName}</span>
+	<span>상품명: ${createdDetailDto.optionsName}</span>
+	<span>가격: ${createdDetailDto.optionsPrice}</span>
+	<span>배송비: ${createdDetailDto.ordersDeliveryPay}</span>
+	<span>수령인: ${createdDetailDto.addressName}</span>
+	<span>연락처: ${createdDetailDto.addressTel}</span>
+	<span>우편번호: ${createdDetailDto.addressPost}</span>
+	<span>기본주소: ${createdDetailDto.addressBasic}</span>
+	<span>상세주소: ${createdDetailDto.addressDetail}</span>
+	
 </div>
 
 </c:forEach>

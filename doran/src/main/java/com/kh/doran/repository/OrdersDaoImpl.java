@@ -261,6 +261,14 @@ private RowMapper<CreatedDetailVO> createdDetailMapper = new RowMapper<CreatedDe
 										.optionsNo(rs.getInt("options_no"))
 										.optionsPjNo(rs.getInt("options_pj_no"))
 										.optionsName(rs.getString("options_name"))
+										.optionsPrice(rs.getInt("options_price"))
+										.addressNo(rs.getInt("address_no"))
+										.addressMemNo(rs.getInt("address_mem_no"))
+										.addressName(rs.getString("address_name"))
+										.addressTel(rs.getString("address_tel"))
+										.addressPost(rs.getString("address_post"))
+										.addressBasic(rs.getString("address_basic"))
+										.addressDetail(rs.getString("address_detail"))
 										.build();
 	}		
 	
@@ -286,6 +294,14 @@ private ResultSetExtractor<CreatedDetailVO> createdDetailExtractor = new ResultS
 					.optionsNo(rs.getInt("options_no"))
 					.optionsPjNo(rs.getInt("options_pj_no"))
 					.optionsName(rs.getString("options_name"))
+					.optionsPrice(rs.getInt("options_price"))
+					.addressNo(rs.getInt("address_no"))
+					.addressMemNo(rs.getInt("address_mem_no"))
+					.addressName(rs.getString("address_name"))
+					.addressTel(rs.getString("address_tel"))
+					.addressPost(rs.getString("address_post"))
+					.addressBasic(rs.getString("address_basic"))
+					.addressDetail(rs.getString("address_detail"))					
 					.build();
 		}
 		else {
@@ -296,9 +312,10 @@ private ResultSetExtractor<CreatedDetailVO> createdDetailExtractor = new ResultS
 
 
 //특정 유저가->개설한 프로젝트들 중에서->하나를 골라서 그 프로젝트에 들어온 주문 검색하기
+//상품명도 같이 나오게 추가
 @Override
 public List<CreatedDetailVO> selectCreatedDetail(int optionsPjNo) {
-	String sql="select* from(select orders.orders_no, orders.orders_mem_no, orders.orders_options_no, orders.orders_date, orders.orders_cancel_date, orders.orders_message, orders.orders_pay_date, orders.orders_delivery_pay, orders.orders_address_no, options.options_no, options.options_pj_no, options.options_name from orders left outer join options on orders.orders_options_no=options.options_no) where options_pj_no=? order by options_pj_no asc";
+	String sql="select*from (select orders.orders_no, orders.orders_mem_no, orders.orders_options_no, orders.orders_date, orders.orders_cancel_date, orders.orders_message, orders.orders_pay_date, orders.orders_delivery_pay, orders.orders_address_no, options.options_no, options.options_pj_no, options.options_name, options.options_price, address.address_no, address.address_mem_no, address.address_name, address.address_tel, address.address_post, address.address_basic, address.address_detail from orders orders, options options, address address where orders.orders_options_no=options.options_no and orders.orders_mem_no=address.address_mem_no) where options_pj_no=?";
 	Object[] param= {optionsPjNo};
 	return jdbcTemplate.query(sql, createdDetailMapper, param);
 }

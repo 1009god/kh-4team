@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.entity.OrdersDto;
 import com.kh.doran.entity.PjDto;
+import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
 import com.kh.doran.repository.OrdersDao;
@@ -42,6 +43,8 @@ public class MemMypageController {
 	@Autowired
 	private PjDao pjDao;
 	
+	@Autowired
+	private AddressDao addressDao;
 	
 	//프로필 홈
   @GetMapping("/profile")

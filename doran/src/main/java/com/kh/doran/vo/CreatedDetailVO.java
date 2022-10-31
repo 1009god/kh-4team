@@ -22,5 +22,12 @@ public class CreatedDetailVO {
 	private int optionsNo;
 	private int optionsPjNo;
 	private String optionsName;
-	
+	private int optionsPrice;
+	private int addressNo;
+	private int addressMemNo;
+	private String addressName;
+	private String addressTel;
+	private String addressPost;
+	private String addressBasic;
+	private String addressDetail;
 }
