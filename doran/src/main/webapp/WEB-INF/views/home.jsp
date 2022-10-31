@@ -94,33 +94,6 @@
     </style>
 
     
-</head>
-<body>
-    <div class="row right">
-         <!-- 검색창 -->
-        <form action = "list" method = "get">
-            <select name="type">
-                <option value="pj_name" <c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>
-                <option value="pj_category" <c:if test="${pjListSearchVo.type=='pj_category'}">selected</c:if>>프로젝트 카테고리</option>
-            </select>
-                
-            <input type="search" name="keyword" placeholder="검색어" required value="${pjListSearchVo.keyword}">
-            <button type="submit">검색</button>
-        </form>
-    </div>    
-
-    <div class="row right">
-        <form action ="list" method = "get">
-        
-        <select name="sort" onchange="this.form.submit()"> <!-- 추후 js.43번 참고해서 하기 -->
-            <option value=>정렬</option>
-            <option value="pj_no">최신순</option>
-            <option value="pj_likes_number">인기순</option>
-            <option value="pj_funding_end_date-sysdate">마감임박순</option>
-        </select> 
-        </form>
-    </div>   
-    
     <div class="container-1200">
 
 		<!-- Slider main container -->
