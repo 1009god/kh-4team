@@ -153,8 +153,8 @@ nav li a:hover {
 
 	<div class="container-1400">
 		<nav>
-				<li><a href="/pj/list"><i class="fa-solid fa-bars"></i>&nbsp;전체 프로젝트</a></li>
 			<ul class="dropdown1-menu">
+				<li><a href="/pj/list"><i class="fa-solid fa-bars"></i>&nbsp;전체</a></li>
 				<li><a
 					href="http://localhost:8888/pj/list?sort=pj_likes_number">인기</a></li>
 				<li><a href="http://localhost:8888/pj/list?sort=pj_no">신규</a></li>

@@ -11,10 +11,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
-<div class = "container-1400">
-
-
-
      <!-- 로딩바 라이브러리 -->
 <!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css"> -->
 <!--     <script src="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.min.js"></script> -->
@@ -56,7 +52,7 @@
     <style>
     
     .pjImg{
-    	max-width: 100%;
+    	max-width: 0%;
     }
 
     .a{
@@ -98,7 +94,7 @@
     }
     </style>
 
-    
+
     <div class="container-1200">
 
 		<!-- Slider main container -->
