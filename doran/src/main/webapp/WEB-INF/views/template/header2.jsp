@@ -34,6 +34,68 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
+                
+            </style>
+        </head>
+        <body>
+            
+            <!-- main은 영역의 시작과 끝을 의미 -->
+            
+                <!-- 상단 헤더 -->
+                <header>
+                    <div class="container-1400">
+                        <div id="logo">
+                        	<a href="/">
+                            	<img src="/img/DoranMini.png" id="logo_img" width="170px" height="70px">
+                            </a>
+                        </div>
+            
+                        <div id="top_menu">
+                        
+                        	<c:choose>
+						        <c:when test = "${login}">
+						        	<button type="submit" class= "ghost" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+								</c:when>
+							</c:choose>               
+                        
+                      
+					          	<c:choose>
+					         		<c:when test = "${login}">
+							           <a class="dropdown-item" href="/mem/logout">로그아웃</a>							     
+						          </c:when>
+						          <c:otherwise>
+						          <button class="btn btn-neutral">
+			                            <a href="/mem/login">로그인</a> |
+			                            <a href="/mem/join">가입</a>		
+		                           </button>				          	  
+						          </c:otherwise>
+					      		</c:choose>
+					      		
+                      
+					</div>					
+                 </div>                 
+              </header>
+                        
+                    <div class="container-1400">
+                        <nav>
+                            <ul>                                
+                                <li><a href="#"><i class="fa-solid fa-bars"></i>&nbsp;전체 프로젝트</a></li>
+                                <li><a href="http://localhost:8888/pj/list?sort=pj_likes_number">인기</a></li>
+                                <li><a href="http://localhost:8888/pj/list?sort=pj_no">신규</a></li>
+                                <li><a href="http://localhost:8888/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>
+                                <li class="dropdown"><a class="dropdown-toggle" href="#">커뮤니티</a>
+                                	<ul class="dropdown-menu">
+								  	<li><a class="dropdown-item" href="/notice/list">공지사항</a></li>
+								    <li><a class="dropdown-item" href="/board/list">도란도란</a></li>
+								 </ul>
+                                </li>
+                                <li class="dropdown"><a class="dropdown-toggle" href="#">고객센터</a>
+                                	<ul class="dropdown-menu">
+								      <li><a class="dropdown-item" href="#">FAQ</a></li>
+								      <li><a class="dropdown-item" href="#">1:1 문의</a></li>
+								    </ul>
+                                </li>
+                            </ul>
 
 <style>
 header {
@@ -202,6 +264,3 @@ nav li a:hover {
                     <body>
                         
                     
-    
-                    
->>>>>>> refs/remotes/origin/main

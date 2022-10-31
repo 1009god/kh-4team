@@ -23,8 +23,10 @@
 		$(".editor").hide();
 	});
 </script>
-<h1>게시글 보기</h1>
-
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="도란도란-게시글" name="title"/>
+</jsp:include>
+ <div class="container-1400">
 <table border = "1" width = "500">
 	<tbody>
 		<tr>
@@ -149,3 +151,7 @@
 		</table>
 	</c:otherwise>
 </c:choose>
+</div>
+
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

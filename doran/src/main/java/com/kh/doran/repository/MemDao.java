@@ -18,8 +18,8 @@ public interface MemDao {
 	boolean editAccountTel(MemDto dto); // 수정-계정수정
 	
 
-	MemDto findEmail(String memTel); //아이디 찾기
-	MemDto findPw(String memEmail, String memTel); //아이디 찾기
+	MemDto findEmail(String memTel); //이메일 찾기
+	MemDto findPw(String memEmail, String memTel); //비밀번호 찾기
 	
 
 
