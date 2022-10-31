@@ -13,30 +13,30 @@
 </jsp:include>
 
 <style>
-
 .mypage_menu > li {
 	float: left;
 	line-height: 3em;             
 	padding-left: 20px;
 	 list-style: none;	 
 }
-
 .mypage_menu > li >a {
 	color: black;
 	display: block;
 	text-align: center;
 	text-decoration: none;
 }
-
 .mypage_menu > li > a:hover {
 	 color: #0072b2;
 }
-
 #proimg {
 	border-radius: 100%;
 }
-
-
+.proinline {
+	display: inline-block;
+}
+.container-1200 {
+	padding: 20px;
+}
 </style>
 
 
@@ -44,25 +44,23 @@
 
 
 
-		
+	
 <div class="container-1400">
 
-	<div>
-	<c:if test=""></c:if>
+	<div class="container-1400" >
 		
-		
-		<c:forEach var="vo" items="${profileImg}" varStatus="status">	
-			<c:if test="${status.last}">			
-				<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
-			</c:if>
-		</c:forEach>
-				
-		<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span>
-		<a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
-		
-		<span>${memDto.memJoinDate} 회원 가입일</span>
-		
-		
+		<div class="proinline">		
+			 <!-- 반복문 -->
+			<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+				<c:if test="${status.last}">			
+					<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+				</c:if>
+			</c:forEach>
+		</div>
+		<div class="proinline">					
+			<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>				
+			<div style="padding-left:20px">${memDto.memJoinDate} 회원 가입일</div>			
+		</div>	
 		
 		
 	</div>
@@ -78,11 +76,36 @@
                        
 <div>
 </div>	
-	
+                       
+
+	<!-- 후원 내역 list -->	
+	<div class=container-800>
+		<table class="table table-hover table-slit">
+			<thead>
+				<tr align="center">
+					<th>주문 번호</th>
+					<th>판매자</th>
+					<th>카테고리</th>
+					<th>프로젝트</th>												
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="supportVO" items="${supportList}" >	
+					<tr align="center">								
+							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
+							<td>${supportVO.memNick}</td>			
+							<td>${supportVO.pjCategory}</td>			
+							<td>${supportVO.pjName}</td>							
+						</tr>							
+				</c:forEach>
+			</tbody>
+		</table>	
+
+		</div>	
+
 	
 
 
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
