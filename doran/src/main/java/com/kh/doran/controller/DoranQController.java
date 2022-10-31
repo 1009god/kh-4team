@@ -30,7 +30,11 @@ public class DoranQController {
 	//글 목록은 admin만 보이게 mem은 추후 마이페이지 문의내역으로 매핑
 	
 	@GetMapping("/list")
-	public String list(Model model, DoranQListSearchVO vo) {
+	public String list(Model model, 
+			@ModelAttribute(name="doranQListSearchVo")
+			DoranQListSearchVO vo) {
+		int count = doranQDao.listCount(vo);
+		vo.setCount(count);
 		model.addAttribute("list",doranQDao.selectList(vo));
 		return "doranq/list";
 	}

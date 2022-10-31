@@ -14,14 +14,14 @@
         .table > tbody > tr > td,
         .table > tfoot > tr > th,
         .table > tfoot > tr > td {  
-           
+            border : 1px solid lightgray;
         }
 	
 </style>
 
 
-<div class="container-700 mt-40 mb-50">
-<table border="1" width="700px" >
+<div class="container-730 mt-40 mb-50">
+<table class="table" border="1"  >
 	<thead>
 	<tr>
 <!-- 		<td align = "right" colspan="6"> -->
