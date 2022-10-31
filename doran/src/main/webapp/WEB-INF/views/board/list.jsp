@@ -9,7 +9,39 @@
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
 <style>
-	 .table.table-slit {
+	 div {
+            /* border:1px dotted gray; */
+        }
+
+        /*
+            테이블 디자인
+            - 테이블은 기본디자인이 너무 많아서 디자인하기 까다로운 태그 중 하나
+        */
+        .table {
+            border-collapse: collapse;/*테두리 병합*/
+            width:100%;
+            font-size: 16px;
+        }
+        /* 
+            방법 1 : .table 안에 있는 모든 th와 모든 td를 선택(후손선택자) 
+            - 내부에 있는 모든 요소를 선택하므로 테이블이 중첩되는 경우 문제가 발생
+        */
+        .table th, 
+        .table td {
+            /* border: 1px solid black; */
+        }
+
+        /* 방법 2 : .table 부터 시작하는 모든 경로를 제시하여 th와 td를 선택(자식선택자) */
+        .table > thead > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > th,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > th,
+        .table > tfoot > tr > td {  
+            padding:0.5em;
+        }
+
+        .table.table-slit {
             border: 3px solid gray;
             border-left: none;
             border-right: none;
@@ -184,6 +216,7 @@
 		</div>
 		
 		<!-- 검색창 -->
+		<div class="row center mt-30" >
 		<form action="list" method="get">
 			<select name="type" required>
 				<option value="board_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
@@ -194,8 +227,9 @@
 			
 			<button type="submit">검색</button>
 		</form>
+	</div>
 </div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
 

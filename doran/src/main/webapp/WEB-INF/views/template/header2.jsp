@@ -160,8 +160,8 @@
                                 <li><a href="http://localhost:8888/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>
                                 <li class="dropdown"><a class="dropdown-toggle" href="#">커뮤니티</a>
                                 	<ul class="dropdown-menu">
-								  	<li><a class="dropdown-item" href="#">공지사항</a></li>
-								    <li><a class="dropdown-item" href="#">도란도란</a></li>
+								  	<li><a class="dropdown-item" href="/notice/list">공지사항</a></li>
+								    <li><a class="dropdown-item" href="/board/list">도란도란</a></li>
 								 </ul>
                                 </li>
                                 <li class="dropdown"><a class="dropdown-toggle" href="#">고객센터</a>
