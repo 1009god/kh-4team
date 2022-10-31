@@ -7,31 +7,19 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
-
-     <!-- 로딩바 라이브러리 -->
-<!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css"> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.min.js"></script> -->
-    
-
-    <!--jquery를 사용하기 위하여 라이브러리 js파일을 불러온다-->
-    <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
-   
    	<!-- 로딩바 라이브러리 -->
 	<script src="https://cdn.jsdelivr.net/gh/hiphop5782/progress-bar@latest/dist/progress-bar.min.js"></script>
-
+	
     <script type="text/javascript">
     
     $(function(){
     	
-    	$("#loading-bar").progressbar({
+    	$(".loading-bar").progressbar({
     	
     	});
-    	
-// 		var list = document.querySelectorAll("#loading-bar");
-// 		for(var i=0; i < list.length; i++){
-// 				var bar = new ldBar(list[i]);
-        
     });
+        
+
     </script>
     
     
@@ -75,9 +63,6 @@
     
     </style>
 
-    
-</head>
-<body>
     <div class="container-1200">
 
 	
@@ -121,9 +106,13 @@
     
     <div class="row center">
         <form action = "list" method ="get">
+        
+      
+        	
         	<button name="" value="">전체</button>
             <button name="category" value="패션/잡화">패션/잡화</button>
             <button name="category" value="뷰티">뷰티</button>
+<!--              <i class="fas fa-pizza-slice fa-5x"></i> -->
             <button name="category" value="푸드">푸드</button>
             <button name="category" value="홈/리빙">홈/리빙</button>
             <button name="category" value="테크/가전">테크/가전</button>
@@ -152,10 +141,10 @@
 		                </div>
 		                <div class="left">${pjDto.achievementRate}% ${pjDto.nvl}원 
 		                </div> 
-                        <div class="row progressbar" id="loading-bar" 
-                        data-value = "${pjDto.achievementRate}"
+                        <div 
+                        class="row progressbar loading-bar"
+                        data-value = "${pjDto.achievementRate}%"
                         data-color = #0072b2>  
-
                         </div>
                      </div>
 	       		</c:forEach>
@@ -215,6 +204,8 @@
 
 </div>
 
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
 
 
 
