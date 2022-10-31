@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
 <div class = "container-1400">
-<h1>어서오세요!</h1>
+
 </div>
 
      <!-- 로딩바 라이브러리 -->
@@ -93,7 +93,7 @@
     
     </style>
 
-    
+
     <div class="container-1200">
 
 		<!-- Slider main container -->
