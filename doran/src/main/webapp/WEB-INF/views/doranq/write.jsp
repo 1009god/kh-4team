@@ -26,6 +26,7 @@
 			<option value="오류문의">오류문의</option>
 			<option value="기타문의">기타문의</option>
 		</select>
+
 	</div>
 	<div class="row">
 		<input class="w-100"  type="text" name="doranQTitle" required placeholder="제목을 입력하세요">

@@ -24,4 +24,5 @@ public interface AdminPjDao {
 	
 	PjDto selectOne(int pjNo);
 	boolean delete(int pjNo);
+	
 }
