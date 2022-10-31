@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.doran.entity.PjDto;
 import com.kh.doran.vo.OrderCountVO;
 import com.kh.doran.vo.OrdersCalVO;
+import com.kh.doran.vo.PjFileVO;
 import com.kh.doran.vo.PjListSearchVO;
 
 
@@ -441,10 +442,19 @@ public class PjDaoImpl implements PjDao {
 	
 
 
+//	@Override
+//	public void insert(PjDto pjDto) {//	1      2				3			4			5			6				7						8					9				1 2 3 4 5 6 7 8 9
+//		String sql ="insert into Pj(PJ_NO, PJ_SELLER_MEM_NO, PJ_CATEGORY, PJ_NAME, PJ_SUMMARY, PJ_TARGET_MONEY, PJ_FUNDING_START_DATE, PJ_FUNDING_END_DATE, PJ_END_DATE) values(?,?,?,?,?,?,?,?,?)";
+//		Object[] param = {pjDto.getPjNo(), pjDto.getPjSellerMemNo(),pjDto.getPjCategory(),pjDto.getPjName(),pjDto.getPjSummary(),pjDto.getPjTargetMoney(),pjDto.getPjFundingStartDate(),pjDto.getPjFundingEndDate(),pjDto.getPjEndDate()};
+//		//							1					2						3				4 					5							6							7							8					9
+//		jdbcTemplate.update(sql, param);
+		
+//	}
 	@Override
-	public void insert(PjDto pjDto) {//	1      2				3			4			5			6				7						8					9				1 2 3 4 5 6 7 8 9
+	public void insert(PjDto pjDto) {
 		String sql ="insert into Pj(PJ_NO, PJ_SELLER_MEM_NO, PJ_CATEGORY, PJ_NAME, PJ_SUMMARY, PJ_TARGET_MONEY, PJ_FUNDING_START_DATE, PJ_FUNDING_END_DATE, PJ_END_DATE) values(?,?,?,?,?,?,?,?,?)";
-		Object[] param = {pjDto.getPjNo(), pjDto.getPjSellerMemNo(),pjDto.getPjCategory(),pjDto.getPjName(),pjDto.getPjSummary(),pjDto.getPjTargetMoney(),pjDto.getPjFundingStartDate(),pjDto.getPjFundingEndDate(),pjDto.getPjEndDate()};
+		Object[] param = {pjDto.getPjNo()
+						, pjDto.getPjSellerMemNo(),pjDto.getPjCategory(),pjDto.getPjName(),pjDto.getPjSummary(),pjDto.getPjTargetMoney(),pjDto.getPjFundingStartDate(),pjDto.getPjFundingEndDate(),pjDto.getPjEndDate()};
 		//							1					2						3				4 					5							6							7							8					9
 		jdbcTemplate.update(sql, param);
 		
@@ -605,6 +615,10 @@ public float dateCount(int pjNo) {
 	Object[] param= {pjNo};
 	return jdbcTemplate.queryForObject(sql, float.class, param);
 }
+
+
+
+
 
 
 

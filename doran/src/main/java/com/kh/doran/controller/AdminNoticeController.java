@@ -51,14 +51,19 @@ public class AdminNoticeController {
 //	참고 : ModelAttribute로 수신한 데이터는 자동으로 Model에 첨부된다
 //	- 옵션에 name을 작성하면 해당하는 이름으로 model에 첨부
 	@RequestMapping("/noticelist")
-	public String list(Model model,
+	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
 		//페이지 네비게이터를 위한 게시글 수를 구한다
 		int count = noticeDao.count(vo);
 		vo.setCount(count);
 		
 		model.addAttribute("list", noticeDao.selectList(vo));
-		return "admin/noticelist";
+		if(session.getAttribute("loginNo")!=null) {
+			return "admin/noticelist";			
+		}
+		else {
+			return "admin/login";
+		}
 	}
 	
 	@GetMapping("/noticedetail")

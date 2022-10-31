@@ -1,6 +1,6 @@
 package com.kh.doran.controller;
 
-import java.lang.ProcessBuilder.Redirect;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.doran.entity.MemDto;
-import com.kh.doran.entity.SellerDto;
 import com.kh.doran.repository.AdminSellerDao;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.vo.AdminsellerDetailVO;
-import com.kh.doran.vo.MemListSearchVO;
 import com.kh.doran.vo.SellerListSearchVO;
 
 @Controller
@@ -32,7 +29,7 @@ public class AdminSellerController {
 	
 
 	@RequestMapping("/sellerlist")
-	public String list(Model model, 
+	public String list(Model model,HttpSession session,
 			@ModelAttribute(name="vo") SellerListSearchVO vo) {
 		
 		//페이지 네비게이터를 위한 게시글 수를 구한 것
@@ -40,7 +37,12 @@ public class AdminSellerController {
 		vo.setCount(count);
 	
 		model.addAttribute("list",adminSellerDao.selectList(vo));
-		return "admin/sellerlist";
+		if(session.getAttribute("loginNo")!=null) {
+			return "admin/sellerlist";			
+		}
+		else {
+			return "admin/login";
+		}
 	}
 	
 	@GetMapping("/sellerdetail")

@@ -3,6 +3,7 @@ package com.kh.doran.repository;
 import java.util.List;
 
 import com.kh.doran.entity.FilesDto;
+import com.kh.doran.vo.PjFileVO;
 import com.kh.doran.vo.SellerFileVO;
 import com.kh.doran.vo.profileImgVO;
 
@@ -24,7 +25,8 @@ public interface FilesDao {
 	//프로젝트 신청시 첨부파일(이미지) 저장
 	//컬럼3개인 테이블
 	//List<FilesDto> connectPjFiles(int pjNo, int filesNo);
-	void connectPjFiles(int pjNo, int filesNo);
+	void connectPjFiles(int pjNo, int filesNo );
+	List<PjFileVO>pjfile(int sellerMemNo);
 	
 	//셀러 첨부파일 list(seller_file_view 조회)
 	List<SellerFileVO> sellerFileList(int sellerMemNo);
