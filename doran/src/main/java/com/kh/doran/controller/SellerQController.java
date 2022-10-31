@@ -26,6 +26,7 @@ public class SellerQController {
 	@Autowired
 	private PjDao pjDao;
 	
+		
 	//판매자에게 문의 작성 페이지
 	@GetMapping("/write")
 	public String write(@RequestParam int pjNo,

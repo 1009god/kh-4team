@@ -13,7 +13,7 @@ display: inline-block;
 
 
     
-      <hr style="border:1px color= silver;" width="100%">
+      <hr style="border:1px color= silver;" width="1400px">
      	<div class="container-1400">
         	<footer class="">
             <ul class="nav" >
