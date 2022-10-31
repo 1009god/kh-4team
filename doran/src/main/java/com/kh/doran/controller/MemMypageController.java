@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.doran.entity.MemDto;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
+import com.kh.doran.repository.OrdersDao;
 
 
 
@@ -28,6 +29,10 @@ public class MemMypageController {
 	
 	@Autowired
 	private FilesDao filesDao;
+	
+	@Autowired
+	private OrdersDao ordersDao;
+	
 	
 	//프로필 홈
   @GetMapping("/profile")
@@ -89,7 +94,19 @@ public class MemMypageController {
 	
 //올린 프로젝트 created
 	@GetMapping("/created")
-	public String created() {
+	public String created(HttpSession session, Model model) {
+		int memNo = (int)session.getAttribute("loginNo");
+		 //2. 아이드를 이용하여 회원정보를 불러온다
+	     MemDto memDto = memDao.selectOne(memNo);
+	     
+	     //3.불러온 정보를 모델에 첨부한다
+	     model.addAttribute("memDto", memDto);
+	     
+	     //(+추가) 프로필 이미지
+	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
+	     
+	     //(+추가) 만든 프로젝트 목록
+		
 		return "mypage/created";
 	}
 	
@@ -107,10 +124,26 @@ public class MemMypageController {
 	     //(+추가) 프로필 이미지
 	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
-	     //(+추가) 후원한 목록- 아마 모델에 첨부해서 프론트에서 배열 돌릴것으로 예상
+	     //(+추가) 후원한 목록
+	     model.addAttribute("supportList", ordersDao.selectSupportList(memNo));
 	     
 	    
 		return "mypage/supported";
+	}
+	
+	//후원한 프로젝트 상세 supported/detail
+	@GetMapping("/supported/detail")
+	public String supportedDetail(@RequestParam int ordersNo, Model model,HttpSession session) {
+		//세션에서 멤버 번호 저장
+		int memNo = (int)session.getAttribute("loginNo");
+		
+		//(+추가) 후원한 프로젝트 상세
+	     model.addAttribute("supportPjImfo", ordersDao.selectSupportDetail(ordersNo));
+	     
+	     //(+추가) 후원한 프로젝트 상세-order,option,deliver
+		model.addAttribute("supportDetail", ordersDao.selectSupportDetail2(ordersNo));		
+		
+		return "mypage/supportedDetail";
 	}
 	
 
