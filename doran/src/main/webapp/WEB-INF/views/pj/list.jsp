@@ -4,7 +4,7 @@
 
 <%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="메인페이지" name="title"/>
+	<jsp:param value="프로젝트 목록" name="title"/>
 </jsp:include>
 
    	<!-- 로딩바 라이브러리 -->
@@ -68,6 +68,18 @@
      	margin : 0 auto;
 
      }
+     .funding{
+    	 font-weight : bold; color : gray;
+     }
+     
+     .category{
+     	text-decoration : none;
+     	color : gray;
+     }
+     .name{
+        text-decoration : none;
+     	color : black;
+     }
     
     </style>
 
@@ -75,9 +87,9 @@
    
     <div class="row center mt-30 mb-10">
         <form action = "list" method ="get">
-        	<button style="font-weight : bold"  class="white ms-30 me-30" name="sort" value="prelaunching">펀딩예정</button>
-            <button style="font-weight : bold" class="white ms-30 me-30" name="sort" value="ongoing">펀딩중</button>
-            <button style="font-weight : bold" class="white ms-30 me-30" name="sort" value="finishing">펀딩마감</button>
+        	<button   class="white funding ms-30 me-30" name="sort" value="prelaunching">펀딩예정</button>
+            <button   class="white funding ms-30 me-30" name="sort" value="ongoing">펀딩중</button>
+            <button   class="white funding ms-30 me-30" name="sort" value="finishing">펀딩마감</button>
         </form>
     </div>   
 <!--     <hr> -->
@@ -123,13 +135,13 @@
  		           				<img width="372px" height="210px" src="http://localhost:8888/files/download/${pjDto.pjFileNo}">
 	            			</div>
 		                <div class="row">
-		                	<span> ${pjDto.pjNo}</span>
-			                <a href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
-			                <span> ♥ ${pjDto.pjLikesNumber}</span>
+<%-- 		                	<span> ${pjDto.pjNo}</span> --%>
+			                <a class="category" href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
+			               <span> <a href=#><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>  ${pjDto.pjLikesNumber}</span>
 		                </div>
 		                
 		                <div class="row">
-			                <a href="detail?pjNo=${pjDto.pjNo}">
+			                <a class="name"href="detail?pjNo=${pjDto.pjNo}">
 			                ${pjDto.pjName}</a>
                                 	
 		                </div>
@@ -200,10 +212,11 @@
 	    <c:otherwise>
 	    	<div class="notOngoing" >
 	    		<div class="row center" style = "padding : 80px">
-		    		<h1 style = "color : lightblue">진행중인 펀딩이 없습니다!</h1>
+		    		<h1 style = "color : #6495ED">진행중인 펀딩이 없습니다</h1>
 		    	</div>
 		    	<div class="row center" >
-		    		<a href="/" style="text-decoration : none; color : #0072b2;"><h2><i class="fa-solid fa-house"></i> 홈으로</h2></a>
+		    		<a href="/" style="text-decoration : none; color : #0072b2;"><h2>
+		    		<i class="fa-solid fa-house"></i> 홈으로</h2></a>
 	    		</div>
 	    	</div>
 	    </c:otherwise>

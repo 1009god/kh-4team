@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="게시글 목록" name="title"/>
+</jsp:include>
+
 <!-- 현재 시간 구하기 -->
 <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <c:set var="today">
@@ -106,10 +110,6 @@
 
 <!-- 테스트용 데이터 출력 -->
 <!-- <h3>${vo}</h3> -->
-<jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="메인페이지" name="title"/>
-</jsp:include>
-
 
 <div class="container-900 mt-40 mb-40">
 	<h1 align="center">도란도란</h1>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="faq" name="title" />
+	<jsp:param value="FAQ" name="title" />
 </jsp:include>
 
 <div class="container-800 mt-40 mb-40">

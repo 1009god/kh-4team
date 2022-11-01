@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="배송지 추가" name="title"/>
+</jsp:include>
 
 <h2>배송지 추가</h2>
 <form method ="post">
@@ -84,6 +81,5 @@
     
 </script>
 
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
 
