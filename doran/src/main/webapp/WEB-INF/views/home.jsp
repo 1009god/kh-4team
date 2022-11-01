@@ -15,38 +15,6 @@
    
    	<!-- 로딩바 라이브러리 -->
 	<script src="https://cdn.jsdelivr.net/gh/hiphop5782/progress-bar@latest/dist/progress-bar.min.js"></script>
-
-    <script type="text/javascript">
-    
-    $(function(){
-    	
-    	const swiper = new Swiper('.swiper', {
-            // Optional parameters
-            direction: 'horizontal', //슬라이드 방향
-            loop: true, //반복여부
-            
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-				autoplay:{
-                delay:1000, //자동재생 간격(ms)
-            },
-
-			effect:"slide", //슬라이드 기본 효과
-    	
-
-	    	$(".loading-bar").progressbar({
-	        	
-	    	});
-    	
-// 		var list = document.querySelectorAll("#loading-bar");
-// 		for(var i=0; i < list.length; i++){
-// 				var bar = new ldBar(list[i]);
-        
-    });
-    </script>
     
     <script type="text/javascript">
     
@@ -118,32 +86,7 @@
         text-decoration : none;
      	color : black;
      }
-    </style>
-
-
-    <div class="container-1300">
-
-		<!-- Slider main container -->
-			<div class="swiper mt-50 w-50">
-			  <!-- Additional required wrapper -->
-			  <div class="swiper-wrapper">
-			    <!-- Slides -->
-			    <div class="swiper-slide"><img src="/img/test1.png"></div>
-			    <div class="swiper-slide"><img src="/img/test.jpg"></div>
-			    <div class="swiper-slide"><img src="/img/burger.png"></div>
-			    ...
-			  </div>
-			  <!-- If we need pagination -->
-			  <div class="swiper-pagination"></div>
-
-			  <!-- If we need navigation buttons -->
-			  <div class="swiper-button-prev"></div>
-			  <div class="swiper-button-next"></div>
-
-			  <!-- If we need scrollbar -->
-			  <div class="swiper-scrollbar"></div>
-			</div>
-	</div>     
+    </style>    
 
        <div class="container-1200">
      
