@@ -20,33 +20,27 @@
         padding: 20px;
         margin: 40px;
         }
-
 </style>
 
 
 <script type="text/javascript">
     //자바스크립트 코드
-
     $(function(){
         $(".toggle-control").on("click",function(){
             $(".target").toggle();
         });
-
       
         
     });
-
     
     function findAddress() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
                 var extraAddr = ''; // 참고항목 변수
-
                 //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                     addr = data.roadAddress;
@@ -54,7 +48,6 @@
                     addr = data.jibunAddress;
                 }
             
-
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_postcode').value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
@@ -63,19 +56,13 @@
             }
         }).open();
     }
-
-
    
-
-
-
 function saveAddress(){
     document.frm.target="ifrm";
     document.frm.action="http://localhost:8888/edit/address_plus";
     document.frm.submit();
     location.reload();
 }
-
 </script>
 
 <div class="container-1400 center">
@@ -144,13 +131,13 @@ function saveAddress(){
 	</label>
 	
 	<label>받는 사람
-		<input name = "addressName" type="text" required autocomplete="off">
+		<input name = "addressName" type="text" required>
 	</label>
 	</div>
 	
 	<div>	
 	<label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required autocomplete="off">
+		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
 	</label>
 	</div>
 	
@@ -158,19 +145,19 @@ function saveAddress(){
 	
 	<div>
 	<label>주소
-		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required autocomplete="off">
+		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
 	</label>
 	</div>
 	
 	<div>
 	<label>상세주소
-		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required autocomplete="off">
+		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
 	</label>
 	</div>
 	
 	<div>
 	<label>받는 사람 휴대폰 번호
-		<input name = "addressTel" type="text" required autocomplete="off">
+		<input name = "addressTel" type="text" required>
 	</label>
 	</div>
 	
@@ -184,7 +171,5 @@ function saveAddress(){
 
 
 
-    
 </body>
 </html>
-
