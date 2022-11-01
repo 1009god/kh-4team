@@ -109,7 +109,7 @@ public class MemMypageController {
 	
 	@GetMapping("/goodbye_result") //비회원 나중에 인터셉터로
 	public String goodbyeResult() {
-		return "mypage/goodbyeResult";
+		return "mypage/goodbye_result";
 	}
 	
 //올린 프로젝트 created
