@@ -164,6 +164,9 @@ public class MemMypageController {
 	     //(+추가) 후원한 프로젝트 상세-order,option,deliver
 		model.addAttribute("supportDetail", ordersDao.selectSupportDetail2(ordersNo));		
 		
+		//(+추가) 후원한 프로젝트의 상세 썸네일 이미지
+		model.addAttribute("supportDetailImg", filesDao.supportDetailImgList(ordersNo));
+		
 		return "mypage/supportedDetail";
 	}
 	
