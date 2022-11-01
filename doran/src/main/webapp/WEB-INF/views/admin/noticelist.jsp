@@ -86,6 +86,7 @@
 <!-- 페이지 네비게이터 -->
 <h3> 
 <div class="row center">
+<ul class="pagination on">
 <c:choose>
 	<c:when test="${not vo.isFirst()}">
 		<a href="noticelist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo; </a>
@@ -131,6 +132,7 @@
 		<a href="#">&raquo;</a>
 	</c:otherwise>
 </c:choose>
+</ul>
 </h3>
 
 <!-- 검색창 -->

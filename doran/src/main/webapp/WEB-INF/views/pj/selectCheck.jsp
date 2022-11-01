@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <jsp:include page="/WEB-INF/views/template/header3.jsp">
-    	<jsp:param value="옵션 체크" name="title" />
+    	<jsp:param value="프로젝트 옵션체크" name="title" />
     </jsp:include>
 
 
