@@ -8,8 +8,11 @@
 	<jsp:param value="나의 좋아요" name="title"/>
 </jsp:include>
 
-
-<!-- 후원 내역 list -->	
+<div class="container-1400" style="height:600px">
+<div class="center">
+<h1>좋아요 목록</h1>
+</div>
+<!-- 좋아요 내역 list -->	
 	<div class=container-800>
 		<table class="table table-hover table-slit">
 			<thead>
@@ -24,6 +27,7 @@
 				<c:forEach var="likes" items="${likesList}" >	
 					<tr align="center">								
 							<td><a href="/pj/detail?pjNo=${likes.pjNo}">${likes.pjNo}</a></td>							
+
 							<td>${likes.pjCategory}</td>			
 							<td>${likes.pjName}</td>				
 								
@@ -33,7 +37,7 @@
 		</table>	
 
 		</div>	
-
+</div>
 
 
 
