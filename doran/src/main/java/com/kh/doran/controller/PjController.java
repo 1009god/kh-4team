@@ -93,6 +93,7 @@ public class PjController {
 		model.addAttribute("OrderCountAll", pjDao.orderCountAll(pjNo));//이 프로젝트를 구입한 회원 명수
 		model.addAttribute("DateCount", pjDao.dateCount(pjNo));//마감일까지 며칠 남았는지(date로는 못 받고 float치환)
 		model.addAttribute("PjFileList", pjFileDao.pjFileList(pjNo));//프로젝트 대표이미지들
+		model.addAttribute("PjFileIntroduce", pjFileDao.selectOne(pjNo));//프로젝트 소개이미지 1개
 		//프로젝트개설판매자의  회원테이블을 넘김
 		PjDto pjDto=pjDao.selectOne(pjNo);
 //		int sellerNo=pjDto.getPjSellerMemNo();

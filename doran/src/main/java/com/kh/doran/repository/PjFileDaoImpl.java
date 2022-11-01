@@ -67,4 +67,11 @@ public class PjFileDaoImpl implements PjFileDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
+	@Override
+	public PjFileDto selectOne(int pjFilePjNo) {
+		String sql="select*from pj_file where pj_file_pj_no=? and pj_file_classify='소개'";
+		Object[] param= {pjFilePjNo};
+		return jdbcTemplate.query(sql, extractor, param);
+	}
+	
 }
