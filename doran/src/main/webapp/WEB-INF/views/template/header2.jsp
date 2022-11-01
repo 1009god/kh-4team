@@ -149,19 +149,26 @@ nav li a:hover {
 				</a>
 			</div>
 
+				
 			<div id="top_menu">
-
 				<c:choose>
-					<c:when test="${login}">
+					<c:when test="${sellerCheck =='대기'}">
 						<button type="submit" class="ghost"
 							onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
 					</c:when>
+					<c:otherwise>
+						<button type="submit" class="ghost"
+							onclick="location.href='/pj/insert'">프로젝트 올리기</button>
+					</c:otherwise>
 				</c:choose>
 
 
 				<c:choose>
 					<c:when test="${login}">
+						<a href="/mypage/profile"> My page </a>
+					<a href="/like"><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>
 						<a class="dropdown-item" href="/mem/logout">로그아웃</a>
+						
 					</c:when>
 					<c:otherwise>
 						<button class="Login-btn btn-neutral1">
