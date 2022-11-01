@@ -33,18 +33,18 @@
 		<h1 style="padding-left: 20px">NO.${sellerDto.sellerMemNo}회원 판매자 정보</h1>
 	</div>
 
-	<div class="center">
+	<div class="">
 		<table class="table">
 			<tbody>
 				<!-- 프로필 이미지를 출력 -->
 				<tr>
-					<th width="10%" valign="top" class="center">
+					<th width="10%" valign="top" class="left">
 						<table class="table">
 							<tbody class="left">
 								<tr>
 								<c:choose>
 									<c:when test="${empty profileImg}">
-										<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+										<img  width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
 									</c:when>
 									
 									<c:otherwise>
@@ -57,28 +57,8 @@
 									</c:otherwise>
 								</c:choose>			
 								</tr>
-							
-										<tr>
-											<td><a class="btn btn-neutral btn-small" href="/admin/sellerlist">목록 보기</a></td>
-										</tr>
-										<tr>
-											<td><a class="btn btn-neutral btn-small"
-												href="change?memNo=${sellerDto.sellerMemNo}">정보 변경</a></td>
-										</tr>
 
 
-								<c:choose>
-									<c:when test="${sellerDto.sellerCheck eq '승인'}">
-										<tr>
-											<td><a class="btn btn-neutral btn-small"
-												href="revoke?sellerMemNo=${sellerDto.sellerMemNo}">판매자 취소</a></td>
-										</tr>
-									</c:when>
-									<c:otherwise>
-										<td><a class="btn btn-neutral btn-small"
-												href="agree?sellerMemNo=${sellerDto.sellerMemNo}">판매자 승인</a></td>
-									</c:otherwise>
-								</c:choose>
 							</tbody>
 						</table>
 					</th>
@@ -149,8 +129,26 @@
 										</c:forEach>
 									</td>
 							</tr>
-							
+													
 						</table>
+						
+						<div class="row right">
+							<a class="btn btn-neutral btn-small" href="/admin/sellerlist">목록 보기</a>
+							<a class="btn btn-neutral btn-small"
+												href="change?memNo=${sellerDto.sellerMemNo}">정보 변경</a>
+																				<c:choose>
+									<c:when test="${sellerDto.sellerCheck eq '승인'}">
+										
+											<a class="btn btn-neutral btn-small"
+												href="revoke?sellerMemNo=${sellerDto.sellerMemNo}">판매자 취소</a>
+										
+									</c:when>
+									<c:otherwise>
+										<a class="btn btn-neutral btn-small"
+												href="agree?sellerMemNo=${sellerDto.sellerMemNo}">판매자 승인</a>
+									</c:otherwise>
+								</c:choose>
+						</div>
 						
 						
 						

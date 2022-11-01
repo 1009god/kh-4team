@@ -11,12 +11,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
-     <!-- 로딩바 라이브러리 -->
-<!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css"> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.min.js"></script> -->
-    
-
-    <!--jquery를 사용하기 위하여 라이브러리 js파일을 불러온다-->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
    
    	<!-- 로딩바 라이브러리 -->
@@ -42,9 +36,10 @@
 
 			effect:"slide", //슬라이드 기본 효과
     	
-    	$("#loading-bar").progressbar({
-    	
-    	});
+
+	    	$(".loading-bar").progressbar({
+	        	
+	    	});
     	
 // 		var list = document.querySelectorAll("#loading-bar");
 // 		for(var i=0; i < list.length; i++){
@@ -56,8 +51,8 @@
     
     <style>
     
-    .pjImg{
-    	max-width: 0%;
+   .pjImg{
+    	max-width: 100%;
     }
 
     .a{
@@ -73,30 +68,44 @@
     
     .list{
      	display : flex; 
-     	justify-content: space-between; 
+      	justify-content: flex-start;  
      	flex-wrap: wrap; 
     }
-    .item{
-     	width : "33%"; 
-    }
-    .inner{
-    	height : 3px;
-    	width:100%;
-/*         position: absolute; */
-        top:0;
-        left:0;
-        bottom:0;
-/*  		background: #0072b2;  */
-            }
+     .item{ 
+     	padding : 13px;
+     } 
+    
      .progressbar{
      	background : lightgray;
      }
-    .swiper-button-prev{
-    	color : gray;
-    }
-    .swiper-button-next{
-    	color : gray;
-    }
+     
+     .white{
+     	background : white;
+     	border : 2px white;
+     	font-size : 20px;
+     	padding : 5px;
+     }
+     .white:hover{
+     	color : #0072b2;
+     }
+     .notOngoing{
+     	width : 700px;
+     	height : 500px;
+     	margin : 0 auto;
+
+     }
+     .funding{
+    	 font-weight : bold; color : gray;
+     }
+     
+     .category{
+     	text-decoration : none;
+     	color : gray;
+     }
+     .name{
+        text-decoration : none;
+     	color : black;
+     }
     </style>
 
 
@@ -122,41 +131,35 @@
 			  <!-- If we need scrollbar -->
 			  <div class="swiper-scrollbar"></div>
 			</div>
-	</div>     
-
-    <div class="row center">
-
-    
-        <div class="row center list">
-	            <c:forEach var="pjDto" items="${list}">
-	            
+        <div class="row center list" >
+	            <c:forEach var="pjDto" items="${list}" varStatus="status">
 	            	<div class="row item">
 	            			<div class="a">
-		           		 		<img class="pjImg" src="/img/test.jpg" >
+ 		           				<img width="372px" height="210px" src="http://localhost:8888/files/download/${pjDto.pjFileNo}">
 	            			</div>
-	            			
 		                <div class="row">
-		                	<span> ${pjDto.pjNo}</span>
-			                <a href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
-			                <span> ♥ ${pjDto.pjLikesNumber}</span>
+<%-- 		                	<span> ${pjDto.pjNo}</span> --%>
+			                <a class="category" href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
+			               <span> <a href=#><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>  ${pjDto.pjLikesNumber}</span>
 		                </div>
 		                
 		                <div class="row">
-			                <a href="detail?pjNo=${pjDto.pjNo}">
+			                <a class="name"href="detail?pjNo=${pjDto.pjNo}">
 			                ${pjDto.pjName}</a>
                                 	
 		                </div>
 		                <div class="left">${pjDto.achievementRate}% ${pjDto.nvl}원 
 		                </div> 
-                        <div class="row progressbar" id="loading-bar" 
-                        data-value = "${pjDto.achievementRate}"
+                        <div 
+                        class="row progressbar loading-bar"
+                        data-value = "${pjDto.achievementRate}%"
                         data-color = #0072b2>  
-
                         </div>
                      </div>
 	       		</c:forEach>
         </div>
-</div>
+	</div>     
+
       
    
 
