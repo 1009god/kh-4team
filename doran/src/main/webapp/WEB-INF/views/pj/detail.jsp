@@ -317,6 +317,69 @@ function shareKakao() {
          
         </aside>
 
+<<<<<<< HEAD
+    <div class="float-container"></div>
+
+    <div>
+        <div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>프로젝트 번호</th>
+                    <td>${PjDto.pjNo}</td>
+                </tr>
+                <tr>
+                    <th>프로젝트 이름</th>
+                    <td>${PjDto.pjName}</td>
+                </tr>
+                <tr>
+                    <th>모인 금액</th>
+                    <td>${OrdersCalVO.priceTotal} 원 ${OrdersCalVO.achievementRate} %</td>
+                </tr>
+                <tr>
+                    <c:set var="OrderCountAll" value="${OrderCountAll}" />
+                    <th>후원자</th>
+                    <td>${OrderCountAll} 명</td>
+                </tr>
+                <tr>
+                    <th>남은 시간</th>
+                    <td>
+                        <c:set var="dateCount" value="${DateCount}" />
+                        <c:if test="${dateCount>0}">
+                                <span class="endCount"></span>
+                        </c:if>    
+                        <c:if test="${dateCount<=0}">
+                            <span>마감된 프로젝트입니다</span>
+                        </c:if>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+	
+	<div>
+		<button><a href="/sellerq/write?pjNo=${PjDto.pjNo}">판매자에게 문의</a></button>
+	</div>
+	
+
+
+    <div>
+        <span>목표금액 ${PjDto.pjTargetMoney}</span>
+        <span>펀딩기간 ${PjDto.pjFundingStartDate} ~ ${PjDto.pjFundingEndDate}</span>
+        <span>결제 목표금액 달성시 ${PjDto.pjFundingEndDate}에 진행</span>
+    </div>
+
+
+	
+	<div class="shareParent">
+	<button type="button">sns 공유 버튼</button>
+	</div>
+	
+	<div class="shareChild">
+	<a href="javascript:shareTwitter();">트위터에 공유</a>
+	<a id="btnKakao" href="javascript:shareKakao();">카카오톡에 공유</a>
+	</div>
         
         <div class="float-container"></div>
     
@@ -448,8 +511,6 @@ function shareKakao() {
             </div>
 
         </div>
-
-        <div class="float-container"></div>
         
     </div>
 

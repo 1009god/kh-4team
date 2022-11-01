@@ -28,6 +28,10 @@ public class MemController {
 	private SellerDao sellerDao;
 	
 	
+	@GetMapping("/joinContent")
+	public String findContent() {
+		return "mem/joinContent";
+	}
 	
 	@GetMapping("/join") 
 	public String join() {
