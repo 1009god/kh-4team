@@ -32,7 +32,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(memInterceptor)
 					.addPathPatterns(//인터셉터가 감시할 주소
 							"/mem/**",//회원 전체
-							"/board/write" //글쓰기
+							"/board/write", //글쓰기
+							"/mypage/**"
 					)
 					.excludePathPatterns(//위의 주소에서 제외할 주소
 							"/mem/join*",//회원가입
