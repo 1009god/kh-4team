@@ -117,13 +117,8 @@
 	            
 	            	<div class="row item">
 	            			<div class="a">
-<!-- 	            			<img class="pjImg" src="/img/test.jpg" > -->
-							<c:set var = pj_file_pj_no value="${PjFilePjNo}">
-								<c:if test="pj_file_pj_no==${pjDto.pjNo}"></c:if>
-		            			<c:forEach var="PjFileList" items="${PjFileList}">
-			           		 		<img class="pjImg" width = "372px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}" >
-		            			</c:forEach>
-	            			</c:set>
+		           		
+		            			
 	            			</div>
 	            			
 		                <div class="row">

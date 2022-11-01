@@ -33,14 +33,23 @@
 						<table class="table">
 							<tbody class="center">
 								<tr>
-									<td>
-									<c:if test=""></c:if>	
-									<c:forEach var="vo" items="${profileImg}" varStatus="status">	
-										<c:if test="${status.last}">			
-											<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
-										</c:if>
-									</c:forEach>
-										
+									<td>									
+									
+									<c:choose>
+									<c:when test="${empty profileImg}">
+										<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+									</c:when>
+									
+									<c:otherwise>
+										 <!-- 반복문 -->
+										<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+											<c:if test="${status.last}">			
+												<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+											</c:if>
+										</c:forEach>			
+									</c:otherwise>
+								</c:choose>			
+								
 									</td>
 								</tr>
 							
