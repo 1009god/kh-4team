@@ -141,7 +141,13 @@
 					[${boardDto.replyCount}]
 				</c:if>
 			</td>
-			<td>${boardDto.memNick}</td>
+			<td>
+				<c:if test="${boardDto.memNick == null}">
+					탈퇴 회원
+				</c:if>
+				${boardDto.memNick}
+				
+			</td>
 			<td>
 				<c:set var="current">
 					<fmt:formatDate value="${boardDto.boardWriteTime}" pattern="yyyy-MM-dd"/>

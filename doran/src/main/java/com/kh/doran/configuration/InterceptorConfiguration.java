@@ -33,14 +33,16 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 					.addPathPatterns(//인터셉터가 감시할 주소
 							"/mem/**",//회원 전체
 							"/board/write", //글쓰기
-							"/mypage/**"
+							"/mypage/**",
+							"/doran-q/write"
 					)
-					.excludePathPatterns(//위의 주소에서 제외할 주소
+					.excludePathPatterns(//위의 주소에서 제외할 주소 (비회원)
 							"/mem/join*",//회원가입
 							"/mem/login",//로그인
 							"/mem/findEmail",//이메일 찾기
 							"/mem/findPw",//비밀번호 찾기
-							"/mem/goodbyeResult"
+							"/mem/goodbyeResult", //탈퇴 결과
+							"doran-q/list" //1:1 문의 목록
 					);
 		
 		//관리자만 수정 / 삭제를 할 수 있도록 검사하는 인터셉터
