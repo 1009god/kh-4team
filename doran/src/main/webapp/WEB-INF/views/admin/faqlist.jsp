@@ -19,28 +19,38 @@
 		<button class="btn btn-positive">검색</button>
 	</form>
 	</div> -->
+<style>
 
+        .table > thead > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > th,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > th,
+        .table > tfoot > tr > td {  
+            border : 1px solid lightgray;
+        }
+	
+</style>
 
 <!-- 목록 출력 -->
 <div class="container-900 mt-40 mb-40">
 	<h1 align="center">FAQ 관리</h1>
-
 	<div class="row">
-		<table class="table table-hover table-slit">
+		<table class="table table-hover" border="1">
+
 			<thead>
 				<tr align="center">
-					<th>번호</th>
+					<th width="15%" >분류</th>
 					<th>제목</th>
-					<th>타입</th>
 				</tr>
 			</thead>
 			<tbody align="center">
 				<c:forEach var="faqDto" items="${list}">
 					<tr>
-						<td align="center">${faqDto.faqNo}</td>
+						
+						<td align="center">${faqDto.faqType}</td>
 						<td align="center"><a href="faqdetail?faqNo=${faqDto.faqNo}">
 								${faqDto.faqTitle} </a></td>
-						<td align="center">${faqDto.faqType}</td>
 
 					</tr>
 				</c:forEach>
@@ -48,7 +58,7 @@
 
 
 		</table>
-			<div class="right">
+			<div class="row right">
 				<a class="btn btn-neutral " href="faqwrite">작성하기</a>
 			</div>
 	</div>

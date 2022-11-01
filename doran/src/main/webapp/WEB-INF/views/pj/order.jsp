@@ -184,6 +184,5 @@ function saveAddress(){
 
 </div>
 
-
 <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
 

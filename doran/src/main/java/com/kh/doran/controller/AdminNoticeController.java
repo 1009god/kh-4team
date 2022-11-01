@@ -58,7 +58,7 @@ public class AdminNoticeController {
 		vo.setCount(count);
 		
 		model.addAttribute("list", noticeDao.selectList(vo));
-		if(session.getAttribute("loginNo")!=null) {
+		if(session.getAttribute("AdminNo")!=null) {
 			return "admin/noticelist";			
 		}
 		else {
