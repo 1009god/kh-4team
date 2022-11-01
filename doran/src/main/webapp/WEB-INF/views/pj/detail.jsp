@@ -12,40 +12,33 @@
 
 <style>
 	
-
     .selectOption {
         border: 1px dotted gray;
     }
-
-
     .projectIntroduce {
         font-size: 14px;
         color:#000000DE;
         margin: 0px 0px 14px;
         text-align: left;
     }
-
     .projectValue {
         font-size: 38px;
         color:#000000DE;
         margin: 0px 10px 0px 0px;
         text-align: left;
     }
-
     .projectSmall {
         font-size: 14px;
         color:#000000DE;
         margin: 0px 0px 0px 3.5px;
         text-align: left;
     }
-
     .projectPercentage {
         font-size: 18px;
         color:#000000DE;
         text-align: left;
         font-weight: bolder;
     }
-
     .targetLeft {
         width: 56px;
     margin-right: 20px;
@@ -54,7 +47,6 @@
     font-size: 12px !important;
     line-height: 20px !important;
     }
-
     .targetRight {
         margin: 0px;
         flex: 1 1 auto;
@@ -66,13 +58,11 @@
     font-size: 13px !important;
     line-height: 22px !important;
     }
-
     .rewardFence {
     width: 100%;
     height: auto;
     padding: 24px 0px 0px;
     }
-
     .rewardBox {
         border-color:#9E9E9E;
         border-width:thin;
@@ -86,7 +76,6 @@
         flex: 1 1 0%;
     }
     
-
     .rewardPrice {
     font-size: 24px;
     line-height: 36px;
@@ -99,7 +88,6 @@
     line-height: 20px;
     letter-spacing: -0.015em;
     }
-
     .rewardPriceComplete {
         font-size: 24px;
         color:#9E9E9E;
@@ -115,7 +103,6 @@
     letter-spacing: -0.015em;
     }
     
-
     
 </style>
 
@@ -131,34 +118,27 @@ $(function(){
     $(".shareParent").on("click",function(){
         $(".shareChild").toggle();
     });
-
     const datecountonjs=Math.ceil("${DateCount}");
     $(".endCount").text(datecountonjs+"일");
-
-
     const swiper = new Swiper('.swiper', {
             // Optional parameters
             direction: 'horizontal',//슬라이드 방향
             loop: true,//반복 여부
-
             // If we need pagination
             pagination: {//페이징 옵션
                 el: '.swiper-pagination',//페이징 적용 대상
                 type: "bullets",//페이징 도구 모양
                 clickable:true,//클릭 가능 여부
             },
-
             // Navigation arrows 좌우 이동 버튼
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-
             //자동 재생 옵션
             autoplay: {
                 delay:1000,//자동재생 간격 1000밀리초
             },
-
             //페이지 전환 효과
             //effect:"slide",//슬라이드 방식(기본)
             //effect: "fade", //페이드인-아웃 효과
@@ -166,25 +146,18 @@ $(function(){
             //effect:"coverflow",//3d 회전 효과
             //effect:"flip",//플립 효과
             effect:"cards",//카드 전환 효과
-
-
             // And if we need scrollbar
             // scrollbar: {
             //     el: '.swiper-scrollbar',
             // },
             });
-
 });
-
-
 function shareTwitter() {
     var sendText = "도란도란에 구경 오세요!"; // 전달할 텍스트
     var pjNo=${PjDto.pjNo};
     var sendUrl = "http://localhost:8888/pj/detail?pjNo="+pjNo; // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
 }
-
-
 function shareKakao() {
 	
 	 var pjNo=${PjDto.pjNo};
@@ -207,10 +180,7 @@ function shareKakao() {
 	    }
 	  });
 	}
-
     
-
-
 </script>
 
 
@@ -317,69 +287,6 @@ function shareKakao() {
          
         </aside>
 
-<<<<<<< HEAD
-    <div class="float-container"></div>
-
-    <div>
-        <div>
-        <table>
-            <tbody>
-                <tr>
-                    <th>프로젝트 번호</th>
-                    <td>${PjDto.pjNo}</td>
-                </tr>
-                <tr>
-                    <th>프로젝트 이름</th>
-                    <td>${PjDto.pjName}</td>
-                </tr>
-                <tr>
-                    <th>모인 금액</th>
-                    <td>${OrdersCalVO.priceTotal} 원 ${OrdersCalVO.achievementRate} %</td>
-                </tr>
-                <tr>
-                    <c:set var="OrderCountAll" value="${OrderCountAll}" />
-                    <th>후원자</th>
-                    <td>${OrderCountAll} 명</td>
-                </tr>
-                <tr>
-                    <th>남은 시간</th>
-                    <td>
-                        <c:set var="dateCount" value="${DateCount}" />
-                        <c:if test="${dateCount>0}">
-                                <span class="endCount"></span>
-                        </c:if>    
-                        <c:if test="${dateCount<=0}">
-                            <span>마감된 프로젝트입니다</span>
-                        </c:if>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-	
-	<div>
-		<button><a href="/sellerq/write?pjNo=${PjDto.pjNo}">판매자에게 문의</a></button>
-	</div>
-	
-
-
-    <div>
-        <span>목표금액 ${PjDto.pjTargetMoney}</span>
-        <span>펀딩기간 ${PjDto.pjFundingStartDate} ~ ${PjDto.pjFundingEndDate}</span>
-        <span>결제 목표금액 달성시 ${PjDto.pjFundingEndDate}에 진행</span>
-    </div>
-
-
-	
-	<div class="shareParent">
-	<button type="button">sns 공유 버튼</button>
-	</div>
-	
-	<div class="shareChild">
-	<a href="javascript:shareTwitter();">트위터에 공유</a>
-	<a id="btnKakao" href="javascript:shareKakao();">카카오톡에 공유</a>
-	</div>
         
         <div class="float-container"></div>
     
@@ -511,6 +418,8 @@ function shareKakao() {
             </div>
 
         </div>
+
+        <div class="float-container"></div>
         
     </div>
 
@@ -518,4 +427,4 @@ function shareKakao() {
     
 
     <!--푸터-->
-    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
