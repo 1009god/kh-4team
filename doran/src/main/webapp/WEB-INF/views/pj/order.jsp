@@ -2,12 +2,28 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-<jsp:include page="/WEB-INF/views/template/header2.jsp">
+
+<jsp:include page="/WEB-INF/views/template/header3.jsp">
 	<jsp:param value="프로젝트 주문" name="title" />
 </jsp:include>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+<style>
+      .boxer {
+        border : 2px;
+        border-color: lightgray;
+        border-style: solid;
+        padding: 20px;
+        margin: 40px;
+        }
+
+</style>
+
+
 <script type="text/javascript">
     //자바스크립트 코드
 
@@ -62,16 +78,28 @@ function saveAddress(){
 
 </script>
 
-<div class="container-1400 row center">
+<div class="container-1400 center">
 
     <form action="order" method="post">
 
-    <h2>결제</h2>
+    <div class="boxer">
+    
+        <div>
+            <span>결제</span>
+        </div>
     <div>
-        ${PjDto.pjName}
-        ${OptionsDto.optionsNo}
-        ${OptionsDto.optionsName}
-        ${OptionsDto.optionsPrice}
+        <div>
+            <span>후원 프로젝트</span><span>${PjDto.pjName}</span>
+        </div>
+        <div>
+            <span>선택 옵션</span><span>${OptionsDto.optionsName}</span>
+        </div>
+        <div>
+            <span>옵션 가격</span><span>${OptionsDto.optionsPrice}</span>
+        </div>
+        <div>
+            <span>배송비</span><span>${OptionsDto.optionsDeliveryPrice}</span>
+        </div>
         
         <input type="hidden" name="ordersOptionsNo" value="${OptionsDto.optionsNo}">
         <input type="hidden" name="ordersPayDate" value="${PjDto.pjFundingEndDate}">
@@ -79,11 +107,11 @@ function saveAddress(){
         <input type="hidden" name="ordersDeliveryPay" value="${OptionsDto.optionsDeliveryPrice}">
         <input type="hidden" name="ordersMemNo" value="${AddressDto[0].addressMemNo}">       
     </div>
-
+    </div>
 
     
 
-    <div id="choose">
+    <div id="choose" class="boxer">
         
         <h2>배송지 선택</h2>
         
@@ -94,15 +122,15 @@ function saveAddress(){
         </c:forEach>
         </select>
 
-    </div>
+        
+        <button type="submit" class="btn btn-positive">주문하기</button>
+        
+    </form>
+    
+</div>
 
-    <button type="submit">주문하기</button>
-
-</form>
-
-
-    <div>
-        <button class="toggle-control">배송지 등록</button>
+    <div class="boxer">
+        <button class="btn btn-neutral toggle-control">배송지 등록</button>
     
 
     <form method ="post" name="frm" class="target">
@@ -156,6 +184,12 @@ function saveAddress(){
 
 
 
+<<<<<<< HEAD
 
 
 <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
+=======
+    
+</body>
+</html>
+>>>>>>> refs/remotes/origin/main

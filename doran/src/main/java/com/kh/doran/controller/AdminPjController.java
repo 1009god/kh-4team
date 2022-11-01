@@ -48,7 +48,7 @@ public class AdminPjController {
 		vo.setCount(count);
 		model.addAttribute("list",adminPjDao.selectList(vo));
 		//세션 추가후 관리자번호 불러오는 if문 추가(관리자 기능 로그인 이후 사용 가능)
-		if(session.getAttribute("loginNo")!=null) {
+		if(session.getAttribute("AdminNo")!=null) {
 			return "admin/pjlist";			
 		}
 		else {
@@ -70,7 +70,7 @@ public class AdminPjController {
 //		int sellerNo=pjDto.getPjSellerMemNo();
 //		model.addAttribute("Seller",memDao.selectOne(sellerNo));
 				
-		Integer loginNo=(Integer) session.getAttribute("loginNo");
+		Integer loginNo=(Integer) session.getAttribute("AdminNo");
 		if(loginNo==null) {
 			return "admin/pjdetail";
 		}
@@ -80,7 +80,7 @@ public class AdminPjController {
 			likesDto.setLikesPjNo(pjNo);
 			model.addAttribute("check",likesDao.check(likesDto));
 			vo.setOptionsPjNo(pjNo);
-			int loginNo2=(int) session.getAttribute("loginNo");
+			int loginNo2=(int) session.getAttribute("AdminNo");
 			vo.setOrdersMemNo(loginNo2);
 			model.addAttribute("OrderCount", pjDao.orderCount(vo));//구매여부
 		}
@@ -94,7 +94,7 @@ public class AdminPjController {
 			return "redirect:pjlist";
 		}
 		else {
-			return "admin/editPjFail";
+			return "admin/editFail";
 		}
 	}
 	

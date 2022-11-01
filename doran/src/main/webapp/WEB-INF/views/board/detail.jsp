@@ -7,6 +7,19 @@
 	<jsp:param value="도란도란-게시글" name="title"/>
 </jsp:include>
 
+<style>
+	.solid-lines {
+	  border: 1px solid gray;
+	}
+	
+	.input-list-search {
+    font-size: 20px;
+    padding: 0.75em;
+    outline: none;
+    
+}
+</style>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(function(){
@@ -96,6 +109,7 @@
 		<tr class="view">
 			<td width="90%">
 			<!-- 작성자 -->
+			<img src="/img/smile.png" width="20" height="20">
 			${replyDto.memNick}
 			<c:if test="${boardDto.boardMemNo == replyDto.replyMemNo}">
 			(작성자)
@@ -140,8 +154,8 @@
 	<table class="table">
 		<tbody>
 			<tr>
-				<th>
-					<textarea class="input w-100 fix-size" name="replyContent" rows="5" cols="55" required placeholder="댓글 작성..."></textarea>
+				<th class="solid-lines">
+					<textarea class="input-list-search w-100 fix-size" name="replyContent" rows="5" cols="55" required placeholder="댓글 작성..."></textarea>
 				</th>
 				<th valign="bottom">
 					<button class="btn btn-positive" type="submit">등록</button>

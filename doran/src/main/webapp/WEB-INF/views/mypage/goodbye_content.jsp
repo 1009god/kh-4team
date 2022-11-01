@@ -3,14 +3,18 @@
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
 	<jsp:param value="회원 탈퇴" name="title"/>
 </jsp:include>
-
-<style>
+	
+	
+	<style>
         .btn.btn-positive[disabled],
         .btn.btn-positive[disabled]:hover {
             background-color: #74b9ff;
             cursor: not-allowed;
         }
     </style>
+    
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/commons.css">
 
     <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다-->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -36,19 +40,18 @@
         });
     </script>
 
-  <div class="container-500">
+  <div class="container-600">
         <div class="row center">
             <h1>회원탈퇴</h1>            
         </div>        
         
 		<div class="row mt-30">
-		 	<h2>서비스 이용에 불편함이 있으신가요?</h2>
-		 	<h5>불편한 사항이 있다면 언제든 도란도란에 알려주세요</h5>
-		 	<a href="/doran-q/list">도란도란 고객센터</a>
-            <h2>탈퇴 전 유의사항을 확인해 주시기 바랍니다</h2>
+		 	<h2>▶ 서비스 이용에 불편함이 있으신가요?</h2>
+		 	<h5>- 불편한 사항이 있다면 언제든 도란도란에 알려주세요<a href="/doran-q/list">&nbsp;도란도란 고객센터</a></h5>
+            <h2>▶ 탈퇴 전 유의사항을 확인해 주시기 바랍니다</h2>
         </div>
         <div class="row">
-            <textarea class="input w-100 fix-size" rows="6" readonly>
+            <textarea class="input w-100 fix-size" rows="20" readonly>
             후원 및 결제
             
 			-이미 결제된 후원은 취소되지 않습니다

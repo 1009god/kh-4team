@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.doran.entity.FilesDto;
 import com.kh.doran.vo.PjFileVO;
 import com.kh.doran.vo.SellerFileVO;
+import com.kh.doran.vo.SupportDetailImgVO;
 import com.kh.doran.vo.profileImgVO;
 
 @Repository
@@ -123,6 +124,7 @@ public class FilesDaoImpl implements FilesDao{
 		jdbcTemplate.update(sql,param);		
 	}
 	
+	//프로필 이미지 다운로드
 	@Override
 	public List<profileImgVO> profileImgList(int memNo) {
 		String sql = "select * from profile_img_view where mem_no = ?";
@@ -209,6 +211,33 @@ public class FilesDaoImpl implements FilesDao{
 		Object[] param = {sellerMemNo};		
 		return jdbcTemplate.query(sql,mapper3,param);
 	}
+	
+	private RowMapper<SupportDetailImgVO> mapper4 = new RowMapper<SupportDetailImgVO>() {
+	
+		
+// supported 디테일 상세 썸네일 리스트 mapper		
+		@Override
+		public SupportDetailImgVO mapRow(ResultSet rs, int rowNum) throws SQLException {			
+			return SupportDetailImgVO.builder()
+					.pjFileNo(rs.getInt("PJ_FILE_NO"))
+					.ordersNo(rs.getInt("ORDERS_NO"))
+					.pjFilePjNo(rs.getInt("PJ_FILE_PJ_NO"))
+					.pjFileClassify(rs.getString("PJ_FILE_CLASSIFY"))
+					.build();
+		}
+	};
+	
+// supported 디테일 상세 썸네일 img가져오는 메소드	
+	@Override
+	public List<SupportDetailImgVO> supportDetailImgList(int ordersNo) {
+		String sql = "select pj_file_pj_no, pj_file_no,orders_no,PJ_FILE_CLASSIFY "
+				+ "from orders inner join options on OPTIONS_NO = ORDERS_OPTIONS_NO inner join pj on OPTIONS_PJ_NO= pj_no "
+				+ "inner join pj_file on PJ_NO=PJ_FILE_PJ_NO where PJ_FILE_CLASSIFY='대표' and orders_no =?";
+		Object[] param = {ordersNo};		
+		return jdbcTemplate.query(sql,mapper4,param);
+	}
+	
+	
 
 
 	

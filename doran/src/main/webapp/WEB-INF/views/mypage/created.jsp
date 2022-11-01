@@ -37,6 +37,23 @@
 .container-1200 {
 	padding: 20px;
 }
+
+.profileBox {
+	padding:20px;
+}
+
+.tm {
+	margin: 30px;
+}
+
+.aa {
+color: #0072b2;
+text-decoration: none;
+}
+
+
+
+
 </style>
 
 
@@ -51,26 +68,44 @@
 <div class="container-1400">
 
 	<div class="container-1400" >
-		
-		<div class="proinline">		
-			 <!-- 반복문 -->
-			<c:forEach var="vo" items="${profileImg}" varStatus="status">	
-				<c:if test="${status.last}">			
-					<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
-				</c:if>
-			</c:forEach>
+			
+		<table class="profileBox">
+		<thead>
+		  <tr>
+		    <td class="" rowspan="2">
+				<c:choose>
+			<c:when test="${empty profileImg}">
+				<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+			</c:when>
+			
+			<c:otherwise>
+				 <!-- 반복문 -->
+				<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+					<c:if test="${status.last}">			
+						<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+					</c:if>
+				</c:forEach>			
+			</c:otherwise>
+		</c:choose>						    
+		    </td>
+		    <td class="">
+		    	<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		    
+		    </td>
+		  </tr>
+		  <tr>
+		    <td class="">
+		   		 <span style="padding-left:20px">${memDto.memJoinDate} 회원 가입일</span>		
+		    </td>
+		  </tr>
+		</thead>
+		</table>
+	
 		</div>
-		<div class="proinline">					
-			<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>				
-			<div style="padding-left:20px">${memDto.memJoinDate} 회원 가입일</div>			
-		</div>	
-		
-		
-	</div>
 	
 	<ul class="mypage_menu">                             
      	 <li><a href="/mypage/created">올린 프로젝트</a></li>
-         <li><a href="/mypage/supported">후원한 프로젝트</a></li>
+         <li><a href="/mypage/supported">후원한 프로젝트</a></li>         
     </ul> 
     
 </div>
@@ -80,47 +115,37 @@
 <div>
 </div>	
                        
-          
-                       
+                              
                        
                        
                        
 
 
 
-	<!-- 후원 내역 list	
+	
 	<div class=container-800>
-		<table class="table table-hover table-slit">
+		<table class="table table-hover table-slit tm">
 			<thead>
 				<tr align="center">
 					<th>프로젝트 번호</th>
+					<th>카테고리</th>
 					<th>프로젝트 제목</th>												
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}" >	
 					<tr align="center">								
-							<td>${myCreatedPjDto.pjNo}</td>
+							<td><a href="/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}" class="aa"'>${myCreatedPjDto.pjNo}</a></td>
+							<td>${myCreatedPjDto.pjCategory}</td>
                             <td>${myCreatedPjDto.pjName}</td>						
 						</tr>							
 				</c:forEach>
 			</tbody>
 		</table>	
 
-		</div>	 -->
+		</div>
 
-
-        <c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}">
-            
-        <span>
-            <a href="/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}">
-            ${myCreatedPjDto}
-            </a>
-        </span>   
-            
-        </c:forEach>
-
-            
+           
         
 	
 

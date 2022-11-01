@@ -30,6 +30,11 @@
             // Optional parameters
             direction: 'horizontal', //슬라이드 방향
             loop: true, //반복여부
+            
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
 
 				autoplay:{
                 delay:1000, //자동재생 간격(ms)
@@ -102,9 +107,9 @@
 			  <!-- Additional required wrapper -->
 			  <div class="swiper-wrapper">
 			    <!-- Slides -->
-			    <div class="swiper-slide"><img src=""></div>
-			    <div class="swiper-slide">img src=""</div>
-			    <div class="swiper-slide">img src=""</div>
+			    <div class="swiper-slide"><img src="/img/burger.png"></div>
+			    <div class="swiper-slide"><img src="/img/test.jpg"></div>
+			    <div class="swiper-slide"><img src="/img/test1.png"></div>
 			    ...
 			  </div>
 			  <!-- If we need pagination -->

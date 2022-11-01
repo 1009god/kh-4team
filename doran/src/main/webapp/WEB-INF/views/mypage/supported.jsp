@@ -44,6 +44,22 @@
 	padding: 20px;
 }
 
+.profileBox {
+	padding:20px;
+}
+
+.tm {
+	margin: 30px;
+}
+
+.aa {
+color: #0072b2;
+text-decoration: none;
+}
+
+
+
+
 </style>
 
 
@@ -55,31 +71,50 @@
 <div class="container-1400">
 
 	<div class="container-1400" >
-		
-		<div class="proinline">		
-			 <!-- 반복문 -->
-			<c:forEach var="vo" items="${profileImg}" varStatus="status">	
-				<c:if test="${status.last}">			
-					<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
-				</c:if>
-			</c:forEach>
+			
+		<table class="profileBox">
+		<thead>
+		  <tr>
+		    <td class="" rowspan="2">
+				<c:choose>
+			<c:when test="${empty profileImg}">
+				<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+			</c:when>
+			
+			<c:otherwise>
+				 <!-- 반복문 -->
+				<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+					<c:if test="${status.last}">			
+						<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+					</c:if>
+				</c:forEach>			
+			</c:otherwise>
+		</c:choose>						    
+		    </td>
+		    <td class="">
+		    	<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		    
+		    </td>
+		  </tr>
+		  <tr>
+		    <td class="">
+		   		 <span style="padding-left:20px">${memDto.memJoinDate} 회원 가입일</span>		
+		    </td>
+		  </tr>
+		</thead>
+		</table>
+	
 		</div>
-		<div class="proinline">					
-			<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>				
-			<div style="padding-left:20px">${memDto.memJoinDate} 회원 가입일</div>			
-		</div>	
-		
-		
-	</div>
 	
 	<ul class="mypage_menu">                             
      	 <li><a href="/mypage/created">올린 프로젝트</a></li>
-         <li><a href="/mypage/supported">후원한 프로젝트</a></li>
+         <li><a href="/mypage/supported">후원한 프로젝트</a></li>       
     </ul> 
     
 </div>
 
-     <hr style="border:1px color= silver;" width="100%">          
+            
+     <hr style="border:1px color= silver;" width="1400px">     
                        
 <div>
 
@@ -110,10 +145,10 @@
           		
 	<!-- 후원 내역 list -->	
 	<div class=container-800>
-		<table class="table table-hover table-slit">
+		<table class="table table-hover table-slit tm">
 			<thead>
 				<tr align="center">
-					<th>주문 번호</th>
+					<th>프로젝트 번호</th>
 					<th>판매자</th>
 					<th>카테고리</th>
 					<th>프로젝트</th>												
@@ -122,7 +157,7 @@
 			<tbody>
 				<c:forEach var="supportVO" items="${supportList}" >	
 					<tr align="center">								
-							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
+							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}" class="aa">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
 							<td>${supportVO.memNick}</td>			
 							<td>${supportVO.pjCategory}</td>			
 							<td>${supportVO.pjName}</td>							
