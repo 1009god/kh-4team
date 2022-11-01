@@ -80,13 +80,11 @@
   
  
         $(function(){
-
 	// 1.newPw의 정규식 검사 진행
             $("input[name=newPw]").blur(function(){
                 var text = $(this).val();
                 var regex = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;                
                 var judge = regex.test(text);
-
                 console.log(text);
                 console.log(judge);
                 
@@ -101,12 +99,10 @@
                     $(this).addClass("fail");
                 }
             });
-
             $("input[name=memPw]").blur(function(){
                 var origin = $("input[name=newPw]").val();
                 var repeat = $(this).val();
                 var judge = origin == repeat;
-
                 console.log(origin);
                 console.log(repeat);
                 console.log(judge);
@@ -123,7 +119,6 @@
                     $(this).addClass("fail");
                 }
             });
-
             
             $("input[name=oldPw]").blur(function(){
             	var old = $("input[name=oldPw]").val();
