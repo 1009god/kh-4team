@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.doran.entity.FilesDto;
 import com.kh.doran.vo.PjFileVO;
 import com.kh.doran.vo.SellerFileVO;
+import com.kh.doran.vo.SupportDetailImgVO;
 import com.kh.doran.vo.profileImgVO;
 
 public interface FilesDao {
@@ -45,5 +46,8 @@ public interface FilesDao {
 	//강사추가 메소드
 	void connectPjFiles(int pjNo, int filesNo, String type);
 	
-	//프로젝트
+	//supported 내역 detail 썸네일 대표 이미지
+	List<SupportDetailImgVO> supportDetailImgList(int ordersNo);
+	
+	
 }

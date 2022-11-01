@@ -66,8 +66,12 @@ public class MemMypageController {
 	     //(+추가) 프로필 이미지
 	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
+	   //(+추가) 지금 접속한 유저가 생성한 모든 프로젝트
+	     List<PjDto> myCreatedPjDto=pjDao.selectSeller(memDto.getMemNo());
+	     model.addAttribute("myCreatedPjDto", myCreatedPjDto);
+	     
 	     //4.화면(view)으로 전달(forward)한다	     
-	     return "mypage/profile";
+	     return "mypage/created";  //루트-수정
   }
   
 //회원 탈퇴!!	
@@ -169,6 +173,9 @@ public class MemMypageController {
 	     
 	     //(+추가) 후원한 프로젝트 상세-order,option,deliver
 		model.addAttribute("supportDetail", ordersDao.selectSupportDetail2(ordersNo));		
+		
+		//(+추가) 후원한 프로젝트의 상세 썸네일 이미지
+		model.addAttribute("supportDetailImg", filesDao.supportDetailImgList(ordersNo));
 		
 		return "mypage/supportedDetail";
 	}

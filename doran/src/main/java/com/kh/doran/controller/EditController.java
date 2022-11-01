@@ -74,9 +74,9 @@ public class EditController {
 			// memberNo는 input으로 받는것이 없음-> session에서 꺼내온다 -> 추가 설정을 해야함
 			int memNo = (int)session.getAttribute("loginNo");
 			
-			inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 memNo를 넣어줌  // 지금 사용자의 no
 			
-			boolean result = memDao.editProfile(inputDto);
+			
+			boolean result = memDao.editProfile(inputDto);  //프로필 내용 수정
 			
 			//수정입력이 된 다음
 			//프로필 이미지 파일이 있다면 등록 및 연결
@@ -85,41 +85,42 @@ public class EditController {
 			
 			if(result) {					
 				for(MultipartFile file : files) {
-					boolean imgResult = files.isEmpty(); //true면 첨부파일이 없는것
-					if(!imgResult) {
+					boolean imgResult = file.isEmpty(); //true면 첨부파일이 없는것
+					if(!imgResult) { //true가 아니라면
 						System.out.println("첨부파일이 존재합니다");
+						
+						inputDto.setMemNo(memNo); //memberDto에 세션에서 가져온 memNo를 넣어줌  // 지금 사용자의 no
+						
+						//db등록
+						int filesNo = filesDao.sequence();
+						filesDao.insert(FilesDto.builder()
+								.filesNo(filesNo)
+								.filesUploadname(file.getOriginalFilename())
+								.filesType(file.getContentType())
+								.filesSize(file.getSize())
+								.build());
+						
+						//파일저장
+						File target = new File(directory,String.valueOf(filesNo));
+						file.transferTo(target);
+						
+						//연결테이블에 연결정보를 저장(회원번호, 첨부파일번호)
+						filesDao.connectFiles(filesNo, memNo);
 					}					
 					
-					//db등록
-					int filesNo = filesDao.sequence();
-					filesDao.insert(FilesDto.builder()
-							.filesNo(filesNo)
-							.filesUploadname(file.getOriginalFilename())
-							.filesType(file.getContentType())
-							.filesSize(file.getSize())
-							.build());
-					
-					//파일저장
-					File target = new File(directory,String.valueOf(filesNo));
-					file.transferTo(target);
-					
-					//연결테이블에 연결정보를 저장(회원번호, 첨부파일번호)
-					filesDao.connectFiles(filesNo, memNo);
-				}
-				
+				}				
 				attr.addAttribute("memNo",inputDto.getMemNo());	
-				return "redirect:/edit/profile";	
+				return "redirect:/mypage/profile";	
 			}		
 			else {
-				return "redirect:/edit/editFail";
-			
+				return "redirect:/edit/editFail";			
 			}	
 		}
-
+			
 
 		@GetMapping("/profile_result")
 		public String profileResult() {
-			return "profile";
+			return "/mypage/profile";
 		}		
 		
 //account 수정 전 정보확인 페이지 
