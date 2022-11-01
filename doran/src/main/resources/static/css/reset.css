@@ -24,6 +24,7 @@ time, mark, audio, video {
 	border: 0;
     font-family: inherit;
 	/* vertical-align: baseline; */
+	text-decoration : none;
 	
 }
 /* HTML5 display-role reset for older browsers */
