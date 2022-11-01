@@ -107,7 +107,7 @@
 		                
 		                <div class="row">
 
-			                <a class="name"href="detail?pjNo=${pjDto.pjNo}">
+			                <a class="name"href="pj/detail?pjNo=${pjDto.pjNo}">
 			                ${pjDto.pjName}</a>
                                 	
 		                </div>
