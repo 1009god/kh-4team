@@ -17,11 +17,55 @@
         .table > tfoot > tr > td {  
            border : 1px solid lightgray;
         }
+        
+         ul.pagination {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            text-align: center;
+        }
+        ul.pagination > li {
+            display: inline-block;
+            border: 1px solid transparent;
+            padding: 0.5em;
+            line-height: 1em;/*글자 표시 높이 설정 */
+            min-width: 2em;
+            text-align: center;
+            cursor: pointer;
+        }
+        ul.pagination > li.on,
+        ul.pagination > li:hover {
+            border-color: #b2bec3;
+            color: #d63031;
+        }
+        
+        ul.pagination > li > a {
+            display: block;
+            width:100%;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul.pagination.pagination-big {
+            font-size: 1.25em;
+        }
+        ul.pagination.pagination-small {
+            font-size: 0.75em;
+        }
+        
+        .input-list-search {
+    font-size: 20px;
+    padding: 0.75em;
+    outline: none;
+    
+}
 	
 </style>
 
 
 <div class="container-900 mt-40 mb-50">
+<h1 align="center">1:1 문의</h1>
 <table class="table" border="1" width="700px" >
 	<thead>
 	<tr>
@@ -72,6 +116,8 @@
 				</c:otherwise>
 			</c:choose>
 			
+
+			
 			
 			<td>${doranQDto.doranQWritetime}</td>
 			
@@ -93,57 +139,65 @@
 	</tbody>
 </table>
 
-        <!--페이지 네비게이터  -->
-    
-    <div class="row center">
-        <ul class="pagination on">
-	        <c:choose>
-	            <c:when test="${not doranQListSearchVo.isFirst()}">
-	                <li><a href="list?p=${doranQListSearchVo.firstBlock()}">&laquo;</a></li> 
-	            </c:when>
-	            <c:otherwise>
-	                <li><a href="#">&laquo;</a></li> 
-	            </c:otherwise>
-	        </c:choose>
-	     
-        
-        <!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
-        <c:choose>
-            <c:when test="${doranQListSearchVo.hasPrev()}">
-                <li><a href="list?p=${doranQListSearchVo.prevBlock()}">&lt;</a></li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="#">&lt;</a></li> 
-            </c:otherwise>
-        </c:choose>
-        
-        <c:forEach var="i" begin="${doranQListSearchVo.startBlock()}" end="${doranQListSearchVo.endBlock()}" step="1">
-            <li><a href="list?p=${i}">${i}</a></li>
-        </c:forEach>
-            
-        <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-        <c:choose>
-            <c:when test="${doranQListSearchVo.hasNext()}">
-                <li><a href="list?p=${doranQListSearchVo.nextBlock()}">&gt;</a></li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="#">&gt;</a></li> 
-            </c:otherwise>
-        </c:choose>
-        
-        <c:choose>
-            <c:when test="${not doranQListSearchVo.isLast()}">
-                <li><a href="list?p=${doranQListSearchVo.lastBlock()}">&raquo;</a></li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="#">&raquo;</a></li> 
-            </c:otherwise>
-        </c:choose>
-            
-       </ul>
+      <!-- 페이지 네비게이터 -->
 
-    </div>
+<div class="row center">
+	<ul class="pagination">
+		<c:choose>
+			<c:when test="${not doranQListSearchVo.isFirst()}">
+				<li><a href="list?p=${doranQListSearchVo.firstBlock()}&${doranQListSearchVo.parameter()}">&laquo; </a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&laquo;</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
+		
+		<c:choose>
+			<c:when test="${doranQListSearchVo.hasPrev()}">
+				<li><a href="list?p=${doranQListSearchVo.prevBlock()}&${doranQListSearchVo.parameter()}">&lt;</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&lt;</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		
+		
+		<c:forEach var="i"  begin="${doranQListSearchVo.startBlock()}" end="${doranQListSearchVo.endBlock()}" step="1">
+			<c:choose>
+					<c:when test="${doranQListSearchVo.p == i}">
+						<li class="on"><a href="#">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="list?p=${i}&${doranQListSearchVo.parameter()}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+		</c:forEach>
+		
+		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+		
+		<c:choose>
+			<c:when test="${doranQListSearchVo.hasNext()}">
+				<li><a href="list?p=${doranQListSearchVo.nextBlock()}&${doranQListSearchVo.parameter()}">&gt;</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&gt;</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${not doranQListSearchVo.isLast()}">
+				<li><a href="list?p=${doranQListSearchVo.lastBlock()}&${doranQListSearchVo.parameter()}">&raquo; </a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&raquo;</a></li>
+			</c:otherwise>
+		</c:choose>
+		</ul>
+		</div>
 </div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
