@@ -13,13 +13,29 @@
 </jsp:include>
 
 <style>
-.box {
+.boxx {
 border : 2px;
 border-color: lightgray;
 border-style: solid;
 padding: 20px;
 margin: 40px;
 }
+
+
+.line {
+border: 3px;
+border-color: black; 
+}
+
+.tg {
+padding : 2px;
+}
+
+.tg-0lax {
+padding-right : 30px;
+}
+
+
 </style>
 
 
@@ -28,34 +44,75 @@ margin: 40px;
 </script>
 
 <div class="container-1400 center">
-
+<!--  
 <c:forEach var="OptionsDto" items="${OptionsDto}">
 	<div>
 		${OptionsDto}
 	</div>
 </c:forEach>
+-->
+<div class="container-1400 center">
+<h1>주문내역</h1>
+</div>
+ <hr style="border:1px color= silver;" width="1400px"> 
+
+
+<div class=" container-1200">
 
 <c:forEach var="createdDetailDto" items="${createdDetailDto}">
-<div class="box">
+
 	<c:if test="${createdDetailDto.ordersCancelDate!=null}">
 		<span>취소된 주문입니다</span>
 	</c:if>
-	<span>주문번호: ${createdDetailDto.ordersNo}</span>
-	<span>상품명: ${createdDetailDto.optionsName}</span>
-	<span>가격: ${createdDetailDto.optionsPrice}</span>
-	<span>배송비: ${createdDetailDto.ordersDeliveryPay}</span>
-	<span>수령인: ${createdDetailDto.addressName}</span>
-	<span>연락처: ${createdDetailDto.addressTel}</span>
-	<span>우편번호: ${createdDetailDto.addressPost}</span>
-	<span>기본주소: ${createdDetailDto.addressBasic}</span>
-	<span>상세주소: ${createdDetailDto.addressDetail}</span>
 	
-</div>
+	<div class="boxx">
+	
+	<table class="tg">
+<thead class="left">
+  <tr>
+    <th class="tg-0lax">주문번호</th>
+    <th class="tg-0lax">${createdDetailDto.ordersNo}</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">프로젝트 옵션</td>
+    <td class="tg-0lax">${createdDetailDto.optionsName}</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">가격</td>
+    <td class="tg-0lax">${createdDetailDto.optionsPrice}</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">배송비</td>
+    <td class="tg-0lax">${createdDetailDto.ordersDeliveryPay}</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">받는 사람</td>
+    <td class="tg-0lax">${createdDetailDto.addressName}</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">연락처</td>
+    <td class="tg-0lax">${createdDetailDto.addressTel}</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">주소</td>
+    <td class="tg-0lax">[${createdDetailDto.addressPost}] ${createdDetailDto.addressBasic} ${createdDetailDto.addressDetail}</td>
+  </tr>
+</tbody>
+</table>
 
+</div>
 </c:forEach>
+</div>
+
+</div>
+	
+
+
 
 	
-</div>
+
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

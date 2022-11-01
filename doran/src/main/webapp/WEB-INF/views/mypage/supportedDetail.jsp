@@ -9,12 +9,13 @@
 </jsp:include>
 
 <style>
-.box {
+.boxx {
 border : 2px;
 border-color: lightgray;
 border-style: solid;
 padding: 20px;
 margin: 40px;
+width: 1200px
 }
 
 
@@ -25,9 +26,25 @@ margin: 40px;
 
 
 
-<div class=container-1200>
+<div class=container-1400>
 
-<div class=box>
+<div class=container-1200>
+<div class="boxx">
+
+ <!-- 반복문 -->
+				
+
+
+	<div>
+	<!--  디테일 사진 -->
+		<c:forEach var="vo" items="${supportDetailImg}" varStatus="status">	
+			<c:if test="${status.first}">			
+				<img width="150px" height="150px" src="http://localhost:8888/files/download/${vo.pjFileNo}" >
+			</c:if>
+		</c:forEach>		
+	</div>
+
+
 	<div> 후원 정보 </div>
 	
 	<div>카테고리 : ${supportPjImfo.pjCategory}</div>
@@ -35,7 +52,7 @@ margin: 40px;
 	<div><h1>프로젝트 이름 : ${supportPjImfo.pjName}</h1></div>
 </div>
 
-<div class=box>
+<div class="boxx">
 	<div>주문 정보</div>
 	
 	<div>주문번호 : ${supportDetail.ordersNo}</div>
@@ -44,7 +61,7 @@ margin: 40px;
 
 </div>
 
-<div class=box>
+<div class="boxx">
 	<div>옵션 정보</div>
 	
 	<div>옵션이름 : ${supportDetail.optionsName}</div>
@@ -53,7 +70,7 @@ margin: 40px;
 
 </div>
 
-<div class=box>
+<div class="boxx">
 	<div>배송 정보</div>
 	
 	<div>받는사람 : ${supportDetail.addressName}</div>
@@ -63,11 +80,13 @@ margin: 40px;
 	<div>상세주소 : ${supportDetail.addressDetail}</div>
 </div>
 
-<div class=" center">
+<div class="center">
 	<button><a href="/mypage/supported">후원 목록으로 가기</a></button>
 	<button><a href="/mypage/supported/cancel?ordersNo=${supportDetail.ordersNo}">주문 취소하기</a></button>
 </div>
 
+
+</div>
 
 </div>
 
@@ -76,7 +95,7 @@ margin: 40px;
 
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
 
 
 

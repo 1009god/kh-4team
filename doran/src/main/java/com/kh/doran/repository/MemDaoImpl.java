@@ -84,7 +84,7 @@ public class MemDaoImpl implements MemDao {
 		String sql = "update mem set mem_nick = ? where mem_no= ?";		
 		Object[] param = {dto.getMemNick(), dto.getMemNo()};
 		//세션에서 no를 가져와야함
-		return jdbcTemplate.update(sql, param) > 0;
+		return jdbcTemplate.update(sql, param) > 0;           
 	}
 	
 	
