@@ -114,15 +114,10 @@
     
         <div class="row center list" >
 	            <c:forEach var="pjDto" items="${list}">
-	            
 	            	<div class="row item">
 	            			<div class="a">
-
-		           				<img width="372px" src="http://localhost:8888/files/download/${PjDto.pjFileNo}">
-
-		           		
-
-		            			
+	            			
+ 		           				<img width="372px" height="272px" src="http://localhost:8888/files/download/${pjDto.pjFileNo}">
 	            			</div>
 	            			
 		                <div class="row">
