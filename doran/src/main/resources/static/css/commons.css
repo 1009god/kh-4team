@@ -375,8 +375,6 @@ ul.pagination.pagination-small {
     background-color: black;
     opacity: 0.5;
     */
-
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .screen-center {
@@ -460,7 +458,7 @@ ul.pagination.pagination-small {
 /* (7) */
 .dropdown-menu {
     font-size: 15px;
-    background-color: ##f6f5f5;
+    background-color: #f6f5f5;
 }
 
 .dropdown-menu li {
@@ -652,7 +650,9 @@ ul.pagination.pagination-small {
         - 해당 영역(.float-container) 종료 시 자동으로 clear 되도록 처리
         - 가상 선택자(virtual selector)가 필요하다
 */
-.float-container {}
+.float-container {
+	width :100%;
+}
 .float-container::after {
     content:"";
     display: block;

@@ -6,7 +6,21 @@
 	<jsp:param value="회원 목록" name="title"/>
 </jsp:include>
 
-<div class="container-700 mt-40 mb-50">
+<style>
+
+        .table > thead > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > th,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > th,
+        .table > tfoot > tr > td {  
+            border : 1px solid lightgray;
+        }
+	
+</style>
+
+
+<div class="container-1000 mt-40 mb40">
 	<!-- 제목 -->
 	<div class="row">
 		<h2>판매자 신청 리스트
@@ -33,7 +47,7 @@
 	
 	<!-- 목록 출력 -->
 	<div class="row1">
-		<table class="table table-hover table-slit">
+		<table class="table table-hover" border="1">
 			<thead>
 				<tr>
 					<th>판매자 닉네임</th>
@@ -75,7 +89,7 @@
 
 <!-- 페이지 네비게이터 -->
 <h3> 
-
+<div class="row center">
 <c:choose>
 	<c:when test="${not vo.isFirst()}">
 		<a href="sellerlist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo; </a>
@@ -123,7 +137,7 @@
 </c:choose>
 </h3>
 </div>
-	
+</div>	
 </div>
     
 <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>

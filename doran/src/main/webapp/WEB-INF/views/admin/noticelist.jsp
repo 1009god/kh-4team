@@ -10,19 +10,18 @@
 <c:set var="today">
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
 </c:set>
-<!-- <style>
-	 .table.table-slit {
-            border: 3px solid gray;
-            border-left: none;
-            border-right: none;
+<style>
+
+        .table > thead > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > th,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > th,
+        .table > tfoot > tr > td {  
+            border : 1px solid lightgray;
         }
-        .table.table-slit > thead {
-            border-bottom: 2px solid gray;
-        }
-        .table.table-slit > tfoot {
-            border-top: 2px solid gray;
-        }
-</style> -->
+	
+</style>
 
 <!-- 테스트용 데이터 출력 -->
 <!-- <h3>${vo}</h3> -->
@@ -38,8 +37,8 @@
 			</tr>
 	</div>
 	
-	<div class="row">
-	<table class="table table-hover table-slit">
+	<div class="row center">
+	<table class="table table-hover" border="1">
 		<thead>
 			<tr>
 				<th align="left" width="10%">번호</th>
@@ -86,7 +85,7 @@
 
 <!-- 페이지 네비게이터 -->
 <h3> 
-
+<div class="row center">
 <c:choose>
 	<c:when test="${not vo.isFirst()}">
 		<a href="noticelist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo; </a>
@@ -135,6 +134,7 @@
 </h3>
 
 <!-- 검색창 -->
+<div class="row center">
 <form action="noticelist" method="get">
 	<select name="type" required>
 		<option value="notice_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
@@ -144,5 +144,6 @@
 	
 	<button type="submit">검색</button>
 </form>
-
+</div>
+</div>
 <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>
