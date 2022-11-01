@@ -88,9 +88,17 @@
 			<tr>
 				<td colspan="2" align="right">
 					<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
-					<a href="edit?boardPostNo=${boardDto.boardPostNo}"><img src="/img/edit.png" width="20" height="20"></a>
-					<a href="delete?boardPostNo=${boardDto.boardPostNo}"><img src="/img/delete.png" width="20" height="20"></a>
-					<a href="list"><img src="/img/list.png" width="20" height="20"></a>
+		
+						<%--
+							회원은 자신의 글만 수정/삭제 가능하도록 처리
+						 --%>
+						<c:set var="owner" value="${loginNo == boardDto.boardMemNo}"></c:set>
+						
+						<c:if test="${owner}">
+							<a href="edit?boardPostNo=${boardDto.boardPostNo}"><img src="/img/edit.png" width="20" height="20"></a>
+							<a href="delete?boardPostNo=${boardDto.boardPostNo}"><img src="/img/delete.png" width="20" height="20"></a>
+						</c:if>
+						<a href="list"><img src="/img/list.png" width="20" height="20"></a>
 				</td>
 			</tr>
 		</tfoot>
