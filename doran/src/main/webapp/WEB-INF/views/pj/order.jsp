@@ -107,7 +107,7 @@ function saveAddress(){
 
     
 
-    <div id="choose">
+    <div id="choose" class="boxer">
         
         <h2>배송지 선택</h2>
         
@@ -118,15 +118,15 @@ function saveAddress(){
         </c:forEach>
         </select>
 
-    </div>
+        
+        <button type="submit" class="btn btn-positive">주문하기</button>
+        
+    </form>
+    
+</div>
 
-    <button type="submit">주문하기</button>
-
-</form>
-
-
-    <div>
-        <button class="toggle-control">배송지 등록</button>
+    <div class="boxer">
+        <button class="btn btn-neutral toggle-control">배송지 등록</button>
     
 
     <form method ="post" name="frm" class="target">

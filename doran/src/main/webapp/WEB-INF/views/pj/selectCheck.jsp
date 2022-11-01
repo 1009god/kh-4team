@@ -24,6 +24,25 @@
         margin: 40px;
         }
 
+        .projectIntroduce {
+        font-size: 14px;
+        color:#000000DE;
+        margin: 0px 0px 14px;
+        text-align: left;
+    }
+    .projectValue {
+        font-size: 38px;
+        color:#000000DE;
+        margin: 0px 10px 0px 0px;
+        text-align: left;
+    }
+    .projectSmall {
+        font-size: 14px;
+        color:#000000DE;
+        margin: 0px 0px 0px 3.5px;
+        text-align: left;
+    }
+
         
 
     </style>
@@ -58,7 +77,7 @@
                 <span class="nam">${PjDto.pjName}</span>
             </div>
             <div>
-                <c:set var="OrdersCalVO" items="${OrdersCalVO}" />
+                <c:set var="OrdersCalVO" items="${OrdersCalVO}"></c:set>
                 <span>${OrdersCalVO.priceTotal}</span><span>${OrdersCalVO.achievementRate}</span><span class="endCount"></span>
             </div>
 
@@ -66,21 +85,21 @@
     
     </div>
 
-    <div class="row center" style="margin:40px 100px;">
+    <div class="row center">
         <!--선물정보, 후원금액-->
         <div class="boxer">
             <div>
-                <span>옵션 정보</span>
+                <h1>옵션 정보</h1>
             </div>
             <div>
                 <div>
-                    <span>옵션 구성</span><span>${OptionsDto.optionsName}</span>
+                    <span class="projectIntroduce" style="margin-right: 15px;">옵션 구성</span><span class="projectValue">${OptionsDto.optionsName}</span>
                 </div>
                 <div>
-                    <span>옵션 가격</span><span>${OptionsDto.optionsPrice}</span>
+                    <span class="projectIntroduce" style="margin-right: 15px;">옵션 가격</span><span class="projectValue">${OptionsDto.optionsPrice}</span>
                 </div>
                 <div>
-                    <span>배송비</span><span>${OptionsDto.optionsDeliveryPrice}</span>
+                    <span class="projectIntroduce" style="margin-right: 15px;">배송비</span><span class="projectValue">${OptionsDto.optionsDeliveryPrice}</span>
                 </div>
             </div>
         </div>
