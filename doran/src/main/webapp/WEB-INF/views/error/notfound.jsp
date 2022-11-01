@@ -9,7 +9,7 @@
 <body>
 	<div class="row center">
 	<p>
-		<img src="/img/500.gif">
+		<img src="/img/404.gif">
 	</p>
 	</div>
 </body>
