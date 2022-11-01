@@ -187,6 +187,8 @@ function shareKakao() {
 
 <div class="container-1400">
 
+    
+
     <div class="center" style="margin-top:10px;">
         <button class="btn btn-neutral" onclick="location.href='list?category=${PjDto.pjCategory}'">${PjDto.pjCategory}</button>
     </div>
@@ -204,7 +206,7 @@ function shareKakao() {
         
     <div class="center" style="margin:0px 100px;"><!--프로젝트 대표이미지, 정보 들어가는 자리(float써야됨 구와아악)-->
     
-        <div style="width:700px;height:480px; margin-right:20px;float:left;">
+        <div style="width:700px;height:550px; margin-right:20px;float:left;">
             <div class="swiper">
                 <c:forEach var="PjFileList" items="${PjFileList}">
                     <img width="594px" height="445px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}">
@@ -219,7 +221,7 @@ function shareKakao() {
             </div>
         </div>
         
-        <aside style="text-align:left;width:360px;height:480px;float:left;">
+        <aside style="text-align:left;width:360px;height:550px;float:left;">
             <div>
                 <span class="projectIntroduce">모인 금액</span>
             </div>
@@ -253,6 +255,12 @@ function shareKakao() {
             <div>
                 <span class="projectValue">${OrderCountAll}</span><span class="projectSmall">명</span>
             </div>
+            <div>
+                <span class="projectIntroduce">좋아요</span>
+            </div>
+            <div>
+                <span class="projectValue">${PjDto.pjLikesNumber}</span>
+            </div>
 
             <div>
                 <hr>
@@ -270,15 +278,38 @@ function shareKakao() {
             <hr>
 
             <div class="center">
-                <button class="btn btn-neutral">
+
+                <c:if test="${loginNo==null}">
+                    <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="location.href='/mem/login'">
+                        <div>
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        </div>
+                        </button>
+                </c:if>
+
+                <c:if test="${check==true}">
+                <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="location.href='like?pjNo=${PjDto.pjNo}'">
                     <div>
                         <i class="fa-solid fa-thumbs-up"></i>
                     </div>
-                    <span>${PjDto.pjLikesNumber}</span>
-                </button>
-                <button class="btn btn-neutral" style="height:54px;" onclick="javascript:shareTwitter();"><i class="fa-brands fa-twitter"></i></button>
-                <button id="btnKakao" class="btn btn-neutral" style="height:54px;" onclick="javascript:shareKakao();"><i class="fa-solid fa-comment"></i></button>
-                <button class="btn btn-positive" style="height:54px;" onclick="location.href='#comeHere';">이 프로젝트 후원하기</button>
+                    </button>
+                </c:if>
+
+                <c:if test="${check==false}">
+                    <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="location.href='like?pjNo=${PjDto.pjNo}'">
+                        <div>
+                            <i class="fa-regular fa-thumbs-up"></i>
+                        </div>
+                        </button>
+                
+                </c:if>
+
+                    <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="javascript:shareTwitter();"><i class="fa-brands fa-twitter"></i></button>
+                <button id="btnKakao" class="btn btn-neutral" style="height:72px;width:72px;" onclick="javascript:shareKakao();"><i class="fa-solid fa-comment"></i></button>
+               
+               <div style="margin-top:10px;">
+                   <button class="btn btn-positive" style="height:72px;" onclick="location.href='#comeHere';">이 프로젝트 후원하기</button>
+               </div>
             </div>
 
             <div style="margin-top:10px;">
@@ -295,7 +326,7 @@ function shareKakao() {
     
 
     <div class="center" style="margin:0px 100px;">
-        <div style="width:700px;margin-right:20px;float:left;"><!--소개이미지 들어가는 div-->
+        <div style="width:700px;height:16000px;margin-right:20px;float:left;"><!--소개이미지 들어가는 div-->
             <img src="http://localhost:8888/files/download/${PjFileIntroduce.pjFileNo}">
         </div>
 
@@ -307,10 +338,10 @@ function shareKakao() {
                 </div>
 
                 <c:forEach var="OptionsDto" items="${OptionsDto}">
-        
-                <c:set var="loginNo" value="${loginNo}" />
-                <c:set var="currentStock" value="${OptionsDto.optionsStock}" />
-                <c:set var="orderCount" value="${OrderCount}" />
+                    <c:set var="loginNo" value="${loginNo}" />
+                    <c:set var="currentStock" value="${OptionsDto.optionsStock}" />
+                    <c:set var="orderCount" value="${OrderCount}" />
+                
 
                 <c:choose>
                     <c:when test="${DateCount<=0}">
