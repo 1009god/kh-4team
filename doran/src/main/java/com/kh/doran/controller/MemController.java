@@ -29,7 +29,7 @@ public class MemController {
 	
 	
 	@GetMapping("/joinContent")
-	public String findContent() {
+	public String joinContent() {
 		return "mem/joinContent";
 	}
 	

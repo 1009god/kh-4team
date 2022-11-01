@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입 완료</title>
-</head>
-<body>
-	<h1>회원 가입 축하드립니다</h1>
-	<h2><a href="#">메인페이지 가기</a></h2>
-	<h2><a href="login">로그인 하러 가기</a></h2>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="회원가입 성공" name="title"/>
+</jsp:include>
 
+<body>
+	<div class="row center">
+	<img class="w-50" src="/img/joinCele.png">
+	<h2><a href="/mem/login" style="color: #0072b2">- 로그인 하러 가기</a></h2>
+	<h2><a href="/" style="color: #0072b2">- 도란도란 홈페이지로 가기</a></h2>
+	</div>
 </body>
-</html>
+
+
+
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
