@@ -209,43 +209,50 @@ function saveAddress(){
                 <form method ="post" name="frm" class="target">
                     <iframe name="ifrm" width="0" height="0" frameborder="0"></iframe> 
                 <div>
-                <label>해당 회원 번호
-                    <input name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
-                </label>
+
+                    <label>해당 회원 번호
+                        <input class="input input-underline w-50" name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
+                    </label>
                 
-                <label>받는 사람
-                    <input name = "addressName" type="text" required>
-                </label>
+                </div>
+
+                <div>
+
+                    <label>받는 사람
+                        <input class="input input-underline w-50" name = "addressName" type="text" placeholder="수령인" required autocomplete="off">
+                    </label>
+                    
                 </div>
                 
                 <div>	
-                <label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-                    <input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
-                </label>
+                    <label>우편주소
+                        <input class="input input-underline w-50" name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required autocomplete="off">
+                    </label>
+                    <button class="btn btn-positive" onclick="findAddress()" value="우편번호 찾기">우편번호 찾기</button>
                 </div>
                 
                 
                 
                 <div>
-                <label>주소
-                    <input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
-                </label>
+                    <label>주소
+                        <input class="input input-underline w-50" name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required autocomplete="off">
+                    </label>
                 </div>
                 
                 <div>
-                <label>상세주소
-                    <input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
-                </label>
+                    <label>상세주소
+                        <input class="input input-underline w-50" name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required autocomplete="off">
+                    </label>
                 </div>
                 
                 <div>
-                <label>받는 사람 휴대폰 번호
-                    <input name = "addressTel" type="text" required>
-                </label>
+                    <label>받는 사람 휴대폰 번호
+                        <input class="input input-underline w-50" name = "addressTel" type="text" required autocomplete="off">
+                    </label>
                 </div>
                 
-                <div>
-                <input type="button" value="등록하기" onclick="saveAddress();">
+                <div class="updown">
+                <button class="btn btn-positive" value="등록하기" onclick="saveAddress();">등록하기</button>
                 </div>
                     
                 </form>
@@ -254,9 +261,8 @@ function saveAddress(){
 
     
 
-</div>
-
 
 
 </body>
 </html>
+

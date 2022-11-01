@@ -79,6 +79,7 @@
 			
 		</table>
 	</div>
+	</div>
 
 <!-- 페이지 네비게이터 -->
 <h3> 
@@ -130,8 +131,6 @@
 </c:choose>
 </h3>
 </div>
-</div>
-	
-</div>
+
     
 <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>

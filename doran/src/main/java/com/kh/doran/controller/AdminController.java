@@ -210,19 +210,29 @@ public class AdminController {
 	}
 	
 	@GetMapping("doran-q/list")
-	public String doranQList(Model model, 
+	public String doranQList(Model model, HttpSession session,
 			@ModelAttribute(name="doranQListSearchVo") 
 			DoranQListSearchVO vo) {
 		int count = doranQDao.listCount(vo);
 		vo.setCount(count);
 		model.addAttribute("list",doranQDao.selectList(vo));
-		return "doranq/adminList";
+		if(session.getAttribute("AdminNo")!=null) {
+			return "doranq/adminList";
+		}
+		else {
+			return "admin/login";
+		}
 	}
 	
 	@GetMapping("doran-q/detail")
-	public String doranQDetail(@RequestParam int doranQNo, Model model) {
+	public String doranQDetail(@RequestParam int doranQNo, Model model,HttpSession session) {
 		model.addAttribute("doranQDto", doranQDao.selectOne(doranQNo));
-		return "doranq/adminDetail";
+		if(session.getAttribute("AdminNo")!=null) {
+			return "doranq/adminDetail";					
+		}
+		else {
+			return "admin/login";
+		}
 	}
 	
 	@GetMapping("doran-q/delete")
