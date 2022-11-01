@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
-
 <jsp:include page="/WEB-INF/views/template/header3.jsp">
 	<jsp:param value="프로젝트 주문" name="title" />
 </jsp:include>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
 <style>
       .boxer {
         border : 2px;
@@ -20,24 +14,30 @@
         padding: 20px;
         margin: 40px;
         }
-
         .cate {
             color:#9e9e9e;
             font-size:13px;
             font-style:bold;
         }
-
         .nam {
         font-size: 38px;
         color:#000000DE;
         margin: 0px 10px 0px 0px;
         text-align: left;
         }
-
-
         .projectIntroduce {
         font-size: 14px;
         color:#000000DE;
+
+    
+        
+          
+    
+
+        
+    
+    @@ -53,12 +49,9 @@
+  
         margin: 0px 0px 14px;
         text-align: left;
     }
@@ -53,23 +53,33 @@
         margin: 0px 0px 0px 3.5px;
         text-align: left;
     }
-
-
     .red {
         color:#ff5757;
     }
-
     .little-left {
         margin-left:8px;
     }
+
+    
+          
+            
+    
+
+          
+          
+            
+    
+
+          
+    
+    @@ -115,54 +108,6 @@ function saveAddress(){
+  
         
     .updown {
         margin-top:5px;
         margin-bottom:5px;
     }
 </style>
-
-
 <script type="text/javascript">
     //자바스크립트 코드
     $(function(){
@@ -111,61 +121,25 @@ function saveAddress(){
     location.reload();
 }
 </script>
-
 <div class="container-1400 center">
-
-
-    <form method ="post" name="frm" class="target">
-        <div>
-            <h2>배송지 입력</h2>
-        </div>
-        <iframe name="ifrm" width="0" height="0" frameborder="0"></iframe> 
-	<div>
-	<label>해당 회원 번호
-		<input name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
-	</label>
-	
-	<label>받는 사람
-		<input name = "addressName" type="text" required>
-	</label>
-	</div>
-	
-	<div>	
-	<label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
-	</label>
-	</div>
-	
-	
-	
-	<div>
-	<label>주소
-		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
-	</label>
-	</div>
-	
-	<div>
-	<label>상세주소
-		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
-	</label>
-	</div>
-	
-	<div>
-	<label>받는 사람 휴대폰 번호
-		<input name = "addressTel" type="text" required>
-	</label>
-	</div>
-	
-	<div>
-	<input type="button" value="등록하기" onclick="saveAddress();">
-	</div>
-        
-    </form>
-
-
-    <form action="order" method="post">
+ <form action="order" method="post">
 
     <div class="boxer">
+
+    
+          
+            
+    
+
+          
+          
+            
+    
+
+          
+    
+    @@ -248,11 +193,7 @@ function saveAddress(){
+  
     
         
     <div>
@@ -191,19 +165,15 @@ function saveAddress(){
         <input type="hidden" name="ordersMemNo" value="${AddressDto[0].addressMemNo}">       
     </div>
     </div>
-
     
-
     <div id="choose" class="boxer">
         
         <h2>배송지 선택</h2>
         
         
-
         <c:if test="${AddressDto==null}">
             <span>배송지를 새로 등록한 후 선택해주세요</span>
         </c:if>
-
         <select name="ordersAddressNo" style="height:50px;">
         <c:forEach var="AddressDto" items="${AddressDto}">
            <option value="${AddressDto.addressNo}">
@@ -234,11 +204,9 @@ function saveAddress(){
                     <span>${AddressDto.addressDetail}</span>
                 </div>
             </div>
-
             </option>
         </c:forEach>
         </select>
-
         
         <button type="submit" class="btn btn-positive little-left">주문하기</button>
         
@@ -248,31 +216,47 @@ function saveAddress(){
 
     <div class="boxer">
 
-<<<<<<< HEAD
-
-=======
         <details>
->>>>>>> refs/remotes/origin/main
 
             <summary>
                 <h2>배송지 입력</h2>
+
+    
+        
+          
+    
+
+        
+    
+    @@ -262,9 +203,6 @@ function saveAddress(){
+  
             </summary>
             <p>
                 <form method ="post" name="frm" class="target">
                     <iframe name="ifrm" width="0" height="0" frameborder="0"></iframe> 
                 <div>
 
-<<<<<<< HEAD
-<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
-=======
                     <label>해당 회원 번호
                         <input class="input input-underline w-50" name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
                     </label>
+
+    
+          
+            
+    
+
+          
+          
+            
+    
+
+          
+    
+    @@ -313,15 +251,10 @@ function saveAddress(){
+  
                 
                 </div>
-
                 <div>
-
                     <label>받는 사람
                         <input class="input input-underline w-50" name = "addressName" type="text" placeholder="수령인" required autocomplete="off">
                     </label>
@@ -313,15 +297,4 @@ function saveAddress(){
                 </form>
             </p>
         </details>
->>>>>>> refs/remotes/origin/main
-
-<<<<<<< HEAD
-=======
-    
-
-
-
 </body>
-</html>
-
->>>>>>> refs/remotes/origin/main
