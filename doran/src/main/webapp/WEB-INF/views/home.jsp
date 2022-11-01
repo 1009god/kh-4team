@@ -30,6 +30,11 @@
             // Optional parameters
             direction: 'horizontal', //슬라이드 방향
             loop: true, //반복여부
+            
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
 
 				autoplay:{
                 delay:1000, //자동재생 간격(ms)
@@ -95,16 +100,16 @@
     </style>
 
 
-    <div class="container-1200">
+    <div class="container-1300">
 
 		<!-- Slider main container -->
-			<div class="swiper w-70">
+			<div class="swiper w-50">
 			  <!-- Additional required wrapper -->
 			  <div class="swiper-wrapper">
 			    <!-- Slides -->
-			    <div class="swiper-slide"><img src=""></div>
-			    <div class="swiper-slide">img src=""</div>
-			    <div class="swiper-slide">img src=""</div>
+			    <div class="swiper-slide"><img src="/img/burger.png"></div>
+			    <div class="swiper-slide"><img src="/img/test.jpg"></div>
+			    <div class="swiper-slide"><img src="/img/test1.png"></div>
 			    ...
 			  </div>
 			  <!-- If we need pagination -->
@@ -117,7 +122,7 @@
 			  <!-- If we need scrollbar -->
 			  <div class="swiper-scrollbar"></div>
 			</div>
-     
+	</div>     
 
     <div class="row center">
 
@@ -154,7 +159,7 @@
 </div>
       
    
-</div>
+
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <jsp:include page="/WEB-INF/views/template/adminheader.jsp"></jsp:include>
 
 
@@ -162,13 +163,13 @@
 });
 function shareTwitter() {
     var sendText = "도란도란에 구경 오세요!"; // 전달할 텍스트
-    var pjNo=${PjDto.pjNo};
+    var pjNo="${PjDto.pjNo}";
     var sendUrl = "http://localhost:8888/pj/detail?pjNo="+pjNo; // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
 }
 function shareKakao() {
 	
-	 var pjNo=${PjDto.pjNo};
+	 var pjNo="${PjDto.pjNo}";
 	 
 	  // 사용할 앱의 JavaScript 키 설정
 	  Kakao.init('98a6f123321ab217bf1325c675369f03');
@@ -197,12 +198,15 @@ function shareKakao() {
 
     <div class="container-1100 center">
 
+
+    <div class="row">
+        ${PjDto.pjCategory}
+    </div>
+
+  
         <div class="boxer">
-            <div>
-                <c:forEach var="PjFileList" items="PjFileList">
-                    <img width="594px" height="445px" src="http://localhost:8888/files/download/${PjFileList1}">
-                </c:forEach>
-            </div>
+                <img src="http://localhost:8888/files/download/${PjFileList[0].pjFilePjNo}">
+
         </div>
 
         <div class="boxer">
@@ -223,5 +227,4 @@ function shareKakao() {
 
     </div>
 
-    <!--푸터-->
     <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>
