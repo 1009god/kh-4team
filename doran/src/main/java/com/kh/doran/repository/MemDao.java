@@ -21,6 +21,8 @@ public interface MemDao {
 	MemDto findEmail(String memTel); //이메일 찾기
 	MemDto findPw(String memEmail, String memTel); //비밀번호 찾기
 	
+	MemDto findPw(int memNo); //멤버번호로 비밀번호 찾기
+	
 
 
 //	MemDto findByPw(int memNo, String memPw);  //비동기 pw 일치불일치 메소드

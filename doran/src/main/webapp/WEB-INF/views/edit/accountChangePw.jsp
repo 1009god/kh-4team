@@ -72,6 +72,7 @@
 
   <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
  	<script type="text/javascript">
+ 	
 		//AJAX 이용시 주의사항
 		 //- 기존처럼 즉시 검사가 불가능하므로 상태를 저장할 객체 필요
 		 var inputStatus = {
@@ -137,28 +138,39 @@
             	
             });
             
+//             $("input[name=oldPw]").blur(function(){
+//             	var pastPw =  ${findPw.memPw};
+//             	var judge3 = old == $("input[name=oldPw]").val();
+            	
+//             	$(this).removeClass("no fail success");
+//             	if(judge){
+//             		$()).
+//             	}
+            	
+//             });
+            
             //만약에 위 조건이 만족한다면
             
-            $.ajax({
-				url:"http://localhost:8888/rest/mem/pw?memPw=" + ${memDto.memPw},
-				method:"put",
-				success:function(resp){
+//             $.ajax({
+// 				url:"http://localhost:8888/rest/mem/pw?memPw=" + ${memDto.memPw},
+// 				method:"put",
+// 				success:function(resp){
 					
-					if(resp == "NNNNN") {
-						inputStatus.memPwValid = true;
-						$("input[name=oldPw").next("span").text("비밀번호가 일치합니다"); 
-						System.out.println("성공");
-					}
-					else if(resp == "NNNNY") {
-						inputStatus.memPwValid = false;
-						$("input[name=oldPw").next("span").text("비밀번호가 일치하지 않습니다");
-						System.out.println("실패");
-					}
-				}
-			});
+// 					if(resp == "NNNNN") {
+// 						inputStatus.memPwValid = true;
+// 						$("input[name=oldPw").next("span").text("비밀번호가 일치합니다"); 
+// 						System.out.println("성공");
+// 					}
+// 					else if(resp == "NNNNY") {
+// 						inputStatus.memPwValid = false;
+// 						$("input[name=oldPw").next("span").text("비밀번호가 일치하지 않습니다");
+// 						System.out.println("실패");
+// 					}
+// 				}
+// 			});
             
             
-            console.log(inputStatus)
+            
             
             
         });
@@ -173,6 +185,10 @@
 
 
 비밀번호 변경 페이지
+
+<!-- 비밀번호가 일치하지 않는다면 input되어서는 안됨 -->
+
+
 
 <div class="container-600 left" >
  <form method="post">
@@ -203,11 +219,10 @@
 			
 		</div>
 		
-	</div>
-	
-	<div class="row center">	
-		<button type="submit" >수정</button>	
-	</div>
+	</div>	
+				<div class="row center">	
+					<button type="submit">수정</button>	
+				</div>	
 		
 	</form>
 	</div>

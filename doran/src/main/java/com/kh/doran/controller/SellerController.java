@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.FilesDto;
 import com.kh.doran.entity.PjDto;
@@ -85,13 +86,11 @@ public class SellerController {
 			
 			//연결 테이블에 연결정보 저장(셀러회원번호, 첨부파일번호)
 			filesDao.connectSellerFiles(sellerMemNo, filesNo);
-			
+				}
 			}
+		return "redirect:sellerfinish";
 		}
-		
-		
-		return "redircet:sellerfinish";
-	}
+	
 	
 	@GetMapping("/sellerfinish")
 	public String sellerfinish(){
