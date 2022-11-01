@@ -29,15 +29,6 @@
         font-size: 14px;
         color:#000000DE;
 
-    
-        
-          
-    
-
-        
-    
-    @@ -53,12 +49,9 @@
-  
         margin: 0px 0px 14px;
         text-align: left;
     }
@@ -72,7 +63,7 @@
 
           
     
-    @@ -115,54 +108,6 @@ function saveAddress(){
+     function saveAddress(){
   
         
     .updown {
@@ -122,7 +113,9 @@ function saveAddress(){
 }
 </script>
 <div class="container-1400 center">
- <form action="order" method="post">
+
+
+    <form action="order" method="post">
 
     <div class="boxer">
 
@@ -138,7 +131,7 @@ function saveAddress(){
 
           
     
-    @@ -248,11 +193,7 @@ function saveAddress(){
+
   
     
         
@@ -228,7 +221,7 @@ function saveAddress(){
 
         
     
-    @@ -262,9 +203,6 @@ function saveAddress(){
+
   
             </summary>
             <p>
@@ -252,7 +245,7 @@ function saveAddress(){
 
           
     
-    @@ -313,15 +251,10 @@ function saveAddress(){
+
   
                 
                 </div>
@@ -297,4 +290,9 @@ function saveAddress(){
                 </form>
             </p>
         </details>
+
+
+
+
+
 </body>
