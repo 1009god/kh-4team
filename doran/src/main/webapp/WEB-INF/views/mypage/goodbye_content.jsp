@@ -69,14 +69,13 @@
             <label class="float-left w-50">
                 <input class="ck ck-required" type="checkbox" name="agree" value="type1">
                 <span>탈퇴 유의사항을 확인했습니다</span>
-                <span class="red">*</span>
             </label>
 
 
         </div>
 
 	<div class="row mt-50 mb-50 right">
-		<button class="btn btn-positive btn-next" disabled>다음 단계로 이동</button>
+		<button class="btn btn-positive btn-next" onclick="location.href='/mypage/goodbye'" disabled>다음 단계로 이동</button>
 	</div>
 
 </div>
