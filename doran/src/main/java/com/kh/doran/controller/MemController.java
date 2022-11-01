@@ -55,7 +55,8 @@ public class MemController {
 	
 	@PostMapping("/login")
 	public String login(
-			@ModelAttribute MemDto inputDto, //사용자가 입력한 정보
+			@ModelAttribute MemDto inputDto,
+			@ModelAttribute SellerDto inputDto1,//사용자가 입력한 정보
 			HttpSession session) {
 		MemDto findDto = memDao.selectOne(inputDto.getMemEmail()); //사용자가 입력한 이메일을 인풋dto에 담아서 Dao에 있는 이메일로 단일조회하는 기능을 쓴다(db를 가는거다)
 		
@@ -64,15 +65,17 @@ public class MemController {
 			return "redirect:login?error"; 
 		}
 		
+		
 		SellerDto sellerfindDto = sellerDao.selectOne(findDto.getMemNo()); //인풋dto를 통해 아이디(이메일)로 셀러를 조회한 것에서 
 		
 		
 		boolean passwordMatch = inputDto.getMemPw().equals(findDto.getMemPw());
 		if(passwordMatch) {	//비밀번호가 맞으면
-			if(sellerfindDto==null) { // 검색해서 나온 결과가 없으면 
+			if(sellerfindDto==null) { // 검색해서 나온 결과가 없으면 				
 				session.setAttribute("loginId", inputDto.getMemEmail()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음
-				session.setAttribute("loginId", inputDto.getMemEmail()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음				
+				session.setAttribute("sellerCheck", inputDto1.getSellerCheck()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음				
 				session.setAttribute("loginNo", findDto.getMemNo()); //loginNo = 회원 번호 세션에 저장
+				session.setAttribute("memNick", inputDto.getMemNick());
 				return "redirect:/";
 			}
 			session.setAttribute("loginId", inputDto.getMemEmail()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음
@@ -92,6 +95,7 @@ public class MemController {
 		session.removeAttribute("loginId"); //세션에 loginId 라는 이름의 데이터 삭제
 		session.removeAttribute("loginNo"); //세션에 loginNo 라는 이름의 데이터 삭제
 		session.removeAttribute("sellerNo");
+		session.removeAttribute("memNIck");
 		return "redirect:/"; //메인페이지로 강제 이동
 	}
 	
