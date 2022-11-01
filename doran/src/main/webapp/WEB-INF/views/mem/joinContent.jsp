@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
-    <meta charset="UTF-8">
-    <title>이용약관</title>
+    <jsp:include page="/WEB-INF/views/template/header3.jsp">
+	<jsp:param value="이용약관" name="title" />
+</jsp:include>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +15,8 @@
     <style>
         .btn.btn-positive[disabled],
         .btn.btn-positive[disabled]:hover {
-            background-color: #74b9ff;
+            background-color: #bdc3c7;
+           	color: #FFFFFF;
             cursor: not-allowed;
         }
 
@@ -24,6 +26,18 @@
         .red {
             color: red;
         }
+        
+        .solid-lines {
+	  border: 1px solid gray;
+	}
+	
+	.w-30 {
+    width:30%;
+	}
+	
+	.mt-200 { margin-top: 200px;}
+	.p-80 {padding:80;}
+	
     </style>
     <script type="text/javascript">
         //자바스크립트 코드
@@ -97,7 +111,7 @@
             <h2>제1절 총칙</h2>
         </div>
         <div class="row">
-            <textarea class="input w-100 fix-size" rows="6" readonly>제1조 목적
+            <textarea class="solid-lines w-100 fix-size" rows="10" readonly>제1조 목적
 도란도란 주식회사(이하 "회사")는 다양한 분야에 걸친 창작 프로젝트들을 통해 창작자와 후원자를 연결하고 있습니다. 회사의 주된 서비스는 창작 프로젝트의 후원을 위한 플랫폼 제공입니다. 이 약관은 회사가 운영하는 사이트 Tumblbug(이하 "사이트"라 합니다)에서 제공하는 모든 서비스(이하 "서비스"라 합니다)를 이용함에 있어 회사와 회원의 권리와 의무, 책임 사항 및 회원의 서비스 이용 절차에 관한 사항을 규정함을 목적으로 합니다.
 
  
@@ -156,7 +170,7 @@
             <h2>제2절 서비스의 이용</h2>
         </div>
         <div class="row">
-            <textarea class="input w-100 fix-size" rows="6" readonly>제5조 서비스의 제공
+            <textarea class="solid-lines w-100 fix-size" rows="10" readonly>제5조 서비스의 제공
 ① 회사는 다음과 같은 서비스를 제공합니다.
 
 프로젝트의 정보 게시 및 후원계약의 체결을 위한 플랫폼 제공
@@ -228,7 +242,7 @@
             <h2>제3절 회원정보의 보호 및 관리</h2>
         </div>
         <div class="row">
-            <textarea onkeydown="closeScreen3(event);" class="input w-100 fix-size textarea3" rows="6" readonly>제11조 개인정보보호
+            <textarea onkeydown="closeScreen3(event);" class="solid-lines w-100 fix-size textarea3" rows="10" readonly>제11조 개인정보보호
 ① 회사는 서비스 제공을 위하여 이용계약의 체결 시 필요한 최소한의 정보(이하 "회원정보")를 수집할 수 있으며, 그 외에도 수집목적 또는 이용목적을 밝혀 회원으로부터 정보를 수집할 수 있습니다. 이 경우 회사는 회원으로부터 정보수집에 대한 동의를 받으며, 회원은 정보제공에 동의를 한 이후에도 회사가 제공하는 양식에 따라 그 동의를 철회할 수 있습니다.
 
 ② 회원의 개인정보의 수집, 보호 및 사용에 대해서는 관련 법령 및 회사의 개인정보처리방침이 적용됩니다. 다만, 회사의 홈페이지 이외의 링크된 사이트에서는 회사의 개인정보처리방침이 적용되지 않습니다.
@@ -257,7 +271,7 @@
 
             <label class="float-left w-50">
                 <input class="ck" type="checkbox" name="agree" value="type3">
-                <span>동의합니다</span>
+                <span>(선택) 동의합니다</span>
             </label>
 
             <div class="float-left w-50 right">
@@ -267,7 +281,7 @@
         </div>
 
         <div class="row mt-50 mb-50">
-            <button class="btn btn-positive w-100" disabled>다음 단계로 이동</button>
+            <button class="btn btn-positive w-100" onclick=" location.href='join' " disabled>다음 단계로 이동</button>
         </div>
     </div>
     

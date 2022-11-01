@@ -133,7 +133,7 @@ function saveAddress(){
         <input type="hidden" name="ordersOptionsNo" value="${OptionsDto.optionsNo}">
         <input type="hidden" name="ordersPayDate" value="${PjDto.pjFundingEndDate}">
         <input type="hidden" name="ordersDeliveryPay" value="${OptionsDto.optionsDeliveryPrice}">
-        <input type="hidden" name="ordersMemNo" value="${loginNo}">       
+        <input type="hidden" name="ordersMemNo" value="${AddressDto[0].addressMemNo}">       
     </div>
     </div>
 
@@ -142,45 +142,49 @@ function saveAddress(){
     <div id="choose" class="boxer">
         
         <h2>배송지 선택</h2>
+        
+        
 
+        <c:if test="${AddressDto==null}">
+            <span>배송지를 새로 등록한 후 선택해주세요</span>
+        </c:if>
+
+        <select name="ordersAddressNo" style="height:50px;">
+        <c:forEach var="AddressDto" items="${AddressDto}">
+           <option value="${AddressDto.addressNo}">
+            
+            <div>
+                <div>
+                    <span>배송지 번호: </span>
+                    <span>${AddressDto.addressNo}</span>
+                </div>
+                <div>
+                    <span>택배 수령인: </span>
+                    <span>${AddressDto.addressName}</span>
+                </div>
+                <div>
+                    <span>연락처: </span>
+                    <span>${AddressDto.addressTel}</span>
+                </div>
+                <div>
+                    <span>우편번호: </span>
+                    <span>${AddressDto.addressPost}</span>
+                </div>
+                <div>
+                    <span>기본주소: </span>
+                    <span>${AddressDto.addressBasic}</span>
+                </div>
+                <div>
+                    <span>상세주소: </span>
+                    <span>${AddressDto.addressDetail}</span>
+                </div>
+            </div>
+
+            </option>
+        </c:forEach>
+        </select>
 
         
-                <select name="ordersAddressNo" style="height:50px;">
-                    <c:forEach var="AddressDto" items="${AddressDto}">
-                       <option value="${AddressDto.addressNo}">
-                        
-                        <div>
-                            <div>
-                                <span>배송지 번호: </span>
-                                <span>${AddressDto.addressNo}</span>
-                            </div>
-                            <div>
-                                <span>택배 수령인: </span>
-                                <span>${AddressDto.addressName}</span>
-                            </div>
-                            <div>
-                                <span>연락처: </span>
-                                <span>${AddressDto.addressTel}</span>
-                            </div>
-                            <div>
-                                <span>우편번호: </span>
-                                <span>${AddressDto.addressPost}</span>
-                            </div>
-                            <div>
-                                <span>기본주소: </span>
-                                <span>${AddressDto.addressBasic}</span>
-                            </div>
-                            <div>
-                                <span>상세주소: </span>
-                                <span>${AddressDto.addressDetail}</span>
-                            </div>
-                        </div>
-            
-                        </option>
-                    </c:forEach>
-                    </select>
-  
-
         <button type="submit" class="btn btn-positive little-left">주문하기</button>
         
     </form>

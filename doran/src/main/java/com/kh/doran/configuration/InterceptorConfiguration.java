@@ -31,9 +31,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//회원용 인터셉터
 		registry.addInterceptor(memInterceptor)
 					.addPathPatterns(//인터셉터가 감시할 주소
-							"/mem/**",//회원 전체
+							"/mem/*",//회원 전체
 							"/board/write", //글쓰기
-							"/mypage/**",
+							"/mypage/*",
 							"/doran-q/write"
 					)
 					.excludePathPatterns(//위의 주소에서 제외할 주소 (비회원)
@@ -41,7 +41,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 							"/mem/login",//로그인
 							"/mem/findEmail",//이메일 찾기
 							"/mem/findPw",//비밀번호 찾기
-							"/mem/goodbyeResult", //탈퇴 결과
+							"/mypage/goodbye_result", //탈퇴 결과
 							"doran-q/list" //1:1 문의 목록
 					);
 		

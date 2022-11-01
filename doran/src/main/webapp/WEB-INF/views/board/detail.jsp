@@ -15,7 +15,12 @@
 	.input-list-search {
     font-size: 20px;
     padding: 0.75em;
-    outline: none;
+    outline: none
+    
+    }
+    span {
+    	color: #0072b2;
+    }
     
 }
 </style>
@@ -43,7 +48,7 @@
 
 <div class="container-800 mt-40 mb-40">
 	<div class="row center">
-	<table border = "1" width = "500" class="table table-border">
+	<table border = "1" width ="500" class="table table-border">
 		<tbody>
 			<tr>
 				<th width = "25%">번호</th>
@@ -112,7 +117,7 @@
 			<img src="/img/smile.png" width="20" height="20">
 			${replyDto.memNick}
 			<c:if test="${boardDto.boardMemNo == replyDto.replyMemNo}">
-			(작성자)
+			<span>(작성자)</span>
 			</c:if>
 			
 				<pre>${replyDto.replyContent}</pre>

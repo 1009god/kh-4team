@@ -8,9 +8,29 @@
 	<style>
         .btn.btn-positive[disabled],
         .btn.btn-positive[disabled]:hover {
-            background-color: #74b9ff;
+            background-color: #bdc3c7;
+           	color: #FFFFFF;
             cursor: not-allowed;
         }
+        
+         .fullscreen {
+            background-color: white;
+        }
+        
+        .red {
+            color: red;
+        }
+        
+     .solid-lines {
+	  border: 1px solid gray;
+	}
+	
+	.w-30 {
+    width:30%;
+	}
+	
+	.mt-200 { margin-top: 200px;}
+	.p-80 {padding:80;}
     </style>
     
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
@@ -51,20 +71,22 @@
             <h2>▶ 탈퇴 전 유의사항을 확인해 주시기 바랍니다</h2>
         </div>
         <div class="row">
-            <textarea class="input w-100 fix-size" rows="20" readonly>
+            <textarea class="solid-lines w-100 fix-size" rows="20" readonly>
             후원 및 결제
             
-			-이미 결제된 후원은 취소되지 않습니다
-			- 결제 완료 후 탈퇴하더라도, 선물 전달이 완료될 때까지 창작자가 배송 정보를 열람할 수 있습니다
-			- 아직 선물을 받지 못했다면, 선물 전달 과정에서 불이익이 발생할 수 있습니다. 배송정보를 변경할 수 없으며 전달에 관한
-				커뮤니티 공지, 문의 내용 등을 확인할 수 없습니다.
-			- 관련 법령에 따라 후원 및 후원취소에 관한 기록, 결제 및 선물 전달에 관한 기록은 5년 동안 보관됩니다.
+-이미 결제된 후원은 취소되지 않습니다
+
+- 결제 완료 후 탈퇴하더라도, 선물 전달이 완료될 때까지 창작자가 배송 정보를 열람할 수 있습니다
+
+- 아직 선물을 받지 못했다면, 선물 전달 과정에서 불이익이 발생할 수 있습니다. 배송정보를 변경할 수 없으며 전달에 관한 커뮤니티 공지, 문의 내용 등을 확인할 수 없습니다.
+
+- 관련 법령에 따라 후원 및 후원취소에 관한 기록, 결제 및 선물 전달에 관한 기록은 5년 동안 보관됩니다.
 			
-			프로젝트
+프로젝트
 			
-			-작성중, 제출, 반려 및 승인된 프로젝트는 모두 삭제되고 공개예정, 펀딩 진행중인 그 프로젝트는 모두 중단됩니다.
-			- 펀딩이 종료된 프로젝트는 삭제되지 않습니다.
-			- 탈퇴하더라도, 이미 펀딩이 종료된 프로젝트에 관한 창작자의 의무와 책임 조항은 그 효력을 유지합니다.
+-작성중, 제출, 반려 및 승인된 프로젝트는 모두 삭제되고 공개예정, 펀딩 진행중인 그 프로젝트는 모두 중단됩니다.
+- 펀딩이 종료된 프로젝트는 삭제되지 않습니다.
+- 탈퇴하더라도, 이미 펀딩이 종료된 프로젝트에 관한 창작자의 의무와 책임 조항은 그 효력을 유지합니다.
             </textarea>
         </div>
         <div class="row float-container">
