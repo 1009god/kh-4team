@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
+
 <jsp:include page="/WEB-INF/views/template/header3.jsp">
 	<jsp:param value="프로젝트 주문" name="title" />
 </jsp:include>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
 <style>
       .boxer {
         border : 2px;
@@ -28,7 +34,6 @@
         .projectIntroduce {
         font-size: 14px;
         color:#000000DE;
-
         margin: 0px 0px 14px;
         text-align: left;
     }
@@ -50,27 +55,14 @@
     .little-left {
         margin-left:8px;
     }
-
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-     function saveAddress(){
-  
         
     .updown {
         margin-top:5px;
         margin-bottom:5px;
     }
 </style>
+
+
 <script type="text/javascript">
     //자바스크립트 코드
     $(function(){
@@ -112,27 +104,13 @@ function saveAddress(){
     location.reload();
 }
 </script>
+
 <div class="container-1400 center">
 
 
     <form action="order" method="post">
 
     <div class="boxer">
-
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-
-  
     
         
     <div>
@@ -158,15 +136,19 @@ function saveAddress(){
         <input type="hidden" name="ordersMemNo" value="${AddressDto[0].addressMemNo}">       
     </div>
     </div>
+
     
+
     <div id="choose" class="boxer">
         
         <h2>배송지 선택</h2>
         
         
+
         <c:if test="${AddressDto==null}">
             <span>배송지를 새로 등록한 후 선택해주세요</span>
         </c:if>
+
         <select name="ordersAddressNo" style="height:50px;">
         <c:forEach var="AddressDto" items="${AddressDto}">
            <option value="${AddressDto.addressNo}">
@@ -197,9 +179,11 @@ function saveAddress(){
                     <span>${AddressDto.addressDetail}</span>
                 </div>
             </div>
+
             </option>
         </c:forEach>
         </select>
+
         
         <button type="submit" class="btn btn-positive little-left">주문하기</button>
         
@@ -213,16 +197,6 @@ function saveAddress(){
 
             <summary>
                 <h2>배송지 입력</h2>
-
-    
-        
-          
-    
-
-        
-    
-
-  
             </summary>
             <p>
                 <form method ="post" name="frm" class="target">
@@ -232,24 +206,11 @@ function saveAddress(){
                     <label>해당 회원 번호
                         <input class="input input-underline w-50" name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
                     </label>
-
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-
-  
                 
                 </div>
+
                 <div>
+
                     <label>받는 사람
                         <input class="input input-underline w-50" name = "addressName" type="text" placeholder="수령인" required autocomplete="off">
                     </label>
@@ -291,8 +252,9 @@ function saveAddress(){
             </p>
         </details>
 
-
+    
 
 
 
 </body>
+</html>
