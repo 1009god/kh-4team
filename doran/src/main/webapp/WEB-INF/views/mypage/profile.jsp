@@ -62,11 +62,11 @@
 		  <tr>
 		    <td class="" rowspan="2">
 				<c:choose>
-			<c:when test="${empty profileImg}">
-				<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
-			</c:when>
+					<c:when test="${empty profileImg}">
+						<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+					</c:when>
 			
-			<c:otherwise>
+					<c:otherwise>
 				 <!-- 반복문 -->
 				<c:forEach var="vo" items="${profileImg}" varStatus="status">	
 					<c:if test="${status.last}">			
@@ -77,7 +77,7 @@
 		</c:choose>						    
 		    </td>
 		    <td class="">
-		    	<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		    	<span style="padding-left:20px">${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
 		    
 		    </td>
 		  </tr>

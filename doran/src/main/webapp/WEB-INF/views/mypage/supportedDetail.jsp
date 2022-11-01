@@ -18,7 +18,13 @@ margin: 40px;
 width: 1200px
 }
 
+.photo {
+float:left 
+}
 
+.boxx > div {
+    padding-bottom: 5px;
+}
 
 </style>
 
@@ -29,13 +35,10 @@ width: 1200px
 <div class=container-1400>
 
 <div class=container-1200>
-<div class="boxx">
+<div class="boxx" style="padding-bottom: 60px;">
 
  <!-- 반복문 -->
-				
-
-
-	<div>
+ 	<div class="photo right">
 	<!--  디테일 사진 -->
 		<c:forEach var="vo" items="${supportDetailImg}" varStatus="status">	
 			<c:if test="${status.first}">			
@@ -44,16 +47,15 @@ width: 1200px
 		</c:forEach>		
 	</div>
 
-
-	<div> 후원 정보 </div>
+	<div class="right">
+		<div class="row"><h3>[${supportPjImfo.pjCategory}]  ${supportPjImfo.memNick}</h3></div>	
+		<div class="row"><h1>${supportPjImfo.pjName}</h1></div>
+	</div>
 	
-	<div>카테고리 : ${supportPjImfo.pjCategory}</div>
-	<div>셀러 닉네임 : ${supportPjImfo.memNick}</div>
-	<div><h1>프로젝트 이름 : ${supportPjImfo.pjName}</h1></div>
 </div>
 
 <div class="boxx">
-	<div>주문 정보</div>
+	<div><h4 style="margin-top: 5px;">주문 정보</h4></div>
 	
 	<div>주문번호 : ${supportDetail.ordersNo}</div>
 	<div>주문날짜 :${supportDetail.ordersDate}</div>
@@ -62,7 +64,7 @@ width: 1200px
 </div>
 
 <div class="boxx">
-	<div>옵션 정보</div>
+	<div><h4 style="margin-top: 5px;">옵션 정보</h4></div>
 	
 	<div>옵션이름 : ${supportDetail.optionsName}</div>
 	<div>후원금액 : ${supportDetail.optionsPrice}</div>
@@ -71,7 +73,7 @@ width: 1200px
 </div>
 
 <div class="boxx">
-	<div>배송 정보</div>
+	<div><h4 style="margin-top: 5px;">배송 정보<h4></div>
 	
 	<div>받는사람 : ${supportDetail.addressName}</div>
 	<div>연락처 : ${supportDetail.addressTel}</div>

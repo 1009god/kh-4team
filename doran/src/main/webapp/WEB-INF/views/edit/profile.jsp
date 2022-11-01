@@ -24,10 +24,14 @@
 }
 
 .mypage_menu > li > a:hover {
-	 color: #0072b2;
+	 color: #0072b2;	 
 }
 
 
+
+#proimg {
+	border-radius: 100%;
+}
 
 
 </style>
@@ -53,37 +57,57 @@
  
  
   
- <hr style="border:1px color= silver;" width="100%">
+ <hr style="border:1px color= silver;" width="1400px">
  
+ <div class="container-1400" style="height:400px;">
  
- <form method="post" enctype="multipart/form-data">
+ <form method="post" enctype="multipart/form-data"  style="margin:30px">
  <!-- 이미지 첨부파일 -->
  
  <table>
 <thead>
   <tr>
-    <th>프로필 사진</th>
+  
+  			<c:choose>
+					<c:when test="${empty profileImg}">
+						<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+					</c:when>
+			
+					<c:otherwise>
+				 <!-- 반복문 -->
+				<c:forEach var="vo" items="${profileImg}" varStatus="status">	
+					<c:if test="${status.last}">			
+						<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+					</c:if>
+				</c:forEach>			
+			</c:otherwise>
+		</c:choose>		
+    
+    <td style="
+    padding-top: 20px;
+    padding-bottom: 20px;">
+프로필 사진</td>
     <th> <input type="file" name= "files" > </th>
+
   </tr>
 </thead>
 <tbody>
-  <tr>
+  <tr>  
     <td>닉네임</td>
-    <td><input type="text" name="memNick" value="${memDto.memNick}"  autocomplete="off"></td>
+    <td><input type="text" name="memNick" value="${memDto.memNick}"  autocomplete="off" class="input input-underline" ></td>
      <input type="hidden" name="memNo" value="${memDto.memNo}" > 
   </tr>
  
 </tbody>
 </table>
  
- <div class="left">
-	
-		<button type="submit" >수정</button>
-	
-	</div>
+ <div class="left" style="margin-top: 20px;">
+    <button type="submit" class="btn" >수정</button>
+</div>
  </form>
   
  
 
+  </div>
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

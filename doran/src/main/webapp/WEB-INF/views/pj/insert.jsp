@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<jsp:include page="/WEB-INF/views/template/header2.jsp">
+<jsp:include page="/WEB-INF/views/template/header3.jsp">
 	<jsp:param value="${sellerdto.sellerMemNo} 프로젝트 올리기" name="title" />
 </jsp:include>
 
@@ -397,4 +397,4 @@
 	}).mount("#pj-insert-app");
 </script>
 
-<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

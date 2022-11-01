@@ -59,6 +59,16 @@ padding-right : 30px;
 
 <div class=" container-1200">
 
+
+	<c:choose>
+   		<c:when test="${empty createdDetailDto}">
+	  		<div class="container-1000 center" >
+	   			<img src="/img/CutnoProject.png" width="1000px" height="575px">
+	   		</div>
+   		</c:when>
+          		
+   	<c:otherwise>
+
 <c:forEach var="createdDetailDto" items="${createdDetailDto}">
 
 	<c:if test="${createdDetailDto.ordersCancelDate!=null}">
@@ -104,6 +114,10 @@ padding-right : 30px;
 
 </div>
 </c:forEach>
+
+</c:otherwise>
+</c:choose>
+
 </div>
 
 </div>

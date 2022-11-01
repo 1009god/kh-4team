@@ -51,7 +51,9 @@ color: #0072b2;
 text-decoration: none;
 }
 
-
+.pick {
+color: #0072b2;
+}
 
 
 </style>
@@ -89,7 +91,7 @@ text-decoration: none;
 		</c:choose>						    
 		    </td>
 		    <td class="">
-		    	<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		    	<span style="padding-left:20px">${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
 		    
 		    </td>
 		  </tr>
@@ -104,27 +106,31 @@ text-decoration: none;
 		</div>
 	
 	<ul class="mypage_menu">                             
-     	 <li><a href="/mypage/created">올린 프로젝트</a></li>
+     	 <li><a href="/mypage/created" ><p style="color:#0072b2; ">올린 프로젝트</p></a></li>
          <li><a href="/mypage/supported">후원한 프로젝트</a></li>         
     </ul> 
     
 </div>
 
-     <hr style="border:1px color= silver;" width="100%">          
+     <hr style="border:1px color= silver;" width="1400px">          
                        
 <div>
 </div>	
                        
-                              
-                       
-                       
-                       
-
-
-
+          <c:choose>
+           		<c:when test="${empty myCreatedPjDto}">
+	           		<div class="container-1000 center" >
+	           			<img src="/img/CutnoProject.png" width="1000px" height="575px">
+	           		</div>
+           		</c:when>
+          		
+          		<c:otherwise>  
+                  
+           
 	
-	<div class=container-800>
-		<table class="table table-hover table-slit tm">
+	<div class= "container-800" style="height:400px">
+	
+	<table class="table table-hover table-slit tm">
 			<thead>
 				<tr align="center">
 					<th>프로젝트 번호</th>
@@ -142,10 +148,12 @@ text-decoration: none;
 				</c:forEach>
 			</tbody>
 		</table>	
-
+	
 		</div>
 
+           </c:otherwise>
            
+           </c:choose>            
         
 	
 

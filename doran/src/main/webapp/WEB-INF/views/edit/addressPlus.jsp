@@ -5,49 +5,79 @@
 	<jsp:param value="배송지 추가" name="title"/>
 </jsp:include>
 
-<h2>배송지 추가</h2>
+<style>
+
+form > div {
+padding: 10px;
+
+}
+
+
+
+
+
+</style>
+
+
+
+
+
+
+<div class="container-1400" style="height:600px">
+
+<div class= "container-1400" style="padding-left:10px;">
+	<h1 style="padding-top: 10px;padding-bottom: 10px;">배송지 추가</h1>
+</div>
+    
+ <hr style="border:1px color= silver;" width="1400px">
+
+
+
+
 <form method ="post">
 	<div>
-	<label>해당 회원 번호
-		<input name="addressMemNo" value="${sessionScope.loginNo}" > 
-	</label>
+		<input name="addressMemNo" value="${sessionScope.loginNo}" hidden> 
+	</div>
 	
-	<label>받는 사람
-		<input name = "addressName" type="text" required>
+	<div>
+	<label>받는 사람&nbsp;&nbsp;
+		<input name = "addressName" type="text" required autocomplete="off" class="input input-underline">
 	</label>
 	</div>
 	
 	<div>	
-	<label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
+	<label>우편주소 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input name = "addressPost"  id="sample6_postcode"  type="text" required autocomplete="off"  class="input input-underline">
 	</label>
 	</div>
 	
 	
 	
 	<div>
-	<label>주소
-		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
+	<label>주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input name = "addressBasic" id="sample6_address"  type="text" required autocomplete="off" class="input input-underline">
 	</label>
 	</div>
 	
 	<div>
-	<label>상세주소
-		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
+	<label>상세주소&nbsp;&nbsp;
+		<input name = "addressDetail" id="sample6_detailAddress" type="text" required autocomplete="off" class="input input-underline">
 	</label>
 	</div>
 	
 	<div>
-	<label>받는 사람 휴대폰 번호
-		<input name = "addressTel" type="text" required>
+	<label> 번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input name = "addressTel" type="text" required autocomplete="off" class="input input-underline">
 	</label>
 	</div>
 	
 	<div>
-	<button type="submit">등록완료</button>
+	<button type="submit" class="btn">등록완료</button>
 	</div>
 	
 </form>
+</div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -80,6 +110,5 @@
     
     
 </script>
-
 <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
 
