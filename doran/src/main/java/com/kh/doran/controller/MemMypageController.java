@@ -70,7 +70,7 @@ public class MemMypageController {
 
 	@GetMapping("/goodbye_content") //회원 탈퇴 전 중요 내용
 	public String goodbyeContent() {
-		return "mypage/goodbyeContent";
+		return "mypage/goodbye_content";
 	}
 	
 	@GetMapping("/goodbye") //회원
