@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="도란도란-게시글" name="title"/>
+</jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
@@ -23,58 +26,57 @@
 		$(".editor").hide();
 	});
 </script>
-<jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="도란도란-게시글" name="title"/>
-</jsp:include>
 
- <div class="container-800 mt-40 mb-40">
-<div class="row center">
-<table border = "1" width = "500" class="table table-border">
-	<tbody>
-		<tr>
-			<th width = "25%">번호</th>
-			<td>${boardDto.boardPostNo}</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td>${boardDto.boardTitle}</td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>${boardDto.memNick}</td>
-		</tr>
-		<tr>
-			<th>작성일</th>
-			<td>
-				<fmt:formatDate value="${boardDto.boardWriteTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
-			</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${boardDto.boardViewCnt}</td>
-		</tr>
-		<tr height="200" valign="top"">
-			<th>내용</th>
-			<td>
-				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
-				<c:forEach var="filesDto" items="${filesList}" >		
-					<img width="auto" height="auto" src="http://localhost:8888/files/download/${filesDto.filesNo}" >
-				</c:forEach>
-				<pre>${boardDto.boardContent}</pre>
-			</td>
-		</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="2" align="right">
-				<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
-				<a href="edit?boardPostNo=${boardDto.boardPostNo}"><img src="/img/edit.png" width="20" height="20"></a>
-				<a href="delete?boardPostNo=${boardDto.boardPostNo}"><img src="/img/delete.png" width="20" height="20"></a>
-				<a href="list"><img src="/img/list.png" width="20" height="20"></a>
-			</td>
-		</tr>
-	</tfoot>
-</table>
+
+<div class="container-800 mt-40 mb-40">
+	<div class="row center">
+	<table border = "1" width = "500" class="table table-border">
+		<tbody>
+			<tr>
+				<th width = "25%">번호</th>
+				<td>${boardDto.boardPostNo}</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>${boardDto.boardTitle}</td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td>${boardDto.memNick}</td>
+			</tr>
+			<tr>
+				<th>작성일</th>
+				<td>
+					<fmt:formatDate value="${boardDto.boardWriteTime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+				</td>
+			</tr>
+			<tr>
+				<th>조회수</th>
+				<td>${boardDto.boardViewCnt}</td>
+			</tr>
+			<tr height="200" valign="top"">
+				<th>내용</th>
+				<td>
+					<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
+					<c:forEach var="filesDto" items="${filesList}" >		
+						<img width="auto" height="auto" src="http://localhost:8888/files/download/${filesDto.filesNo}" >
+					</c:forEach>
+					<pre>${boardDto.boardContent}</pre>
+				</td>
+			</tr>
+			
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2" align="right">
+					<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
+					<a href="edit?boardPostNo=${boardDto.boardPostNo}"><img src="/img/edit.png" width="20" height="20"></a>
+					<a href="delete?boardPostNo=${boardDto.boardPostNo}"><img src="/img/delete.png" width="20" height="20"></a>
+					<a href="list"><img src="/img/list.png" width="20" height="20"></a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 </div>
 <div class="row center">
 <table border="1" width="500" class="table table-slit table-reply-list">
