@@ -94,10 +94,11 @@
 
 <%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="공지사항" name="title"/>
+	<jsp:param value="공지사항 목록" name="title"/>
 </jsp:include>
 
 <div class="container-900 mt-40 mb-40">
+<h1 align="center">공지사항</h1>
 <table class="table table-slit">
 	<thead>
 	<tr>
@@ -197,13 +198,12 @@
 <!-- 검색창 -->
 <div class="row center mt-30">
 <form action="list" method="get">
-	<select name="type" required>
+	<select class="input" name="type" required>
 		<option value="notice_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
 	</select>
 
-	<input type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
-
-	<button type="submit">검색</button>
+	<input class="input" type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
+	<button class="btn btn-positive" type="submit">검색</button>
 </form>
 </div>
 </div>

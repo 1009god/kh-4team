@@ -162,7 +162,7 @@ nav li a:hover {
 					href="http://localhost:8888/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>	
 					
 					<li><a href="#">커뮤니티</a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown1-menu">
 						<li><a href="/notice/list">공지사항</a></li>
 						<li><a href="/doran-q/list">도란도란</a></li>
 					</ul>
@@ -171,7 +171,7 @@ nav li a:hover {
 								
 				<ul class="dropdown1-menu">
 					<li><a href="#">고객센터</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown1-menu">
 								<li><a href="/faq/list">FAQ</a></li>
 								<li><a href="/doran-q/list">1:1 문의</a></li>
 							</ul>

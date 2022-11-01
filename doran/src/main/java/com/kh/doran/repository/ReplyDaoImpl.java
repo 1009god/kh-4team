@@ -65,7 +65,7 @@ public class ReplyDaoImpl implements ReplyDao {
 				+ "from reply R left outer join "
 				+ "mem M on R.reply_mem_no = M.mem_no "
 						+ "where reply_board_post_no = ? "
-						+ "order by reply_board_post_no asc";
+						+ "order by reply_writetime";
 		Object[] param = {replyBoardPostNo};
 		return jdbcTemplate.query(sql, listMapper, param);
 	}

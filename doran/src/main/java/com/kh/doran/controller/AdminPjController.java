@@ -7,17 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.doran.entity.LikesDto;
-import com.kh.doran.error.TargetNotFoundException;
+import com.kh.doran.entity.PjDto;
 import com.kh.doran.repository.AdminPjDao;
 import com.kh.doran.repository.LikesDao;
 import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.PjDao;
+import com.kh.doran.repository.PjFileDao;
 import com.kh.doran.vo.OrderCountVO;
 import com.kh.doran.vo.PjListSearchVO;
 
@@ -37,6 +36,8 @@ public class AdminPjController {
 	@Autowired
 	private OptionsDao optionsDao;
 	
+	@Autowired
+	private PjFileDao pjFileDao;
 	
 	@RequestMapping("/pjlist")
 	public String list(Model model,HttpSession session,
@@ -59,9 +60,13 @@ public class AdminPjController {
 	public String detail(@RequestParam int pjNo, @ModelAttribute OrderCountVO vo, Model model, HttpSession session) {
 		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트넘버로 검색해서 나온 값 model에 저장해서 넘김
 		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));//pjno로 검색해서 나온 옵션들 model에 저장해서 넘김
+		model.addAttribute("OrdersCalVO", pjDao.calVo(pjNo));//선택한 프로젝트의 총 결제금액, 달성율
+		model.addAttribute("OrderCountAll", pjDao.orderCountAll(pjNo));//이 프로젝트를 구입한 회원 명수
+		model.addAttribute("DateCount", pjDao.dateCount(pjNo));//마감일까지 며칠 남았는지(date로는 못 받고 float치환)
+		model.addAttribute("PjFileList", pjFileDao.pjFileList(pjNo));//프로젝트 대표이미지들
 		
 		//프로젝트개설판매자의  회원테이블을 넘김
-//		PjDto pjDto=pjDao.selectOne(pjNo);
+		PjDto pjDto=pjDao.selectOne(pjNo);
 //		int sellerNo=pjDto.getPjSellerMemNo();
 //		model.addAttribute("Seller",memDao.selectOne(sellerNo));
 				

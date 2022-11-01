@@ -99,11 +99,12 @@
 
 
 <div class="container-900 mt-40 mb-40">
+	<h1 align="center">도란도란</h1>
 <table class="table table-slit">
 	<thead>
 	<tr>
 		<td align = "right" colspan="6">
-			<a href="write">글쓰기</a>
+			<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
 		</td>
 		<tr>
 			<th>번호</th>
@@ -150,7 +151,7 @@
 	<tfoot>
 		<tr>
 			<td align = "right" colspan="6">
-				<a href="write">글쓰기</a>
+				<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
 			</td>
 		</tr>
 	</tfoot>
@@ -218,14 +219,12 @@
 		<!-- 검색창 -->
 		<div class="row center mt-30" >
 		<form action="list" method="get">
-			<select name="type" required>
+			<select class="input" name="type" required>
 				<option value="board_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
-				<option value="board_writer" <c:if test="${vo.type == 'board_mem_no' }" >selected</c:if>>작성자</option>
 			</select>
 			
-			<input type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
-			
-			<button type="submit">검색</button>
+			<input class="input" type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
+			<button class="btn btn-positive" type="submit">검색</button>
 		</form>
 	</div>
 </div>
