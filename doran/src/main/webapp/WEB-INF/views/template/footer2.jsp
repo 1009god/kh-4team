@@ -28,7 +28,7 @@ display: inline-block;
                    
                 </div>
                 <div style="float: right;" class="box float-right">
-                   <a class="btn btn-positive" href="#" role="button">도란도란 1:1 문의</a>
+                   <a class="btn btn-positive" href="droan-q/write" role="button">도란도란 1:1 문의</a>
                 </div>
               </footer>
           </div>

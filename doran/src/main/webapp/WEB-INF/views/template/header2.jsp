@@ -188,7 +188,7 @@ nav li a:hover {
 					<li><a href="#">커뮤니티</a>
 					<ul class="dropdown1-menu">
 						<li><a href="/notice/list">공지사항</a></li>
-						<li><a href="/doran-q/list">도란도란</a></li>
+						<li><a href="/board/list">도란도란</a></li>
 					</ul>
 					</li>
 						</ul>
