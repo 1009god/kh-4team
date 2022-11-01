@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <jsp:include page="/WEB-INF/views/template/header3.jsp">
-	<jsp:param value="회원가입" name="title" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
-
-
 	<style>
 	
         .input.NNNNN ~ .NNNNN-message ,
@@ -13,6 +13,7 @@
         .input.fail ~ .fail-message {
             display: block;
         }
+        
         .input ~ .NNNNN-message {
             color: red;
             display: none;
@@ -81,28 +82,19 @@
 	}
 	.fa-asterisk {
 		color:red;
-		
-		
 	}
 	
-	.input-list-search {
-    font-size: 20px;
-    padding: 0.75em;
-    outline: none;
-    }
+	.solid-lines {
+	  border: 1px solid gray;
+	}
 	
 	.w-30 {
     width:30%;
 	}
 	
-	.mt-70 { margin-top: 70px;}
+	.mt-200 { margin-top: 200px;}
 	.p-80 {padding:80;}
-	
-	.solid-lines {
-	  border: 1px solid gray;
-	}
 	</style>
-
 	 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
 	
@@ -179,13 +171,10 @@
         	
         	$(this).removeClass("fail NNNNN NNNNY");
             if(judge){
-
                 var that = this;//this를 보관
-
                 $.ajax({
                     //url:"http://localhost:8888/rest/mem/nick?memberNick="+memberNick,
                     //method:"get",
-
                     url:"http://localhost:8888/rest/mem/nick",
                     method:"post",
                     data:{
@@ -204,20 +193,17 @@
                     },
                     error:function(){}//통신 오류 발생 시
                 });
-
             }
             else {
                 $(this).addClass("fail");
                 inputStatus.memNickValid = false;
             }
-
         });
 		
         $("input[name=memPw]").blur(function(){
             var text = $(this).val();
             var regex = /^[A-Za-z0-9~!@#*]{8,16}$/;
             var judge = regex.test(text);
-
             $(this).removeClass("success fail");
             if(judge){
                 $(this).addClass("success");
@@ -231,7 +217,6 @@
             var origin = $("input[name=memPw]").val();
             var repeat = $(this).val();
             var judge = origin == repeat;
-
             $(this).removeClass("success fail");
             if(judge){
                 $(this).addClass("success");
@@ -240,10 +225,9 @@
                 $(this).addClass("fail");
             }
         });
-
         
         $("input[name=memTel]").blur(function() {
-			var regex = /^\d{3}-\d{3,4}-\d{4}$/;
+			var regex = /^010([0-9]{8})$/;
 			var memTel = $(this).val();
 			var span = $(this).next("span");
 			var judge = regex.test(memTel);
@@ -260,27 +244,11 @@
 			
 		
 		});
-        
-        $(".join-form").submit(function(){
-	    	$("input[name=memEmail").blur();
-	    	$("input[name=memPw]").blur();
-	    	$("#password-check").blur();
-	    	$("input[name=memNick]").blur();
-	    	$("input[name=memTel]").blur();
-	    	console.log("co" + $(".input.fail").length);
-	    	
-	    	if($(".input.fail".length > 0)) {
-	        	return false;
-	        }
-	    });
-
 		
 		
     });
 	</script>
-
 	<form action="join" method="post" class="login-formcheck">
-	<div class="container-300 mt-70 solid-lines p-80 w-30">
 	<div class="container-350">
 		<div class="row center">
 			<h1>회원 가입</h1>
@@ -288,39 +256,37 @@
 
 		 <div class="row">
             <label>이메일</label>
-            <input type="text" name="memEmail" class="solid-lines input-list-search w-100" placeholder="name@example.com"  required>
+            <input type="text" name="memEmail" class="input w-100" placeholder="name@example.com"  required>
             <span></span>
         </div>
 
          <div class="row">
             <label>비밀번호</label>
-            <input type="password" name="memPw" class="solid-lines input-list-search w-100" onblur="checkPassword();" placeholder="8-16자 영문 대/소문자/숫자/특수문자(~!@#*)" required>
+            <input type="password" name="memPw" class="input w-100" onblur="checkPassword();" placeholder="8-16자 영문 소문자/숫자/특수문자(~!@#*)" required>
         	<span class="success-message">올바른 비밀번호 형식입니다</span>
             <span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
         </div>
-        
+
         <div class="row">
             <label>비밀번호 확인</label>
-            <input type="password" class="solid-lines input-list-search w-100" id="password-check" placeholder="8-16자 영문 대/소문자/숫자/특수문자(~!@#*)" >
+            <input type="password" class="input w-100" id="password-check" placeholder="8-16자 영문 소문자/숫자/특수문자(~!@#*)" >
             <span class="success-message">비밀번호가 일치합니다</span>
             <span class="fail-message">비밀번호가 일치하지 않습니다</span>
         </div>
 
 		<div class="row">
             <label>닉네임</label>
-            <input type="text" name="memNick" class="solid-lines input-list-search w-100" placeholder="한글, 영어, 숫자로 2-10글자" required>
+            <input type="text" name="memNick" class="input w-100" placeholder="한글, 영어, 숫자로 2-10글자" required>
        		<span class="NNNNN-message">이미 사용중인 닉네임입니다</span>
             <span class="NNNNY-message">사용 가능한 닉네임입니다!</span>
-            <span class="fail-message">한글과 숫자 2~10글자로 작성해주세요</span>
+            <span class="fail-message">한글과 영어 소문자 숫자 2~10글자로 작성해주세요</span>
         </div>
-
 		<div class="row">
             <label>전화번호</label>
-            <input type="tel" name="memTel" class="solid-lines input-list-search w-100" placeholder="- 제외하고 입력"  required>
+            <input type="tel" name="memTel" class="input w-100" placeholder="- 제외하고 입력"  required>
        		<span></span>
         </div>
-
-		<div class="row center w-100 input">
+		<div class="row">
 			<select name="memRoute" required > 
 				<option>SNS</option>
 				<option>검색</option>
@@ -330,8 +296,7 @@
 			</select>
 		</div>
 		<div class="d-grid gap-2 d-md-block">
-  			<button class="btn btn-positive w-100" type="submit">가입하기</button>
+  			<button class="btn btn-primary" type="submit">가입하기</button>
 		</div>
-	</div>
 	</div>
 	</form>
