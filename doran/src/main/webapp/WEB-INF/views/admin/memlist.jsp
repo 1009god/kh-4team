@@ -74,63 +74,67 @@
 			     	</tr>
 				</c:forEach>
 			</tbody>
-			
-		
-			
 		</table>
 	</div>
 	</div>
 
 <!-- 페이지 네비게이터 -->
-<h3> 
-<div class= "row center">
-<c:choose>
-	<c:when test="${not vo.isFirst()}">
-		<a href="memlist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo; </a>
-	</c:when>
-	<c:otherwise>
-		<a href="#">&laquo;</a>
-	</c:otherwise>
-</c:choose>
 
-<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
-
-<c:choose>
-	<c:when test="${vo.hasPrev()}">
-		<a href="memlist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a>
-	</c:when>
-	<c:otherwise>
-		<a href="#">&lt;</a>
-	</c:otherwise>
-</c:choose>
-
-
-
-<c:forEach var="i"  begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<a href="memlist?p=${i}&${vo.parameter()}">${i}</a>
-</c:forEach>
-
-<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-
-<c:choose>
-	<c:when test="${vo.hasNext()}">
-		<a href="memlist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a>
-	</c:when>
-	<c:otherwise>
-		<a href="#">&gt;</a>
-	</c:otherwise>
-</c:choose>
-
-<c:choose>
-	<c:when test="${not vo.isLast()}">
-		<a href="memlist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo; </a>
-	</c:when>
-	<c:otherwise>
-		<a href="#">&raquo;</a>
-	</c:otherwise>
-</c:choose>
-</h3>
-</div>
-
+<div class="row center">
+	<ul class="pagination">
+		<c:choose>
+			<c:when test="${not vo.isFirst()}">
+				<li><a href="memlist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo; </a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&laquo;</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		<!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
+		
+		<c:choose>
+			<c:when test="${vo.hasPrev()}">
+				<li><a href="memlist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&lt;</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		
+		
+		<c:forEach var="i"  begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
+			<c:choose>
+					<c:when test="${vo.p == i}">
+						<li class="on"><a href="#">${i}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="memlist?p=${i}&${vo.parameter()}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+		</c:forEach>
+		
+		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+		
+		<c:choose>
+			<c:when test="${vo.hasNext()}">
+				<li><a href="memlist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&gt;</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:choose>
+			<c:when test="${not vo.isLast()}">
+				<li><a href="memlist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo; </a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="#">&raquo;</a></li>
+			</c:otherwise>
+		</c:choose>
+		</ul>
+		</div>
     
 <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>
