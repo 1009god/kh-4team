@@ -71,7 +71,7 @@ public class MemController {
 		if(passwordMatch) {	//비밀번호가 맞으면
 			if(sellerfindDto==null) { // 검색해서 나온 결과가 없으면 
 				session.setAttribute("loginId", inputDto.getMemEmail()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음
-				
+				session.setAttribute("loginId", inputDto.getMemEmail()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음				
 				session.setAttribute("loginNo", findDto.getMemNo()); //loginNo = 회원 번호 세션에 저장
 				return "redirect:/";
 			}
