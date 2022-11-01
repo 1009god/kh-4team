@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="login" value="${loginId != null}"></c:set>
+<c:set var="login" value="${AdminId != null}"></c:set>
 <c:set var="admin" value="${mg == '관리자'}"></c:set>
 
 <html>
@@ -48,7 +48,7 @@
 				<c:choose>
 					<c:when test="${login}">
 						<li><a href="/admin">홈</a></li>
-						<li class="right-menu"><a href="#">${loginId} 님</a>
+						<li class="right-menu"><a href="#">${AdminId} 님</a>
 							<ul>
 								<li><a href="/admin/logout">로그아웃</a></li>
 							</ul></li>

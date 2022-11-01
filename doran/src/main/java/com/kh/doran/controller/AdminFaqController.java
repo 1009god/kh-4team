@@ -40,13 +40,17 @@ public class AdminFaqController {
 	}
 
 	@GetMapping("/faqdetail")
-	public String detail(Model model, @RequestParam int faqNo) {
+	public String detail(Model model, @RequestParam int faqNo,HttpSession session) {
 		FaqDto faqDto = faqDao.selectOne(faqNo);
 		model.addAttribute("faqDto", faqDto);
+		if(session.getAttribute("AdminNo")!=null) {
+			return "admin/faqdetail";			
+		}
+		else {
+			return "admin/login";
+		}
+	};
 
-		return "admin/faqdetail";
-
-	}
 
 	@GetMapping("/faqwrite")
 	public String insert() {
@@ -54,7 +58,7 @@ public class AdminFaqController {
 	}
 
 	@PostMapping("/faqwrite")
-	public String insert(@ModelAttribute FaqDto faqDto) {
+	public String insert(@ModelAttribute FaqDto faqDto,HttpSession session) {
 		faqDao.insert(faqDto);
 		return "redirect:write_success";
 	}

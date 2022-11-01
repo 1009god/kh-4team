@@ -612,6 +612,7 @@ ul.pagination.pagination-small {
 .dropdown1-menu li {
     position: relative;
     text-align: center;
+    background-color : white;
 }
 .dropdown1-menu > li > ul ul
  {

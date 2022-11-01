@@ -36,6 +36,30 @@
            
 
 <style>
+
+.Login-btn.btn-neutral1:hover {
+    border: 1px solid black;
+    color: black;
+}
+* {
+    box-sizing: border-box;
+}
+.Login-btn.btn-neutral1 {
+    border: 2px solid #e9ecef;
+    background-color: white;
+    color: gray;
+}
+.login-btn {
+    border-radius: 50px;
+    font-size: 15px;
+    padding: 0.75em;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+
 header {
 	width: 100%;
 	position: relative;
@@ -46,8 +70,8 @@ header {
 	float: right;
 	position: relative;
 	right: 10px;
-	top: 20px;
-	padding: 10px;
+	top: 5px;
+	padding: 3px; /* 두께 */
 }
 
 nav {
@@ -140,8 +164,8 @@ nav li a:hover {
 						<a class="dropdown-item" href="/mem/logout">로그아웃</a>
 					</c:when>
 					<c:otherwise>
-						<button class="btn btn-neutral">
-							<a href="/mem/login">로그인</a> | <a href="/mem/join">회원가입</a>
+						<button class="Login-btn btn-neutral1">
+							<a href="/mem/login">로그인</a> / <a href="/mem/join">회원가입</a>
 						</button>
 					</c:otherwise>
 				</c:choose>
