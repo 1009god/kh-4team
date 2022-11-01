@@ -6,23 +6,37 @@
 	<jsp:param value="프로젝트 목록" name="title"/>
 </jsp:include>
 
+<style>
 
-<div class="container-700 mt-40 mb-50">
+        .table > thead > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > th,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > th,
+        .table > tfoot > tr > td {  
+            border : 1px solid lightgray;
+        }
+	
+</style>
+
+
+
+<div class="container-1000 container-900 mt-40 mb40">
 	<!-- 제목 -->
-	<div class="row center">
+	<div class="row">
 		<h3>프로젝트 리스트</h3>
 	</div>
 	
 	<!-- 목록 출력 -->
 	<div class="row center">
-		<table class="table table-hover table-slit">
+		<table class="table table-hover" border="1" >
 			<thead>
 				<tr>
-					<th>판매자 닉네임</th>
-					<th>카테고리</th>
+					<th width="15%">판매자</th>
+					<th width="10%">카테고리</th>
 					<th>프로젝트명</th>
-					<th>목표금액</th>
-					<th>시작일</th>
+					<th width="10%">목표금액</th>
+					<th width="20%">시작일</th>
 					
 					
 					
