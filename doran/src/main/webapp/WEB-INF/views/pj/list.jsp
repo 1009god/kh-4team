@@ -57,28 +57,33 @@
      	background : white;
      	border : 2px white;
      	font-size : 20px;
-     	font-weight : bold;
      	padding : 5px;
      }
      .white:hover{
      	color : #0072b2;
+     }
+     .notOngoing{
+     	width : 700px;
+     	height : 500px;
+     	margin : 0 auto;
+
      }
     
     </style>
 
     <div class="container-1200">
    
-    <div class="row center mt-30 mb-30">
+    <div class="row center mt-30 mb-10">
         <form action = "list" method ="get">
-        	<button class="white ms-30 me-30" name="sort" value="prelaunching">펀딩예정</button>
-            <button class="white ms-30 me-30" name="sort" value="ongoing">펀딩중</button>
-            <button class="white ms-30 me-30" name="sort" value="finishing">펀딩마감</button>
+        	<button style="font-weight : bold"  class="white ms-30 me-30" name="sort" value="prelaunching">펀딩예정</button>
+            <button style="font-weight : bold" class="white ms-30 me-30" name="sort" value="ongoing">펀딩중</button>
+            <button style="font-weight : bold" class="white ms-30 me-30" name="sort" value="finishing">펀딩마감</button>
         </form>
     </div>   
-    <hr>
+<!--     <hr> -->
     
     
-    <div class="row right">
+    <div class="row right mb-30">
         <form action ="list" method = "get">
         
         <select name="sort" onchange="this.form.submit()"> <!-- 추후 js.43번 참고해서 하기 -->
@@ -96,7 +101,7 @@
         	<button class="white ms-10 me-10" name="" value="">
         	<i class="fa-sharp fa-solid fa-border-all"></i> 전체</button>
         	<i class="fa-solid fa-fork-knife"></i>
-            <button class="white ms-10 me-10" name="category" value="패션/잡화">
+            <button  class="white ms-10 me-10" name="category" value="패션/잡화">
             <i class="fa-solid fa-shirt"></i> 패션/잡화</button>
             <button class="white ms-10 me-10" name="category" value="뷰티">
           	<i class="fa-solid fa-face-smile"></i> 뷰티</button>
@@ -111,15 +116,12 @@
 
         </form>
     </div>
-    
         <div class="row center list" >
-	            <c:forEach var="pjDto" items="${list}">
+	            <c:forEach var="pjDto" items="${list}" varStatus="status">
 	            	<div class="row item">
 	            			<div class="a">
-	            			
- 		           				<img width="372px" height="272px" src="http://localhost:8888/files/download/${pjDto.pjFileNo}">
+ 		           				<img width="372px" height="210px" src="http://localhost:8888/files/download/${pjDto.pjFileNo}">
 	            			</div>
-	            			
 		                <div class="row">
 		                	<span> ${pjDto.pjNo}</span>
 			                <a href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
@@ -144,56 +146,68 @@
 
         
         <!--페이지 네비게이터  -->
-    
-    <div class="row center">
-        <ul class="pagination on">
-	        <c:choose>
-	            <c:when test="${not pjListSearchVo.isFirst()}">
-	                <li><a href="list?p=${pjListSearchVo.firstBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&laquo;</a></li> 
-	            </c:when>
-	            <c:otherwise>
-	                <li><a href="#">&laquo;</a></li> 
-	            </c:otherwise>
-	        </c:choose>
-	     
-        
-        <!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
-        <c:choose>
-            <c:when test="${pjListSearchVo.hasPrev()}">
-                <li><a href="list?p=${pjListSearchVo.prevBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&lt;</a></li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="#">&lt;</a></li> 
-            </c:otherwise>
-        </c:choose>
-        
-        <c:forEach var="i" begin="${pjListSearchVo.startBlock()}" end="${pjListSearchVo.endBlock()}" step="1">
-            <li><a href="list?p=${i}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">${i}</a></li>
-        </c:forEach>
-            
-        <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-        <c:choose>
-            <c:when test="${pjListSearchVo.hasNext()}">
-                <li><a href="list?p=${pjListSearchVo.nextBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&gt;</a></li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="#">&gt;</a></li> 
-            </c:otherwise>
-        </c:choose>
-        
-        <c:choose>
-            <c:when test="${not pjListSearchVo.isLast()}">
-                <li><a href="list?p=${pjListSearchVo.lastBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&raquo;</a></li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="#">&raquo;</a></li> 
-            </c:otherwise>
-        </c:choose>
-            
-       </ul>
-
-    </div>
-
+ 	<c:choose>
+ 		<c:when test="${not empty list}">
+		    <div class="row center">
+		        <ul class="pagination on">
+			        <c:choose>
+			            <c:when test="${not pjListSearchVo.isFirst()}">
+			                <li><a href="list?p=${pjListSearchVo.firstBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&laquo;</a></li> 
+			            </c:when>
+			            <c:otherwise>
+			                <li><a href="#">&laquo;</a></li> 
+			            </c:otherwise>
+			        </c:choose>
+			     
+		        
+		        <!-- 이전을 누르면 이전 구간의 마지막 페이지로 안내 -->
+		        <c:choose>
+		            <c:when test="${pjListSearchVo.hasPrev()}">
+			                <li><a href="list?p=${pjListSearchVo.prevBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&lt;</a></li>
+			            </c:when>
+			            <c:otherwise>
+			                <li><a href="#">&lt;</a></li> 
+			            </c:otherwise>
+			        </c:choose>
+			        
+			        <c:forEach var="i" begin="${pjListSearchVo.startBlock()}" end="${pjListSearchVo.endBlock()}" step="1">
+			            <li><a href="list?p=${i}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">${i}</a></li>
+			        </c:forEach>
+			            
+			        <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
+			        <c:choose>
+			            <c:when test="${pjListSearchVo.hasNext()}">
+			                <li><a href="list?p=${pjListSearchVo.nextBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&gt;</a></li>
+			            </c:when>
+			            <c:otherwise>
+			                <li><a href="#">&gt;</a></li> 
+			            </c:otherwise>
+			        </c:choose>
+			        
+			        <c:choose>
+			            <c:when test="${not pjListSearchVo.isLast()}">
+			                <li><a href="list?p=${pjListSearchVo.lastBlock()}&${pjListSearchVo.parameter()}&${pjListSearchVo.sortBy()}&${pjListSearchVo.categoryBy()}">&raquo;</a></li>
+			            </c:when>
+			            <c:otherwise>
+			                <li><a href="#">&raquo;</a></li> 
+			            </c:otherwise>
+			        </c:choose>
+			            
+			       </ul>
+			
+			    </div>
+	    </c:when>
+	    <c:otherwise>
+	    	<div class="notOngoing" >
+	    		<div class="row center" style = "padding : 80px">
+		    		<h1 style = "color : lightblue">진행중인 펀딩이 없습니다!</h1>
+		    	</div>
+		    	<div class="row center" >
+		    		<a href="/" style="text-decoration : none; color : #0072b2;"><h2><i class="fa-solid fa-house"></i> 홈으로</h2></a>
+	    		</div>
+	    	</div>
+	    </c:otherwise>
+	</c:choose> 
 </div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
