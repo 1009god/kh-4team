@@ -214,16 +214,11 @@ function shareKakao() {
     <div class="center" style="margin:0px 100px;"><!--프로젝트 대표이미지, 정보 들어가는 자리(float써야됨 구와아악)-->
     
         <div style="width:700px;height:550px; margin-right:20px;float:left;">
-            <div class="swiper">
+            <div>
                 <c:forEach var="PjFileList" items="${PjFileList}">
                     <img width="594px" height="445px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}">
                 </c:forEach>
-                <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
-        
-            <!-- If we need navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+                
             
             </div>
         </div>
@@ -319,9 +314,6 @@ function shareKakao() {
                </div>
             </div>
 
-            <div style="margin-top:10px;">
-                <button class="btn btn-neutral w-100" style="height:54px;"><a href="/sellerq/write?pjNo=${PjDto.pjNo}">판매자에게 문의</a></button>
-            </div>
          
         </aside>
 
