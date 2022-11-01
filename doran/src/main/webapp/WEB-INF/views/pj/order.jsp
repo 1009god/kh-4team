@@ -20,6 +20,53 @@
         padding: 20px;
         margin: 40px;
         }
+
+        .cate {
+            color:#9e9e9e;
+            font-size:13px;
+            font-style:bold;
+        }
+
+        .nam {
+        font-size: 38px;
+        color:#000000DE;
+        margin: 0px 10px 0px 0px;
+        text-align: left;
+        }
+
+
+        .projectIntroduce {
+        font-size: 14px;
+        color:#000000DE;
+        margin: 0px 0px 14px;
+        text-align: left;
+    }
+    .projectValue {
+        font-size: 38px;
+        color:#000000DE;
+        margin: 0px 10px 0px 0px;
+        text-align: left;
+    }
+    .projectSmall {
+        font-size: 14px;
+        color:#000000DE;
+        margin: 0px 0px 0px 3.5px;
+        text-align: left;
+    }
+
+
+    .red {
+        color:#ff5757;
+    }
+
+    .little-left {
+        margin-left:8px;
+    }
+        
+    .updown {
+        margin-top:5px;
+        margin-bottom:5px;
+    }
 </style>
 
 
@@ -67,30 +114,31 @@ function saveAddress(){
 
 <div class="container-1400 center">
 
+
     <form action="order" method="post">
 
     <div class="boxer">
     
-        <div>
-            <span>결제</span>
-        </div>
+        
     <div>
-        <div>
-            <span>후원 프로젝트</span><span>${PjDto.pjName}</span>
+        <div class="updown">
+            <span class="projectIntroduce">후원 프로젝트</span><span class="projectValue little-left">${PjDto.pjName}</span>
         </div>
-        <div>
-            <span>선택 옵션</span><span>${OptionsDto.optionsName}</span>
+        <div class="updown">
+            <span class="projectIntroduce">선택 옵션</span><span class="projectValue little-left">${OptionsDto.optionsName}</span>
         </div>
-        <div>
-            <span>옵션 가격</span><span>${OptionsDto.optionsPrice}</span>
+        <div class="updown">
+            <span class="projectIntroduce">옵션 가격</span><span class="projectValue little-left">${OptionsDto.optionsPrice}</span>
         </div>
-        <div>
-            <span>배송비</span><span>${OptionsDto.optionsDeliveryPrice}</span>
+        <div class="updown">
+            <span class="projectIntroduce">배송비</span><span class="projectValue little-left">${OptionsDto.optionsDeliveryPrice}</span>
+        </div>
+        <div class="row updown">
+            <input type="text" name="ordersMessage" class="input input-underline w-50" placeholder="배달시 요청사항(예: 경비실에 맡겨주세요)">
         </div>
         
         <input type="hidden" name="ordersOptionsNo" value="${OptionsDto.optionsNo}">
         <input type="hidden" name="ordersPayDate" value="${PjDto.pjFundingEndDate}">
-        <input type="text" name="ordersMessage" placeholder="배달시 요청사항(예: 경비실에 맡겨주세요)">
         <input type="hidden" name="ordersDeliveryPay" value="${OptionsDto.optionsDeliveryPrice}">
         <input type="hidden" name="ordersMemNo" value="${AddressDto[0].addressMemNo}">       
     </div>
@@ -102,70 +150,109 @@ function saveAddress(){
         
         <h2>배송지 선택</h2>
         
-        ${AddressDto}
-        <select name="ordersAddressNo">
-            <c:forEach var="AddressDto" items="${AddressDto}">
-           <option value="${AddressDto.addressNo}">${AddressDto}</option>
+        
+
+        <c:if test="${AddressDto==null}">
+            <span>배송지를 새로 등록한 후 선택해주세요</span>
+        </c:if>
+
+        <select name="ordersAddressNo" style="height:50px;">
+        <c:forEach var="AddressDto" items="${AddressDto}">
+           <option value="${AddressDto.addressNo}">
+            
+            <div>
+                <div>
+                    <span>배송지 번호: </span>
+                    <span>${AddressDto.addressNo}</span>
+                </div>
+                <div>
+                    <span>택배 수령인: </span>
+                    <span>${AddressDto.addressName}</span>
+                </div>
+                <div>
+                    <span>연락처: </span>
+                    <span>${AddressDto.addressTel}</span>
+                </div>
+                <div>
+                    <span>우편번호: </span>
+                    <span>${AddressDto.addressPost}</span>
+                </div>
+                <div>
+                    <span>기본주소: </span>
+                    <span>${AddressDto.addressBasic}</span>
+                </div>
+                <div>
+                    <span>상세주소: </span>
+                    <span>${AddressDto.addressDetail}</span>
+                </div>
+            </div>
+
+            </option>
         </c:forEach>
         </select>
 
         
-        <button type="submit" class="btn btn-positive">주문하기</button>
+        <button type="submit" class="btn btn-positive little-left">주문하기</button>
         
     </form>
     
 </div>
 
     <div class="boxer">
-        <button class="btn btn-neutral toggle-control">배송지 등록</button>
-    
 
-    <form method ="post" name="frm" class="target">
-        <div>
-            <h2>배송지 입력</h2>
-        </div>
-        <iframe name="ifrm" width="0" height="0" frameborder="0"></iframe> 
-	<div>
-	<label>해당 회원 번호
-		<input name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
-	</label>
-	
-	<label>받는 사람
-		<input name = "addressName" type="text" required>
-	</label>
-	</div>
-	
-	<div>	
-	<label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
-	</label>
-	</div>
-	
-	
-	
-	<div>
-	<label>주소
-		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
-	</label>
-	</div>
-	
-	<div>
-	<label>상세주소
-		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
-	</label>
-	</div>
-	
-	<div>
-	<label>받는 사람 휴대폰 번호
-		<input name = "addressTel" type="text" required>
-	</label>
-	</div>
-	
-	<div>
-	<input type="button" value="등록하기" onclick="saveAddress();">
-	</div>
-        
-    </form>
+        <details>
+
+            <summary>
+                <h2>배송지 입력</h2>
+            </summary>
+            <p>
+                <form method ="post" name="frm" class="target">
+                    <iframe name="ifrm" width="0" height="0" frameborder="0"></iframe> 
+                <div>
+                <label>해당 회원 번호
+                    <input name="addressMemNo" value="${sessionScope.loginNo}" readonly> 
+                </label>
+                
+                <label>받는 사람
+                    <input name = "addressName" type="text" required>
+                </label>
+                </div>
+                
+                <div>	
+                <label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
+                    <input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
+                </label>
+                </div>
+                
+                
+                
+                <div>
+                <label>주소
+                    <input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
+                </label>
+                </div>
+                
+                <div>
+                <label>상세주소
+                    <input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
+                </label>
+                </div>
+                
+                <div>
+                <label>받는 사람 휴대폰 번호
+                    <input name = "addressTel" type="text" required>
+                </label>
+                </div>
+                
+                <div>
+                <input type="button" value="등록하기" onclick="saveAddress();">
+                </div>
+                    
+                </form>
+            </p>
+        </details>
+
+    
 
 </div>
 
