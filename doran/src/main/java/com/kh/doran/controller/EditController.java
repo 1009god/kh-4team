@@ -111,10 +111,11 @@ public class EditController {
 				return "redirect:/edit/profile";	
 			}		
 			else {
-				return "redirect:/edit/editFail";
-			
+				return "redirect:/edit/editFail";			
 			}	
 		}
+	
+		
 
 
 		@GetMapping("/profile_result")

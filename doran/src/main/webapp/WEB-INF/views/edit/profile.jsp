@@ -28,7 +28,7 @@
   
 	<div>
 		<label>닉네임</label>
-		<input type="text" name="memNick" value="${memDto.memNick}" required autocomplete="off">
+		<input type="text" name="memNick" value="${memDto.memNick}"  autocomplete="off">
 		<input type="hidden" name="memNo" value="${memDto.memNo}" > 
 	</div>
 	<div class="left">
