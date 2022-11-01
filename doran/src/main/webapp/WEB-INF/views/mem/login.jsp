@@ -53,5 +53,3 @@
 </div>
 </body>
 </html>
-	<%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
