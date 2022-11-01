@@ -9,7 +9,4 @@ public interface PjFileDao {
 
 	List<PjFileDto> pjFileList(int pjFilePjNo);
 
-	List<PjFileDto> pjFileList(PjListSearchVO vo);
-	
-	List<PjFileDto> pjFileList();
 }
