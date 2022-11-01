@@ -333,8 +333,8 @@ function shareKakao() {
     
 
     <div class="center" style="margin:0px 100px;">
-        <div style="width:700px;height:16000px;margin-right:20px;float:left;"><!--소개이미지 들어가는 div-->
-            <img src="http://localhost:8888/files/download/${PjFileIntroduce.pjFileNo}">
+        <div style="width:700px;margin-right:20px;float:left;"><!--소개이미지 들어가는 div-->
+            <img width="650px" height="16000px" src="http://localhost:8888/files/download/${PjFileIntroduce.pjFileNo}">
         </div>
 
         <div style="text-align:left;width:360px;float:left;position: sticky;top: 5px;"><!--후원 리워드 선택 div-->

@@ -184,12 +184,7 @@ function saveAddress(){
 
 
 
-<<<<<<< HEAD
-
-
-<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
-=======
     
 </body>
 </html>
->>>>>>> refs/remotes/origin/main
+

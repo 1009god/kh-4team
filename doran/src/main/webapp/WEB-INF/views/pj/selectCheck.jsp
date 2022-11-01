@@ -137,13 +137,7 @@
 </div>
 
 
-<<<<<<< HEAD
 
-<a href="order?optionsNo=${OptionsDto.optionsNo}"><button>다음</button></a>
-
-
-<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
-=======
 </body>
 </html>
->>>>>>> refs/remotes/origin/main
+
