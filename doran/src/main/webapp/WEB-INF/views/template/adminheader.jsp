@@ -36,7 +36,7 @@
 <body>
 	<main>
 		<header>
-			<div class="container-1200">
+			<div class="container-1400">
 				<div class="row center">
 					<h1>도란도란 관리자 전용 페이지</h1>
 				</div>
@@ -70,7 +70,7 @@
 		<div class="float-container">
 			<!-- 관리자 메뉴 추가 -->
 			<aside>
-				<div class="container-150">
+				<div class="container-1400">
 					<div class="row">
 						<h2>관리자메뉴</h2>
 					</div>
@@ -87,7 +87,7 @@
 						<a href="/admin/noticelist">공지사항 관리</a>
 					</div>
 					<div class="row">
-						<a href="#">1:1문의 관리</a>
+						<a href="/admin/doran-q/list">1:1문의 관리</a>
 					</div>
 					<div class="row">
 						<a href="/admin/faqlist">FAQ 작성</a>
