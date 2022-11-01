@@ -77,6 +77,7 @@
         border-color:#9E9E9E;
         border-width:thin;
         border-style:solid;
+        border-radius: 2px;
         padding: 20px;
         margin:15px;
     }

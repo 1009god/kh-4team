@@ -60,6 +60,8 @@ function saveAddress(){
 
 </script>
 
+<div class="container-1400 row center">
+
     <form action="order" method="post">
 
     <h2>결제</h2>
