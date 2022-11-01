@@ -102,7 +102,9 @@ public class PjListSearchVO {
 	}
 	
 	//현재 페이지 번호(없을 경우 p=1로 설정)
+	@Builder.Default
 	private int p = 1;
+	@Builder.Default
 	private int size = 6;
 	
 	@ToString.Include
@@ -119,6 +121,7 @@ public class PjListSearchVO {
 	private int count;
 	
 	//화면에 표시할 블럭 개수
+	@Builder.Default
 	private int blockSize = 5;
 	
 	@ToString.Include
