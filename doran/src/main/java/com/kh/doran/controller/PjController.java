@@ -205,8 +205,6 @@ public class PjController {
 //		vo.setAchievementRate(Math.round(achievementRate)); //말이 안 되나?
 		
 		model.addAttribute("list",pjDao.selectList(vo));
-		model.addAttribute("PjFileList", pjFileDao.pjFileList(vo));
-//		System.out.println("번호는 =?"+pjFileDao.pjFileList(vo));
 		return "pj/list";
 	};
 	

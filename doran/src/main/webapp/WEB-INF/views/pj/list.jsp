@@ -117,10 +117,9 @@
 	            
 	            	<div class="row item">
 	            			<div class="a">
-	            			<img class="pjImg" src="/img/test.jpg" >
-	            			<c:forEach var="PjFileList" items="${PjFileList}">
-<%-- 		           		 		<img class="pjImg" width = "372px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}" > --%>
-	            			</c:forEach>
+<!-- 	            			<img class="pjImg" src="/img/test.jpg" > -->
+		           		 	<img class="pjImg" width = "372px" src="http://localhost:8888/files/download/${pjDto.pjFileNo}" >
+
 	            			</div>
 	            			
 		                <div class="row">
