@@ -26,6 +26,7 @@ public class PjListSearchVO {
 	private int pjLikesNumber;
 	private int nvl;
 	private int achievementRate;
+	private int pjFileNo;
 	
 	
 	//검색 분류와 검색어

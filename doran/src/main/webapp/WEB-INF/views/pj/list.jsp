@@ -67,8 +67,17 @@
     </style>
 
     <div class="container-1200">
-
-
+   
+    <div class="row center mt-30 mb-30">
+        <form action = "list" method ="get">
+        	<button class="white ms-30 me-30" name="sort" value="prelaunching">펀딩예정</button>
+            <button class="white ms-30 me-30" name="sort" value="ongoing">펀딩중</button>
+            <button class="white ms-30 me-30" name="sort" value="finishing">펀딩마감</button>
+        </form>
+    </div>   
+    <hr>
+    
+    
     <div class="row right">
         <form action ="list" method = "get">
         
@@ -81,16 +90,7 @@
         </form>
     </div>   
     
-    <div class="row center mb-30">
-        <form action = "list" method ="get">
-        	<button class="white ms-30 me-30" name="sort" value="prelaunching">펀딩예정</button>
-            <button class="white ms-30 me-30" name="sort" value="ongoing">펀딩중</button>
-            <button class="white ms-30 me-30" name="sort" value="finishing">펀딩마감</button>
-        </form>
-    </div>   
-    <hr>
-    
-    <div class="row center mt-30">
+    <div class="row center mt-20">
         <form action = "list" method ="get">
         
         	<button class="white ms-10 me-10" name="" value="">
@@ -117,10 +117,12 @@
 	            
 	            	<div class="row item">
 	            			<div class="a">
-	            			<img class="pjImg" src="/img/test.jpg" >
-	            			<c:forEach var="PjFileList" items="${PjFileList}">
-<%-- 		           		 		<img class="pjImg" width = "372px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}" > --%>
-	            			</c:forEach>
+
+		           				<img width="372px" src="http://localhost:8888/files/download/${PjDto.pjFileNo}">
+
+		           		
+
+		            			
 	            			</div>
 	            			
 		                <div class="row">
