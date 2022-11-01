@@ -124,7 +124,8 @@ public class PjDaoImpl implements PjDao {
 			               + "select " 
 			       + " PJ.*, "
 			       + " nvl(ACH.total, 0), "
-			      + " nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate "
+			      + " nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate, "
+			      + "IMG.pj_file_no "
 			   + " from pj PJ "
 			      + " left outer join ( "
 			          + " select " 
@@ -133,6 +134,13 @@ public class PjDaoImpl implements PjDao {
 			           +" from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no "
 			          + " group by OPT.options_pj_no "
 			      + " ) ACH on PJ.pj_no = ACH.options_pj_no "
+			   + "            left outer join ("
+			      + "             select B.pj_file_no ,B.pj_file_pj_no"
+			      + "                    from"
+			      + "                    pj_file B inner join files A"
+			      + "                    on B.pj_file_no = A.files_no"
+			      + "                where pj_file_classify = '대표'"
+			      + "            ) IMG on PJ.pj_no = IMG.pj_file_pj_no"
 			      	+ "where instr(#1, ?)>0 order by pj_no desc"
 								+")TMP "
 								+ "where  pj_funding_start_date < sysdate "
@@ -154,7 +162,8 @@ public class PjDaoImpl implements PjDao {
 				+ "                select "
 				+ "        PJ.*,"
 				+ "        nvl(ACH.total, 0),"
-				+ "        nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate"
+				+ "        nvl(ACH.total, 0) / PJ.pj_target_money *100 achievement_rate, "
+			     + "	IMG.pj_file_no "				
 				+ "    from pj PJ"
 				+ "        left outer join ("
 				+ "            select "
@@ -162,7 +171,15 @@ public class PjDaoImpl implements PjDao {
 				+ "                sum(OPT.options_price) total"
 				+ "            from orders ORD inner join options OPT on ORD.orders_options_no = OPT.options_no"
 				+ "            group by OPT.options_pj_no"
-				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no order by pj_no desc"
+				+ "        ) ACH on PJ.pj_no = ACH.options_pj_no "
+				+ "                    left outer join ("
+				+ "             select B.pj_file_no ,B.pj_file_pj_no"
+				+ "                    from"
+				+ "                    pj_file B inner join files A"
+				+ "                    on B.pj_file_no = A.files_no"
+				+ "                where pj_file_classify = '대표'"
+				+ "            ) IMG on PJ.pj_no = IMG.pj_file_pj_no "
+				+ "			order by pj_no desc"
 				+ "					)TMP "
 				+ "					where  pj_funding_start_date < sysdate "
 				+ "					and sysdate-pj_funding_end_date<=0 "
@@ -494,6 +511,7 @@ public class PjDaoImpl implements PjDao {
 					.pjLikesNumber(rs.getInt("pj_likes_number"))
 					.nvl(rs.getInt("nvl(ACH.total,0)"))
 					.achievementRate(rs.getInt("achievement_rate"))
+					.pjFileNo(rs.getInt("pj_file_no"))
 				.build();
 		}
 	};

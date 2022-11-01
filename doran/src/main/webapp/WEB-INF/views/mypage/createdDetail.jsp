@@ -29,6 +29,12 @@ margin: 40px;
 
 <div class="container-1400 center">
 
+<c:forEach var="OptionsDto" items="${OptionsDto}">
+	<div>
+		${OptionsDto}
+	</div>
+</c:forEach>
+
 <c:forEach var="createdDetailDto" items="${createdDetailDto}">
 <div class="box">
 	<c:if test="${createdDetailDto.ordersCancelDate!=null}">

@@ -95,10 +95,10 @@
     </style>
 
 
-    <div class="container-1200">
+    <div class="container-1300">
 
 		<!-- Slider main container -->
-			<div class="swiper w-70">
+			<div class="swiper w-50">
 			  <!-- Additional required wrapper -->
 			  <div class="swiper-wrapper">
 			    <!-- Slides -->
@@ -117,7 +117,7 @@
 			  <!-- If we need scrollbar -->
 			  <div class="swiper-scrollbar"></div>
 			</div>
-     
+	</div>     
 
     <div class="row center">
 
@@ -154,7 +154,7 @@
 </div>
       
    
-</div>
+
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

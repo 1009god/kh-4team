@@ -20,6 +20,7 @@ import com.kh.doran.entity.PjDto;
 import com.kh.doran.repository.AddressDao;
 import com.kh.doran.repository.FilesDao;
 import com.kh.doran.repository.MemDao;
+import com.kh.doran.repository.OptionsDao;
 import com.kh.doran.repository.OrdersDao;
 import com.kh.doran.repository.PjDao;
 import com.kh.doran.vo.CreatedDetailVO;
@@ -46,6 +47,9 @@ public class MemMypageController {
 	@Autowired
 	private AddressDao addressDao;
 	
+	@Autowired
+	private OptionsDao optionsDao;
+	
 	//프로필 홈
   @GetMapping("/profile")
   public String mypage(HttpSession session, Model model) {
@@ -70,7 +74,7 @@ public class MemMypageController {
 
 	@GetMapping("/goodbye_content") //회원 탈퇴 전 중요 내용
 	public String goodbyeContent() {
-		return "mypage/goodbyeContent";
+		return "mypage/goodbye_content";
 	}
 	
 	@GetMapping("/goodbye") //회원
@@ -124,10 +128,12 @@ public class MemMypageController {
 		return "mypage/created";
 	}
 	
-	//내가 올린 프로젝트들 중->특정 프로젝트를 선택하면->얼마나 팔렸는지 현황
+	//내가 올린 프로젝트들 중->특정 프로젝트를 선택하면->얼마나 팔렸는지 현황 +(1101)그 프로젝트 정보
 	@GetMapping("/created/detail")
 	public String createdDetail(@RequestParam int pjNo, HttpSession session, Model model) {
 		model.addAttribute("createdDetailDto", ordersDao.selectCreatedDetail(pjNo));
+		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//프로젝트 정보
+		model.addAttribute("OptionsDto", optionsDao.selectList(pjNo));
 		return "mypage/createdDetail";
 	};
 	

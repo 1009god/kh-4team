@@ -11,7 +11,4 @@ public interface PjFileDao {
 	
 	PjFileDto selectOne(int pjFilePjNo);//개별 프로젝트의 소개 이미지를 가져옴
 
-	List<PjFileDto> pjFileList(PjListSearchVO vo);
-	
-//	List<PjFileDto> pjFileList();
 }

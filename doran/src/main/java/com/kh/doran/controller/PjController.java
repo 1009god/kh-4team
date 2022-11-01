@@ -124,8 +124,13 @@ public class PjController {
 		if(loginNo==null) {
 			return "redirect:/mem/login";
 		}
-		
+		OptionsDto dto=optionsDao.selectOne(optionsNo);
+		int pjNo=dto.getOptionsPjNo();
+		model.addAttribute("PjDto", pjDao.selectOne(pjNo));//주문한 옵션이 소속되어있는 프로젝트의 정보
+		model.addAttribute("OrdersCalVO", pjDao.calVo(pjNo));//선택한 프로젝트의 총 결제금액, 달성율
+		model.addAttribute("DateCount", pjDao.dateCount(pjNo));//마감일까지 며칠 남았는지(date로는 못 받고 float치환)
 		model.addAttribute("OptionsDto", optionsDao.selectOne(optionsNo));//선택중인 옵션
+		model.addAttribute("PjFileList", pjFileDao.pjFileList(pjNo));//프로젝트 대표이미지들
 		return "pj/selectCheck";
 	};
 	
@@ -206,8 +211,6 @@ public class PjController {
 //		vo.setAchievementRate(Math.round(achievementRate)); //말이 안 되나?
 		
 		model.addAttribute("list",pjDao.selectList(vo));
-		model.addAttribute("PjFileList", pjFileDao.pjFileList(vo));
-//		System.out.println("번호는 =?"+pjFileDao.pjFileList(vo));
 		return "pj/list";
 	};
 	

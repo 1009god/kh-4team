@@ -24,33 +24,30 @@
 	<!-- 목록 출력 -->
 	<div class="container-900 mt-40 mb-40">
 		<h1 align="center">FAQ</h1>
-	<div class="row">
-		<table class="table table-hover table-slit">
+		<table class="table table-slit">
 			<thead>
 				<tr align="center">
 					<th>번호</th>
-					<th>제목</th>
-					<th>타입</th>
+					<th width="45%">제목</th>
+					<th>유형</th>
 				</tr>
 			</thead>
 			<tbody align="center">
 				<c:forEach var="faqDto" items="${list}">
-				<tr>
-					<td align="center">${faqDto.faqNo}</td>
-					<td align="center">
-						<a href="detail?faqNo=${faqDto.faqNo}">
-							${faqDto.faqTitle}
-						</a>
-					</td>
+					<tr>
+						<td>${faqDto.faqNo}</td>
+						<td align="left">
+							<a href="detail?faqNo=${faqDto.faqNo}">
+								${faqDto.faqTitle}
+							</a>
+						</td>
 					<td align="center">${faqDto.faqType}</td>
-					
 				</tr>
 				</c:forEach>
 			</tbody>
 	</table>
 	</div>
 	
-</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

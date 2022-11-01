@@ -375,8 +375,6 @@ ul.pagination.pagination-small {
     background-color: black;
     opacity: 0.5;
     */
-
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .screen-center {
@@ -565,17 +563,18 @@ ul.pagination.pagination-small {
 /* (6) */
 .dropdown1-menu li:hover > ul {
     display: block;
+    color : #0072b2
 }
 
 /* (7) */
 .dropdown1-menu {
     font-size: 15px;
-    background-color: #f6f5f5;
+    background-color: none;
 }
 
 .dropdown1-menu li {
     padding: 0.5em;
-    background-color: #f8f9fa;
+    background-color: none;
 }
 .dropdown1-menu a {
     display: block;
@@ -586,20 +585,22 @@ ul.pagination.pagination-small {
 }
 .dropdown1-menu ul {
     width:100%;
-    background-color: #f8f9fa;
+    background-color: none;
+    z-index: 2929;
 }
 
 /* (8) */
 .dropdown1-menu li:hover {
-    background-color: #f8f9fa;
+    background-color: none;
+    color : #0072b2;
 }
 .dropdown1-menu li:hover > a {
-    color:black;
+    color : #0072b2
 }
 /* (9) */
 .dropdown1-menu {
     position: relative;
-    background-color: #f8f9fa;
+    background-color: none;
 }
 .dropdown1-menu > .right-menu {
     position: absolute;
@@ -652,7 +653,9 @@ ul.pagination.pagination-small {
         - 해당 영역(.float-container) 종료 시 자동으로 clear 되도록 처리
         - 가상 선택자(virtual selector)가 필요하다
 */
-.float-container {}
+.float-container {
+	width :100%;
+}
 .float-container::after {
     content:"";
     display: block;
