@@ -137,7 +137,7 @@
 		                <div class="row">
 <%-- 		                	<span> ${pjDto.pjNo}</span> --%>
 			                <a class="category" href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
-			               <span> <a href=#><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>  ${pjDto.pjLikesNumber}</span>
+			               <span><i class="fa-solid fa-heart" style="color:#0072b2"></i>  ${pjDto.pjLikesNumber}</span>
 		                </div>
 		                
 		                <div class="row">
@@ -210,7 +210,7 @@
 	    </c:when>
 	    <c:otherwise>
 	    	<div class="notOngoing" >
-	    		<div class="row center" style = "padding : 80px">
+	    		<div class="row center" style = "padding : 50px">
 		    		<h1 style = "color : #6495ED">진행중인 펀딩이 없습니다</h1>
 		    	</div>
 		    	<div class="row center" >
