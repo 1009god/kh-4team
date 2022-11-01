@@ -61,6 +61,15 @@ public class PjFileDaoImpl implements PjFileDao {
 	}
 	
 	@Override
+	public List<PjFileDto> pjFileList() { //목록
+		String sql = "select B.pj_file_pj_no, B.pj_file_no , B.pj_file_classify	"
+					+ "    from	pj_file B inner join files A "
+							+ "    on B.pj_file_no = A.files_no "
+					+ "where pj_file_classify = '대표'";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	@Override
 	public List<PjFileDto> pjFileList(PjListSearchVO vo) {
 		String sql="select*from pj_file where pj_file_pj_no=#1 and pj_file_classify='대표'";
 		sql = sql.replace("#1", Integer.toString(vo.getPjNo()));

@@ -11,5 +11,5 @@ public interface PjFileDao {
 
 	List<PjFileDto> pjFileList(PjListSearchVO vo);
 	
-//	List<PjFileDto> pjFileList();
+	List<PjFileDto> pjFileList();
 }
