@@ -5,7 +5,7 @@
 
 <%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="메인페이지" name="title"/>
+	<jsp:param value="내가 후원한 프로젝트" name="title"/>
 </jsp:include>
 
 <style>
@@ -76,7 +76,7 @@ margin: 40px;
 
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
 
 
 

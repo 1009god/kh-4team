@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header2.jsp">
-<jsp:param value="판매자 등록" name="title"/>
-</jsp:include>
-<link rel="stylesheet" type="text/css" href="reset.css">
-    <link rel="stylesheet" type="text/css" href="commons.css">
     
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+<jsp:param value="판매자 신청" name="title"/>
+</jsp:include>
+
 <script type="text/javascript">
 
 
@@ -14,7 +12,7 @@
 <div class="container-600">
 
 <div class="mt-50">
-<h2>판매자 회원신청<h2>
+<h2>판매자 회원신청</h2>
 </div>
 
 <div class="row">

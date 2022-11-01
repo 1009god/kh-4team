@@ -52,8 +52,16 @@ public class HomeController {
 		
 		model.addAttribute("list",pjDao.selectList(vo));
 		
-		model.addAttribute("list");
+//		model.addAttribute("list");
 		return "home";
 	}
 	
+	@RequestMapping("/pj/list")
+	public String homeSearch(Model model, HttpSession session,
+			@ModelAttribute(name="pjListSearchVo") PjListSearchVO vo) {
+		
+		model.addAttribute("list",pjDao.selectList(vo));
+		
+		return "home";
+	}
 }

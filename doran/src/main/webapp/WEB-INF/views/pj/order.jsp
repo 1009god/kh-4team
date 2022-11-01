@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-<jsp:include page="/WEB-INF/views/template/header2.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="프로젝트 주문" name="title" />
+</jsp:include>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -156,4 +158,4 @@ function saveAddress(){
 
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

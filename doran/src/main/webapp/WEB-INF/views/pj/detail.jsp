@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header2.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="프로젝트 상세보기" name="title"/>
+</jsp:include>
 <!--swiper 의존성-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <!--폰트어썸-->
@@ -518,4 +520,4 @@ function shareKakao() {
     
 
     <!--푸터-->
-    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>

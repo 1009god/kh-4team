@@ -181,7 +181,7 @@ nav li a:hover {
                             
 							     <!-- 검색창 -->
                                 <div class="row right">
-							        <form action="list" method="get">
+							        <form action="/pj/list" method="get">
 							            <select name="type">
 							                <option value="pj_name"
 							<c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>

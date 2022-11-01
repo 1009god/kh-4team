@@ -4,7 +4,7 @@
 
 <%-- 템플릿 페이지인 header.jsp 를 동적으로 불러와라 --%>
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="메인페이지" name="title"/>
+	<jsp:param value="계정 정보 변경" name="title"/>
 </jsp:include>
 
 <div class="container-1400">
