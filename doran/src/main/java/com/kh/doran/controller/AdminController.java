@@ -79,8 +79,8 @@ public class AdminController {
 		boolean passwordMatch=
 				inputDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
-			session.setAttribute("loginId",inputDto.getAdminEmail());
-			session.setAttribute("loginNo", findDto.getAdminNo()); 
+			session.setAttribute("AdminId",inputDto.getAdminEmail());
+			session.setAttribute("AdminNo", findDto.getAdminNo()); 
 //			adminDao.updateLoginTime(inputDto.getAdminEmail());
 			return "redirect:/admin";
 		}
@@ -91,8 +91,8 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("loginId");
-		session.removeAttribute("loginNo");
+		session.removeAttribute("AdminId");
+		session.removeAttribute("AdminNo");
 		
 		return "redirect:/admin";
 	}
@@ -115,7 +115,7 @@ public class AdminController {
 		vo.setCount(count);
 	
 		model.addAttribute("list",adminDao.selectList(vo));
-		if(session.getAttribute("loginNo")!=null) {
+		if(session.getAttribute("AdminNo")!=null) {
 			return "admin/memlist";			
 		}
 		else {
@@ -124,7 +124,7 @@ public class AdminController {
 	};
 	
 	@GetMapping("/detail")
-	public String detail(Model model,
+	public String detail(Model model,HttpSession session,
 						@RequestParam int memNo) {
 		MemDto memDto=adminDao.selectOne1(memNo);
 		model.addAttribute("memDto",memDto);
@@ -132,15 +132,27 @@ public class AdminController {
 		//(+추가) 프로필 이미지
 	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 		
-		return "admin/detail";
-	}
+	     if(session.getAttribute("AdminNo")!=null) {
+				return "admin/detail";			
+			}
+			else {
+				return "admin/login";
+			}
+		};
+
 
 	@GetMapping("/change")
-	public String change(Model model,@RequestParam int memNo) {
+	public String change(Model model,@RequestParam int memNo,HttpSession session) {
 		model.addAttribute("memDto",adminDao.selectOne1(memNo));
-		return "admin/change";
+		if(session.getAttribute("AdminNo")!=null) {
+			return "admin/change";			
+		}
+		else {
+			return "admin/login";
+		}
+	};
 
-	}
+	
 	
 
 	@PostMapping("/change")

@@ -47,7 +47,7 @@ public class AdminSellerController {
 	
 	@GetMapping("/sellerdetail")
 	public String detail(
-			Model model, 
+			Model model, HttpSession session,
 			@RequestParam int sellerMemNo) {
 		AdminsellerDetailVO sellerDto = adminSellerDao.selectOne1(sellerMemNo);
 		model.addAttribute("sellerDto",sellerDto);
@@ -58,8 +58,14 @@ public class AdminSellerController {
 	     //(+추가) 셀러 첨부파일 다운로드
 	     model.addAttribute("sellerfileList", filesDao.sellerFileList(sellerMemNo));
 		
-		return "admin/sellerdetail";
-	}
+	     if(session.getAttribute("AdminNo")!=null) {
+	    	 return "admin/sellerdetail";			
+			}
+			else {
+				return "admin/login";
+			}
+		};
+	
 	
 	@GetMapping("/agree")
 	public String agree(@RequestParam int sellerMemNo,

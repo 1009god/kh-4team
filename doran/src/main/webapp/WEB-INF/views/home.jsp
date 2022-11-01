@@ -30,6 +30,11 @@
             // Optional parameters
             direction: 'horizontal', //슬라이드 방향
             loop: true, //반복여부
+            
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
 
 				autoplay:{
                 delay:1000, //자동재생 간격(ms)
