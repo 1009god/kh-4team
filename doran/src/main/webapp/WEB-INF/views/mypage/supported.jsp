@@ -108,7 +108,7 @@ text-decoration: none;
 	
 	<ul class="mypage_menu">                             
      	 <li><a href="/mypage/created">올린 프로젝트</a></li>
-         <li><a href="/mypage/supported">후원한 프로젝트</a></li>       
+         <li><a href="/mypage/supported"><p style="color:#0072b2; ">후원한 프로젝트</p></a></li>       
     </ul> 
     
 </div>
@@ -137,21 +137,22 @@ text-decoration: none;
             <c:choose>
            		<c:when test="${empty supportList}">
 	           		<div class="container-1000 center" >
-	           			<img src="/img/nopj.png" width="1000px" height="800px">
+	           			<img src="/img/CutnoProject.png" width="1000px" height="575px">
 	           		</div>
            		</c:when>
           		
           		<c:otherwise>
           		
 	<!-- 후원 내역 list -->	
-	<div class=container-800>
+	<div class=container-800 style="height:400px">
 		<table class="table table-hover table-slit tm">
 			<thead>
 				<tr align="center">
 					<th>프로젝트 번호</th>
 					<th>판매자</th>
 					<th>카테고리</th>
-					<th>프로젝트</th>												
+					<th>프로젝트</th>
+					<th>취소날짜</th>												
 				</tr>
 			</thead>
 			<tbody>
@@ -160,7 +161,9 @@ text-decoration: none;
 							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}" class="aa">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
 							<td>${supportVO.memNick}</td>			
 							<td>${supportVO.pjCategory}</td>			
-							<td>${supportVO.pjName}</td>							
+							<td>${supportVO.pjName}</td>	
+							<td>${supportVO.ordersCancelDate}</td>						
+												
 						</tr>							
 				</c:forEach>
 			</tbody>

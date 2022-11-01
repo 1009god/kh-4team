@@ -60,16 +60,16 @@
  <hr style="border:1px color= silver;" width="1400px">
 
 
-	<div class="container-1400">
+	<div class="container-1400" style="height:400px">
 		
 	<input type="hidden" name="memNo" value="${memDto.memNo}" > 
 		
 		<table>
 			<thead>
 			  <tr>
-			    <th>비밀번호</th>
-			    <th></th>
-			    <th> <button class="btn-round"  type="button" ><a href="/edit/account_change_pw">수정</a></button></th>
+			    <td>비밀번호</td>		
+			    <td></td>	    
+			    <td> <button class="btn-round"  type="button" ><a href="/edit/account_change_pw">수정</a></button></td>
 			  </tr>
 			</thead>
 			<tbody>

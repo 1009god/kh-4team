@@ -152,6 +152,7 @@ public List<OrdersMemNoSearchVO> memNoSearch(int ordersMemNo) {
 					.pjCategory(rs.getString("pj_category"))
 					.pjName(rs.getString("pj_name"))
 					.memNick(rs.getString("mem_nick"))
+					.ordersCancelDate(rs.getDate("orders_cancel_date"))
 					.build();
 		}		
 		
@@ -180,6 +181,7 @@ private ResultSetExtractor<SupportListVO> SupportDetailPjExtractor = new ResultS
 					.pjCategory(rs.getString("pj_category"))
 					.pjName(rs.getString("pj_name"))
 					.memNick(rs.getString("mem_nick"))
+					
 					.build();
 			}
 			else {
