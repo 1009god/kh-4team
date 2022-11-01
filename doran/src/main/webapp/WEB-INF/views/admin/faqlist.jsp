@@ -42,8 +42,8 @@
 		<table class="table table-hover" border="1">
 			<thead>
 				<tr align="center">
-					<th width="15%" >제목</th>
-					<th>타입</th>
+					<th width="15%" >분류</th>
+					<th>제목</th>
 				</tr>
 			</thead>
 			<tbody align="center">
