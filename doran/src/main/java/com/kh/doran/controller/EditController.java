@@ -61,6 +61,9 @@ public class EditController {
 			
 			//(3) 조회한 정보를 화면으로 전달
 			model.addAttribute("memDto",memDto);
+						
+			 //(+추가) 프로필 이미지
+		     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 			
 			//(4) 연결될 화면 주소를 반환
 			return "edit/profile";
