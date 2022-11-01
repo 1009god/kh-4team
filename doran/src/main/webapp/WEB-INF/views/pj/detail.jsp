@@ -11,14 +11,7 @@
 
 
 <style>
-	.shareParent {
-	position:relative;
-	}
 	
-	.shareChild{
-	position:absolute;
-	bottom:10px;
-	}
 
     .selectOption {
         border: 1px dotted gray;
@@ -74,11 +67,52 @@
     line-height: 22px !important;
     }
 
+    .rewardFence {
+    width: 100%;
+    height: auto;
+    padding: 24px 0px 0px;
+    }
 
+    .rewardBox {
+        border-color:#9E9E9E;
+        border-width:thin;
+        border-style:solid;
+        padding: 20px;
+        margin:15px;
+    }
     
+    .rewardBoxInner {
+        flex: 1 1 0%;
+    }
     
 
+    .rewardPrice {
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.025em;
+    margin: 0px 0px 6px;
+    }
     
+    .rewardInformation {
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: -0.015em;
+    }
+
+    .rewardPriceComplete {
+        font-size: 24px;
+        color:#9E9E9E;
+    line-height: 36px;
+    letter-spacing: -0.025em;
+    margin: 0px 0px 6px;
+    }
+    
+    .rewardInformationComplete {
+        font-size: 13px;
+        color:#9E9E9E;
+    line-height: 20px;
+    letter-spacing: -0.015em;
+    }
     
 
     
@@ -180,7 +214,7 @@ function shareKakao() {
 
 
 
-    <div class="container-1400">
+<div class="container-1400">
 
     <div class="center" style="margin-top:10px;">
         <button class="btn btn-neutral" onclick="location.href='list?category=${PjDto.pjCategory}'">${PjDto.pjCategory}</button>
@@ -271,9 +305,9 @@ function shareKakao() {
                     </div>
                     <span>${PjDto.pjLikesNumber}</span>
                 </button>
-                <button class="btn btn-neutral" style="height:54px;"><i class="fa-brands fa-twitter"></i></button>
-                <button class="btn btn-neutral" style="height:54px;"><i class="fa-solid fa-comment"></i></button>
-                <button class="btn btn-positive" style="height:54px;">이 프로젝트 후원하기</button>
+                <button class="btn btn-neutral" style="height:54px;" onclick="javascript:shareTwitter();"><i class="fa-brands fa-twitter"></i></button>
+                <button id="btnKakao" class="btn btn-neutral" style="height:54px;" onclick="javascript:shareKakao();"><i class="fa-solid fa-comment"></i></button>
+                <button class="btn btn-positive" style="height:54px;" onclick="location.href='#comeHere';">이 프로젝트 후원하기</button>
             </div>
 
             <div style="margin-top:10px;">
@@ -283,153 +317,143 @@ function shareKakao() {
         </aside>
 
         
+        <div class="float-container"></div>
     
     </div>
 
-    <div class="float-container"></div>
+    
 
-    <div>
-        <div>
-        <table>
-            <tbody>
-                <tr>
-                    <th>프로젝트 번호</th>
-                    <td>${PjDto.pjNo}</td>
-                </tr>
-                <tr>
-                    <th>프로젝트 이름</th>
-                    <td>${PjDto.pjName}</td>
-                </tr>
-                <tr>
-                    <th>모인 금액</th>
-                    <td>${OrdersCalVO.priceTotal} 원 ${OrdersCalVO.achievementRate} %</td>
-                </tr>
-                <tr>
-                    <c:set var="OrderCountAll" value="${OrderCountAll}" />
-                    <th>후원자</th>
-                    <td>${OrderCountAll} 명</td>
-                </tr>
-                <tr>
-                    <th>남은 시간</th>
-                    <td>
-                        <c:set var="dateCount" value="${DateCount}" />
-                        <c:if test="${dateCount>0}">
-                                <span class="endCount"></span>
-                        </c:if>    
-                        <c:if test="${dateCount<=0}">
-                            <span>마감된 프로젝트입니다</span>
-                        </c:if>
-                    </td>
-                </tr>
-               <tr>
-               		<th>좋아요</th>
-               		<td>
-               		${PjDto.pjLikesNumber}
-               		
-	               		<c:if test="${check==true}">
-	               		<button><a href="like?pjNo=${PjDto.pjNo}">좋아요 취소하기</a></button>
-	               		</c:if>
-	               		<c:if test="${check==false}">
-	               		<button><a href="like?pjNo=${PjDto.pjNo}">좋아요 하기</a></button>
-	               		</c:if>
-               		
-               		</td>
-               </tr>
-            </tbody>
-        </table>
-    </div>
+    <div class="center" style="margin:0px 100px;">
+        <div style="width:700px;margin-right:20px;float:left;"><!--소개이미지 들어가는 div-->
+            <img src="http://localhost:8888/files/download/${PjFileIntroduce.pjFileNo}">
+        </div>
 
-	
-	<div>
-		<button><a href="/sellerq/write?pjNo=${PjDto.pjNo}">판매자에게 문의</a></button>
-	</div>
-	
+        <div style="text-align:left;width:360px;float:left;position: sticky;top: 5px;"><!--후원 리워드 선택 div-->
+            <div class="rewardFence">
+                <a name="comeHere"></a>
+                <div style="margin:0px 0px 7px;">
+                    <span>리워드 선택</span>
+                </div>
 
-
-    <div>
-        <span>목표금액 ${PjDto.pjTargetMoney}</span>
-        <span>펀딩기간 ${PjDto.pjFundingStartDate} ~ ${PjDto.pjFundingEndDate}</span>
-        <span>결제 목표금액 달성시 ${PjDto.pjFundingEndDate}에 진행</span>
-    </div>
-
-
-	
-	<div class="shareParent">
-	<button type="button">sns 공유 버튼</button>
-	</div>
-	
-	<div class="shareChild">
-	<a href="javascript:shareTwitter();">트위터에 공유</a>
-	<a id="btnKakao" href="javascript:shareKakao();">카카오톡에 공유</a>
-	</div>
-
-
-    <c:forEach var="OptionsDto" items="${OptionsDto}">
+                <c:forEach var="OptionsDto" items="${OptionsDto}">
         
- 	<c:set var="loginNo" value="${loginNo}" />
-    <c:set var="currentStock" value="${OptionsDto.optionsStock}" />
-    <c:set var="orderCount" value="${OrderCount}" />
-    
+                <c:set var="loginNo" value="${loginNo}" />
+                <c:set var="currentStock" value="${OptionsDto.optionsStock}" />
+                <c:set var="orderCount" value="${OrderCount}" />
 
-    <c:choose>
+                <c:choose>
+                    <c:when test="${DateCount<=0}">
+                        <div class="rewardBox">
+                            <div class="rewardBoxInner">
+                                <div class="rewardInformationComplete">
+                                    <!--재고-->
+                                    <span></span>
+                                </div>
+                                <div class="rewardPriceComplete">
+                                    <!--가격-->
+                                    <span class="price">${OptionsDto.optionsPrice}</span>
+                                </div>
+                                <div class="rewardInformationComplete">
+                                    <!--상품이름-->
+                                    <span class="name">${OptionsDto.optionsName}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </c:when>
 
-        <c:when test="${DateCount<=0}">
-            <div>
-                <span>마감된 프로젝트입니다</span>
-            </div>
-            <div>
+                    <c:when test="${loginNo==null}">
+                        <div class="rewardBox" onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
+                            <div class="rewardBoxInner">
+                                <div class="rewardInformation">
+                                    <!--재고-->
+                                    <span class="stock">${OptionsDto.optionsStock}</span>
+                                </div>
+                                <div class="rewardPrice">
+                                    <!--가격-->
+                                    <span class="price">${OptionsDto.optionsPrice}</span>
+                                </div>
+                                <div class="rewardInformation">
+                                    <!--상품이름-->
+                                    <span class="name">${OptionsDto.optionsName}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </c:when>
+
+                    <c:when test="${OrderCount==1}">
+                        <div class="rewardBox" onclick="alert('이미 후원한 프로젝트입니다. 추가로 후원할 수 없습니다');">
+                            <div class="rewardBoxInner">
+                                <div class="rewardInformation">
+                                    <!--재고-->
+                                    <span class="stock">${OptionsDto.optionsStock}</span>
+                                </div>
+                                <div class="rewardPrice">
+                                    <!--가격-->
+                                    <span class="price">${OptionsDto.optionsPrice}</span>
+                                </div>
+                                <div class="rewardInformation">
+                                    <!--상품이름-->
+                                    <span class="name">${OptionsDto.optionsName}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </c:when>
+
+                    <c:when test="${currentStock==0}">
+                        <div class="rewardBox" onclick="alert('품절');">
+                            <div class="rewardBoxInner">
+                                <div class="rewardInformation">
+                                    <!--재고-->
+                                    <span class="stock">${OptionsDto.optionsStock}</span>
+                                </div>
+                                <div class="rewardPrice">
+                                    <!--가격-->
+                                    <span class="price">${OptionsDto.optionsPrice}</span>
+                                </div>
+                                <div class="rewardInformation">
+                                    <!--상품이름-->
+                                    <span class="name">${OptionsDto.optionsName}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </c:when>
+
+                    <c:when test="${loginNo!=null&&OrderCount==0&&currentStock!=0}">
+                        <div class="rewardBox" onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
+                            <div class="rewardBoxInner">
+                                <div class="rewardInformation">
+                                    <!--재고-->
+                                    <span class="stock">${OptionsDto.optionsStock}</span>
+                                </div>
+                                <div class="rewardPrice">
+                                    <!--가격-->
+                                    <span class="price">${OptionsDto.optionsPrice}</span>
+                                </div>
+                                <div class="rewardInformation">
+                                    <!--상품이름-->
+                                    <span class="name">${OptionsDto.optionsName}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </c:when>
+
+                </c:choose>
+
+                </c:forEach>
+
                 
-                <span class="no">${OptionsDto.optionsNo}</span>
-                <span class="name">${OptionsDto.optionsName}</span>
-                <span class="price">${OptionsDto.optionsPrice}</span>
-                <span class="stock">${OptionsDto.optionsStock}</span>
             </div>
-        </c:when>
-    	
-    	<c:when test="${loginNo==null}">
-    		<div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
-                <span class="no">${OptionsDto.optionsNo}</span>
-                <span class="name">${OptionsDto.optionsName}</span>
-                <span class="price">${OptionsDto.optionsPrice}</span>
-                <span class="stock">${OptionsDto.optionsStock}</span>
-            </div>
-    	</c:when>
-    
-    
-        <c:when test="${OrderCount==1}">
-            <div class="selectOption"  onclick="alert('이미 후원한 프로젝트입니다. 추가로 후원할 수 없습니다');">
-                <span class="no">${OptionsDto.optionsNo}</span>
-                <span class="name">${OptionsDto.optionsName}</span>
-                <span class="price">${OptionsDto.optionsPrice}</span>
-                <span class="stock">${OptionsDto.optionsStock}</span>
-            </div>
-        </c:when>
 
-        <c:when test="${currentStock==0}">
-            <div class="selectOption"  onclick="alert('품절');">
-                <span class="no">${OptionsDto.optionsNo}</span>
-                <span class="name">${OptionsDto.optionsName}</span>
-                <span class="price">${OptionsDto.optionsPrice}</span>
-                <span class="stock">${OptionsDto.optionsStock}</span>
-            </div>
-        </c:when>
+        </div>
 
-        <c:when test="${loginNo!=null&&OrderCount==0&&currentStock!=0}">
-            <div class="selectOption"  onclick="location.href='selectCheck?optionsNo=${OptionsDto.optionsNo}';">
-                <span class="no">${OptionsDto.optionsNo}</span>
-                <span class="name">${OptionsDto.optionsName}</span>
-                <span class="price">${OptionsDto.optionsPrice}</span>
-                <span class="stock">${OptionsDto.optionsStock}</span>
-            </div>
-        </c:when>
-    </c:choose>
-
-    </c:forEach>
-
-
+        <div class="float-container"></div>
+        
     </div>
 
-</div>
+
+    
 
     <!--푸터-->
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
