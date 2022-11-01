@@ -52,6 +52,11 @@
 	margin: 30px;
 }
 
+.aa {
+color: #0072b2;
+text-decoration: none;
+}
+
 
 
 
@@ -103,8 +108,7 @@
 	
 	<ul class="mypage_menu">                             
      	 <li><a href="/mypage/created">올린 프로젝트</a></li>
-         <li><a href="/mypage/supported">후원한 프로젝트</a></li>
-         <li><a href="#">나의 1:1 문의보기</a></li>
+         <li><a href="/mypage/supported">후원한 프로젝트</a></li>       
     </ul> 
     
 </div>
@@ -144,7 +148,7 @@
 		<table class="table table-hover table-slit tm">
 			<thead>
 				<tr align="center">
-					<th>주문 번호</th>
+					<th>프로젝트 번호</th>
 					<th>판매자</th>
 					<th>카테고리</th>
 					<th>프로젝트</th>												
@@ -153,7 +157,7 @@
 			<tbody>
 				<c:forEach var="supportVO" items="${supportList}" >	
 					<tr align="center">								
-							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
+							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}" class="aa">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
 							<td>${supportVO.memNick}</td>			
 							<td>${supportVO.pjCategory}</td>			
 							<td>${supportVO.pjName}</td>							

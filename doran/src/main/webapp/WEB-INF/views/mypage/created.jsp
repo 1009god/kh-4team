@@ -42,7 +42,14 @@
 	padding:20px;
 }
 
+.tm {
+	margin: 30px;
+}
 
+.aa {
+color: #0072b2;
+text-decoration: none;
+}
 
 
 
@@ -98,8 +105,7 @@
 	
 	<ul class="mypage_menu">                             
      	 <li><a href="/mypage/created">올린 프로젝트</a></li>
-         <li><a href="/mypage/supported">후원한 프로젝트</a></li>
-         <li><a href="#">나의 1:1 문의보기</a></li>
+         <li><a href="/mypage/supported">후원한 프로젝트</a></li>         
     </ul> 
     
 </div>
@@ -109,47 +115,37 @@
 <div>
 </div>	
                        
-          
-                       
+                              
                        
                        
                        
 
 
 
-	<!-- 후원 내역 list	
+	
 	<div class=container-800>
-		<table class="table table-hover table-slit">
+		<table class="table table-hover table-slit tm">
 			<thead>
 				<tr align="center">
 					<th>프로젝트 번호</th>
+					<th>카테고리</th>
 					<th>프로젝트 제목</th>												
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}" >	
 					<tr align="center">								
-							<td>${myCreatedPjDto.pjNo}</td>
+							<td><a href="/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}" class="aa"'>${myCreatedPjDto.pjNo}</a></td>
+							<td>${myCreatedPjDto.pjCategory}</td>
                             <td>${myCreatedPjDto.pjName}</td>						
 						</tr>							
 				</c:forEach>
 			</tbody>
 		</table>	
 
-		</div>	 -->
+		</div>
 
-
-        <c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}">
-            
-        <span>
-            <a href="/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}">
-            ${myCreatedPjDto}
-            </a>
-        </span>   
-            
-        </c:forEach>
-
-            
+           
         
 	
 

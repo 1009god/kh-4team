@@ -12,7 +12,9 @@
 
 <style>
 .border{
-border:solid;
+
+padding: 20px;
+
 }
 
 .container-800 {
@@ -38,27 +40,49 @@ margin : 30px
    padding: 10px;
    
    }
+   
+   
+   .mypage_menu > li {
+	float: left;
+	line-height: 3em;             
+	padding-left: 20px;
+	 list-style: none;	 
+}
+
+.mypage_menu > li >a {
+	color: black;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+.mypage_menu > li > a:hover {
+	 color: #0072b2;
+}
 
 
 </style>
 
 
-<div class="container-1400">
-
-<h1>설정</h1>
-
- 
- <div>
- <span><a href="/edit/profile">프로필</a></span>
- <span><a href="/edit/account">계정</a></span>
- <span><a href="/edit/address_list">배송지</a></span>
- </div>
-
-<div>
- 	<hr style="border:1px color= silver;" width="100%">
-</div> 
-
+<div class= "container-1400" style="padding-left:10px;">
+	<h1>설정</h1>
 </div>
+ 
+ 
+ <div class= "container-1400">
+		<ul class="mypage_menu">                             
+	     	 <li><a href="/edit/profile">프로필</a></li>
+	         <li><a href="/edit/account">계정</a></li>	    
+	         <li><a href="/edit/address_list">배송지</a></li>    
+	    </ul> 
+   </div>
+ 
+ 
+ 
+  
+ <hr style="border:1px color= silver;" width="1400px">
+
+<div class="container-1400">
 
 <div class="container-800 left" >
 	
@@ -90,7 +114,7 @@ margin : 30px
 		
 		</div>
 		
-		</div>
+	</div>
 </div>
 
 <%-- footer.jsp 를 동적으로 불러와라 --%>

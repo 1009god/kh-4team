@@ -66,8 +66,12 @@ public class MemMypageController {
 	     //(+추가) 프로필 이미지
 	     model.addAttribute("profileImg", filesDao.profileImgList(memNo));
 	     
+	   //(+추가) 지금 접속한 유저가 생성한 모든 프로젝트
+	     List<PjDto> myCreatedPjDto=pjDao.selectSeller(memDto.getMemNo());
+	     model.addAttribute("myCreatedPjDto", myCreatedPjDto);
+	     
 	     //4.화면(view)으로 전달(forward)한다	     
-	     return "mypage/profile";
+	     return "mypage/created";  //루트-수정
   }
   
 //회원 탈퇴!!	
