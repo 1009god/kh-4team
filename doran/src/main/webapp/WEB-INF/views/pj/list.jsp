@@ -118,7 +118,7 @@
 	            	<div class="row item">
 	            			<div class="a">
 
-		           				<img width="5372px" src="http://localhost:8888/files/download/${PjDto.pjFileNo}">
+		           				<img width="372px" src="http://localhost:8888/files/download/${PjDto.pjFileNo}">
 
 		           		
 
