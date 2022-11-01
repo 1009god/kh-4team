@@ -144,13 +144,13 @@ function saveAddress(){
 	</label>
 	
 	<label>받는 사람
-		<input name = "addressName" type="text" required>
+		<input name = "addressName" type="text" required autocomplete="off">
 	</label>
 	</div>
 	
 	<div>	
 	<label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required  >
+		<input name = "addressPost"  id="sample6_postcode" placeholder="우편번호" type="text" required autocomplete="off">
 	</label>
 	</div>
 	
@@ -158,19 +158,19 @@ function saveAddress(){
 	
 	<div>
 	<label>주소
-		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required>
+		<input name = "addressBasic" id="sample6_address" placeholder="주소" type="text" required autocomplete="off">
 	</label>
 	</div>
 	
 	<div>
 	<label>상세주소
-		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required>
+		<input name = "addressDetail" id="sample6_detailAddress" placeholder="상세주소" type="text" required autocomplete="off">
 	</label>
 	</div>
 	
 	<div>
 	<label>받는 사람 휴대폰 번호
-		<input name = "addressTel" type="text" required>
+		<input name = "addressTel" type="text" required autocomplete="off">
 	</label>
 	</div>
 	
