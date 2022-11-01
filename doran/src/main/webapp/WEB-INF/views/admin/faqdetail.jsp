@@ -26,9 +26,8 @@
 		</tr>
 	</tbody>
 </table>
-	<tfoot>
-		<tr>
-			<td colspan="2" align="right"><a class="btn btn-neutral"
+		<div class="row right">
+			<a class="btn btn-neutral"
 				href="faqlist">목록으로</a>
 				
 				<a class="btn btn-neutral"
@@ -36,11 +35,6 @@
 				
 				<a class="btn btn-neutral"
 				 href="faqdelete?faqNo=${faqDto.faqNo}">삭제하기</a>
-
-				</td>
-				
-		</tr>
-		
-	</tfoot>
+		</div>
 
 <jsp:include page="/WEB-INF/views/template/adminfooter.jsp"></jsp:include>

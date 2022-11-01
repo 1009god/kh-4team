@@ -47,7 +47,19 @@
         text-align: left;
     }
 
+
+    .red {
+        color:#ff5757;
+    }
+
+    .little-left {
+        margin-left:8px;
+    }
         
+    .updown {
+        margin-top:5px;
+        margin-bottom:5px;
+    }
 
     </style>
 
@@ -74,15 +86,15 @@
             <img style="width:150px;height: 130px;" src="http://localhost:8888/files/download/${PjFileList[0].pjFileNo}">
         </div>
         <div style="padding-top:10px;">
-            <div>
+            <div class="updown">
                 <span class="cate">${PjDto.pjCategory}</span>
             </div>
-            <div>
+            <div class="updown">
                 <span class="nam">${PjDto.pjName}</span>
             </div>
-            <div>
+            <div class="updown">
                 <c:set var="OrdersCalVO" items="${OrdersCalVO}"></c:set>
-                <span>${OrdersCalVO.priceTotal}</span><span>${OrdersCalVO.achievementRate}</span><span class="endCount"></span>
+                <span>${OrdersCalVO.priceTotal} 원</span><span class="red little-left">${OrdersCalVO.achievementRate} %</span><span class="endCount little-left"></span>
             </div>
 
         </div>
@@ -92,10 +104,7 @@
     <div class="row center">
         <!--선물정보, 후원금액-->
         <div class="boxer">
-            <div>
-                <h1>옵션 정보</h1>
-            </div>
-            <div>
+            
                 <div>
                     <span class="projectIntroduce" style="margin-right: 15px;">옵션 구성</span><span class="projectValue">${OptionsDto.optionsName}</span>
                 </div>
@@ -105,20 +114,20 @@
                 <div>
                     <span class="projectIntroduce" style="margin-right: 15px;">배송비</span><span class="projectValue">${OptionsDto.optionsDeliveryPrice}</span>
                 </div>
-            </div>
+            
         </div>
 
         <div class="boxer">
             
-            <div>
-                <span>프로젝트 성공시 결제는 ${PjDto.pjFundingEndDate} 에 진행됩니다. 프로젝트가 무산되거나 중단된 경우, 예약된 결제는 자동으로 취소됩니다.</span>
+            <div class="updown">
+                <span>프로젝트 성공시 결제는 <span class="red">${PjDto.pjFundingEndDate}</span> 에 진행됩니다. 프로젝트가 무산되거나 중단된 경우, 예약된 결제는 자동으로 취소됩니다.</span>
             </div>
             
-            <div>
+            <div class="updown">
                 
                 <details>
                     <summary>후원 유의사항 확인</summary>
-                    <p>후원은 구매가 아닌 창의적인 계획에 자금을 지원하는 일입니다.
+                    <p class="updown">후원은 구매가 아닌 창의적인 계획에 자금을 지원하는 일입니다.
                         텀블벅에서의 후원은 아직 실현되지 않은 프로젝트가 실현될 수 있도록 제작비를 후원하는 과정으로, 기존의 상품 또는 용역을 거래의 대상으로 하는 매매와는 차이가 있습니다. 따라서 전자상거래법상 청약철회 등의 규정이 적용되지 않습니다.
                         프로젝트는 계획과 달리 진행될 수 있습니다.
                         예상을 뛰어넘는 멋진 결과가 나올 수 있지만 진행 과정에서 계획이 지연, 변경되거나 무산될 수도 있습니다. 본 프로젝트를 완수할 책임과 권리는 창작자에게 있습니다.</p>
@@ -137,13 +146,7 @@
 </div>
 
 
-<<<<<<< HEAD
 
-<a href="order?optionsNo=${OptionsDto.optionsNo}"><button>다음</button></a>
-
-
-<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
-=======
 </body>
 </html>
->>>>>>> refs/remotes/origin/main
+
