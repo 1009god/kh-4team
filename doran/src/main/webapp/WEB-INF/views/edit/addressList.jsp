@@ -11,10 +11,9 @@
 
 
 <style>
+
 .border{
-
 padding: 20px;
-
 }
 
 .container-800 {
@@ -37,10 +36,8 @@ margin : 30px
    
    .box {
    margin: 10px;
-   padding: 10px;
-   
-   }
-   
+   padding: 10px;   
+   }   
    
    .mypage_menu > li {
 	float: left;
@@ -87,11 +84,16 @@ margin : 30px
 <div class="container-800 left" >
 	
 	<div width="50%">
-		등록된 배송지<button class="btn-round"><a class="atag" href="http://localhost:8888/edit/address_plus">배송지 추가</a></button>
+	
+		<div class="row"><h3>등록된 배송지</h3></div>
+		<div class="row">
+			<button class="btn-round"><a class="atag" href="http://localhost:8888/edit/address_plus">배송지 추가</a></button>
+		</div>
 		
 		</div>
 		<div class="container-800 left box" width = "50%">
-		<c:forEach var= "dto" items = "${list}"> <!-- 컨트롤러에서 넘어온 list -->
+		<c:forEach var= "dto" items = "${list}"> 
+		<!-- 컨트롤러에서 넘어온 list -->
 		
 		<div class="border">
 		<button class="btn-round"><a class="atag" href="address_delete?addressNo=${dto.addressNo}">삭제</a></button>

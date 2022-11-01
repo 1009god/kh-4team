@@ -98,7 +98,7 @@
     <div class="row right mb-30">
         <form action ="list" method = "get">
         
-        <select name="sort" onchange="this.form.submit()"> <!-- 추후 js.43번 참고해서 하기 -->
+        <select style= "width:200px;"  name="sort" onchange="this.form.submit()"> <!-- 추후 js.43번 참고해서 하기 -->
             <option value=>정렬</option>
             <option value="pj_no" <c:if test="${pjListSearchVo.sort=='pj_no'}">selected</c:if>>최신순</option>
             <option value="pj_likes_number" <c:if test="${pjListSearchVo.sort=='pj_likes_number'}">selected</c:if>>인기순</option>
@@ -137,13 +137,12 @@
 		                <div class="row">
 <%-- 		                	<span> ${pjDto.pjNo}</span> --%>
 			                <a class="category" href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
-			               <span> <a href=#><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>  ${pjDto.pjLikesNumber}</span>
+			               <span><i class="fa-solid fa-heart" style="color:#0072b2"></i>  ${pjDto.pjLikesNumber}</span>
 		                </div>
 		                
 		                <div class="row">
 			                <a class="name"href="detail?pjNo=${pjDto.pjNo}">
-			                ${pjDto.pjName}</a>
-                                	
+			                ${pjDto.pjName}</a>                               	
 		                </div>
 		                <div class="left">${pjDto.achievementRate}% ${pjDto.nvl}원 
 		                </div> 
@@ -211,7 +210,7 @@
 	    </c:when>
 	    <c:otherwise>
 	    	<div class="notOngoing" >
-	    		<div class="row center" style = "padding : 80px">
+	    		<div class="row center" style = "padding : 50px">
 		    		<h1 style = "color : #6495ED">진행중인 펀딩이 없습니다</h1>
 		    	</div>
 		    	<div class="row center" >

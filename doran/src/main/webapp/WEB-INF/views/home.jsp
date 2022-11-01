@@ -11,12 +11,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
-     <!-- 로딩바 라이브러리 -->
-<!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.css"> -->
-<!--     <script src="https://cdn.jsdelivr.net/npm/@loadingio/loading-bar@0.1.1/dist/loading-bar.min.js"></script> -->
-    
-
-    <!--jquery를 사용하기 위하여 라이브러리 js파일을 불러온다-->
     <script src = "https://code.jquery.com/jquery-3.6.1.js"></script>
    
    	<!-- 로딩바 라이브러리 -->
@@ -42,9 +36,10 @@
 
 			effect:"slide", //슬라이드 기본 효과
     	
-    	$("#loading-bar").progressbar({
-    	
-    	});
+
+	    	$(".loading-bar").progressbar({
+	        	
+	    	});
     	
 // 		var list = document.querySelectorAll("#loading-bar");
 // 		for(var i=0; i < list.length; i++){
@@ -66,7 +61,8 @@
     </script>
     <style>
     
-    .pjImg{
+
+   .pjImg{
     	max-width: 100%;
     }
 
@@ -108,6 +104,7 @@
      	height : 500px;
      	margin : 0 auto;
 
+
      }
      .funding{
     	 font-weight : bold; color : gray;
@@ -121,8 +118,8 @@
         text-decoration : none;
      	color : black;
      }
-    
     </style>
+
 
     <div class="container-1300">
 
@@ -149,29 +146,8 @@
 	</div>     
 
        <div class="container-1200">
-      
-    
-    <div class="row center mt-20">
-        <form action = "pj/list" method ="get">
-        
-        	<button class="white ms-10 me-10" name="" value="">
-        	<i class="fa-sharp fa-solid fa-border-all"></i> 전체</button>
-        	<i class="fa-solid fa-fork-knife"></i>
-            <button  class="white ms-10 me-10" name="category" value="패션/잡화">
-            <i class="fa-solid fa-shirt"></i> 패션/잡화</button>
-            <button class="white ms-10 me-10" name="category" value="뷰티">
-          	<i class="fa-solid fa-face-smile"></i> 뷰티</button>
-            <button class="white ms-10 me-10" name="category" value="푸드">
-            <i class="fa-solid fa-utensils"></i> 푸드</button>
-            <button class="white ms-10 me-10" name="category" value="홈/리빙">
-            <i class="fa-solid fa-house"></i> 홈/리빙</button>
-            <button class="white ms-10 me-10" name="category" value="테크/가전">
-            <i class="fa-solid fa-laptop"></i> 테크/가전</button>
-            <button class="white ms-10 me-10" name="category" value="기타">
-            <i class="fa-solid fa-guitar"></i> 기타</button>
+     
 
-        </form>
-    </div>
         <div class="row center list" >
 	            <c:forEach var="pjDto" items="${list}" varStatus="status">
 	            	<div class="row item">
@@ -180,12 +156,15 @@
 	            			</div>
 		                <div class="row">
 <%-- 		                	<span> ${pjDto.pjNo}</span> --%>
-			                <a class="category" href="pj/list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
+
+			                <a class="category" href="list?category=${pjDto.pjCategory}">[${pjDto.pjCategory}]</a>
+
 			               <span> <a href=#><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>  ${pjDto.pjLikesNumber}</span>
 		                </div>
 		                
 		                <div class="row">
-			                <a class="name"href="pj/detail?pjNo=${pjDto.pjNo}">
+
+			                <a class="name"href="detail?pjNo=${pjDto.pjNo}">
 			                ${pjDto.pjName}</a>
                                 	
 		                </div>
@@ -199,6 +178,11 @@
                      </div>
 	       		</c:forEach>
         </div>
+	</div>     
+
+      
+   
+
 
         
         <!--페이지 네비게이터  -->

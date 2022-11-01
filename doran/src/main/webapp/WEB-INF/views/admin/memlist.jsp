@@ -74,14 +74,12 @@
 			     	</tr>
 				</c:forEach>
 			</tbody>
-			
-		
-			
 		</table>
 	</div>
 	</div>
 
 <!-- 페이지 네비게이터 -->
+
 <h3> 
 <div class= "row center">
 <c:choose>

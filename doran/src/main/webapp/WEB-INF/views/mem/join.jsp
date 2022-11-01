@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <jsp:include page="/WEB-INF/views/template/header3.jsp">
+	<jsp:param value="회원가입" name="title" />
+</jsp:include>
 
 	 		<link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,6 +94,25 @@
 	}
 	.fa-asterisk {
 		color:red;
+		
+		
+	}
+	
+	.input-list-search {
+    font-size: 20px;
+    padding: 0.75em;
+    outline: none;
+    }
+	
+	.w-30 {
+    width:30%;
+	}
+	
+	.mt-70 { margin-top: 70px;}
+	.p-80 {padding:80;}
+	
+	.solid-lines {
+	  border: 1px solid gray;
 	}
 	</style>
 
@@ -270,6 +293,7 @@
 	</script>
 
 	<form action="join" method="post" class="login-formcheck">
+	<div class="container-300 mt-70 solid-lines p-80 w-30">
 	<div class="container-350">
 		<div class="row center">
 			<h1>회원 가입</h1>
@@ -277,27 +301,27 @@
 
 		 <div class="row">
             <label>이메일</label>
-            <input type="text" name="memEmail" class="input w-100" placeholder="name@example.com"  required>
+            <input type="text" name="memEmail" class="solid-lines input-list-search w-100" placeholder="name@example.com"  required>
             <span></span>
         </div>
 
          <div class="row">
             <label>비밀번호</label>
-            <input type="password" name="memPw" class="input w-100" onblur="checkPassword();" placeholder="8-16자 영문 대/소문자/숫자/특수문자(~!@#*)" required>
+            <input type="password" name="memPw" class="solid-lines input-list-search w-100" onblur="checkPassword();" placeholder="8-16자 영문 대/소문자/숫자/특수문자(~!@#*)" required>
         	<span class="success-message">올바른 비밀번호 형식입니다</span>
             <span class="fail-message">8~16자로 반드시 영문 대/소문자, 숫자, 특수문자가 포함되어야 합니다</span>
         </div>
         
         <div class="row">
             <label>비밀번호 확인</label>
-            <input type="password" class="input w-100" id="password-check" placeholder="8-16자 영문 대/소문자/숫자/특수문자(~!@#*)" >
+            <input type="password" class="solid-lines input-list-search w-100" id="password-check" placeholder="8-16자 영문 대/소문자/숫자/특수문자(~!@#*)" >
             <span class="success-message">비밀번호가 일치합니다</span>
             <span class="fail-message">비밀번호가 일치하지 않습니다</span>
         </div>
 
 		<div class="row">
             <label>닉네임</label>
-            <input type="text" name="memNick" class="input w-100" placeholder="한글, 영어, 숫자로 2-10글자" required>
+            <input type="text" name="memNick" class="solid-lines input-list-search w-100" placeholder="한글, 영어, 숫자로 2-10글자" required>
        		<span class="NNNNN-message">이미 사용중인 닉네임입니다</span>
             <span class="NNNNY-message">사용 가능한 닉네임입니다!</span>
             <span class="fail-message">한글과 숫자 2~10글자로 작성해주세요</span>
@@ -305,11 +329,11 @@
 
 		<div class="row">
             <label>전화번호</label>
-            <input type="tel" name="memTel" class="input w-100" placeholder="- 제외하고 입력"  required>
+            <input type="tel" name="memTel" class="solid-lines input-list-search w-100" placeholder="- 제외하고 입력"  required>
        		<span></span>
         </div>
 
-		<div class="row">
+		<div class="row center w-100 input">
 			<select name="memRoute" required > 
 				<option>SNS</option>
 				<option>검색</option>
@@ -319,8 +343,9 @@
 			</select>
 		</div>
 		<div class="d-grid gap-2 d-md-block">
-  			<button class="btn btn-primary" type="submit">가입하기</button>
+  			<button class="btn btn-positive w-100" type="submit">가입하기</button>
 		</div>
+	</div>
 	</div>
 	</form>
 
