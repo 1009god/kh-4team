@@ -148,7 +148,7 @@ public class PjController {
 		//현재 접속중인 계정이 등록해둔 배송지 목록을 저장해서 넘김
 		int loginNo2=(int) session.getAttribute("loginNo");
 		model.addAttribute("AddressDto",addressDao.selectList(loginNo2));
-		
+		model.addAttribute("loginNo",loginNo2);
 		
 		return "pj/order";
 	};
