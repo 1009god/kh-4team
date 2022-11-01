@@ -102,9 +102,9 @@
 			  <!-- Additional required wrapper -->
 			  <div class="swiper-wrapper">
 			    <!-- Slides -->
-			    <div class="swiper-slide"><img src=""></div>
-			    <div class="swiper-slide">img src=""</div>
-			    <div class="swiper-slide">img src=""</div>
+			    <div class="swiper-slide"><img src="/img/burger.png"></div>
+			    <div class="swiper-slide"><img src="/img/test.jpg"></div>
+			    <div class="swiper-slide"><img src="/img/test1.png"></div>
 			    ...
 			  </div>
 			  <!-- If we need pagination -->

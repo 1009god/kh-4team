@@ -153,8 +153,8 @@ function shareKakao() {
 
     <div class="container-1100">
 
-    <div class="center">
-        <button class="btn btn-neutral" onclick="location.href='list?category=${PjDto.pjCategory}'">${PjDto.pjCategory}</button>
+    <div class="row">
+        ${PjDto.pjCategory}
     </div>
 
   
