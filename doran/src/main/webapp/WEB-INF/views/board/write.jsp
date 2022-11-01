@@ -7,6 +7,12 @@
 	<jsp:param value="메인페이지" name="title"/>
 </jsp:include>
 
+<style>
+	.solid-lines {
+	  border: 1px solid gray;
+	}
+</style>
+
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
@@ -22,7 +28,7 @@
 <div class="container-800 mt-40">
 	<div class="row left">
 		<label>제목</label>
-		<input class="input w-100" type="text" name="boardTitle" required>
+		<input class="input w-100 solid-lines" type="text" name="boardTitle" required>
 	</div>
 	<div class="row left">
 		<label>내용</label>

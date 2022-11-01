@@ -89,6 +89,19 @@
             font-size: 0.75em;
         }
         
+        .solid-lines {
+	  border: 1px solid gray;
+	}
+	
+	.input-list-search {
+    font-size: 20px;
+    padding: 0.75em;
+    outline: none;
+    
+}
+        
+        
+        
 </style>
 
 <!-- 테스트용 데이터 출력 -->
@@ -219,11 +232,11 @@
 		<!-- 검색창 -->
 		<div class="row center mt-30" >
 		<form action="list" method="get">
-			<select class="input" name="type" required>
-				<option value="board_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
+			<select style="display:none" class="input" name="type" required>
+				<option  value="board_title" <c:if test="${vo.type == 'board_title' }" >selected</c:if>>제목</option>
 			</select>
 			
-			<input class="input" type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
+			<input class="solid-lines input-list-search" type="search" name="keyword" placeholder="검색어" required value = "${param.keyword}">
 			<button class="btn btn-positive" type="submit">검색</button>
 		</form>
 	</div>
