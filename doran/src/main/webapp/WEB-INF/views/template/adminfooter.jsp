@@ -42,10 +42,10 @@
 						<h2>상태창</h2>	
 					</div>
 					<div class="row">
-						loginId : ${sessionScope.loginId}
+						loginId : ${sessionScope.AdminId}
 					</div>
 					<div class="row">
-						로그인 : ${sessionScope.loginId != null}
+						로그인 : ${sessionScope.AdminId != null}
 					</div>
 				</div>
 			</div>

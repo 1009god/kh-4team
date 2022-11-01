@@ -37,7 +37,7 @@ public class AdminSellerController {
 		vo.setCount(count);
 	
 		model.addAttribute("list",adminSellerDao.selectList(vo));
-		if(session.getAttribute("loginNo")!=null) {
+		if(session.getAttribute("AdminNo")!=null) {
 			return "admin/sellerlist";			
 		}
 		else {

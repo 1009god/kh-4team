@@ -1,5 +1,7 @@
 package com.kh.doran.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.kh.doran.entity.FaqDto;
 import com.kh.doran.error.TargetNotFoundException;
-import com.kh.doran.repository.DoranQDao;
 import com.kh.doran.repository.FaqDao;
 
 @Controller
@@ -28,17 +28,16 @@ public class AdminFaqController {
 
 
 	@GetMapping("/faqlist")
-	public String list(Model model,HttpSession session, @RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-		boolean isSearch = type != null && keyword != null;
-		if (isSearch) {// 검색
-			model.addAttribute("list", faqDao.selectList(type, keyword));
-		} else {// 목록
-			model.addAttribute("list", faqDao.selectList());
+	public String list(Model model,HttpSession session) {		
+		List<FaqDto> list =faqDao.selectList();
+		model.addAttribute("list", faqDao.selectList());		
+		if(session.getAttribute("AdminNo")!=null) {
+			return "/admin/faqlist";			
 		}
-		return "admin/faqlist";
+		else {
+			return "/admin/login";
+		}
 	}
-
 	@GetMapping("/faqdetail")
 	public String detail(Model model, @RequestParam int faqNo,HttpSession session) {
 		FaqDto faqDto = faqDao.selectOne(faqNo);
@@ -49,7 +48,7 @@ public class AdminFaqController {
 		else {
 			return "admin/login";
 		}
-	};
+	}
 
 
 	@GetMapping("/faqwrite")

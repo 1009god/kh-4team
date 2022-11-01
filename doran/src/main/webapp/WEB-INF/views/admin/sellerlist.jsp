@@ -113,7 +113,7 @@
 
 
 <c:forEach var="i"  begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<a href="memlist?p=${i}&${vo.parameter()}">${i}</a>
+	<a href="sellerlist?p=${i}&${vo.parameter()}">${i}</a>
 </c:forEach>
 
 <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
