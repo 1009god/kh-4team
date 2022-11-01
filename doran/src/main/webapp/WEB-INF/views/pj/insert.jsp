@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
-	<jsp:param value="${sellerdto.sellerMemNo} 판매자 정보" name="title" />
+	<jsp:param value="${sellerdto.sellerMemNo} 프로젝트 올리기" name="title" />
 </jsp:include>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">

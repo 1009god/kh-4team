@@ -135,6 +135,13 @@ public class MemDaoImpl implements MemDao {
 		Object[] param = {memEmail, memTel};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+
+	@Override
+	public MemDto findPw(int memNo) {
+		String sql = "select * from mem where mem_no = ?";
+		Object[] param = {memNo};
+		return  jdbcTemplate.query(sql, extractor, param);
+	}
 	
 	
 	

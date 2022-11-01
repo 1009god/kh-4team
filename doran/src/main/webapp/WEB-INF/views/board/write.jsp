@@ -5,6 +5,10 @@
     
 <h1>게시글 작성</h1>
 
+<jsp:include page="/WEB-INF/views/template/header2.jsp">
+	<jsp:param value="메인페이지" name="title"/>
+</jsp:include>
+
 <form action="write" method="post" enctype="multipart/form-data">
 <table border = "1" width ="500">
 	<tbody>
@@ -37,4 +41,7 @@
 	</tfoot>
 </table>
 </form>
+
+<%-- footer.jsp 를 동적으로 불러와라 --%>
+<jsp:include page="/WEB-INF/views/template/footer2.jsp"></jsp:include>
     

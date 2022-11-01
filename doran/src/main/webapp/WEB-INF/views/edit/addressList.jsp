@@ -31,7 +31,14 @@ margin : 30px
  .atag {
    text-decoration: none;
    color:white;
-}
+   }
+   
+   .box {
+   margin: 10px;
+   padding: 10px;
+   
+   }
+
 
 </style>
 
@@ -51,15 +58,15 @@ margin : 30px
  	<hr style="border:1px color= silver;" width="100%">
 </div> 
 
+</div>
 
-
-<div class="container-1400 left" >
+<div class="container-800 left" >
 	
 	<div width="50%">
 		등록된 배송지<button class="btn-round"><a class="atag" href="http://localhost:8888/edit/address_plus">배송지 추가</a></button>
 		
 		</div>
-		<div class="container-1400 left" width = "50%">
+		<div class="container-800 left box" width = "50%">
 		<c:forEach var= "dto" items = "${list}"> <!-- 컨트롤러에서 넘어온 list -->
 		
 		<div class="border">
