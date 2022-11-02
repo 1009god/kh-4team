@@ -92,7 +92,7 @@ text-decoration: none;
 		</c:choose>						    
 		    </td>
 		    <td class="">
-		    	<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		    	<span style="padding-left:20px"> ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
 		    
 		    </td>
 		  </tr>
