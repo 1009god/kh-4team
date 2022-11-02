@@ -101,6 +101,7 @@
     font-size: 20px;
     padding: 0.75em;
     outline: none;
+     border: 1px solid gray;
     
 }
         

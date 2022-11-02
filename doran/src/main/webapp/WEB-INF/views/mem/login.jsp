@@ -25,7 +25,7 @@
 <body>      
 
  <div class="" style="float: left;">
-      <img src="/img/DoranMini.png" width="30%">
+     <a href="/"><img src="/img/DoranMini.png" width="30%"></a>
     </div>
     <div class=container style="float: right;"></div>
     <div class="login-page">
