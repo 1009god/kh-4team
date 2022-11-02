@@ -88,7 +88,7 @@ public class AdminNoticeController {
 			@RequestParam List<MultipartFile> files,
 			HttpSession session, RedirectAttributes attr) throws IllegalStateException, IOException {
 		//session 에 있는 회원 번호를 작성자로 추가한 뒤 등록해야 함
-		int adminNo = (int)session.getAttribute("loginNo");
+		int adminNo = (int)session.getAttribute("AdminNo");
 		noticeDto.setNoticeAdminNo(adminNo);
 		
 		int noticeNo = noticeService.write(noticeDto, files);
