@@ -214,7 +214,7 @@
 		    		<h1 style = "color : #6495ED">진행중인 펀딩이 없습니다</h1>
 		    	</div>
 		    	<div class="row center" >
-		    		<a href="/" style="text-decoration : none; color : #0072b2;"><h2>
+		    		<a href="${pageContext.request.contextPath}/" style="text-decoration : none; color : #0072b2;"><h2>
 		    		<i class="fa-solid fa-house"></i> 홈으로</h2></a>
 	    		</div>
 	    	</div>

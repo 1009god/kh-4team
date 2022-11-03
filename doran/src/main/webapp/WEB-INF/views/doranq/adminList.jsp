@@ -63,8 +63,8 @@
 			</td>
 			
 			<c:choose>
-				<c:when test="${doranQDto.doranQMemNo==0}">
-					<td></td>
+				<c:when test="${doranQDto.doranQAdminNo !empty}">
+					<td>관리자</td>
 				</c:when>
 				<c:otherwise>
 					<td>${doranQDto.doranQMemNo}</td>

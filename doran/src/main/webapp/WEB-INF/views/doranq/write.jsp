@@ -49,7 +49,7 @@
 		<textarea name="doranQContent"></textarea>
 	</div>
 	<div class="row right">
-		<button class="btn btn-positive" type="submit"><img src="/img/pencil.png" width="20" height="20"></button>
+		<button class="btn btn-positive" type="submit"><img src="${pageContext.request.contextPath}/img/pencil.png" width="20" height="20"></button>
 	</div>
 </div>
 </div>
