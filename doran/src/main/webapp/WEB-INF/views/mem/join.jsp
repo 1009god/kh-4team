@@ -152,7 +152,7 @@
 		
 			
 			$.ajax({
-				url:"http://localhost:8888/rest/mem/id?memEmail="+memEmail,
+				url:"${pageContext.request.contextPath}/rest/mem/id?memEmail="+memEmail,
 				method:"get",
 				success:function(resp){
 					//$("input[name=memEmail").next("span").text(resp);
@@ -199,7 +199,7 @@
                     //url:"http://localhost:8888/rest/mem/nick?memberNick="+memberNick,
                     //method:"get",
 
-                    url:"http://localhost:8888/rest/mem/nick",
+                    url:"${pageContext.request.contextPath}/rest/mem/nick",
                     method:"post",
                     data:{
                         memNick:memNick
