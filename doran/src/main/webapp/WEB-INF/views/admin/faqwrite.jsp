@@ -22,7 +22,7 @@
 	</div>
 	
 	<div class="row left">
-		<input class="input" name="faqTitle" placeholder="제목" required type="text">
+		<input class="input w-100" name="faqTitle" placeholder="제목" required type="text">
 	</div>
 	<div class="row center">
 		<textarea class="input w-100" name="faqContent" placeholder="내용" required rows="8"></textarea>

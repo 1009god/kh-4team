@@ -111,7 +111,7 @@
 	<thead>
 	<tr>
 		<tr>
-			<th width="45%">제목</th>
+			<th width="70%">제목</th>
 			<th>작성일</th>
 		</tr>
 	</thead>

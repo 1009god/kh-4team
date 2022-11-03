@@ -18,7 +18,7 @@
 </style>
 
 <div class="container-300 mt-100solid-lines p-80 w-30">
-<h1 align="center">이메일 찾기</h1>
+<h1 align="center">회원 탈퇴</h1>
 <form action="goodbye" method="post">
 	<div class="row center">
 		<input class="input w-100 solid-lines mt-30"  type="password" name="memPw" placeholder="비밀번호를 입력해 주세요" required>

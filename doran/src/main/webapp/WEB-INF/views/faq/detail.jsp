@@ -8,8 +8,8 @@
 </jsp:include>
 
 <div class="container-800 mt-40 mb-40">
-	<div class="row center">
-<table border = "1" width = "500"  class="table table-border mt-50">
+	
+<table border = "1" width = "100%" class="table table-border mt-50">
 	<tbody>
 		<tr>
 			<th width="10%">번호</th>
@@ -19,7 +19,7 @@
 			<th>제목</th>
 			<td>${faqDto.faqTitle}</td>
 		</tr>
-		<tr height="200" valign="top"">
+		<tr height="200px" valign="top">
 			<th>내용</th>
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 --> <pre>${faqDto.faqContent}</pre>
