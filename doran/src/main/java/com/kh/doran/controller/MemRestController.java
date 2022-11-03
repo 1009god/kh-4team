@@ -17,13 +17,13 @@ import com.kh.doran.repository.MemDao;
 
 @CrossOrigin
 @RestController //view 사용 x, 비동기식
-@RequestMapping("/rest/mem")
+@RequestMapping("${pageContext.request.contextPath}/rest/mem")
 public class MemRestController { //아이디 검사
 	
 	@Autowired
 	private MemDao memDao;
 	
-	@GetMapping("/id")
+	@GetMapping("${pageContext.request.contextPath}/id")
 	public String id(@RequestParam String memEmail) {
 		MemDto memDto = memDao.selectOne(memEmail);
 		if(memDto == null) {
@@ -34,7 +34,7 @@ public class MemRestController { //아이디 검사
 		}
 	}
 	
-	@RequestMapping("/nick")
+	@RequestMapping("${pageContext.request.contextPath}/nick")
 	public String nick(@RequestParam String memNick) {
 		MemDto memDto = memDao.findByNickname(memNick);
 		if(memDto == null) {
@@ -45,19 +45,7 @@ public class MemRestController { //아이디 검사
 		}
 	}
 	
-//	@RequestMapping("/pw")
-//	public String pw(@RequestParam String memPw, HttpSession session) {
-//		 int memNo = (int)session.getAttribute("loginNo");  
-//		 MemDto memDto = memDao.findByPw(memNo, memPw);
-//		 if(memDto != null) { //디비가 비어있는게 아니면
-//			 return "NNNNN"; //old 비밀번호가 일치
-//		 }
-//		 else {
-//			 return "NNNNY"; // 비밀번호 불일치
-//		 }
-//	}
-	
-	@RequestMapping("/pw")
+	@RequestMapping("${pageContext.request.contextPath}/pw")
 	public String pw(HttpSession session, @RequestParam int memPw) {
 		 int memNo = (int)session.getAttribute("loginNo");  
 		 MemDto memDto = memDao.selectOne(memNo);  //selectOne을 이용한 비밀번호 수정 비동기통신

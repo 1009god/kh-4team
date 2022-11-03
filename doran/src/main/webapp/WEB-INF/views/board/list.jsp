@@ -16,7 +16,6 @@
 	 div {
             /* border:1px dotted gray; */
         }
-
         /*
             테이블 디자인
             - 테이블은 기본디자인이 너무 많아서 디자인하기 까다로운 태그 중 하나
@@ -118,7 +117,7 @@
 	<thead>
 	<tr>
 		<td align = "right" colspan="6">
-			<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
+			<a href="write"><img src="${pageContext.request.contextPath}/img/pencil.png" width="20" height="20"></a>
 		</td>
 		<tr>
 			<th>번호</th>
@@ -171,7 +170,7 @@
 	<tfoot>
 		<tr>
 			<td align = "right" colspan="6">
-				<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
+				<a href="write"><img src="${pageContext.request.contextPath}/img/pencil.png" width="20" height="20"></a>
 			</td>
 		</tr>
 	</tfoot>
