@@ -77,7 +77,7 @@
 				<td>
 					<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
 					<c:forEach var="filesDto" items="${filesList}" >		
-						<img width="auto" height="auto" src="http://localhost:8888/files/download/${filesDto.filesNo}" >
+						<img width="auto" height="auto" src="${pageContext.request.contextPath}/files/download/${filesDto.filesNo}" >
 					</c:forEach>
 					<pre>${boardDto.boardContent}</pre>
 				</td>
@@ -87,7 +87,7 @@
 		<tfoot>
 			<tr>
 				<td colspan="2" align="right">
-					<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
+					<a href="write"><img src="${pageContext.request.contextPath}/img/pencil.png" width="20" height="20"></a>
 		
 						<%--
 							회원은 자신의 글만 수정/삭제 가능하도록 처리
@@ -95,10 +95,10 @@
 						<c:set var="owner" value="${loginNo == boardDto.boardMemNo}"></c:set>
 						
 						<c:if test="${owner}">
-							<a href="edit?boardPostNo=${boardDto.boardPostNo}"><img src="/img/edit.png" width="20" height="20"></a>
-							<a href="delete?boardPostNo=${boardDto.boardPostNo}"><img src="/img/delete.png" width="20" height="20"></a>
+							<a href="edit?boardPostNo=${boardDto.boardPostNo}"><img src="${pageContext.request.contextPath}/img/edit.png" width="20" height="20"></a>
+							<a href="delete?boardPostNo=${boardDto.boardPostNo}"><img src="${pageContext.request.contextPath}/img/delete.png" width="20" height="20"></a>
 						</c:if>
-						<a href="list"><img src="/img/list.png" width="20" height="20"></a>
+						<a href="list"><img src="${pageContext.request.contextPath}/img/list.png" width="20" height="20"></a>
 				</td>
 			</tr>
 		</tfoot>
@@ -122,7 +122,7 @@
 		<tr class="view">
 			<td width="90%">
 			<!-- 작성자 -->
-			<img src="/img/smile.png" width="20" height="20">
+			<img src="${pageContext.request.contextPath}/img/smile.png" width="20" height="20">
 			${replyDto.memNick}
 			<c:if test="${boardDto.boardMemNo == replyDto.replyMemNo}">
 			<span>(작성자)</span>
@@ -135,8 +135,8 @@
 			<th>
 				<!-- 수정과 삭제는 현재 사용자가 남긴 댓글에만 표시 -->
 				<c:if test="${loginNo == replyDto.replyMemNo}">
-					<a style="display:block; margin:10px 0px;" class="edit-btn"><img src="/img/edit.png" width="20" height="20"></a>
-					<a style="display:block; margin:10px 0px;" class="delete-btn" href="reply/delete?replyNo=${replyDto.replyNo}&replyBoardPostNo=${replyDto.replyBoardPostNo}"><img src="/img/delete.png" width="20" height="20"></a>
+					<a style="display:block; margin:10px 0px;" class="edit-btn"><img src="${pageContext.request.contextPath}/img/edit.png" width="20" height="20"></a>
+					<a style="display:block; margin:10px 0px;" class="delete-btn" href="${pageContext.request.contextPath}/reply/delete?replyNo=${replyDto.replyNo}&replyBoardPostNo=${replyDto.replyBoardPostNo}"><img src="${pageContext.request.contextPath}/img/delete.png" width="20" height="20"></a>
 				</c:if>
 			</th>
 		</tr>
@@ -148,8 +148,8 @@
 					<input type="hidden" name="replyNo" value="${replyDto.replyNo}">
 					<input type="hidden" name="replyBoardPostNo" value="${replyDto.replyBoardPostNo}">
 					<textarea name="replyContent" rows="5" cols="55" required>${replyDto.replyContent}</textarea>
-					<button type="submit"><img src="/img/edit.png" width="20" height="20"></button>
-					<a class="cancel-btn"><img src="/img/cancel.png" width="20" height="20"></a>
+					<button type="submit"><img src="${pageContext.request.contextPath}/img/edit.png" width="20" height="20"></button>
+					<a class="cancel-btn"><img src="${pageContext.request.contextPath}/img/cancel.png" width="20" height="20"></a>
 				</form>
 			</th>
 		</tr>

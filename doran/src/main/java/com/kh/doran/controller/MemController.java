@@ -20,7 +20,7 @@ import com.kh.doran.repository.SellerDao;
 
 
 @Controller
-@RequestMapping("/mem")
+@RequestMapping("${pageContext.request.contextPath}/mem")
 public class MemController {
 	@Autowired
 	private MemDao memDao;
@@ -28,32 +28,32 @@ public class MemController {
 	private SellerDao sellerDao;
 	
 	
-	@GetMapping("/joinContent")
+	@GetMapping("${pageContext.request.contextPath}/joinContent")
 	public String joinContent() {
 		return "mem/joinContent";
 	}
 	
-	@GetMapping("/join") 
+	@GetMapping("${pageContext.request.contextPath}/join") 
 	public String join() {
 		return "mem/join";
 	}
-	@PostMapping("/join")
+	@PostMapping("${pageContext.request.contextPath}/join")
 	public String join(@ModelAttribute MemDto memDto) {
 		memDao.insert(memDto);
 		return "redirect:join_finish";
 	}
 	
-	@GetMapping("/join_finish")
+	@GetMapping("${pageContext.request.contextPath}/join_finish")
 	public String joinFinish() {
 		return "mem/joinFinish"; //완료 페이지는 홈으로? 아님 축하드린다는 창?
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("${pageContext.request.contextPath}/login")
 	public String login() {
 		return "mem/login";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("${pageContext.request.contextPath}/login")
 	public String login(
 			@ModelAttribute MemDto inputDto,
 			@ModelAttribute SellerDto inputDto1,//사용자가 입력한 정보
@@ -90,7 +90,7 @@ public class MemController {
 		}
 	}
 	
-	@GetMapping("/logout")
+	@GetMapping("${pageContext.request.contextPath}/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId"); //세션에 loginId 라는 이름의 데이터 삭제
 		session.removeAttribute("loginNo"); //세션에 loginNo 라는 이름의 데이터 삭제
@@ -99,12 +99,12 @@ public class MemController {
 		return "redirect:/"; //메인페이지로 강제 이동
 	}
 	
-	@GetMapping("/findEmail")
+	@GetMapping("${pageContext.request.contextPath}/findEmail")
 	public String findEmail() {
 		return "mem/findEmail";
 	}
 	
-	@PostMapping("/findEmail")
+	@PostMapping("${pageContext.request.contextPath}/findEmail")
 	public String findEmail(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
 		MemDto findDto = memDao.findEmail(inputDto.getMemTel());
 		if(findDto == null) {
@@ -116,12 +116,12 @@ public class MemController {
 		}
 	}
 	
-	@GetMapping("/findPw")
+	@GetMapping("${pageContext.request.contextPath}/findPw")
 	public String findPw() {
 		return "mem/findPw";
 	}
 	
-	@PostMapping("/findPw")
+	@PostMapping("${pageContext.request.contextPath}/findPw")
 	public String findPw(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
 		MemDto findDto = memDao.findPw(inputDto.getMemEmail(), inputDto.getMemTel());
 		if(findDto == null) {

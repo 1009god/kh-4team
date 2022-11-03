@@ -25,7 +25,7 @@ import com.kh.doran.vo.NoticeListSearchVO;
 
 
 @Controller
-@RequestMapping("/notice")
+@RequestMapping("${pageContext.request.contextPath}/notice")
 public class NoticeController {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class NoticeController {
 
 //	참고 : ModelAttribute로 수신한 데이터는 자동으로 Model에 첨부된다
 //	- 옵션에 name을 작성하면 해당하는 이름으로 model에 첨부
-	@RequestMapping("/list")
+	@RequestMapping("${pageContext.request.contextPath}/list")
 	public String list(Model model,
 			@ModelAttribute(name="vo") NoticeListSearchVO vo) {
 		//페이지 네비게이터를 위한 게시글 수를 구한다
@@ -54,7 +54,7 @@ public class NoticeController {
 		return "notice/list";
 	}
 
-	@GetMapping("/detail")
+	@GetMapping("${pageContext.request.contextPath}/detail")
 	public String detail(
 		@RequestParam int noticeNo, Model model, HttpSession session) {
 		model.addAttribute("noticeDto", noticeDao.selectOne(noticeNo));
