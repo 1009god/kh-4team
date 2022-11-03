@@ -6,6 +6,9 @@
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
 	<jsp:param value="회원가입" name="title"/>
 </jsp:include>
+<script>
+   var root = "${pageContext.request.contextPath}";
+</script>
 	<style>
 	
         .input.NNNNN ~ .NNNNN-message ,
@@ -97,6 +100,7 @@
 	</style>
 	 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
+    
 	
   //AJAX 이용시 주의사항
     //- 기존처럼 즉시 검사가 불가능하므로 상태를 저장할 객체 필요
@@ -131,7 +135,7 @@
 		
 			
 			$.ajax({
-				url:"${pageContext.request.contextPath}/rest/mem/id?memEmail="+memEmail,
+				url:root + "/rest/mem/id?memEmail="+memEmail,
 				method:"get",
 				success:function(resp){
 					if(resp == "NNNNY") {
@@ -172,7 +176,7 @@
             if(judge){
                 var that = this;//this를 보관
                 $.ajax({
-                    url:"${pageContext.request.contextPath}/rest/mem/nick",
+                    url:root + "/rest/mem/nick",
                     method:"post",
                     data:{
                         memNick:memNick
