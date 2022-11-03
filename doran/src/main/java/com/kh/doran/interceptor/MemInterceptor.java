@@ -39,7 +39,7 @@ public class MemInterceptor implements HandlerInterceptor{
 		if(loginId == null) {//비회원. 2-(2)
 			
 			//[1] 로그인 페이지로 리다이렉트
-			response.sendRedirect("/mem/login");
+			response.sendRedirect("${pageContext.request.contextPath}/mem/login");
 			
 			//[2] HTTP 상태 코드 중에서 미인증(401)을 반환
 			//- 추가로 상태번호에 따른 처리가 필요하다

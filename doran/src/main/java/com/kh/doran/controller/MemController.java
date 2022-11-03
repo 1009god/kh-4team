@@ -20,7 +20,7 @@ import com.kh.doran.repository.SellerDao;
 
 
 @Controller
-@RequestMapping("/mem")
+@RequestMapping("${pageContext.request.contextPath}/mem")
 public class MemController {
 	@Autowired
 	private MemDao memDao;
@@ -28,52 +28,49 @@ public class MemController {
 	private SellerDao sellerDao;
 	
 	
-	@GetMapping("/joinContent")
+	@GetMapping("${pageContext.request.contextPath}/joinContent")
 	public String joinContent() {
 		return "mem/joinContent";
 	}
 	
-	@GetMapping("/join") 
+	@GetMapping("${pageContext.request.contextPath}/join") 
 	public String join() {
 		return "mem/join";
 	}
-	@PostMapping("/join")
+	@PostMapping("${pageContext.request.contextPath}/join")
 	public String join(@ModelAttribute MemDto memDto) {
 		memDao.insert(memDto);
 		return "redirect:join_finish";
 	}
 	
-	@GetMapping("/join_finish")
+	@GetMapping("${pageContext.request.contextPath}/join_finish")
 	public String joinFinish() {
 		return "mem/joinFinish"; //완료 페이지는 홈으로? 아님 축하드린다는 창?
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("${pageContext.request.contextPath}/login")
 	public String login() {
 		return "mem/login";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("${pageContext.request.contextPath}/login")
 	public String login(
 			@ModelAttribute MemDto inputDto,
 			@ModelAttribute SellerDto inputDto1,//사용자가 입력한 정보
 			HttpSession session) {
 		MemDto findDto = memDao.selectOne(inputDto.getMemEmail()); //사용자가 입력한 이메일을 인풋dto에 담아서 Dao에 있는 이메일로 단일조회하는 기능을 쓴다(db를 가는거다)
+		SellerDto sellerfindDto = sellerDao.selectOne(findDto.getMemNo()); //인풋dto를 통해 아이디(이메일)로 셀러를 조회한 것에서 
 		
 		
 		if(findDto == null) { //아이디 틀리면 로그인창
 			return "redirect:login?error"; 
 		}
-		
-		
-		SellerDto sellerfindDto = sellerDao.selectOne(findDto.getMemNo()); //인풋dto를 통해 아이디(이메일)로 셀러를 조회한 것에서 
-		
-		
+				
 		boolean passwordMatch = inputDto.getMemPw().equals(findDto.getMemPw());
 		if(passwordMatch) {	//비밀번호가 맞으면
 			if(sellerfindDto==null) { // 검색해서 나온 결과가 없으면 				
 				session.setAttribute("loginId", inputDto.getMemEmail()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음
-				session.setAttribute("sellerCheck", inputDto1.getSellerCheck()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음				
+				session.setAttribute("sellerCheck", sellerfindDto.getSellerCheck()); //loginId = 회원 이메일을 이 이름으로 저장 세션 셋 어쩌구 ("이름", "값); 회원 번호만 세션에 넣음				
 				session.setAttribute("loginNo", findDto.getMemNo()); //loginNo = 회원 번호 세션에 저장
 				session.setAttribute("memNick", inputDto.getMemNick());
 				return "redirect:/";
@@ -90,7 +87,7 @@ public class MemController {
 		}
 	}
 	
-	@GetMapping("/logout")
+	@GetMapping("${pageContext.request.contextPath}/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId"); //세션에 loginId 라는 이름의 데이터 삭제
 		session.removeAttribute("loginNo"); //세션에 loginNo 라는 이름의 데이터 삭제
@@ -99,12 +96,12 @@ public class MemController {
 		return "redirect:/"; //메인페이지로 강제 이동
 	}
 	
-	@GetMapping("/findEmail")
+	@GetMapping("${pageContext.request.contextPath}/findEmail")
 	public String findEmail() {
 		return "mem/findEmail";
 	}
 	
-	@PostMapping("/findEmail")
+	@PostMapping("${pageContext.request.contextPath}/findEmail")
 	public String findEmail(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
 		MemDto findDto = memDao.findEmail(inputDto.getMemTel());
 		if(findDto == null) {
@@ -116,12 +113,12 @@ public class MemController {
 		}
 	}
 	
-	@GetMapping("/findPw")
+	@GetMapping("${pageContext.request.contextPath}/findPw")
 	public String findPw() {
 		return "mem/findPw";
 	}
 	
-	@PostMapping("/findPw")
+	@PostMapping("${pageContext.request.contextPath}/findPw")
 	public String findPw(HttpSession session, Model model, @ModelAttribute MemDto inputDto) {
 		MemDto findDto = memDao.findPw(inputDto.getMemEmail(), inputDto.getMemTel());
 		if(findDto == null) {

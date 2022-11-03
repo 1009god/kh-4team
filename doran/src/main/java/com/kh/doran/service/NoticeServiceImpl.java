@@ -34,8 +34,6 @@ public class NoticeServiceImpl implements NoticeService {
 				//(+ 추가) 게시글이 등록된 다음 파일이 있다면 해당 파일을 등록 및 연결
 				//- 첨부파일이 없어도 리스트에는 1개의 객체가 들어있다
 				for(MultipartFile file : files) {
-					if(!file.isEmpty()) {
-						System.out.println("첨부파일 발견");
 						
 						int filesNo = filesDao.sequence();
 						filesDao.insert(FilesDto.builder()
@@ -51,7 +49,6 @@ public class NoticeServiceImpl implements NoticeService {
 						
 						//+ 연결 테이블에 연결 정보를 저장 (게시글 번호, 첨부파일 번호)
 						noticeDao.connectFiles(noticeNo, filesNo);
-					}
 				}
 		return noticeNo;
 	}

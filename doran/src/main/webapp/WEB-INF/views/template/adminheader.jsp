@@ -48,7 +48,7 @@
 				<c:choose>
 					<c:when test="${login}">
 						<li><a href="/admin">홈</a></li>
-						<li class="right-menu"><a href="#">${AdminId} 님</a>
+						<li class="right-menu"><a href="#">${AdminId} </a>
 							<ul>
 								<li><a href="/admin/logout">로그아웃</a></li>
 							</ul></li>

@@ -43,8 +43,8 @@
 	</div>
 
 	<div class="row right">
-		<a class="btn btn-neutral" href="list"><img src="/img/list.png" width="20" height="20"></a>
-		<button class="btn btn-positive" type="submit"><img src="/img/edit.png" width="20" height="20"></button>
+		<a class="btn btn-neutral" href="list"><img src="${pageContext.request.contextPath}/img/list.png" width="20" height="20"></a>
+		<button class="btn btn-positive" type="submit"><img src="${pageContext.request.contextPath}/img/edit.png" width="20" height="20"></button>
 	</div>
 
 </div>
