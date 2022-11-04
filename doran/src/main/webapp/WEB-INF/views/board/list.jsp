@@ -103,6 +103,9 @@
      border: 1px solid gray;
     
 }
+	.a{
+		color : black;
+	}
         
         
         
@@ -132,7 +135,7 @@
 		<tr>
 			<td>${boardDto.boardPostNo}</td>
 			<td align="left">
-				<a href="detail?boardPostNo=${boardDto.boardPostNo}">
+				<a class="a" href="detail?boardPostNo=${boardDto.boardPostNo}">
 					${boardDto.boardTitle}
 				</a>
 				

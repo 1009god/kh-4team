@@ -27,9 +27,9 @@ display: inline-block;
                     <div class="row text-center ">&copy; 2022 Company, Inc</div>
                    
                 </div>
-                <div style="float: right;" class="box float-right">
+                <div style="float: right; " class="box float-right" >
 
-                   <a class="btn btn-positive" href="/doran-q/write" role="button">도란도란 1:1 문의</a>
+                   <a style="color:	#696969;"class="btn btn-positive" href="/doran-q/write" role="button">도란도란 1:1 문의</a>
 
                 </div>
               </footer>

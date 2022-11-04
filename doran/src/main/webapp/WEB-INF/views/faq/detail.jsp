@@ -6,9 +6,17 @@
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
 	<jsp:param value="FAQ" name="title" />
 </jsp:include>
+<style>
+	.line{
+		 line-height: 2rem;
+	}
+	.a{
+		color : black;
+	}
+</style>
 
-<div class="container-800 mt-40 mb-40">
-	
+<div class="container-900 mt-40 mb-40">
+
 <table border = "1" width = "100%" class="table table-border mt-50">
 	<tbody>
 		<tr>
@@ -21,8 +29,8 @@
 		</tr>
 		<tr height="200px" valign="top">
 			<th>내용</th>
-			<td>
-				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 --> <pre>${faqDto.faqContent}</pre>
+			<td class= "line">
+				${faqDto.faqContent}
 			</td>
 		</tr>
 	</tbody>

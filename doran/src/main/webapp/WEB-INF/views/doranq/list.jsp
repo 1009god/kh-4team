@@ -60,6 +60,9 @@
     outline: none;
     
 }
+	.a{
+		color : black;
+	}
 	
 </style>
 
@@ -104,7 +107,7 @@
 			<c:forEach var="i" begin="1" end="${doranQDto.doranQDepth}" step="1">
 				&nbsp;&nbsp;
 			</c:forEach>
-			<a href="detail?doranQNo=${doranQDto.doranQNo}">${doranQDto.doranQTitle}</a>
+			<a class="a" href="detail?doranQNo=${doranQDto.doranQNo}">${doranQDto.doranQTitle}</a>
 			</td>
 			
 			<c:choose>
