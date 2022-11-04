@@ -99,7 +99,7 @@
    
 function saveAddress(){
     document.frm.target="ifrm";
-    document.frm.action="http://localhost:8888/edit/address_plus";
+    document.frm.action="${pageContext.request.contextPath}/edit/address_plus";
     document.frm.submit();
     location.reload();
 }
