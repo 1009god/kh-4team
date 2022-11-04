@@ -31,7 +31,7 @@ import com.kh.doran.vo.BoardDetailVO;
 import com.kh.doran.vo.BoardListSearchVO;
 
 @Controller
-@RequestMapping("${pageContext.request.contextPath}/board")
+@RequestMapping("/board")
 public class BoardController {
 	
 	@Autowired
@@ -55,7 +55,7 @@ public class BoardController {
 	
 	//modelAttribute 로 수신한 데이터는 자동으로 model 에 첨부됨
 	//- 옵션에 name 을 작성하면 해당하는 이름으로 model 에 첨부
-	@RequestMapping("${pageContext.request.contextPath}/list")
+	@RequestMapping("/list")
 	public String list(Model model,
 			@ModelAttribute(name="vo") BoardListSearchVO vo) {
 		//페이지 네비게이터를 위한 게시글 수를 구한다
@@ -66,7 +66,7 @@ public class BoardController {
 		return "board/list";
 	}
 	
-	@GetMapping("${pageContext.request.contextPath}/detail")
+	@GetMapping("/detail")
 	public String detail(@RequestParam int boardPostNo, Model model,
 			HttpSession session) {
 //		1. 조회수를 증가시켜서 데이터를 불러온다
@@ -108,12 +108,12 @@ public class BoardController {
 		return "board/detail";
 	}
 	
-	@GetMapping("${pageContext.request.contextPath}/write")
+	@GetMapping("/write")
 	public String write() {
 		return "board/write";
 	}
 	
-	@PostMapping("${pageContext.request.contextPath}/write") 
+	@PostMapping("/write") 
 	public String write(
 			@ModelAttribute BoardDto boardDto,
 			@RequestParam List<MultipartFile> files,
@@ -128,7 +128,7 @@ public class BoardController {
 		return "redirect:detail";
 	}
 	
-	@GetMapping("${pageContext.request.contextPath}/delete")
+	@GetMapping("/delete")
 	public String delete(@RequestParam int boardPostNo) {
 		boolean result = boardService.remove(boardPostNo);
 	      if(result) {//삭제 성공
@@ -140,7 +140,7 @@ public class BoardController {
 		
 	}
 	
-	@GetMapping("${pageContext.request.contextPath}/edit")
+	@GetMapping("/edit")
 	public String edit(@RequestParam int boardPostNo, Model model) {
 		BoardDetailVO boardDto = boardDao.selectOne(boardPostNo);
 		if(boardDto == null) { //없는 경우 내가 만든 예외 발생
@@ -150,7 +150,7 @@ public class BoardController {
 		return "board/edit";
 	}
 	
-	@PostMapping("${pageContext.request.contextPath}/edit")
+	@PostMapping("/edit")
 	public String edit(@ModelAttribute BoardDto boardDto,
 			RedirectAttributes attr) {
 		boolean result = boardDao.update(boardDto);
@@ -164,7 +164,7 @@ public class BoardController {
 		}
 	}
 	
-	@PostMapping("${pageContext.request.contextPath}/reply/write")
+	@PostMapping("/reply/write")
 	public String replyWrite(
 			@ModelAttribute ReplyDto replyDto,
 			RedirectAttributes attr, HttpSession session) {
@@ -176,7 +176,7 @@ public class BoardController {
 		return "redirect:/board/detail"; //절대
 	}
 	
-	@GetMapping("${pageContext.request.contextPath}/reply/delete")
+	@GetMapping("/reply/delete")
 	public String replyDelete(
 			@RequestParam int replyNo,
 			@RequestParam int replyBoardPostNo,
@@ -186,7 +186,7 @@ public class BoardController {
 		return "redirect:/board/detail";
 	}
 	
-	@PostMapping("${pageContext.request.contextPath}/reply/edit")
+	@PostMapping("/reply/edit")
 	public String replyEdit(
 			@ModelAttribute ReplyDto replyDto,
 			RedirectAttributes attr) {
