@@ -37,6 +37,8 @@ public interface AdminDao {
 		int listCount(MemListSearchVO vo);
 		
 		
+		
+		
 		//프로젝트 테이블
 		
 		

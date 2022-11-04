@@ -89,6 +89,9 @@
     outline: none;
     
 }
+	.a{
+		color : black;
+	}
 </style>
 
 <jsp:include page="/WEB-INF/views/template/header2.jsp">
@@ -125,7 +128,7 @@
 					<tr>
 						<td>${faqDto.faqNo}</td>
 						<td align="left">
-							<a href="detail?faqNo=${faqDto.faqNo}">
+							<a class="a" href="detail?faqNo=${faqDto.faqNo}">
 								${faqDto.faqTitle}
 							</a>
 						</td>
