@@ -212,16 +212,16 @@ nav li a:hover {
 							     <!-- 검색창 -->
                                 <div class="row right">
 							        <form action="/pj/list" method="get">
-							            <select name="type">
+							            <select style="height:21px" name="type">
 							                <option value="pj_name"
 							<c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>
 							                <option value="pj_category"
 							<c:if test="${pjListSearchVo.type=='pj_category'}">selected</c:if>>프로젝트 카테고리</option>
 							            </select>
 							                
-							            <input type="search" name="keyword" placeholder="검색어"
+							            <input type="search" name="keyword" autocomplete="off" placeholder="검색어" style="width:"
 						required value="${pjListSearchVo.keyword}">
-							            <button type="submit">검색</button>
+							            <button style = "background-color:#F0F8FF; border:solid 1px lightgray;" type="submit">검색</button>
 							        </form>
   								</div>    
                         
