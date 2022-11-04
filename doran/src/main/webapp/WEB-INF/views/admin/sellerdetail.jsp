@@ -44,14 +44,14 @@
 								<tr>
 								<c:choose>
 									<c:when test="${empty profileImg}">
-										<img  width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+										<img  width="80px" height="80px" src="${pageContext.request.contextPath}/img/NonProfile.png" id="proimg">
 									</c:when>
 									
 									<c:otherwise>
 										 <!-- 반복문 -->
 										<c:forEach var="vo" items="${profileImg}" varStatus="status">	
 											<c:if test="${status.last}">			
-												<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+												<img width="80px" height="80px" src="${pageContext.request.contextPath}/files/download/${vo.profileImgFileNo}" id="proimg">
 											</c:if>
 										</c:forEach>			
 									</c:otherwise>
@@ -120,7 +120,7 @@
 								<th>판매자 신청 첨부파일</th>
 									<td>
 										<c:forEach var="sellerfileListVo" items="${sellerfileList}">
-											<li><a href = "http://localhost:8888/files/download/${sellerfileListVo.sfFileNo}">
+											<li><a href = "${pageContext.request.contextPath}/files/download/${sellerfileListVo.sfFileNo}">
 													${sellerfileListVo.filesUploadName}(${sellerfileListVo.filesSize} bytes) 
 													-
 													[${sellerfileListVo.filesType}]
@@ -133,7 +133,7 @@
 						</table>
 						
 						<div class="row right">
-							<a class="btn btn-neutral btn-small" href="/admin/sellerlist">목록 보기</a>
+							<a class="btn btn-neutral btn-small" href="${pageContext.request.contextPath}/admin/sellerlist">목록 보기</a>
 							<a class="btn btn-neutral btn-small"
 												href="change?memNo=${sellerDto.sellerMemNo}">정보 변경</a>
 																				<c:choose>

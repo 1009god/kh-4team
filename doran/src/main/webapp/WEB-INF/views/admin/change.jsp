@@ -14,10 +14,10 @@
 	
 	<div class="row left">
 		<label>회원 닉네임</label>
-		<input class="input w-100" type="text" name="memNick" value="${dto.memNick}" autocomplete="off">
+		<input class="input w-100" type="text" name="memNick" value="${memdto.memNick}" autocomplete="off">
 	</div>
 	<div class="row right">
-		<a class="btn btn-neutral" href="/admin/memlist">목록으로</a>
+		<a class="btn btn-neutral" href="${pageContext.request.contextPath}/admin/memlist">목록으로</a>
 		<button class="btn btn-positive" type="submit">수정하기</button>
 	</div>
 </div>

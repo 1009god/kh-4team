@@ -10,7 +10,7 @@
 		<h1>존재하지 않는 회원입니다</h1>
 	</div>
 	<div class="row center">
-		<h2><a href="/admin/memlist">목록 보기</a></h2>
+		<h2><a href="${pageContext.request.contextPath}/admin/memlist">목록 보기</a></h2>
 	</div>
 </div>
 	

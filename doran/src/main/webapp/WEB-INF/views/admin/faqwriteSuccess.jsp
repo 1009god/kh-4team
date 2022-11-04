@@ -12,7 +12,7 @@
 </div>
 	<div class="container-200 mt-40>">
 	<div class="row">
-		<a href="/" class="btn btn-neutral w-100">메인페이지</a>
+		<a href="${pageContext.request.contextPath}/" class="btn btn-neutral w-100">메인페이지</a>
 	</div>
 	<div class="row">
 		<a href="faqlist" class="btn btn-neutral w-100">목록</a>
