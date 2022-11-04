@@ -83,7 +83,7 @@
         <div style="margin-right: 20px;">
             <!--프로젝트 이미지-->
             <c:set var="PjFileList" items="${PjFileList}" />
-            <img style="width:150px;height: 130px;" src="http://localhost:8888/files/download/${PjFileList[0].pjFileNo}">
+            <img style="width:150px;height: 130px;" src="${pageContext.request.contextPath}/files/download/${PjFileList[0].pjFileNo}">
         </div>
         <div style="padding-top:10px;">
             <div class="updown">

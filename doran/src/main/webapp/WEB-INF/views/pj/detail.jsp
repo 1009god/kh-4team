@@ -162,7 +162,7 @@ $(function(){
 function shareTwitter() {
     var sendText = "도란도란에 구경 오세요!"; // 전달할 텍스트
     var pjNo="${PjDto.pjNo}";
-    var sendUrl = "http://localhost:8888/pj/detail?pjNo="+pjNo; // 전달할 URL
+    var sendUrl = "http://${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo; // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
 }
 function shareKakao() {
@@ -179,10 +179,10 @@ function shareKakao() {
 	    content: {
 	      title: "도란도란", // 보여질 제목
 	      description: "도란도란에 구경 오세요!", // 보여질 설명
-	      imageUrl: "http://localhost:8888/pj/detail?pjNo="+pjNo, // 콘텐츠 URL
+	      imageUrl: "http://${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo, // 콘텐츠 URL
 	      link: {
-	         mobileWebUrl: "http://localhost:8888/",
-	         webUrl: "http://localhost:8888/"
+	         mobileWebUrl: "http://${pageContext.request.contextPath}",
+	         webUrl: "http://${pageContext.request.contextPath}"
 	      }
 	    }
 	  });
@@ -216,7 +216,7 @@ function shareKakao() {
         <div style="width:700px;height:550px; margin-right:20px;float:left;">
             <div>
                 <c:forEach var="PjFileList" items="${PjFileList}">
-                    <img width="594px" height="445px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}">
+                    <img width="594px" height="445px" src="${pageContext.request.contextPath}/files/download/${PjFileList.pjFileNo}">
                 </c:forEach>
                 
             
@@ -282,7 +282,7 @@ function shareKakao() {
             <div class="center">
 
                 <c:if test="${loginNo==null}">
-                    <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="location.href='/mem/login'">
+                    <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="location.href='${pageContext.request.contextPath}/mem/login'">
                         <div>
                             <i class="fa-solid fa-thumbs-up"></i>
                         </div>
@@ -326,7 +326,7 @@ function shareKakao() {
 
     <div class="center" style="margin:0px 100px;">
         <div style="width:700px;margin-right:20px;float:left;"><!--소개이미지 들어가는 div-->
-            <img width="650px" height="16000px" src="http://localhost:8888/files/download/${PjFileIntroduce.pjFileNo}">
+            <img width="650px" height="16000px" src="${pageContext.request.contextPath}/files/download/${PjFileIntroduce.pjFileNo}">
         </div>
 
         <div style="text-align:left;width:360px;float:left;position: sticky;top: 5px;"><!--후원 리워드 선택 div-->
