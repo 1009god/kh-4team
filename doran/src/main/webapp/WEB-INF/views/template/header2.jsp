@@ -171,7 +171,7 @@ nav li a:hover {
 					</c:when>
 					<c:otherwise>
 						<button class="Login-btn btn-neutral1">
-							<a href="/mem/login">로그인</a> / <a href="/mem/join">회원가입</a>
+							<a href="/mem/login">로그인</a> / <a href="/mem/joinContent">회원가입</a>
 						</button>
 					</c:otherwise>
 				</c:choose>
