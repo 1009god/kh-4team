@@ -17,13 +17,13 @@ import com.kh.doran.repository.MemDao;
 
 @CrossOrigin
 @RestController //view 사용 x, 비동기식
-@RequestMapping("${pageContext.request.contextPath}/rest/mem")
+@RequestMapping("/rest/mem")
 public class MemRestController { //아이디 검사
 	
 	@Autowired
 	private MemDao memDao;
 	
-	@GetMapping("${pageContext.request.contextPath}/id")
+	@GetMapping("/id")
 	public String id(@RequestParam String memEmail) {
 		MemDto memDto = memDao.selectOne(memEmail);
 		if(memDto == null) {
@@ -34,7 +34,7 @@ public class MemRestController { //아이디 검사
 		}
 	}
 	
-	@RequestMapping("${pageContext.request.contextPath}/nick")
+	@RequestMapping("/nick")
 	public String nick(@RequestParam String memNick) {
 		MemDto memDto = memDao.findByNickname(memNick);
 		if(memDto == null) {
@@ -45,7 +45,7 @@ public class MemRestController { //아이디 검사
 		}
 	}
 	
-	@RequestMapping("${pageContext.request.contextPath}/pw")
+	@RequestMapping("/pw")
 	public String pw(HttpSession session, @RequestParam int memPw) {
 		 int memNo = (int)session.getAttribute("loginNo");  
 		 MemDto memDto = memDao.selectOne(memNo);  //selectOne을 이용한 비밀번호 수정 비동기통신

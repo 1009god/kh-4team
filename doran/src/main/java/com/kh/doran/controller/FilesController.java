@@ -18,14 +18,14 @@ import com.kh.doran.service.FilesService;
 
 
 @RestController //컨트롤러+리스폰스바디
-@RequestMapping("${pageContext.request.contextPath}/files")
+@RequestMapping("/files")
 public class FilesController {
 	
 	
 	@Autowired
 	private FilesService filesService;
 	
-	@GetMapping("${pageContext.request.contextPath}/download/{filesNo}")
+	@GetMapping("/download/{filesNo}")
 	public ResponseEntity<ByteArrayResource> download(
 			@PathVariable int filesNo) throws IOException{
 		return filesService.load(filesNo);
