@@ -63,7 +63,7 @@ padding-right : 30px;
 	<c:choose>
    		<c:when test="${empty createdDetailDto}">
 	  		<div class="container-1000 center" >
-	   			<img src="/img/CutnoProject.png" width="1000px" height="575px">
+	   			<img src="${pageContext.request.contextPath}/img/CutnoProject.png" width="1000px" height="575px">
 	   		</div>
    		</c:when>
           		

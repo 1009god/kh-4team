@@ -77,7 +77,7 @@ color: #0072b2;
 		    <td class="" rowspan="2">
 				<c:choose>
 			<c:when test="${empty profileImg}">
-				<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+				<img width="80px" height="80px" src="${pageContext.request.contextPath}/img/NonProfile.png" id="proimg">
 			</c:when>
 			
 			<c:otherwise>
@@ -91,7 +91,7 @@ color: #0072b2;
 		</c:choose>						    
 		    </td>
 		    <td class="">
-		    	<span style="padding-left:20px">${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		    	<span style="padding-left:20px">${memDto.memNick} </span><a href="${pageContext.request.contextPath}/edit/profile"><i class="fa-solid fa-gear"></i></a>
 		    
 		    </td>
 		  </tr>
@@ -106,8 +106,8 @@ color: #0072b2;
 		</div>
 	
 	<ul class="mypage_menu">                             
-     	 <li><a href="/mypage/created" ><p style="color:#0072b2; ">올린 프로젝트</p></a></li>
-         <li><a href="/mypage/supported">후원한 프로젝트</a></li>         
+     	 <li><a href="${pageContext.request.contextPath}/mypage/created" ><p style="color:#0072b2; ">올린 프로젝트</p></a></li>
+         <li><a href="${pageContext.request.contextPath}/mypage/supported">후원한 프로젝트</a></li>         
     </ul> 
     
 </div>
@@ -120,7 +120,7 @@ color: #0072b2;
           <c:choose>
            		<c:when test="${empty myCreatedPjDto}">
 	           		<div class="container-1000 center" >
-	           			<img src="/img/CutnoProject.png" width="1000px" height="575px">
+	           			<img src="${pageContext.request.contextPath}/img/CutnoProject.png" width="1000px" height="575px">
 	           		</div>
            		</c:when>
           		
@@ -141,7 +141,7 @@ color: #0072b2;
 			<tbody>
 				<c:forEach var="myCreatedPjDto" items="${myCreatedPjDto}" >	
 					<tr align="center">								
-							<td><a href="/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}" class="aa"'>${myCreatedPjDto.pjNo}</a></td>
+							<td><a href="${pageContext.request.contextPath}/mypage/created/detail?pjNo=${myCreatedPjDto.pjNo}" class="aa"'>${myCreatedPjDto.pjNo}</a></td>
 							<td>${myCreatedPjDto.pjCategory}</td>
                             <td>${myCreatedPjDto.pjName}</td>						
 						</tr>							

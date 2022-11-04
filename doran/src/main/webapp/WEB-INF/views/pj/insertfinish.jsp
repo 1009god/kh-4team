@@ -9,7 +9,7 @@
 <body>
 	<div class="row center">
 	<p>
-		<img src="/img/pjSuccess.png" width="800px" >
+		<img src="${pageContext.request.contextPath}/img/pjSuccess.png" width="800px" >
 	</p>
 	</div>
 </body>

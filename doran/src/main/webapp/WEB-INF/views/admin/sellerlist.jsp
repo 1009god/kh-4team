@@ -57,7 +57,7 @@
 				<c:forEach var="dto" items="${list}">
 					<tr align="center">
 						<td><a
-							href="/admin/sellerdetail?sellerMemNo=${dto.sellerMemNo}">
+							href="${pageContext.request.contextPath}/admin/sellerdetail?sellerMemNo=${dto.sellerMemNo}">
 								${dto.memNick} </a></td>
 						<td>${dto.sellerRegistryDate}</td>
 

@@ -37,7 +37,7 @@
 									
 									<c:choose>
 									<c:when test="${empty profileImg}">
-										<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+										<img width="80px" height="80px" src="${pageContext.request.contextPath}/img/NonProfile.png" id="proimg">
 									</c:when>
 									
 									<c:otherwise>
@@ -54,7 +54,7 @@
 								</tr>
 							
 										<tr>
-											<td><a class="btn btn-neutral btn-small" href="/admin/memlist">목록
+											<td><a class="btn btn-neutral btn-small" href="${pageContext.request.contextPath}/admin/memlist">목록
 													보기</a></td>
 										</tr>
 										<tr>

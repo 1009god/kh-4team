@@ -168,14 +168,14 @@ nav li a:hover {
 
 				<c:choose>
 					<c:when test="${login}">
-						<a href="#">${loginId} 님</a>
+						<a href="${pageContext.request.contextPath}/mypage/profile">${loginId} 님</a>
 					<a href="/like"><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>
 						<a class="dropdown-item" href="/mem/logout">로그아웃</a>
 						
 					</c:when>
 					<c:otherwise>
 						<button class="Login-btn btn-neutral1">
-							<a href="/mem/login">로그인</a> / <a href="/mem/join">회원가입</a>
+							<a href="/mem/login">로그인</a> / <a href="/mem/joinContent">회원가입</a>
 						</button>
 					</c:otherwise>
 				</c:choose>
@@ -188,17 +188,17 @@ nav li a:hover {
 	<div class="container-1400">
 		<nav>
 			<ul class="dropdown1-menu">
-				<li><a href="/pj/list"><i class="fa-solid fa-bars"></i>&nbsp;전체</a></li>
+				<li><a href="${pageContext.request.contextPath}/pj/list"><i class="fa-solid fa-bars"></i>&nbsp;전체</a></li>
 				<li><a
-					href="http://localhost:8888/pj/list?sort=pj_likes_number">인기</a></li>
-				<li><a href="http://localhost:8888/pj/list?sort=pj_no">신규</a></li>
+					href="${pageContext.request.contextPath}/pj/list?sort=pj_likes_number">인기</a></li>
+				<li><a href="${pageContext.request.contextPath}/pj/list?sort=pj_no">신규</a></li>
 				<li><a
-					href="http://localhost:8888/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>	
+					href="${pageContext.request.contextPath}/pj/list?sort=pj_funding_end_date-sysdate">마감임박</a></li>	
 					
 					<li><a href="#">커뮤니티</a>
 					<ul class="dropdown1-menu">
-						<li><a href="/notice/list">공지사항</a></li>
-						<li><a href="/board/list">도란도란</a></li>
+						<li><a href="${pageContext.request.contextPath}/notice/list">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/list">도란도란</a></li>
 					</ul>
 					</li>
 						</ul>
@@ -206,8 +206,8 @@ nav li a:hover {
 				<ul class="dropdown1-menu">
 					<li><a href="#">고객센터</a>
 							<ul class="dropdown1-menu">
-								<li><a href="/faq/list">FAQ</a></li>
-								<li><a href="/doran-q/list">1:1 문의</a></li>
+								<li><a href="${pageContext.request.contextPath}/faq/list">FAQ</a></li>
+								<li><a href="${pageContext.request.contextPath}/doran-q/list">1:1 문의</a></li>
 							</ul>
 						</li>
 					</ul>

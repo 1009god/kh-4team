@@ -78,7 +78,7 @@ text-decoration: none;
 		    <td class="" rowspan="2">
 				<c:choose>
 			<c:when test="${empty profileImg}">
-				<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+				<img width="80px" height="80px" src="${pageContext.request.contextPath}/img/NonProfile.png" id="proimg">
 			</c:when>
 			
 			<c:otherwise>
@@ -92,7 +92,7 @@ text-decoration: none;
 		</c:choose>						    
 		    </td>
 		    <td class="">
-		    	<span style="padding-left:20px">${memDto.memNo} ${memDto.memNick} </span><a href="/edit/profile"><i class="fa-solid fa-gear"></i></a>
+		    	<span style="padding-left:20px"> ${memDto.memNick} </span><a href="${pageContext.request.contextPath}/edit/profile"><i class="fa-solid fa-gear"></i></a>
 		    
 		    </td>
 		  </tr>
@@ -107,8 +107,8 @@ text-decoration: none;
 		</div>
 	
 	<ul class="mypage_menu">                             
-     	 <li><a href="/mypage/created">올린 프로젝트</a></li>
-         <li><a href="/mypage/supported"><p style="color:#0072b2; ">후원한 프로젝트</p></a></li>       
+     	 <li><a href="${pageContext.request.contextPath}/mypage/created">올린 프로젝트</a></li>
+         <li><a href="${pageContext.request.contextPath}/mypage/supported"><p style="color:#0072b2; ">후원한 프로젝트</p></a></li>       
     </ul> 
     
 </div>
@@ -137,7 +137,7 @@ text-decoration: none;
             <c:choose>
            		<c:when test="${empty supportList}">
 	           		<div class="container-1000 center" >
-	           			<img src="/img/CutnoProject.png" width="1000px" height="575px">
+	           			<img src="${pageContext.request.contextPath}/img/CutnoProject.png" width="1000px" height="575px">
 	           		</div>
            		</c:when>
           		
@@ -158,7 +158,7 @@ text-decoration: none;
 			<tbody>
 				<c:forEach var="supportVO" items="${supportList}" >	
 					<tr align="center">								
-							<td><a href="/mypage/supported/detail?ordersNo=${supportVO.ordersNo}" class="aa">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
+							<td><a href="${pageContext.request.contextPath}/mypage/supported/detail?ordersNo=${supportVO.ordersNo}" class="aa">${supportVO.ordersNo}</a></td> <!-- 주문번호 -->
 							<td>${supportVO.memNick}</td>			
 							<td>${supportVO.pjCategory}</td>			
 							<td>${supportVO.pjName}</td>	
