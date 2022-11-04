@@ -19,7 +19,7 @@ public class HomeController {
 	@Autowired
 	private AdminPjDao adminpjDao;
 	
-	@RequestMapping("${pageContext.request.contextPath}")
+	@RequestMapping("/")
 	public String home(Model model,
 			@ModelAttribute(name="pjListSearchVo") PjListSearchVO vo
 			,AdminpjListVO adminpjListvo) {
