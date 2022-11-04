@@ -84,6 +84,10 @@
 								<td>${memDto.memNick}</td>
 							</tr>
 							<tr>
+								<th>비밀번호</th>
+								<td>${memDto.memPw}</td>
+							</tr>
+							<tr>
 								<th>전화번호</th>
 								<td>${memDto.memTel}</td>
 							</tr>

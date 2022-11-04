@@ -45,18 +45,6 @@ public class MemRestController { //아이디 검사
 		}
 	}
 	
-//	@RequestMapping("/pw")
-//	public String pw(@RequestParam String memPw, HttpSession session) {
-//		 int memNo = (int)session.getAttribute("loginNo");  
-//		 MemDto memDto = memDao.findByPw(memNo, memPw);
-//		 if(memDto != null) { //디비가 비어있는게 아니면
-//			 return "NNNNN"; //old 비밀번호가 일치
-//		 }
-//		 else {
-//			 return "NNNNY"; // 비밀번호 불일치
-//		 }
-//	}
-	
 	@RequestMapping("/pw")
 	public String pw(HttpSession session, @RequestParam int memPw) {
 		 int memNo = (int)session.getAttribute("loginNo");  

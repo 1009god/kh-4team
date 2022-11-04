@@ -42,7 +42,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 							"/mem/findEmail",//이메일 찾기
 							"/mem/findPw",//비밀번호 찾기
 							"/mypage/goodbye_result", //탈퇴 결과
-							"doran-q/list" //1:1 문의 목록
+							"/doran-q/list" //1:1 문의 목록
 					);
 		
 		//관리자만 수정 / 삭제를 할 수 있도록 검사하는 인터셉터

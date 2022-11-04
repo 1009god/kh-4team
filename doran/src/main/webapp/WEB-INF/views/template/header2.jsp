@@ -151,28 +151,27 @@ nav li a:hover {
 
 				
 			<div id="top_menu">
-				<c:choose>
-					<c:when test="${sellerCheck =='승인'}">
+			
+					<c:if test="${login}">
 						<button type="submit" class="ghost"
 							onclick="location.href='/pj/insert'">프로젝트 올리기</button>
-					</c:when>
-					<c:otherwise>
+							
 						<button type="submit" class="ghost"
 							onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
-					</c:otherwise>
-				</c:choose>
+					</c:if>
+				
 
 
 				<c:choose>
 					<c:when test="${login}">
-						<a href="/mypage/profile"> My page </a>
+						<a href="#">${loginId} 님</a>
 					<a href="/like"><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>
 						<a class="dropdown-item" href="/mem/logout">로그아웃</a>
 						
 					</c:when>
 					<c:otherwise>
 						<button class="Login-btn btn-neutral1">
-							<a href="/mem/login">로그인</a> / <a href="/mem/join">회원가입</a>
+							<a href="/mem/login">로그인</a> / <a href="/mem/joinContent">회원가입</a>
 						</button>
 					</c:otherwise>
 				</c:choose>
@@ -213,16 +212,16 @@ nav li a:hover {
 							     <!-- 검색창 -->
                                 <div class="row right">
 							        <form action="/pj/list" method="get">
-							            <select name="type">
+							            <select style="height:21px" name="type">
 							                <option value="pj_name"
 							<c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>
 							                <option value="pj_category"
 							<c:if test="${pjListSearchVo.type=='pj_category'}">selected</c:if>>프로젝트 카테고리</option>
 							            </select>
 							                
-							            <input type="search" name="keyword" placeholder="검색어"
+							            <input type="search" name="keyword" autocomplete="off" placeholder="검색어" style="width:"
 						required value="${pjListSearchVo.keyword}">
-							            <button type="submit">검색</button>
+							            <button style = "background-color:#F0F8FF; border:solid 1px lightgray;" type="submit">검색</button>
 							        </form>
   								</div>    
                         
@@ -233,3 +232,4 @@ nav li a:hover {
                     <body>
                         
                     
+

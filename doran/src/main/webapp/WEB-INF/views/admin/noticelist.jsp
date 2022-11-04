@@ -41,15 +41,15 @@
 	<table class="table table-hover" border="1">
 		<thead>
 			<tr>
-				<th align="left" width="10%">번호</th>
-				<th width="45%">제목</th>
+				<th align="center" width="10%">번호</th>
+				<th width="70%">제목</th>
 				<th>작성일</th>
 		</thead>
 		<tbody align="center">
 			<c:forEach var="noticeDto" items="${list}">
 				<tr>
 
-					<td align="left">${noticeDto.noticeNo}</td>
+					<td align="center">${noticeDto.noticeNo}</td>
 
 					<td align="left"><a
 						href="noticedetail?noticeNo=${noticeDto.noticeNo}">

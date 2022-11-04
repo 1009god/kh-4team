@@ -16,7 +16,6 @@
 	 div {
             /* border:1px dotted gray; */
         }
-
         /*
             테이블 디자인
             - 테이블은 기본디자인이 너무 많아서 디자인하기 까다로운 태그 중 하나
@@ -104,6 +103,9 @@
      border: 1px solid gray;
     
 }
+	.a{
+		color : black;
+	}
         
         
         
@@ -118,7 +120,7 @@
 	<thead>
 	<tr>
 		<td align = "right" colspan="6">
-			<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
+			<a href="write"><img src="${pageContext.request.contextPath}/img/pencil.png" width="20" height="20"></a>
 		</td>
 		<tr>
 			<th>번호</th>
@@ -133,7 +135,7 @@
 		<tr>
 			<td>${boardDto.boardPostNo}</td>
 			<td align="left">
-				<a href="detail?boardPostNo=${boardDto.boardPostNo}">
+				<a class="a" href="detail?boardPostNo=${boardDto.boardPostNo}">
 					${boardDto.boardTitle}
 				</a>
 				
@@ -171,7 +173,7 @@
 	<tfoot>
 		<tr>
 			<td align = "right" colspan="6">
-				<a href="write"><img src="/img/pencil.png" width="20" height="20"></a>
+				<a href="write"><img src="${pageContext.request.contextPath}/img/pencil.png" width="20" height="20"></a>
 			</td>
 		</tr>
 	</tfoot>

@@ -95,6 +95,9 @@
     outline: none;
     
 }
+	.a{
+		color : black;
+	}
 </style>
 
 <!-- 테스트용 데이터 출력 -->
@@ -118,8 +121,8 @@
 	<tbody align="center">
 	<c:forEach var="noticeDto" items="${list}">
 		<tr>
-			<td align="center">
-				<a href="detail?noticeNo=${noticeDto.noticeNo}">
+			<td align="left">
+				<a class="a" href="detail?noticeNo=${noticeDto.noticeNo}">
 					${noticeDto.noticeTitle}
 				</a>
 			</td>

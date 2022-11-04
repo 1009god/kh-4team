@@ -9,7 +9,7 @@
 <body>
 	<div class="row center">
 	<p>
-		<img src="/img/500.gif">
+		<img src="${pageContext.request.contextPath}/img/500.gif">
 	</p>
 	</div>
 </body>

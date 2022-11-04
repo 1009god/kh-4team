@@ -6,9 +6,9 @@
 
 <body>
 	<div class="row center">
-	<img class="w-50" src="/img/joinCele.png">
-	<h2><a href="/mem/login" style="color: #0072b2">- 로그인 하러 가기</a></h2>
-	<h2><a href="/" style="color: #0072b2">- 도란도란 홈페이지로 가기</a></h2>
+	<img class="w-50" src="${pageContext.request.contextPath}/img/joinCele.png">
+	<h2><a href="${pageContext.request.contextPath}/mem/login" style="color: #0072b2">- 로그인 하러 가기</a></h2>
+	<h2><a href="${pageContext.request.contextPath}" style="color: #0072b2">- 도란도란 홈페이지로 가기</a></h2>
 	</div>
 </body>
 

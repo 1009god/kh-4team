@@ -96,7 +96,6 @@ public class BoardController {
 			model.addAttribute("boardDto", boardDao.selectOne(boardPostNo)); //불러와
 		}
 		
-		System.out.println("history" + history);
 		
 //		(4) 갱신된 저장소를 세션에 다시 저장
 		session.setAttribute("history", history);
