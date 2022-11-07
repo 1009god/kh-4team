@@ -87,7 +87,7 @@ margin : 30px
 	
 		<div class="row"><h3>등록된 배송지</h3></div>
 		<div class="row">
-			<button class="btn-round"><a class="atag" href="http://localhost:8888/edit/address_plus">배송지 추가</a></button>
+			<button class="btn-round"><a class="atag" href="${pageContext.request.contextPath}/edit/address_plus">배송지 추가</a></button>
 		</div>
 		
 		</div>

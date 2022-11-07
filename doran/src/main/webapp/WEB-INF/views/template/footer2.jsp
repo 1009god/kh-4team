@@ -30,7 +30,7 @@ display: inline-block;
 
                 <div style="float: right; " class="box float-right" >
 
-                   <a style="color:	#696969;"class="btn btn-positive" href="/doran-q/write" role="button">도란도란 1:1 문의</a>
+                   <a style="color:	#696969;"class="btn btn-positive" href="${pageContext.request.contextPath}/doran-q/write" role="button">도란도란 1:1 문의</a>
 
 
                 </div>

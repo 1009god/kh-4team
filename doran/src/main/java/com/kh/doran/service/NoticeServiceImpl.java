@@ -22,7 +22,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Autowired
 	private FilesDao filesDao;
 	
-	private final File directory = new File(System.getProperty("user.home"), "doranupload");
+	private final File directory = new File("D:/upload/kh10D");
 	
 	@Override
 	public int write(NoticeDto noticeDto, List<MultipartFile> files) throws IllegalStateException, IOException {

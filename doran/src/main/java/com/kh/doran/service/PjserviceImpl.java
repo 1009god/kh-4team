@@ -30,7 +30,7 @@ public class PjserviceImpl implements Pjservice {
 	@Autowired
 	private FilesDao filesDao;
 	
-	private File root = new File(System.getProperty("user.home")+"/doranupload");
+	private File root = new File("D:/upload/kh10D");
 	
 	@PostConstruct
 	public void init() {

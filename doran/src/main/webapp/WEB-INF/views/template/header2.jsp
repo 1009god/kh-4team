@@ -23,16 +23,16 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
 
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.min.js"></script>
            
 
 <style>
@@ -148,7 +148,7 @@ nav li a:hover {
 	<header>
 		<div class="container-1400">
 			<div id="logo">
-				<a href="/"> <img src="/img/DoranMini.png" id="logo_img"
+				<a href="${pageContext.request.contextPath}/"> <img src="${pageContext.request.contextPath}/img/DoranMini.png" id="logo_img"
 					width="170px" height="70px">
 				</a>
 			</div>
@@ -169,13 +169,13 @@ nav li a:hover {
 				<c:choose>
 					<c:when test="${login}">
 						<a href="${pageContext.request.contextPath}/mypage/profile">${loginId} 님</a>
-					<a href="/like"><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>
-						<a class="dropdown-item" href="/mem/logout">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/like"><i class="fa-solid fa-heart" style="color:#0072b2"></i></a>
+						<a class="dropdown-item" href="${pageContext.request.contextPath}/mem/logout">로그아웃</a>
 						
 					</c:when>
 					<c:otherwise>
 						<button class="Login-btn btn-neutral1">
-							<a href="/mem/login">로그인</a> / <a href="/mem/joinContent">회원가입</a>
+							<a href="${pageContext.request.contextPath}/mem/login">로그인</a> / <a href="${pageContext.request.contextPath}/mem/joinContent">회원가입</a>
 						</button>
 					</c:otherwise>
 				</c:choose>
@@ -215,7 +215,7 @@ nav li a:hover {
                             
 							     <!-- 검색창 -->
                                 <div class="row right">
-							        <form action="/pj/list" method="get">
+							        <form action="${pageContext.request.contextPath}/pj/list" method="get">
 							            <select style="height:21px" name="type">
 							                <option value="pj_name"
 							<c:if test="${pjListSearchVo.type=='pj_name'}">selected</c:if>>프로젝트 이름</option>

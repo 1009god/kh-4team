@@ -136,59 +136,20 @@
                     $(this).addClass("fail");
                 }          	
             	
-            });
-            
-//             $("input[name=oldPw]").blur(function(){
-//             	var pastPw =  ${findPw.memPw};
-//             	var judge3 = old == $("input[name=oldPw]").val();
-            	
-//             	$(this).removeClass("no fail success");
-//             	if(judge){
-//             		$()).
-//             	}
-            	
-//             });
-            
-            //만약에 위 조건이 만족한다면
-            
-//             $.ajax({
-// 				url:"http://localhost:8888/rest/mem/pw?memPw=" + ${memDto.memPw},
-// 				method:"put",
-// 				success:function(resp){
-					
-// 					if(resp == "NNNNN") {
-// 						inputStatus.memPwValid = true;
-// 						$("input[name=oldPw").next("span").text("비밀번호가 일치합니다"); 
-// 						System.out.println("성공");
-// 					}
-// 					else if(resp == "NNNNY") {
-// 						inputStatus.memPwValid = false;
-// 						$("input[name=oldPw").next("span").text("비밀번호가 일치하지 않습니다");
-// 						System.out.println("실패");
-// 					}
-// 				}
-// 			});
-            
-            
+            });      
             
             
             
         });
+        
     </script>
-
-
 
 
 
 
 <div class="container-1400">
 
-
-
-
 <!-- 비밀번호가 일치하지 않는다면 input되어서는 안됨 -->
-
-
 
 <div class="container-1200 center" >
  <form method="post">
@@ -197,19 +158,11 @@
 		<input type="hidden" name="memNo" value="${memDto.memNo}" > 
 		
 		<div class="row">
-<!-- 			<label>현재 비밀번호</label> -->
-<!-- 			<input type="text" name="oldPw" required autocomplete="off"> -->
-<!-- 			<span></span> -->
-<!-- 			<span class ="no-message">비워두시면 안됩니다</span> -->
-<!-- 			<span class="fail-message">6자 이상, 20자 이내로 입력해주세요.</span> -->
+
 		</div>
 		
 		<div class="row">
-<!-- 			<label>변경할 비밀번호</label> -->
-<!-- 			<input type="text" name="newPw" required autocomplete="off"> -->
-<!-- 			<span class = "success-message">성공</span> -->
-<!-- 			<span class ="no-message">비워두시면 안됩니다</span> -->
-<!-- 			<span class="fail-message">6자 이상, 20자 이내로 입력해주세요.</span> -->
+
 			
 			<div>
 			<!-- 최종적으로 넘어갈 pw -->

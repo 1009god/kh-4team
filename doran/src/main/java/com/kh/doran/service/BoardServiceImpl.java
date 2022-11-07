@@ -22,7 +22,7 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private FilesDao filesDao;
 	
-	private final File directory = new File(System.getProperty("user.home"), "doranupload");
+	private final File directory = new File("D:/upload/kh10D");
 	
 	
 	@Override

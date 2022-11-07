@@ -22,7 +22,7 @@
                     <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
                 </div>
                 <div style="float: right;">
-                   <a class="btn btn-positive" href="/doran-q/write" role="button">도란도란에게 1:1 문의</a>
+                   <a class="btn btn-positive" href="${pageContext.request.contextPath}/doran-q/write" role="button">도란도란에게 1:1 문의</a>
                 </div>
               </footer>
           </div>
@@ -32,10 +32,4 @@
     		
     		
     		
-    		  <!-- 
-    			사용자 세션과 관련된 정보 출력 (지울 예정)<br>
-    			loginNo : ${sessionScope.loginNo}<br>
-    			loginId : ${sessionScope.loginId}<br>
-    			sellerNo : ${sessionScope.sellerNo}<br>
-    		   -->
     		
