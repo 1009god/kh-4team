@@ -99,7 +99,7 @@
         </div>
 
 	<div class="row mt-50 mb-50 right">
-		<button class="btn btn-positive btn-next" onclick="location.href='/mypage/goodbye'" disabled>다음 단계로 이동</button>
+		<button class="btn btn-positive btn-next" onclick="location.href='${pageContext.request.contextPath}/mypage/goodbye'" disabled>다음 단계로 이동</button>
 	</div>
 
 </div>
