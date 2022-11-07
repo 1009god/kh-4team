@@ -34,7 +34,7 @@ public class NoticeController {
 	@Autowired
 	private FilesDao filesDao; 
 	
-	private final File directory = new File(System.getProperty("user.home"), "doranupload");
+	private final File directory = new File("D:/upload/kh10D");
 	
 	@PostConstruct //최초 실행시 딱 한 번만 실행되는 메소드
 	public void prepare() {

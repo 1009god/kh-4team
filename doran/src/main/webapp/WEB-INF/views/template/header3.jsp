@@ -23,14 +23,14 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
 
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
-<!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
+
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
            
@@ -74,7 +74,7 @@
 		<div style="width:100%; margin:0 auto;">
 			<div class="header1" style="display:flex;">
 				<div style="margin-left: 200px;">
-				<a href="/"> <img src="/img/DoranMini.png" id="logo_img"
+				<a href="${pageContext.request.contextPath}/"> <img src="${pageContext.request.contextPath}/img/DoranMini.png" id="logo_img"
 					width="170px" height="70px">
 				</a>
 				</div>

@@ -69,7 +69,7 @@
 			  <tr>
 			    <td>비밀번호</td>		
 			    <td></td>	    
-			    <td> <button class="btn-round"  type="button" ><a href="/edit/account_change_pw">수정</a></button></td>
+			    <td> <button class="btn-round"  type="button" ><a href="${pageContext.request.contextPath}/edit/account_change_pw">수정</a></button></td>
 			  </tr>
 			</thead>
 			<tbody>
@@ -83,7 +83,7 @@
 			  <tr>
 			    <td>회원탈퇴</td>
 			    <td></td>
-			    <td><button class="btn-round" type="button" ><a href="/mypage/goodbye_content">탈퇴</a></button></td>
+			    <td><button class="btn-round" type="button" ><a href="${pageContext.request.contextPath}/mypage/goodbye_content">탈퇴</a></button></td>
 			  </tr>
 			</tbody>
 		</table>
