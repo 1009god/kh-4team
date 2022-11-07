@@ -162,7 +162,7 @@ $(function(){
 function shareTwitter() {
     var sendText = "도란도란에 구경 오세요!"; // 전달할 텍스트
     var pjNo="${PjDto.pjNo}";
-    var sendUrl = "http://${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo; // 전달할 URL
+    var sendUrl = "${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo; // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
 }
 function shareKakao() {
