@@ -179,10 +179,10 @@ function shareKakao() {
 	    content: {
 	      title: "도란도란", // 보여질 제목
 	      description: "도란도란에 구경 오세요!", // 보여질 설명
-	      imageUrl: "http://${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo, // 콘텐츠 URL
+	      imageUrl: "${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo, // 콘텐츠 URL
 	      link: {
-	         mobileWebUrl: "http://${pageContext.request.contextPath}",
-	         webUrl: "http://${pageContext.request.contextPath}"
+	         mobileWebUrl: "${pageContext.request.contextPath}",
+	         webUrl: "${pageContext.request.contextPath}"
 	      }
 	    }
 	  });

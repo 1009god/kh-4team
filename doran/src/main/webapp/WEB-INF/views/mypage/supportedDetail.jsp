@@ -26,6 +26,11 @@ float:left
     padding-bottom: 5px;
 }
 
+.but{
+	background-color:#F0F8FF; 
+	border:solid 1px lightgray;
+}
+
 </style>
 
 
@@ -83,8 +88,8 @@ float:left
 </div>
 
 <div class="center">
-	<button><a href="${pageContext.request.contextPath}/mypage/supported">후원 목록으로 가기</a></button>
-	<button><a href="${pageContext.request.contextPath}/mypage/supported/cancel?ordersNo=${supportDetail.ordersNo}">주문 취소하기</a></button>
+	<button class="but"><a style="color:black;" href="${pageContext.request.contextPath}/mypage/supported">후원 목록으로 가기</a></button>
+	<button class="but"><a style="color:black;" href="${pageContext.request.contextPath}/mypage/supported/cancel?ordersNo=${supportDetail.ordersNo}">주문 취소하기</a></button>
 </div>
 
 

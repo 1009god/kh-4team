@@ -133,6 +133,10 @@ nav li a:hover {
 	                color: black;
 	            
 }
+.but{
+	background-color:#F0F8FF; 
+	border:solid 1px lightgray;
+}
 
 </style>
 </head>
