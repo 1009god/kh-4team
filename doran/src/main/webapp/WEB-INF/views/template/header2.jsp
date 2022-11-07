@@ -133,6 +133,10 @@ nav li a:hover {
 	                color: black;
 	            
 }
+.but{
+	background-color:#F0F8FF; 
+	border:solid 1px lightgray;
+}
 
 </style>
 </head>
@@ -153,10 +157,10 @@ nav li a:hover {
 			<div id="top_menu">
 			
 					<c:if test="${login}">
-						<button type="submit" class="ghost"
+						<button class="but" type="submit" class="ghost"
 							onclick="location.href='/pj/insert'">프로젝트 올리기</button>
 							
-						<button type="submit" class="ghost"
+						<button class="but" type="submit" class="ghost"
 							onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
 					</c:if>
 				
