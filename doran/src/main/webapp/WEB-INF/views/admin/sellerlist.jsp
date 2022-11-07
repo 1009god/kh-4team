@@ -81,7 +81,7 @@
 		<div class="row center">
 			<c:choose>
 				<c:when test="${not vo.isFirst()}">
-					<a href="admin/sellerlist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;
+					<a href="/admin/sellerlist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;
 					</a>
 				</c:when>
 				<c:otherwise>
@@ -93,7 +93,7 @@
 
 			<c:choose>
 				<c:when test="${vo.hasPrev()}">
-					<a href="admin/sellerlist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a>
+					<a href="/admin/sellerlist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#">&lt;</a>
@@ -104,14 +104,14 @@
 
 			<c:forEach var="i" begin="${vo.startBlock()}" end="${vo.endBlock()}"
 				step="1">
-				<a href="admin/sellerlist?p=${i}&${vo.parameter()}">${i}</a>
+				<a href="/admin/sellerlist?p=${i}&${vo.parameter()}">${i}</a>
 			</c:forEach>
 
 			<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 
 			<c:choose>
 				<c:when test="${vo.hasNext()}">
-					<a href="admin/sellerlist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a>
+					<a href="/admin/sellerlist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#">&gt;</a>
@@ -120,7 +120,7 @@
 
 			<c:choose>
 				<c:when test="${not vo.isLast()}">
-					<a href="admin/sellerlist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;
+					<a href="/admin/sellerlist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;
 					</a>
 				</c:when>
 				<c:otherwise>
