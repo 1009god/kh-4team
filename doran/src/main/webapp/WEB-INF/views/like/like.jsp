@@ -26,7 +26,7 @@
 			<tbody>
 				<c:forEach var="likes" items="${likesList}" >	
 					<tr align="center">								
-							<td><a href="/pj/detail?pjNo=${likes.pjNo}">${likes.pjNo}</a></td>							
+							<td><a href="${pageContext.request.contextPath}/pj/detail?pjNo=${likes.pjNo}">${likes.pjNo}</a></td>							
 
 							<td>${likes.pjCategory}</td>			
 							<td>${likes.pjName}</td>				

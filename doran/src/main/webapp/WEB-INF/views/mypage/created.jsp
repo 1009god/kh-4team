@@ -84,7 +84,7 @@ color: #0072b2;
 				 <!-- 반복문 -->
 				<c:forEach var="vo" items="${profileImg}" varStatus="status">	
 					<c:if test="${status.last}">			
-						<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+						<img width="80px" height="80px" src="${pageContext.request.contextPath}/files/download/${vo.profileImgFileNo}" id="proimg">
 					</c:if>
 				</c:forEach>			
 			</c:otherwise>

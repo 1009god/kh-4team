@@ -70,7 +70,7 @@
   
   			<c:choose>
 					<c:when test="${empty profileImg}">
-						<img width="80px" height="80px" src="/img/NonProfile.png" id="proimg">
+						<img width="80px" height="80px" src="${pageContext.request.contextPath}/img/NonProfile.png" id="proimg">
 					</c:when>
 			
 					<c:otherwise>
