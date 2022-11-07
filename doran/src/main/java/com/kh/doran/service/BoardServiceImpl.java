@@ -44,7 +44,6 @@ public class BoardServiceImpl implements BoardService{
 										.build());
 								//파일저장
 								File target = new File(directory,String.valueOf(filesNo));
-								System.out.println(target.getAbsolutePath());
 								file.transferTo(target);
 								
 								//+ 연결 테이블에 연결 정보를 저장 (게시글 번호, 첨부파일 번호)
