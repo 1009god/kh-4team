@@ -7,18 +7,16 @@
       body {
         margin: 0;
       }
-      .container {
+      
+   .container {
         width: 50%;
         height: 100%;
-        background:url('/img/loginBack.jpg') no-repeat;
+        background:url('${pageContext.request.contextPath}/img/loginBack.jpg') no-repeat;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
       }
-      
-      .big-border {
-      	
-      }
+    
     </style>
   </head>
 

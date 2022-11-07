@@ -154,10 +154,10 @@ nav li a:hover {
 			
 					<c:if test="${login}">
 						<button type="submit" class="ghost"
-							onclick="location.href='/pj/insert'">프로젝트 올리기</button>
+							onclick="location.href='${pageContext.request.contextPath}/pj/insert'">프로젝트 올리기</button>
 							
 						<button type="submit" class="ghost"
-							onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+							onclick="location.href='${pageContext.request.contextPath}/seller/sellerjoin'">판매자 신청</button>
 					</c:if>
 				
 

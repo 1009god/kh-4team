@@ -284,7 +284,7 @@ function shareKakao() {
             <div class="center">
 
                 <c:if test="${loginNo==null}">
-                    <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="location.href='/mem/login'">
+                    <button class="btn btn-neutral" style="height:72px;width:72px;" onclick="location.href='${pageContext.request.contextPath}/mem/login'">
                         <div>
                             <i class="fa-solid fa-thumbs-up"></i>
                         </div>

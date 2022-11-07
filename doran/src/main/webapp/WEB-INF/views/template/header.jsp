@@ -103,7 +103,7 @@
           </a>
           <c:choose>
 			<c:when test = "${login}">
-				<button type="submit" class="btn btn-neutral" onclick="location.href='/seller/sellerjoin'">판매자 신청</button>
+				<button type="submit" class="btn btn-neutral" onclick="location.href='${pageContext.request.contextPath}/seller/sellerjoin'">판매자 신청</button>
 			</c:when>
 		</c:choose>    
   	</div>
