@@ -22,7 +22,7 @@ public class SellerServiceImpl implements SellerService{
 	@Autowired
 	private FilesDao filesDao;
 	
-	private final File directory = new File(System.getProperty("user.home"), "doranupload");
+	private final File directory = new File("D:/upload/kh10D");
 
 //	@Override
 //	public int write(SellerDto sellerDto, List<MultipartFile> files) throws IllegalStateException, IOException {

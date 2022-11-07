@@ -29,7 +29,6 @@ public class NoticeTest2 {
 		//번호 생성
 		String sql = "select notice_seq.nextval from dual";
 		int noticeNo = jdbcTemplate.queryForObject(sql, int.class);
-		System.out.println("noticeNo = " + noticeNo);
 		
 		//등록
 		sql = "insert into notice("

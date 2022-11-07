@@ -36,9 +36,6 @@ public class BoardTest {
 		List<BoardDto> list = boardDao.selectList();
 		//검색
 		//List<BoardDto> list = boardDao.selectList("board_title", "테스트");
-		for(BoardDto boardDto : list) {
-			System.out.println(boardDto);
-		}
 		
 		assertEquals(list.size(), 10);
 	}

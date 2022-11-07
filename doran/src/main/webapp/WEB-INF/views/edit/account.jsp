@@ -48,9 +48,9 @@
  
  <div class= "container-1400">
 		<ul class="mypage_menu">                             
-	     	 <li><a href="/edit/profile">프로필</a></li>
-	         <li><a href="/edit/account">계정</a></li>	    
-	         <li><a href="/edit/address_list">배송지</a></li>    
+	     	 <li><a href="${pageContext.request.contextPath}/edit/profile">프로필</a></li>
+	         <li><a href="${pageContext.request.contextPath}/edit/account">계정</a></li>	    
+	         <li><a href="${pageContext.request.contextPath}/edit/address_list">배송지</a></li>    
 	    </ul> 
    </div>
  
@@ -69,7 +69,7 @@
 			  <tr>
 			    <td>비밀번호</td>		
 			    <td></td>	    
-			    <td> <button class="btn-round"  type="button" ><a href="/edit/account_change_pw">수정</a></button></td>
+			    <td> <button class="btn-round"  type="button" ><a href="${pageContext.request.contextPath}/edit/account_change_pw">수정</a></button></td>
 			  </tr>
 			</thead>
 			<tbody>
@@ -83,7 +83,7 @@
 			  <tr>
 			    <td>회원탈퇴</td>
 			    <td></td>
-			    <td><button class="btn-round" type="button" ><a href="/mypage/goodbye_content">탈퇴</a></button></td>
+			    <td><button class="btn-round" type="button" ><a href="${pageContext.request.contextPath}/mypage/goodbye_content">탈퇴</a></button></td>
 			  </tr>
 			</tbody>
 		</table>

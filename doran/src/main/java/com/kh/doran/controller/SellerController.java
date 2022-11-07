@@ -41,7 +41,7 @@ public class SellerController {
 	@Autowired
 	private PjDao pjDao;
 	
-	private final File directory =new File(System.getProperty("user.home"), "doranupload");
+	private final File directory =new File("D:/upload/kh10D");
 	@PostConstruct
 	public void prepare() {
 		directory.mkdirs();
@@ -79,7 +79,7 @@ public class SellerController {
 					.filesSize(file.getSize())
 					.build());
 			//파일저장
-			File dir = new File(System.getProperty("user.home"), "doranupload");
+			File dir = new File("D:/upload/kh10D");
 			dir.mkdirs();
 			File target = new File(dir,String.valueOf(filesNo));
 			file.transferTo(target);

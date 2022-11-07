@@ -29,15 +29,15 @@
 
     
 
-<link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link href="${pageContext.request.contextPath}/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="${pageContext.request.contextPath}/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="${pageContext.request.contextPath}/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="${pageContext.request.contextPath}/docs/5.2/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="${pageContext.request.contextPath}/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+<link rel="icon" href="${pageContext.request.contextPath}/docs/5.2/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#712cf9">
 
 <style>
@@ -90,7 +90,7 @@
     
      <!-- Custom styles for this template -->
     <link href="headers.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
 
   </head>
   <body>
@@ -98,8 +98,8 @@
   <header class="p-3 mb-3 border-bottom ">
   	<div class="container">
   		<div id="logo">
-          <a href="/">
-             <img src="/img/DoranMini.png" id="logo_img" width="170px" height="70px">
+          <a href="${pageContext.request.contextPath}/">
+             <img src="${pageContext.request.contextPath}/img/DoranMini.png" id="logo_img" width="170px" height="70px">
           </a>
           <c:choose>
 			<c:when test = "${login}">
@@ -111,7 +111,7 @@
     <div class="container mb-10">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="#">
-        	<img src="/img/burger.png" width="25px" height="25px">
+        	<img src="${pageContext.request.contextPath}/img/burger.png" width="25px" height="25px">
         </a>
 		<ul class="nav nav-pills ">
 		<li class="nav-item">
@@ -147,7 +147,7 @@
 </header>
 
 
-    <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
 
   

@@ -48,9 +48,9 @@
  
  <div class= "container-1400">
 		<ul class="mypage_menu">                             
-	     	 <li><a href="/edit/profile">프로필</a></li>
-	         <li><a href="/edit/account">계정</a></li>	    
-	         <li><a href="/edit/address_list">배송지</a></li>    
+	     	 <li><a href="${pageContext.request.contextPath}/edit/profile">프로필</a></li>
+	         <li><a href="${pageContext.request.contextPath}/edit/account">계정</a></li>	    
+	         <li><a href="${pageContext.request.contextPath}/edit/address_list">배송지</a></li>    
 	    </ul> 
    </div>
  
@@ -77,7 +77,7 @@
 				 <!-- 반복문 -->
 				<c:forEach var="vo" items="${profileImg}" varStatus="status">	
 					<c:if test="${status.last}">			
-						<img width="80px" height="80px" src="http://localhost:8888/files/download/${vo.profileImgFileNo}" id="proimg">
+						<img width="80px" height="80px" src="${pageContext.request.contextPath}/files/download/${vo.profileImgFileNo}" id="proimg">
 					</c:if>
 				</c:forEach>			
 			</c:otherwise>

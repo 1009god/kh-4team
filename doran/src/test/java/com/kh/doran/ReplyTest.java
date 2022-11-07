@@ -32,9 +32,6 @@ public class ReplyTest {
 	@Test
 	public void test() {
 		List<ReplyListVO> list = replyDao.selectList(8026);
-		for(ReplyListVO replyDto : list) {
-			System.out.println(replyDto);
-		}
 	}
 
 }
