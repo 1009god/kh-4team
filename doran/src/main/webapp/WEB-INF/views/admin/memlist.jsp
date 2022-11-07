@@ -63,7 +63,7 @@
 					<td>${dto.memNo}</td>
 					
 					<td>
-						<a href="/admin/detail?memNo=${dto.memNo}">
+						<a href="${pageContext.request.contextPath}/admin/detail?memNo=${dto.memNo}">
 							${dto.memNick}
 						</a>
 					</td>
@@ -84,7 +84,7 @@
 <div class= "row center">
 <c:choose>
 	<c:when test="${not vo.isFirst()}">
-		<a href="/admin/memlist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo; </a>
+		<a href="${pageContext.request.contextPath}/admin/memlist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo; </a>
 	</c:when>
 	<c:otherwise>
 		<a href="#">&laquo;</a>
@@ -95,7 +95,7 @@
 
 <c:choose>
 	<c:when test="${vo.hasPrev()}">
-		<a href="/admin/memlist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a>
+		<a href="${pageContext.request.contextPath}/admin/memlist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a>
 	</c:when>
 	<c:otherwise>
 		<a href="#">&lt;</a>
@@ -105,14 +105,14 @@
 
 
 <c:forEach var="i"  begin="${vo.startBlock()}" end="${vo.endBlock()}" step="1">
-	<a href="/admin/memlist?p=${i}&${vo.parameter()}">${i}</a>
+	<a href="${pageContext.request.contextPath}/admin/memlist?p=${i}&${vo.parameter()}">${i}</a>
 </c:forEach>
 
 <!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
 
 <c:choose>
 	<c:when test="${vo.hasNext()}">
-		<a href="/admin/memlist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a>
+		<a href="${pageContext.request.contextPath}/admin/memlist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a>
 	</c:when>
 	<c:otherwise>
 		<a href="#">&gt;</a>
@@ -121,7 +121,7 @@
 
 <c:choose>
 	<c:when test="${not vo.isLast()}">
-		<a href="/admin/memlist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo; </a>
+		<a href="${pageContext.request.contextPath}/admin/memlist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo; </a>
 	</c:when>
 	<c:otherwise>
 		<a href="#">&raquo;</a>
