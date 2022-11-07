@@ -47,7 +47,7 @@ float:left
 	<!--  디테일 사진 -->
 		<c:forEach var="vo" items="${supportDetailImg}" varStatus="status">	
 			<c:if test="${status.first}">			
-				<img width="150px" height="150px" src="http://localhost:8888/files/download/${vo.pjFileNo}" >
+				<img width="150px" height="150px" src="${pageContext.request.contextPath}/files/download/${vo.pjFileNo}" >
 			</c:if>
 		</c:forEach>		
 	</div>

@@ -68,9 +68,9 @@ margin : 30px
  
  <div class= "container-1400">
 		<ul class="mypage_menu">                             
-	     	 <li><a href="/edit/profile">프로필</a></li>
-	         <li><a href="/edit/account">계정</a></li>	    
-	         <li><a href="/edit/address_list">배송지</a></li>    
+	     	 <li><a href="${pageContext.request.contextPath}/edit/profile">프로필</a></li>
+	         <li><a href="${pageContext.request.contextPath}/edit/account">계정</a></li>	    
+	         <li><a href="${pageContext.request.contextPath}/edit/address_list">배송지</a></li>    
 	    </ul> 
    </div>
  

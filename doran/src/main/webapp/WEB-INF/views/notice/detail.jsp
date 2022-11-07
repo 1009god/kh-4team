@@ -30,7 +30,7 @@
 			<td>
 				<!-- pre 태그 엔터, 띄어쓰기, 탭 키 그대로 표시 -->
 				<c:forEach var="filesDto" items="${filesList}" >		
-					<img width="auto" height="auto" src="http://localhost:8888/files/download/${filesDto.filesNo}" >
+					<img width="auto" height="auto" src="${pageContext.request.contextPath}/files/download/${filesDto.filesNo}" >
 				</c:forEach>
 				
 				<pre>${noticeDto.noticeContent}</pre>

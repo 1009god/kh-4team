@@ -164,7 +164,7 @@ $(function(){
 function shareTwitter() {
     var sendText = "도란도란에 구경 오세요!"; // 전달할 텍스트
     var pjNo="${PjDto.pjNo}";
-    var sendUrl = "http://localhost:8888/pj/detail?pjNo="+pjNo; // 전달할 URL
+    var sendUrl = "${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo; // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
 }
 function shareKakao() {
@@ -181,10 +181,10 @@ function shareKakao() {
 	    content: {
 	      title: "도란도란", // 보여질 제목
 	      description: "도란도란에 구경 오세요!", // 보여질 설명
-	      imageUrl: "http://localhost:8888/pj/detail?pjNo="+pjNo, // 콘텐츠 URL
+	      imageUrl: "${pageContext.request.contextPath}/pj/detail?pjNo="+pjNo, // 콘텐츠 URL
 	      link: {
-	         mobileWebUrl: "http://localhost:8888/",
-	         webUrl: "http://localhost:8888/"
+	         mobileWebUrl: "${pageContext.request.contextPath}/",
+	         webUrl: "${pageContext.request.contextPath}/"
 	      }
 	    }
 	  });
@@ -218,7 +218,7 @@ function shareKakao() {
         <div style="width:700px;height:550px; margin-right:20px;float:left;">
             <div>
                 <c:forEach var="PjFileList" items="${PjFileList}">
-                    <img width="594px" height="445px" src="http://localhost:8888/files/download/${PjFileList.pjFileNo}">
+                    <img width="594px" height="445px" src="${pageContext.request.contextPath}/files/download/${PjFileList.pjFileNo}">
                 </c:forEach>
                 
             
