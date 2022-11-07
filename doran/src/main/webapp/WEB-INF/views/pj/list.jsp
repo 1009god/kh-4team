@@ -132,7 +132,7 @@
 	            <c:forEach var="pjDto" items="${list}" varStatus="status">
 	            	<div class="row item">
 	            			<div class="a">
- 		           				<img width="372px" height="210px" src="http://localhost:8888/files/download/${pjDto.pjFileNo}">
+ 		           				<img width="372px" height="210px" src="${pageContext.request.contextPath}/files/download/${pjDto.pjFileNo}">
 	            			</div>
 		                <div class="row">
 <%-- 		                	<span> ${pjDto.pjNo}</span> --%>
