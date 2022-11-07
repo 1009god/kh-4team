@@ -14,7 +14,7 @@
 		<h5>그동안 DoranDoran을 이용해 주셔서 감사합니다</h5>
 		<h5>더더욱 노력하고 발전하는 도란도란이 되겠습니다</h5>
 	
-		<button type="submit" onclick="location.href='/'">홈으로</button>
+		<button type="submit" onclick="location.href='${pageContext.request.contextPath}'">홈으로</button>
 	</div>	
 </div>
 
