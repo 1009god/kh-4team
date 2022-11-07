@@ -26,13 +26,7 @@
 		<button class="btn btn-positive w-10">로그인</button>
 	</div>
 
-	<div class="row center">
-		<a href="#">아이디 찾기</a>
-	</div>
-	
-	<div class="row center">
-		<a href="#">비밀번호 찾기</a>
-	</div>
+
 	
 	<!-- 이상인 경우만 나오는 화면 -->
 	<c:if test="${param.error != null}">

@@ -12,10 +12,6 @@ padding: 10px;
 
 }
 
-
-
-
-
 </style>
 
 
@@ -35,42 +31,43 @@ padding: 10px;
 
 
 <form method ="post">
+
 	<div>
 		<input name="addressMemNo" value="${sessionScope.loginNo}" hidden> 
 	</div>
 	
-	<div>
-	<label>받는 사람&nbsp;&nbsp;
-		<input name = "addressName" type="text" required autocomplete="off" class="input input-underline">
-	</label>
-	</div>
 	
-	<div>	
-	<label>우편주소 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name = "addressPost"  id="sample6_postcode"  type="text" required autocomplete="off"  class="input input-underline">
-	</label>
-	</div>
-	
-	
-	
-	<div>
-	<label>주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name = "addressBasic" id="sample6_address"  type="text" required autocomplete="off" class="input input-underline">
-	</label>
-	</div>
-	
-	<div>
-	<label>상세주소&nbsp;&nbsp;
-		<input name = "addressDetail" id="sample6_detailAddress" type="text" required autocomplete="off" class="input input-underline">
-	</label>
-	</div>
-	
-	<div>
-	<label> 번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name = "addressTel" type="text" required autocomplete="off" class="input input-underline">
-	</label>
-	</div>
+<table>
+	<thead>
+	  <tr>
+	    <th>받은사람</th>
+	    <th><input name = "addressName" type="text" required autocomplete="off" class="input input-underline"></th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr>
+	    <td>우편주소</td>
+	    <td><input type="button" onclick="findAddress()" value="우편번호 찾기"></td>
+	  </tr>
+	  <tr>
+	    <td colspan="2">
+	    	<input name = "addressPost"  id="sample6_postcode"  type="text" required autocomplete="off"  class="input input-underline">
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>주소</td>
+	    <td><input name = "addressBasic" id="sample6_address"  type="text" required autocomplete="off" class="input input-underline"></td>
+	  </tr>
+	  <tr>
+	    <td>상세주소</td>
+	    <td><input name = "addressDetail" id="sample6_detailAddress" type="text" required autocomplete="off" class="input input-underline"></td>
+	  </tr>
+	  <tr>
+	    <td>번호</td>
+	    <td><input name = "addressTel" type="text" required autocomplete="off" class="input input-underline"></td>
+	  </tr>
+	</tbody>
+</table>
 	
 	<div>
 	<button type="submit" class="btn">등록완료</button>
@@ -78,6 +75,10 @@ padding: 10px;
 	
 </form>
 </div>
+
+
+
+
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

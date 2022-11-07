@@ -8,7 +8,7 @@
 
 <div class="container-1400 center" >
 
-	<img src = "/img/Doran.png" width="50%" height="500px">
+	<img src = "${pageContext.request.contextPath}/img/Doran.png" width="50%" height="500px">
 	<div class="center">
 		<h3>회원 탈퇴가 완료되었습니다</h3>
 		<h5>그동안 DoranDoran을 이용해 주셔서 감사합니다</h5>

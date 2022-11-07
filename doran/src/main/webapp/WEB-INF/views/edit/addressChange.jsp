@@ -5,48 +5,70 @@
 </jsp:include>
 
 
+
+<div class="container-1400" style="height:600px">
+
+<div class= "container-1400" style="padding-left:10px;">
+	<h1 style="padding-top: 10px;padding-bottom: 10px;">배송지 수정</h1>
+</div>
+    
+ <hr style="border:1px color= silver;" width="1400px">
+
+
+
+
+
 <form method ="post">
+
+	<div><!-- 회원번호 -->	
+		<input name="addressMemNo" value="${sessionScope.loginNo}" hidden> 
+	</div>
+		
+	<table>
+		<thead>
+		  <tr>
+		    <th>받은사람</th>
+		    <th><input name = "addressName" type="text" required value=${addressDto.addressName} class="input input-underline"></th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+		    <td>우편주소</td>
+		    <td><input type="button" onclick="findAddress()" value="우편번호 찾기"></td>
+		  </tr>
+		  <tr>
+		    <td colspan="2">
+		    	<input name = "addressPost"  id="sample6_postcode" type="text" required value=${addressDto.addressPost} class="input input-underline">
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>주소</td>
+		    <td><input name = "addressBasic" id="sample6_address" type="text" required value=${addressDto.addressBasic} class="input input-underline"></td>
+		  </tr>
+		  <tr>
+		    <td>상세주소</td>
+		    <td><input name = "addressDetail" id="sample6_detailAddress"  type="text" required value=${addressDto.addressDetail} class="input input-underline"></td>
+		  </tr>
+		  <tr>
+		    <td>번호</td>
+		    <td><input name = "addressTel" type="text" required value=${addressDto.addressTel} class="input input-underline"></td>
+		  </tr>
+		</tbody>
+	</table>
+	
+	
 	<div>
-	<label>해당 회원 번호
-		<input name="addressMemNo" value="${sessionScope.loginNo}" > 
-	</label>
-	
-	<label>받는 사람
-		<input name = "addressName" type="text" required value=${addressDto.addressName}>
-	</label>
+		<button type="submit">등록완료</button>
 	</div>
-	
-	<div>	
-	<label>우편주소<input type="button" onclick="findAddress()" value="우편번호 찾기"><br>
-		<input name = "addressPost"  id="sample6_postcode" type="text" required value=${addressDto.addressPost} >
-	</label>
-	</div>
-	
-	
-	
-	<div>
-	<label>주소
-		<input name = "addressBasic" id="sample6_address" type="text" required value=${addressDto.addressBasic}>
-	</label>
-	</div>
-	
-	<div>
-	<label>상세주소
-		<input name = "addressDetail" id="sample6_detailAddress"  type="text" required value=${addressDto.addressDetail}>
-	</label>
-	</div>
-	
-	<div>
-	<label>받는 사람 휴대폰 번호
-		<input name = "addressTel" type="text" required value=${addressDto.addressTel}>
-	</label>
-	</div>
-	
-	<div>
-	<button type="submit">등록완료</button>
-	</div>
-	
+			
 </form>
+
+</div>
+
+
+
+
+
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
