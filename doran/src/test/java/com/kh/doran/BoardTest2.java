@@ -21,7 +21,6 @@ public class BoardTest2 {
 		//번호 생성
 		String sql = "select board_seq.nextval from dual";
 		int boardPostNo = jdbcTemplate.queryForObject(sql, int.class);
-		System.out.println("boardPostNo = " + boardPostNo);
 		
 		//등록
 		sql = "insert into board(board_post_no, board_mem_no, "
