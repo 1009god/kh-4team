@@ -157,10 +157,10 @@ nav li a:hover {
 			<div id="top_menu">
 			
 					<c:if test="${login}">
-						<button type="submit" class="ghost"
+						<button type="submit" class="ghost but"
 							onclick="location.href='${pageContext.request.contextPath}/pj/insert'">프로젝트 올리기</button>
 							
-						<button type="submit" class="ghost"
+						<button type="submit" class="ghost but"
 							onclick="location.href='${pageContext.request.contextPath}/seller/sellerjoin'">판매자 신청</button>
 					</c:if>
 				
